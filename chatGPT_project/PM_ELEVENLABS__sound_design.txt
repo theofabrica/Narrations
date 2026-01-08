@@ -1,0 +1,313 @@
+1) What the model can (and can’t) do
+
+ElevenLabs’ Sound Effects turns natural-language descriptions into sound design,
+foley, ambiences, and even basic musical elements (e.g., drum loops, brass stabs).
+It understands everyday language and audio terminology.
+
+You control output with three key settings:
+- Duration
+- Looping
+- Prompt influence
+
+Max duration per generation is 30 seconds.
+The UI can export MP3 (44.1 kHz) or WAV (48 kHz) and generates four candidates per run
+for quick auditioning.
+
+Parameters at a glance
+- Duration: 0.1–30 s (set a fixed length or let the model decide)
+- Looping: produces seamless loops for continuous beds and ambiences
+- Prompt influence: controls adherence to text
+  Higher = more literal
+  Lower = more creative variation
+  Default UI value = 30%
+
+Complex sequences note:
+For multi-event scenes, better results are achieved by generating components
+separately and assembling them in a DAW, rather than prompting an entire scene
+in one pass.
+
+
+2) The Prompt Blueprint (recommended structure)
+
+Use this “slots” template to keep prompts crisp, unambiguous, and reproducible:
+
+[Core event] —
+[Source / material] —
+[Action / dynamics] —
+[Environment / space] —
+[Mic perspective & distance] —
+[Timing / envelope] —
+[Tone / texture] —
+[Production / processing notes] —
+[If musical: tempo / key / meter]
+
+Example (impact):
+Metal toolbox — dropped hard — concrete floor — small garage, tight reflections —
+close-mic (0.5 m) — short decay, no reverb tail —
+bright, crisp transient — no background noise.
+
+Example (looping ambience):
+Gentle forest rain — steady drizzle on leaves — light wind —
+soft, diffuse space — mid-distance —
+constant level, no swells —
+warm noise floor — suitable for seamless looping.
+
+The documentation explicitly encourages clear, concise nouns and audio terms such as:
+“whoosh”, “impact”, “drone”, “braam”, “stem”, “loop”.
+
+
+3) Picking settings that fit the job
+
+Duration guidelines:
+- One-shots & impacts: 0.3–1.5 s
+- Whooshes & transitions: 1–3 s
+- Foley actions (footsteps, etc.): 2–6 s per pass
+- Ambiences & textures: 10–30 s (often with Looping enabled)
+
+Ensure total duration does not exceed 30 s.
+
+Looping:
+Use for beds, ambiences, UI beds, engine idles, etc.
+The engine is designed to produce seamless repeats.
+
+Prompt influence:
+- Raise above default (30%) when you need literal matches
+- Lower for creative variation and texture exploration
+
+
+4) Writing effective prompts (do’s & don’ts)
+
+Do:
+- Front-load the core noun (e.g., “glass shatter”, “wooden door creak”)
+- Keep verbs specific (“slides”, “clacks”, “rattles”)
+- Add material, surface, and space context
+- Set mic perspective, envelope, and texture
+- Split multi-part scenes into stems
+- Specify BPM, key, and style for musical elements
+
+Don’t:
+- Stack contradictions (e.g., “bone-dry cathedral reverb”)
+- Overload with narrative clutter
+- Expect film-ready scenes from a single prompt
+
+
+5) Pattern library (ready-to-use examples)
+
+Impacts & hits:
+- Thick wooden crate — dropped from 1 m — concrete floor —
+  short, punchy thump — minimal rattle —
+  close-mic (1 m) — tight room reflections.
+
+- Cinematic braam — orchestral-brassy, sub-heavy —
+  wide stereo — slow attack, long tail —
+  ominous tone.
+
+Whooshes & transitions:
+- Airy whoosh — fast pass-by —
+  soft high-end hiss — gentle swell —
+  no tonal pitch — clean tail.
+
+- Complex sci-fi whoosh — layered turbine spin-up then glide —
+  subtle modulation — medium room.
+
+Foley: footsteps
+- Footsteps — leather boots on gravel —
+  steady pace — small courtyard reflections —
+  mid-distance — consistent level.
+
+- Sneakers on polished wood —
+  light squeaks — indoor gym —
+  dry, close-mic.
+
+Doors & mechanisms:
+- Heavy metal door — latch clicks —
+  slow creak open — hollow hallway resonance —
+  close-mic on hinges.
+
+- Mechanical lever — crisp click, spring recoil —
+  precise, no hum.
+
+UI & system sounds:
+- Subtle UI tap — soft transient, short decay —
+  warm, rounded tone — no reverb —
+  phone OS style.
+
+- Notification chime — two-note up-gliss —
+  glassy but gentle — very short tail —
+  clean.
+
+Vehicles & pass-bys:
+- Compact car pass-by — moderate speed —
+  Doppler shift — suburban street ambience —
+  mid-distance.
+
+- Electric scooter whirr —
+  steady idle — loop-ready —
+  constant level — minimal hiss.
+
+Weather & ambiences (Looping recommended):
+- Light rain on leaves —
+  steady drizzle — soft wind —
+  diffuse canopy —
+  loop-ready, no swells.
+
+- City night ambience —
+  distant traffic bed —
+  occasional wet tire hiss —
+  subtle neon buzz —
+  even level.
+
+Water:
+- Single water droplet —
+  ceramic sink —
+  bright, resonant ping —
+  short decay — ultra-clean.
+
+- Stream trickle —
+  small creek over stones —
+  loop-ready —
+  gentle stereo movement.
+
+Electricity / tech / glitch:
+- Analog static hiss —
+  warm tape noise —
+  gentle flutter —
+  loop-ready.
+
+- Glitchy data burst —
+  stuttering packets —
+  short, jagged transients —
+  wide stereo image.
+
+Magic / fantasy:
+- Arcane spell cast —
+  shimmering particles —
+  upward whoosh —
+  brief sparkle tail —
+  no tonal center.
+
+- Enchanted door unlock —
+  crystalline twinkle + soft click —
+  tiny chamber reverb.
+
+
+6) Complex scenes: how to prompt and assemble
+
+For sequences like:
+“footsteps on gravel, then metallic door opens”,
+
+Use explicit sequence words such as “then” or “followed by”.
+For best control, render separate stems and assemble them later in your DAW.
+This yields cleaner, more syncable results than a single monolithic prompt.
+
+
+7) Musical elements with Sound Effects
+
+You can prompt musical stems and loops:
+- “90s hip-hop drum loop, 90 BPM”
+- “Vintage brass stabs in F minor”
+
+Specify:
+- Tempo
+- Key
+- Feel
+- Swing / quantization
+- Tone (vinyl crackle, lo-fi tape)
+
+For full songs, ElevenLabs provides a separate Music capability.
+
+
+8) Looping technique (for seamless beds)
+
+- Use phrasing such as “steady”, “constant level”, “no swells”
+- Avoid distinct starts or endings
+- Enable Looping in the UI for endless repetition
+
+
+9) Workflow & quality checklist
+
+1. Draft short and literal
+2. Iterate to taste
+3. Raise Prompt influence if the model drifts
+4. Keep durations tight for one-shots
+5. Audition the four generated variations
+6. Download WAV 48 kHz for post
+7. Layer stems and add fades in DAW
+
+
+10) Cost-savvy prompting (UI & API)
+
+Website UI:
+- Auto length generation ≈ 200 credits
+- Fixed duration ≈ 40 credits per second (max 30 s)
+
+API:
+- One effect per call
+- Auto length ≈ 100 credits
+- Fixed duration ≈ 20 credits per second
+
+Tip:
+Use short durations to audition, then extend once satisfied.
+
+
+11) Troubleshooting quick fixes
+
+- Too musical or pitched:
+  Add “atonal”, “no musical pitch”
+
+- Too noisy:
+  Add “clean recording”, “low noise floor”,
+  raise Prompt influence
+
+- Scene feels messy:
+  Split into stems, simplify wording, shorten duration
+
+- Ambience doesn’t loop:
+  Use “steady / no swells” phrasing and enable Looping
+
+
+12) High-signal audio terms the model understands
+
+Impact, whoosh, ambience, one-shot, loop, stem,
+braam, glitch, drone
+
+
+13) Community-validated tips
+
+- Short-to-medium prompts outperform long prose
+- Context (surface, space, perspective) resolves ambiguity
+- Looping for beds, stems for scenes
+
+
+14) Copy-paste prompt starters
+
+Clean UI click:
+Subtle UI tap — soft transient, rounded tone —
+ultra-short decay — no reverb —
+clean, modern app sound.
+
+Sci-fi whoosh:
+Futuristic whoosh — turbine spin-up then glide —
+airy high-end — smooth swell —
+medium room — short tail.
+
+Metal creak:
+Old iron gate — slow hinge creak —
+outdoor courtyard reflections —
+mid-distance — gritty texture.
+
+Rain bed (looping):
+Gentle forest rain — steady drizzle on leaves —
+soft wind — diffuse canopy space —
+constant level — loop-ready.
+
+Cinematic braam:
+Cinematic braam — brassy, sub-heavy —
+slow attack — long reverberant tail —
+wide stereo — ominous.
+
+90s hip-hop drum loop:
+90s hip-hop drum loop — 90 BPM —
+swung groove — dusty vinyl feel —
+tight kick, crisp snare —
+loop-ready.

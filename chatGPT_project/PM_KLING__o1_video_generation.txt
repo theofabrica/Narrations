@@ -1,0 +1,460 @@
+Kling O1 Prompting Knowledge Base (Kling “01 / O1”) — Text, Image, Reference & Edit
+
+Source note (transparency): The official Kling user guide you linked is hosted on app.klingai.com, which is blocked for automated browsing by robots rules in my environment. So this knowledge base is compiled from accessible documentation and credible, widely-used integrator guides (fal.ai, Leonardo.Ai, ImagineArt, Higgsfield) plus reputable workflows and tested prompt patterns. Where limits differ (e.g., number of reference images), I call it out explicitly.
+
+
+
+1) What Kling O1 is (and why prompting matters)
+
+Kling Video O1 is positioned as a unified multimodal video system that can handle multiple tasks (generation + editing + transformations) in one model, using natural language prompts and optional image/video references. The model is described as supporting workflows such as text-to-video, reference-to-video, start/end-frame generation, video editing/modification, restyling, and camera extension inside one unified pipeline. Barchart.com
+
+A key implication for prompting: your prompt is not just a “description”—it’s closer to a director’s instruction set that the model uses to interpret what to create and what to preserve, especially in edit and video-to-video modes. Fal.ai+1
+
+
+
+2) The 4 core building blocks of a strong Kling prompt
+
+A very consistent, high-performing structure across Kling prompting guides is:
+
+Subject (who/what is on screen)
+
+Action (what the subject does)
+
+Context (where/when, environment, mood)
+
+Style (visual format, genre, rendering approach)
+
+Optionally add: camera behavior, framing/lens, lighting, and motion pacing to gain predictability. Leonardo AI+2Automagically by Segmind+2
+
+A practical “director order” (recommended)
+
+Put the most important constraints early. Many workflows observe stronger adherence when key requirements appear at the start of the prompt. Fal.ai
+
+Recommended prompt order:
+
+Shot / camera setup
+
+Subject + action
+
+Environment + time of day
+
+Motion choreography (subject + camera)
+
+Style + lighting + render cues
+
+Constraints / preserve list (esp. edits)
+
+
+
+3) Prompt length and density: how much is “enough”?
+
+A reliable rule of thumb from Kling O1 power users is to keep prompts dense but not chaotic—often around 50–150 words for consistent results (enough anchors without contradictions). Fal.ai
+
+In API contexts, you may be allowed much longer prompts (for example, Leonardo’s Kling O1 API doc allows up to 1500 characters), but “allowed” ≠ “optimal.” Use the extra space for precision, not for piling on conflicting adjectives. Leonardo.Ai
+
+
+
+4) Know your mode: Kling O1 prompting is mode-dependent
+
+One of the most important “pro” lessons: the same prompt does not behave the same way across modes. Fal.ai
+
+A commonly documented breakdown (by integrators and dev platforms) includes:
+
+Image-to-Video: you’re “animating” a still; prompt should emphasize motion choreography that fits the image. Fal.ai+1
+
+Video-to-Video (Transformation / Reference Video): you’re changing “look” while preserving motion; prompt should say what changes vs. what stays. Fal.ai+1
+
+Reference-to-Video / Elements: you’re enforcing identity/objects/settings via reference images; prompt should map references explicitly. Fal.ai+1
+
+Video Edit: you’re doing “surgical” changes; prompt must specify preservation constraints and isolate the edit. Fal.ai+2Fal.ai+2
+
+
+
+5) Core parameters you must align with your prompt (duration, aspect ratio, references)
+
+Different platforms expose different limits and UI, but these patterns are common:
+
+Duration
+
+Many UIs and APIs expose short clip generation (often 5 or 10 seconds in some implementations). Leonardo.Ai+1
+
+Kling O1 is also described as supporting 3–10 seconds across its unified workflow in multiple places. Barchart.com+2Fal.ai+2
+
+Prompting implication: write prompts like you’re directing a single shot, not a whole movie.
+
+Aspect ratio / resolution
+
+A common set of “platform standard” dimensions (example: Leonardo’s Kling O1 integration) includes:
+
+16:9 → 1920×1080
+
+1:1 → 1440×1440
+
+9:16 → 1080×1920 Leonardo.Ai
+
+Prompting implication: describe composition with the chosen aspect ratio in mind (e.g., “close-up portrait framing” for 9:16).
+
+Start/End frames vs. image references
+
+Some APIs explicitly enforce rules like:
+
+Start/end frames cannot be used together with image reference mode. Leonardo.Ai
+
+Prompting implication: decide if your control comes from:
+
+Keyframes (start/end images) for a planned transition, or
+
+Reference images / elements for identity/prop consistency.
+
+Reference image count varies by platform
+
+Examples from accessible docs:
+
+Up to 4 elements/images combined in fal’s Kling O1 edit workflow. Fal.ai
+
+Up to 5 image references in Leonardo’s API guide. Leonardo.Ai
+
+Up to 7 images in a Higgsfield Kling O1 workflow description. Higgsfield
+
+Best practice: write prompts that work with 4 references, then scale up if your platform allows more.
+
+
+
+6) The “Kling Prompt Formula” (universal template)
+
+Use this as your default blueprint:
+
+Template
+
+Camera / shot: (static / handheld / dolly / drone / POV, framing, lens feel)
+
+Subject: (who/what, appearance)
+
+Action: (what happens on screen)
+
+Context: (location, time of day, weather, background activity)
+
+Motion choreography: (subject motion + camera motion, pacing words)
+
+Style: (genre/format, realism level, color grade, lighting, texture)
+
+Constraints: (what must not change, especially for edits)
+
+This matches the “subject-first + motion + camera + style anchors” structure recommended for Kling O1 modes. Fal.ai+2Automagically by Segmind+2
+
+
+
+7) Camera & motion language that Kling responds to
+
+A) Separate subject motion vs camera motion
+
+Especially in image-to-video, you get better control when you explicitly separate:
+
+“The subject turns…”
+
+“Camera slowly pushes in…” Fal.ai
+
+B) Use pacing words (they matter)
+
+Words like:
+
+“gradually,” “smoothly,” “suddenly,” “rhythmically,” “slow motion,” “steady”
+help define the feel of the motion. Fal.ai+1
+
+C) Motivate camera movement (avoid random “cool” moves)
+
+A practical narrative rule: camera movement should serve a goal—show action, reveal info, or express emotion—otherwise it can reduce clarity. Leonardo AI
+
+D) Layered motion for cinematic depth
+
+A powerful technique is describing motion by depth layers:
+
+foreground / midground / background, parallax, traffic vs pedestrians, etc. Fal.ai
+
+
+
+8) Mode playbooks (the most important section)
+
+8.1 Text-to-Video playbook
+
+Goal: generate a coherent short shot from pure text.
+
+Do:
+
+Keep it to one scene, one shot idea.
+
+Define camera stance (static, handheld, tracking).
+
+Add lighting and environment anchors.
+
+Use a clear visual style (“film noir lighting,” “commercial product shot,” “documentary handheld”). Leonardo AI+1
+
+Don’t:
+
+Don’t over-script multiple scene cuts in 5–10 seconds unless you’re intentionally testing boundaries.
+
+Micro-template:
+“[Shot type]. [Subject] [action]. [Setting/time]. Camera [movement]. Style: [visual format], [lighting], [color grade], [realism].”
+
+
+
+8.2 Image-to-Video playbook
+
+Goal: animate a given image with believable motion.
+
+Do:
+
+Describe motion that’s physically plausible given what’s in the still.
+
+Use separate clauses for camera vs subject movement.
+
+Use pacing words (“slowly,” “gently,” “steady”). Fal.ai
+
+If Motion Brush exists in your interface:
+
+The motion brush path and the text prompt should agree (don’t draw “upward jump” and prompt “walk forward”). Stable Diffusion Art
+
+
+
+8.3 Start & End frame playbook (keyframe interpolation)
+
+Goal: force a specific beginning and ending and let Kling generate the “bridge.”
+
+Do:
+
+Choose start/end frames with the same aspect ratio as output.
+
+Prompt for the transition logic: what changes, what stays, how motion evolves.
+
+Keep the story “between” frames consistent (don’t ask for a new character if neither frame contains them). Leonardo.Ai+1
+
+Constraint reminder (common in APIs):
+Start/end frames may be mutually exclusive with image reference mode in some integrations. Leonardo.Ai
+
+
+
+8.4 Reference-to-Video / Elements playbook (consistency control)
+
+Goal: keep characters/props/settings consistent via references.
+
+Do:
+
+Map references explicitly:
+“Character from reference 1… outfit from reference 2… prop from reference 3… background from reference 4…” Fal.ai
+
+Keep terminology stable across shots (“red jacket” stays “red jacket”). Fal.ai
+
+Platform tip: Some tools call this “Elements” and let you upload multiple images of the same subject/object for stronger identity capture. Higgsfield+1
+
+
+
+8.5 Video-to-Video “Reference Video” playbook (transform but preserve motion)
+
+Goal: use an existing video as a motion/composition base, then generate a new clip with consistent style/scene rules.
+
+A common UI flow is: upload a reference video (3–10s) + up to four reference elements/images + set output parameters. ImagineArt
+
+Prompting rule:
+State preservation constraints directly, e.g.:
+
+“Maintain the original motion and composition.”
+
+“Keep the camera movement and blocking.” Fal.ai+1
+
+
+
+8.6 Video Edit playbook (surgical, prompt-based post)
+
+Goal: change specific elements while keeping the rest identical.
+
+Do (highly recommended pattern):
+
+Start with what must remain unchanged
+
+Then specify the single edit
+
+Add a “do not change” list (negative constraints) Fal.ai+1
+
+Kling O1 is explicitly positioned for conversational post tasks such as:
+
+“remove bystanders,”
+
+“change daytime to dusk,”
+
+“swap outfit,”
+and similar scene-level semantic edits. Barchart.com+1
+
+
+
+9) Using @Element / @Image tokens (when your platform supports it)
+
+Some platforms (notably fal.ai’s Kling O1 integration) use explicit prompt tokens:
+
+@Element1, @Element2 for tracked elements (characters/objects to insert or swap)
+
+@Image1, @Image2 for style references (look/landscape/texture)
+
+Phrase pattern example (as shown in the tool UI):
+“Replace the character in the video with @Element1, maintaining the same movements and camera angles. Transform the landscape into @Image1.” Fal.ai
+
+Prompting implication: when tokens exist, treat your prompt as a transform instruction, not a scene description.
+
+
+
+10) Negative prompting and “preserve lists”
+
+Negative prompts work best when they’re phrased as preservation constraints, especially in edit mode:
+
+Examples of good “preserve” constraints:
+
+“Do not alter facial features.”
+
+“Do not change body proportions.”
+
+“Keep camera movement identical.”
+
+“Keep lighting direction consistent.”
+
+This “surgical precision” approach is explicitly recommended for edit mode prompting. Fal.ai
+
+
+
+11) Common failure modes and how to fix them
+
+A) “The motion is wrong / stiff”
+
+Fix:
+
+Make motion instructions explicit and physically plausible.
+
+Add pacing words: “smooth,” “steady,” “gradual.”
+
+Reduce the number of simultaneous moving parts. Fal.ai+1
+
+B) “The camera does random stuff”
+
+Fix:
+
+Specify static shot or a single simple move (“slow dolly-in”).
+
+Tie the camera move to narrative intent (reveal/emotion/action). Leonardo AI+1
+
+C) “It ignores the prompt”
+
+Fix:
+
+Put the top 1–2 constraints in the first sentence.
+
+Remove contradictions (e.g., “fast-paced dreamy slow motion”).
+
+Keep the prompt within a clean structure (subject → action → context → camera → style). Fal.ai+1
+
+D) “Identity drift across shots”
+
+Fix:
+
+Use reference-to-video / Elements and keep vocabulary consistent. Fal.ai+1
+
+Use start/end frames when you need stronger “bookends.” Leonardo.Ai+1
+
+
+
+12) Prompt library (copy/paste starters)
+
+These are original templates built to match the mode playbooks above.
+
+Text-to-Video (cinematic single shot)
+
+“Medium close-up, handheld documentary feel. A rain-soaked cyclist stops under a streetlamp, catching their breath, water dripping from their helmet. Nighttime city alley with wet pavement reflections and soft neon signage in the background. Camera gently pushes in, steady motion, slight natural shake. Cinematic lighting, high contrast, realistic textures, cool color grade, sharp focus.”
+
+Image-to-Video (animate a portrait)
+
+“Static camera. The subject slowly turns their head toward the light, blinking naturally. Hair moves gently in a soft breeze. Subtle breathing motion in shoulders and chest. Background remains stable, with slight bokeh shimmer. Smooth, realistic motion, calm pacing.”
+
+Start/End frame transition (object morph)
+
+“Generate a smooth transformation between the start frame and end frame. The object gradually morphs shape while maintaining consistent lighting direction and shadows. Camera remains fixed. The transformation is continuous and physically coherent, with subtle particle-like dust motes drifting in the air.”
+
+Video-to-Video transformation (preserve motion)
+
+“Maintain the original camera movement and subject blocking. Transform the scene into a foggy cyberpunk street with neon signage and wet reflective pavement. Add volumetric fog, subtle lens bloom, and a cooler color grade, while preserving the timing and motion structure of the input video.”
+
+Video edit (surgical)
+
+“Keep everything unchanged: same camera movement, same subject motion, same background geometry. Remove all bystanders from the scene, leaving only the main subject. Do not alter the main subject’s face, body proportions, clothing texture, or lighting direction.”
+
+
+
+13) MyGPT “Prompt Builder” instructions (drop-in ready)
+
+Below is a system-style instruction you can paste into a Custom GPT to turn it into a Kling O1 prompt engineer.
+
+A) MyGPT System Instruction (English)
+
+Role: You are a Kling O1 prompt engineer and creative director. Your job is to produce highly controllable prompts for Kling O1 generation and editing.
+
+Process (always follow):
+
+Identify the user’s requested mode:
+
+Text-to-Video, Image-to-Video, Start+End Frames, Reference-to-Video/Elements, Reference Video (video-to-video), Video Edit.
+
+Ask only for missing essentials if needed; otherwise infer reasonable defaults.
+
+Output in this exact structure:
+
+Output Format:
+
+Final Prompt (copy/paste) — 50–150 words, single paragraph, no bullet points. Put the most critical constraints in the first sentence.
+
+Negative / Preserve List — bullet list of “Do not change…” constraints (especially for edit/video-to-video).
+
+Settings Suggestions — duration (3–10s depending on platform; default 5s), aspect ratio (16:9/9:16/1:1), and whether to use references or start/end frames.
+
+Reference Mapping (if applicable) — “Ref1 = …, Ref2 = …” describing what each reference controls.
+
+One-line iteration advice — the single best next tweak if the first result misses.
+
+Prompting rules:
+
+Always separate subject motion from camera motion.
+
+Avoid contradictions in lighting/style.
+
+Prefer physically plausible actions.
+
+For video-to-video and edit: state what to preserve first, then state changes.
+
+This approach matches documented best practices: structured prompts, explicit motion/camera language, element mapping, and surgical edit constraints. Barchart.com+3Fal.ai+3Fal.ai+3
+
+B) MyGPT “Intake Questions” (optional)
+
+If you choose to ask questions, ask at most 5, in this order:
+
+Mode? (Text / Image / Start-End / References / Edit)
+
+What must stay consistent? (identity, outfit, props, background)
+
+Camera style? (static, handheld, dolly, drone, POV)
+
+Visual style? (cinematic realism, commercial, animation, noir, etc.)
+
+Output format? (16:9, 9:16, 1:1; 5s or 10s)
+
+
+
+14) Quick checklist (printable mental model)
+
+Before generating:
+
+✅ Mode selected (generation vs edit vs reference video) Fal.ai+1
+
+✅ Subject + action + context + style specified Leonardo AI
+
+✅ Camera behavior explicitly stated (or “static”) Leonardo AI+1
+
+✅ Motion pacing words included (“smoothly,” “gradually,” etc.) Fal.ai
+
+✅ For edits: preserve list first, change list second Fal.ai+2Fal.ai+2
+
+✅ References mapped (Ref1/Ref2…) and terminology kept stable

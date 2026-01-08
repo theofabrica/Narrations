@@ -1,0 +1,23 @@
+.
+├── CORE_NARRATIONS__principles_and_patterns.md
+├── MAP_PROJECT__structure_overview.txt
+├── N0_FRAME__production_context.md
+├── N0_META__governance_and_versioning.md
+├── N0_META__interaction_protocol.md
+├── N0_META__role_mission_constraints.md
+├── N1_BIBLE__world_intent_characters.md
+├── N2_ARCHITECTURE__global_structure.md
+├── N3_UNITS__sequences_scenes.md
+├── N4_PROMPTS__plans_and_generation.md
+├── PM_ELEVENLABS__music_generation.txt
+├── PM_ELEVENLABS__sound_design.txt
+├── PM_KLING__o1_video_generation.txt
+├── PM_KLING__v2_video_generation.txt
+├── PM_MIDJOURNEY__image_generation.txt
+├── PM_NANOBANANA__image_model.txt
+├── SRC_NARRATOLOGY__aristote_poetics.txt
+├── SRC_NARRATOLOGY__lavandier_dramaturgy.txt
+├── SRC_NARRATOLOGY__mckee_story.txt
+└── SRC_NARRATOLOGY__truby_anatomy_of_story.txt
+
+1 directory, 20 files

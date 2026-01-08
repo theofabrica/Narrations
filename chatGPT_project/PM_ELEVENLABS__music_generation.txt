@@ -1,0 +1,351 @@
+Knowledge Base – Prompting Music (Instrumental) for Eleven Music
+
+
+0) Scope & Key Facts
+
+- Eleven Music is a text-to-music model that understands natural-language and musical
+  terminology, providing control over genre, structure, and whether vocals are present.
+
+- It supports generating instrumental tracks (no sung vocals) when specified explicitly
+  in the prompt. The UI supports durations from 10 seconds up to 5 minutes.
+
+- By default, the model may include vocals or lyrics unless you explicitly indicate
+  “instrumental only”.
+
+- The product guide describes full workflows: generate, edit sections, refine styles,
+  then export.
+
+- Licensing and commercial use are permitted under certain subscription tiers.
+
+
+1) What the Model Understands Especially Well
+
+- Genre & mood:
+  Responds to high-level moods (“melancholic”, “uplifting”) and detailed musical language
+  (“dissonant strings over pulsing sub-bass”).
+
+- Instrumentation, tempo, key:
+  Specifying instruments, BPM (e.g., “120 BPM”), and key (“in A minor”) gives strong control.
+
+- Structure & duration:
+  Tracks can be built by sections (intro, verse, chorus, outro).
+  Instrumental tracks still require “instrumental only”.
+
+- Text with intent:
+  The model considers use-case context (e.g., background for video, game trailer), and
+  tailoring the prompt improves results.
+
+
+2) The Building Blocks of an Effective Instrumental Prompt
+
+When crafting a prompt for purely instrumental music, include:
+
+1. Use Case / Context
+   Example: background music for a tech product launch, short film soundtrack.
+
+2. Genre & Sub-genre
+   Example: ambient drone, cinematic orchestral, lo-fi hip-hop instrumental.
+
+3. Instrumentation
+   List instruments clearly; use “solo” when applicable (solo piano, solo guitar).
+
+4. Tempo (BPM) & Key
+   Example: 120 BPM, in D minor.
+
+5. Texture & Production Style
+   Analog warmth, wide stereo field, clean low end, long reverb, minimal beat.
+
+6. Structure & Dynamics
+   Describe evolution: build, crescendo, climax, decrescendo, fade-out.
+
+7. Duration
+   Specify total length or indicate loop-friendly format.
+
+8. Exclusions / Negatives
+   Explicitly state what you do not want:
+   “no vocals”, “no choir”, “no vocal chops”, “no abrupt ending”.
+
+9. Instrumental-Only Clause
+   Always include “instrumental only” to guarantee no singing.
+
+
+3) Ensuring “Instrumental Only”
+
+- Add “instrumental only” in the prompt.
+
+- When available in the API, use a parameter such as:
+  force_instrumental = true
+
+- To avoid ghost vocals or choir textures, also add exclusions:
+  “Exclude: vocals, choir, vocal chops”.
+
+- When working by sections, reinforce “instrumental only” per section if needed.
+
+
+4) Duration, Structure & Variants
+
+- Duration:
+  UI supports fixed or auto duration.
+  Minimum: 10 seconds
+  Maximum: 5 minutes
+
+- Structure:
+  Recommended workflow:
+  Start with a short section (intro), then add sections progressively.
+
+- Variants:
+  You can generate variants or regenerate individual sections for experimentation.
+
+- Loop-friendly / endings:
+  Specify “loop-friendly ending”, “no abrupt ending”, or “smooth fade-out”.
+
+
+5) Style Negatives / Anti-Styles
+
+To refine output further, exclude undesirable elements:
+
+- Global exclusions:
+  Example:
+  “Exclude: vocals, choir, heavy electronic drums, four-on-the-floor kick”.
+
+- Section-level exclusions:
+  Example:
+  Outro section — “Exclude: abrupt ending, vocals”.
+
+- Use Include / Exclude style controls when available in the UI.
+
+
+6) Composition Plan / Advanced Control
+
+- The product guide mentions a composition plan (JSON) for advanced users.
+
+- This plan can define:
+  - Sections
+  - Durations in milliseconds
+  - Included styles
+  - Excluded styles
+  - Instrumentation per section
+
+- Especially useful for precise timing (e.g., music synced to video edits).
+
+
+7) Official Best Practices (Summary)
+
+- Be specific with genre and style.
+- Avoid vague labels like “rock music”.
+- Layer descriptors: mood + instrumentation + use case + tempo.
+- Define instrumentation clearly.
+- Use Include / Exclude styles.
+- Build by sections instead of generating long tracks at once.
+- Iterate and refine instead of restarting from scratch.
+
+
+8) Compliance & Limitations
+
+- Prompt restrictions:
+  Do not reference specific copyrighted artists, song titles, labels, or lyrics.
+
+- Commercial use:
+  Check your subscription tier for rights and limitations.
+
+- Model limitations:
+  Ambiguous prompts may still produce unexpected vocals or artifacts.
+
+- Duration limits:
+  Minimum 10 s, maximum 5 min per generation.
+
+
+9) Prompt Templates (Instrumental)
+
+Template A – Quick one-liner
+
+[Use case], [genre/sub-genre], instrumental only,
+[key instruments], [BPM], in [tonality],
+[production texture], [duration],
+Exclude: [unwanted elements].
+
+Example:
+“Product demo background music, indie-electro, instrumental only,
+clean guitar + analog synth pads + warm bass,
+112 BPM, in G major,
+wide stereo field with crisp transients,
+30 s,
+Exclude: vocals, heavy distortion.”
+
+
+Template B – Detailed brief
+
+Describe role + genre + instrumentation + tempo/key +
+texture/mix style + duration + exclusions.
+End with: instrumental only.
+
+Example:
+“Instrumental only: ambient cinematic score for a short nature documentary.
+Gentle strings, wind and water textures, soft piano motifs.
+~70 BPM in D minor.
+Large hall reverb, analog tape warmth, fade-out end.
+Duration 60 s.
+Exclude: vocals, choir, harsh percussion.”
+
+
+Template C – Section by section (single prompt)
+
+Instrumental only, total duration [X s].
+
+- 0–10 s (Intro): instruments/texture, Include styles, Exclude elements.
+- 10–40 s (Main): instruments, BPM, key, dynamics, Include/Exclude.
+- 40–X s (Outro): reduced instrumentation, fade-out, Exclude abrupt stop.
+
+Example:
+“Instrumental only, 60 s.
+0–15 s: solo piano, room ambience, no percussion.
+15–45 s: string ensemble, 90 BPM, in B minor, building dynamics,
+include subtle brass, exclude vocals and electronic drums.
+45–60 s: fade to solo cello, long reverb tail, exclude abrupt stop.”
+
+
+10) Example Prompts (Instrumental Only)
+
+1. Ambient / Meditation (45 s)
+   “Ambient drone textures, wide stereo, no percussion,
+   solo synth pads, instrumental only,
+   70 BPM, in D minor,
+   fade-out end,
+   45 s,
+   Exclude: vocals, sharp transients.”
+
+2. Corporate Bright (30 s)
+   “Instrumental only, bright indie-electro for corporate video,
+   clean electric guitar, shimmering synths, warm bass,
+   112 BPM, in G major,
+   30 s,
+   Exclude: vocals, heavy distortion.”
+
+3. Trailer Orchestral (60 s)
+   “Instrumental only, cinematic orchestral hybrid,
+   sweeping strings, brass accents, low impacts,
+   90 BPM, in E minor,
+   tension building to climax,
+   60 s,
+   Exclude: choir, lyrics.”
+
+4. Lo-fi Hip-Hop (90 s)
+   “Instrumental only, lo-fi hip-hop beat,
+   82 BPM, dusty Rhodes piano,
+   vinyl crackle, mellow bass,
+   90 s,
+   Exclude: vocals, loud sidechaining.”
+
+5. Synthwave 80s (60 s)
+   “Instrumental only, 80s synthwave,
+   analog synths, gated snare, driving bass,
+   100 BPM, in A minor,
+   60 s,
+   Exclude: vocals, modern EDM drops.”
+
+6. Jazz Quartet (75 s)
+   “Instrumental only, modern jazz quartet:
+   tenor sax, piano, upright bass, brushed drums,
+   110 BPM swing feel, in D major,
+   intimate club ambience,
+   75 s,
+   Exclude: vocal lead.”
+
+7. Solo Piano (60 s)
+   “Instrumental only, contemplative solo piano,
+   in E-flat major,
+   natural reverb, minimal sustain,
+   60 s,
+   Exclude: percussion, voices.”
+
+8. Acoustic Guitar Fingerstyle (45 s)
+   “Instrumental only, solo acoustic guitar fingerstyle,
+   95 BPM, in D major,
+   close-mic recording,
+   45 s,
+   Exclude: pads, synth.”
+
+9. Chiptune (40 s)
+   “Instrumental only, 8-bit chiptune soundtrack,
+   square lead, noise percussion,
+   128 BPM,
+   40 s,
+   Exclude: vocals, full orchestra.”
+
+10. Ethnic Percussion Ensemble (50 s)
+    “Instrumental only, tribal percussion ensemble,
+    djembes, shakers, subtle ambient pads,
+    100 BPM,
+    50 s,
+    Exclude: vocal chants, modern drums.”
+
+11. Post-Rock (70 s)
+    “Instrumental only, post-rock guitars,
+    swelling dynamics,
+    78 BPM, in B minor,
+    crescendo then drop,
+    70 s,
+    Exclude: vocals, pop structure.”
+
+12. Afrobeat Instrumental (60 s)
+    “Instrumental only, Afrobeat groove,
+    high-life guitar, talking drums,
+    95 BPM,
+    60 s,
+    Exclude: vocals, heavy horns.”
+
+13. Trap Cinematic (45 s)
+    “Instrumental only, trap orchestral hybrid,
+    140 BPM, low 808 bass,
+    staccato strings,
+    45 s,
+    Exclude: ad-libs, vocals.”
+
+14. Minimal Techno (90 s)
+    “Instrumental only, minimal techno loop,
+    124 BPM, deep pulse,
+    filter sweeps,
+    90 s,
+    Exclude: vocals, loud claps.”
+
+15. Nordic Folk (60 s)
+    “Instrumental only, Nordic folk instrumentation,
+    nyckelharpa and bouzouki,
+    96 BPM,
+    60 s,
+    Exclude: vocals, pads.”
+
+
+11) Iteration & Troubleshooting (Instrumental)
+
+- Unexpected vocals:
+  Reinforce “instrumental only” and add exclusions.
+
+- Ambiguous style:
+  Increase specificity (instrument, tempo, texture).
+
+- Pacing issues:
+  Define BPM and describe dynamic evolution.
+
+- Abrupt ending:
+  Specify “fade-out”, “clean tail”, or “loop-friendly”.
+
+- Best practice:
+  Build in sections and refine incrementally.
+
+
+12) API Reference Highlights
+
+- music_length_ms sets target duration in milliseconds.
+- force_instrumental parameter may be available.
+- Composition plan JSON allows precise section control.
+
+
+13) Pre-Generation Quality Checklist
+
+Before generating:
+- Instrumental-only clause included
+- Genre and instrumentation clearly defined
+- Tempo and duration specified
+- Exclusions listed
+- Structure or loop behavior defined

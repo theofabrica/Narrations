@@ -1,0 +1,382 @@
+Google Nano Banana (Gemini 2.5 Flash Image) — Practical Guide (Updated 2025 Edition)
+
+A complete and field-tested reference for editing and creating images with Google’s
+Gemini 2.5 Flash Image model.
+
+
+1) Context and Terminology (as of October 10, 2025)
+
+Nano Banana is the public name for Google’s image editing and generation system
+integrated into the Gemini app.
+
+On the developer side, it corresponds to the model:
+gemini-2.5-flash-image
+
+Image generation and editing are done entirely through natural-language instructions —
+no manual masking or tools required.
+
+Every generated image includes:
+- a visible watermark
+- an invisible SynthID marker for authenticity and traceability
+
+Editing is multi-turn: you can refine images iteratively through conversation.
+
+The API and Vertex AI expose the parameter:
+image_config.aspect_ratio
+
+Supported aspect ratios (fixed list):
+1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9
+
+“Preview” variant models are deprecated on October 31, 2025.
+Developers must migrate to gemini-2.5-flash-image.
+
+
+Capabilities & quality:
+- 1024 px output resolution
+- Strong rendering of people, animals, and products
+- Improved typographic precision
+- Refined lighting and style handling
+- Support for iterative prompting and compositional guidance
+
+
+Access:
+- Public access via the Gemini app
+- Prototyping via Google AI Studio
+- Production and automation via Vertex AI
+
+
+
+2) The “SHOW ME” Philosophy
+
+Nano Banana works best when you ask it to reveal rather than command it to change.
+
+Instead of saying:
+“Replace the background”
+
+Prefer:
+“Show me this same scene with…”
+
+Core principle:
+“SHOW ME” requests invite the model to imagine the next frame in the same story.
+
+Examples:
+- Show me the next image in the sequence.
+- Show me a side shot of that person.
+- Show me what she’s looking at.
+- Show me an aerial view of the boy holding his phone.
+
+Why this works:
+This phrasing activates the model’s scene-continuity reasoning, producing coherent
+perspectives and contextually accurate transformations.
+
+Practical guidance:
+1. Iterate in small steps.
+   Do not overload prompts with multiple changes.
+2. Describe what you expect to see.
+   Example:
+   “Show me what he’s seeing — a foggy coastal town with wooden houses in the valley.”
+3. Build a universe frame by frame.
+   Each output can become the input for the next “show me” prompt.
+
+
+
+3) What Nano Banana Can Do for Editing
+
+Editing capabilities (instruction-based):
+
+- Targeted visual changes through natural language:
+  “Show me the same scene but brighter.”
+  “Show me this person wearing a red jacket.”
+
+- Multi-turn refinement through conversation:
+  “Show me this car as a convertible.”
+  “Show me it in yellow.”
+  “Show me it parked by the sea.”
+
+- Multi-image blending:
+  Combine two or three uploaded images described in text.
+  Example descriptions:
+  “A portrait photo.”
+  “A minimalist background.”
+  “A warm daylight reference.”
+
+  Note: Nano Banana does not understand “Image A/B” or “first/second image”.
+  It identifies images only through their textual descriptions.
+
+- Style or texture transfer:
+  “Show me this jacket with the color palette of the sunset photo.”
+
+- Identity consistency:
+  Faces, proportions, and visual style are preserved across edits.
+
+- Improved text rendering for UI, signage, and posters.
+
+- Aspect ratio control via prompt or image_config.aspect_ratio.
+
+- Traceability via visible watermark and invisible SynthID.
+
+
+
+4) Fundamental Prompting (Editing & Creation)
+
+4.1 Universal Formula (Creation)
+
+Prompt structure:
+“Show me [SUBJECT] [ACTION] in [SCENE / CONTEXT],
+[STYLE], [LIGHTING], [COMPOSITION],
+[SPECIFIC CONSTRAINTS], [ASPECT RATIO].”
+
+Example:
+“Show me a tabby cat sleeping in a sunbeam on a windowsill,
+photographic style, 50 mm lens, golden afternoon light,
+soft bokeh, 2:3.”
+
+Tips:
+- Be specific and visual.
+- Avoid negative phrasing.
+- Use cinematic vocabulary.
+- Iterate gradually.
+
+
+4.2 Professional Formula (Editing an Existing Image)
+
+Prompt format:
+
+“Show me this image with [goal or change].
+Preserve [key elements: identity, colors, composition].
+Use [style / lighting / texture cues].
+Output in [aspect ratio].”
+
+Example:
+“Show me this portrait with a light grey background instead of dark blue.
+Preserve the face, expression, and lighting direction. 4:5.”
+
+For multi-image editing:
+“Show me the portrait photo combined with the background photo of a modern office
+interior, keeping the same soft daylight tone.”
+
+
+
+5) Ready-to-Use Editing Recipes
+
+5.1 Background Replacement
+“Show me this person with a mountain landscape at sunrise behind them.
+Preserve identity and proportions.
+Adjust lighting for realistic integration. Photographic style, 16:9.”
+
+5.2 Add / Replace Object
+“Show me the same table but replace the book with a vintage lamp.
+Keep all other objects fixed.
+Realistic photo style, slight vignette, 3:2.”
+
+5.3 Figurine / Miniature
+“Show me this person as a miniature collector’s figurine placed on a desk,
+with a subtle base and studio softbox lighting. 1:1.”
+
+5.4 Virtual Try-On / Outfit Change
+“Show me the same person wearing a charcoal grey Italian-cut suit
+with a white shirt and slim tie.
+Preserve the face and hairstyle, keep body proportions natural. 4:5.”
+
+5.5 Interior Redesign (Multi-turn)
+1. “Show me this living room with sage-green walls and a cream Berber rug;
+    keep all furniture. 2:3.”
+2. “Now show me the same room with a light-oak bookshelf added on the left wall,
+    same lighting.”
+3. “Now show me the coffee table replaced by a mid-century oval smoked-glass model.”
+
+5.6 Pattern / Color Transfer
+“Show me this dress with the pattern and colors from the photo of blue silk fabric,
+preserving the cut and material. 3:4.”
+
+5.7 Signage / UI Text
+“Show me this sign reading ‘CAFE RIVOLI’.
+Use geometric sans-serif, tight kerning, centered,
+perspective matched, strong contrast. 4:3.”
+
+5.8 Restoration / Colorization
+“Show me this photo cleaned of scratches and dust.
+Restore facial sharpness, colorize naturally,
+soften contrast. 1:1.”
+
+
+
+6) Working With or Without Reference Images
+
+Without references:
+- Provide context and goal
+- Specify what to preserve
+- Define degree of change (minor or major)
+- Use sequential “show me” prompts
+
+With references (1–3 images):
+Each image must be described in text, not labeled.
+
+Example descriptions:
+“A portrait of a woman standing indoors.”
+“A photo of a minimalist living room with soft daylight.”
+“A picture of natural oak textures.”
+
+Prompt example:
+“Show me the woman from the portrait photo standing in the living room scene,
+with textures similar to the oak photo.”
+
+
+
+7) Creative Control: Composition, Camera, Lighting
+
+You may specify:
+- Type: photo, illustration, 3D, film still
+- Lens / angle: wide, macro, low-angle, overhead
+- Lighting: softbox, golden hour, ambient, backlight
+- Palette: warm, muted, monochrome
+- Composition: horizon at shoulder height, subject on left third
+- Aspect ratio: one of the 10 supported formats
+
+
+
+8) Official Best Practices
+
+- Be specific and conversational.
+- Describe desired results, not prohibitions.
+- Use visual vocabulary (camera, lighting, distance).
+- Limit references to three images.
+- Use supported aspect ratios only.
+- Iterate through small “show me” steps.
+
+
+
+9) Production / API Summary
+
+- Model: gemini-2.5-flash-image
+- Multimodal outputs: image + textual summary
+- Multi-turn editing supported in one conversation thread
+- Input size limit: approximately 50 MB total
+- Output size: approximately 1024 px
+- Watermarking: visible + SynthID
+- Preview models deprecated after October 31, 2025
+
+
+
+10) Troubleshooting
+
+Aspect ratio not respected:
+Cause: ratio not stated
+Fix: add “show me this image in 16:9” or set via API
+
+Text warped:
+Cause: overlong or thin font
+Fix: use uppercase, shorter words, higher contrast
+
+Over-editing:
+Cause: missing “preserve” clause
+Fix: always specify what stays unchanged
+
+Flat image:
+Cause: lack of lighting depth
+Fix: add lens, lighting, micro-contrast cues
+
+Confusing multiple images:
+Cause: descriptions too vague
+Fix: use clear textual descriptions, not labels
+
+
+
+11) Camera & Point of View (POV) Control
+
+Camera movement is achieved via language and iteration, not sliders.
+
+Examples:
+- “Show me this scene from a slightly higher angle.”
+- “Show me a side view of the same person.”
+- “Show me what he’s looking at.”
+
+Use wider aspect ratios (16:9, 21:9) for wider framings.
+
+
+
+12) Camera Vocabulary
+
+Angle / orbit:
+three-quarter view, profile, rear three-quarter, over-the-shoulder,
+bird’s-eye, worm’s-eye, Dutch tilt
+
+Height:
+eye-level, high-angle, low-angle
+
+Distance:
+close-up, medium, wide, “step back 2 meters”
+
+Lens feel:
+24 mm (wide), 50 mm (normal), 85 mm (portrait compression)
+
+
+
+13) Practical Limits
+
+- Large jumps require hallucination of unseen areas.
+- Protect faces and products.
+- Move in small increments.
+- Maintain consistent lighting and geometry.
+
+
+
+14) Prompt Patterns for Camera Control
+
+Small orbit:
+“Show me this person from a front three-quarter left angle.
+Preserve face, outfit, lighting. Eye-level, 50 mm lens look.”
+
+Then iterate:
+“Show me 10° further left.”
+“Show me slightly lower, horizon at shoulder height.”
+“Show me a wider frame revealing more background.”
+
+Raise / lower camera:
+“Show me the same scene from slightly above,
+camera tilted down, preserve proportions.”
+
+Pull back:
+“Show me the same subject in a wider frame,
+revealing more environment. 16:9 composition.”
+
+
+
+15) Guardrails for Reliable Results
+
+1. State preservation targets first.
+2. Use incremental changes.
+3. Anchor composition explicitly.
+4. Use lens language for perspective.
+5. Choose aspect ratio to match the change.
+6. Iterate conversationally in one thread.
+
+
+
+16) Troubleshooting Camera Shifts
+
+Face or product warps:
+Cause: angle change too large
+Fix: preserve identity, reduce shift
+
+Frame tightens unexpectedly:
+Cause: model centers subject
+Fix: request more environment + wide ratio
+
+Geometry inconsistent:
+Cause: jump too large
+Fix: move in smaller increments
+
+Pan / tilt ignored:
+Cause: terms too mechanical
+Fix: describe visible result instead
+
+
+
+17) Developer Notes
+
+- Model: gemini-2.5-flash-image
+- Aspect ratios set via image_config.aspect_ratio
+- Traceability via visible watermark + SynthID
+- Canvas expansion handled by Imagen, not Gemini
+- Workflow: iterative edits via descriptive language

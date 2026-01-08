@@ -1,0 +1,1327 @@
+Comprehensive Guide to Promp2ng Kling 2.0 (Image-to-Video AI Model) 
+Kling 2.0 is a powerful image-to-video deep learning model that can transform sta:c images 
+(or text prompts) into dynamic video clips. Whether you want a cinema:c movie shot, a 
+cartoon anima:on, a stylized art piece, a product showcase, a natural landscape, or a sci-ﬁ 
+scene, craBing the right prompt is key. This guide will walk you through prompt structure, 
+eﬀec:ve techniques for beginners and advanced users, and :ps for various video styles. We’ll 
+also cover nega:ve prompts, camera movements, chaining mul:ple scenes, ensuring 
+consistency, and avoiding common piIalls. Let’s dive in! 
+Prompt Structure and Syntax for Kling 2.0 
+A well-structured prompt is the founda:on of a good Kling video. Kling prompts are typically 
+wriMen as one or two descrip:ve sentences, covering the who, what, where, and how of 
+your scene. According to Kling’s oﬃcial recommenda:ons, an ideal prompt should include 
+the following elementslearn.rundiﬀusion.com: 
+
+•  Subject – The main focus of your video (e.g. a person, animal, 
+
+object)learn.rundiﬀusion.com. 
+
+•  Subject Descrip2on – Key details about the subject’s appearance or aMributes (e.g. 
+
+clothing, color, size, expression)learn.rundiﬀusion.com. 
+
+•  Subject Movement – What the subject is doing or how it’s moving (e.g. running, 
+
+waving, turning)learn.rundiﬀusion.com. 
+
+•  Scene – The seRng or environment where the ac:on occurs (e.g. a crowded city 
+
+street, a forest at dusk)learn.rundiﬀusion.com. 
+
+•  Scene Descrip2on – Extra details about the seRng (e.g. weather, background 
+
+elements, atmosphere)learn.rundiﬀusion.com. 
+
+•  Camera & Style (op2onal) – Any speciﬁc camera movement or angle, ligh:ng style, or 
+overall mood to enhance the cinema:c feel (e.g. wide angle shot, so. golden light, 
+tense atmosphere)learn.rundiﬀusion.com. 
+
+These components can be arranged into a prompt formula. A simple syntax template is: 
+“[Subject], [subject descrip2on], [subject movement] in [scene]. [Scene descrip2on]. 
+[Camera angle/mo2on], [ligh2ng], [atmosphere].” 
+For example, a prompt following this structure might be: 
+“A young woman (subject) wearing a ﬂowing red dress (subject descrip/on) sprints joyfully 
+(subject movement) across a sunlit meadow (scene). Wildﬂowers sway in the breeze and 
+birds ﬂy overhead (scene descrip/on). Wide aerial shot, so. golden light, dreamy 
+atmosphere (camera & style).” 
+This prompt clearly deﬁnes the main subject, what she’s doing, the seRng, and stylis:c cues 
+– providing a strong blueprint for Kling to generate the 
+videolearn.rundiﬀusion.comlearn.rundiﬀusion.com. 
+Image-to-Video vs Text-to-Video: If you are using image-to-video, you already supply a base 
+image, which gives context for the scene. In that case, your prompt can focus more on 
+describing the subjects in the image and how they move, since the seRng is partly deﬁned 
+by the imageytscribe.com. For text-to-video (no ini:al image), you must describe the scene 
+from scratch along with the subject. The prompt structure is similar, but scene descrip:on 
+becomes crucial because Kling has no visual reference without an image. 
+Write in natural language. Unlike some older AI image models that relied on comma-
+separated keywords, Kling responds well to prompts wriMen as descrip:ve sentences. You 
+can use rich, vivid language and even mul:ple sentences – just ensure they are coherent and 
+focused. Clarity is more important than brevity. Aim to be concise but speciﬁc in detailing 
+
+the elements abovelearn.rundiﬀusion.com. In the next sec:ons, we’ll break down each 
+component of the prompt and how to use it eﬀec:vely. 
+Key Components of an Eﬀec2ve Kling Prompt 
+Each part of your prompt plays a role in guiding Kling 2.0. Here’s how to craZ each 
+component for maximum eﬀect: 
+1. Subject and Scene Descrip2on 
+Begin by iden:fying what the video is about – the main subject and the environment. Being 
+speciﬁc here will greatly improve the relevance of the output. 
+
+•  Subject Detail: Clearly state who or what is the focus. Instead of a vague phrase like 
+“someone” or “an object,” specify details. For example, rather than “Show someone 
+using tools,” a beMer descrip:on would be “A mechanic in gray overalls repairs a 
+motorcycle engine, tools spread out on a red toolbox”blog.segmind.com. This level of 
+detail gives Kling concrete visuals to work with. Men:on aMributes like color, clothing, 
+size, or any dis:nc:ve features of the subject. 
+
+•  Scene SeZng: Describe where the ac:on takes place. Name the loca:on or seRng 
+
+type (a kitchen, a rainforest, outer space, etc.), and include sensory details if relevant. 
+For instance, “in a small vintage kitchen with sunlight through the window” or “on a 
+distant planet with two moons in the sky”. Providing contextual details (weather, 
+:me of day, background objects) helps the AI render a richer sceneblog.segmind.com. 
+A good scene descrip2on paints a clear picture: e.g. “The garage has LED lights 
+overhead and vintage car posters on the walls” as opposed to just “in a 
+garage.”blog.segmind.com 
+
+•  Rela2on Between Subject and Scene: Write the prompt so that everything 
+
+happening is anchored to the subject. The subject typically comes ﬁrst in the 
+sentence, and then you describe the scene in rela:on to that subjectytscribe.com. For 
+example: “A cyclist rests by a fountain in a busy city plaza. Pedestrians bustle around 
+and pigeons ﬂy past.” Here the subject (“a cyclist”) is the anchor, and the scene 
+elements (“busy city plaza”, pedestrians, pigeons) relate to that subject. 
+
+•  For Image-to-Video: Leverage details from your base image. If your input image is a 
+pain:ng of a castle, your prompt might start with “A medieval castle on a hilltop…” 
+and then describe what new mo:on or event you want in that scene. You don’t need 
+to re-describe the obvious content of the image, but you can add new elements or 
+emphasize certain aspects. Ensure the prompt doesn’t contradict the image – for 
+instance, if the image is a day:me scene, promp:ng “under a night sky” will force 
+Kling to alter the :me of day dras:cally, which could cause unnatural results. Align 
+prompt details with the image or only make gradual changes (like “the leaves begin to 
+fall from the trees” if the image is a forest scene). 
+
+•  For Text-to-Video: Provide enough scene detail to compensate for the lack of an 
+
+image. Deﬁne the seRng thoroughly: if it’s outdoors, men:on ground and sky details; 
+if it’s indoors, describe the room and props. This helps avoid empty or blurry 
+backgrounds. For example: “A lone hiker stands at the edge of a cliﬀ overlooking a 
+vast canyon. The sky is ﬁlled with pink sunrise hues and low clouds dri. between the 
+cliﬀs.” The vivid scene descrip:on here guides Kling to generate a detailed 
+environment rather than a generic void. 
+
+Tip: More detail is usually beLer than too liLle. Prompts that lack detail yield bland 
+outputsblog.segmind.com. Give speciﬁc cues for every major element you want visible. 
+
+However, avoid stuﬃng in irrelevant details – each detail should contribute to the scene you 
+envision. We’ll discuss over-complica:ng prompts in the PiIalls sec:on. 
+2. Style and Visual Elements 
+Next, consider how the video should look and feel. Kling 2.0 oﬀers a lot of ﬂexibility in visual 
+style, from photorealis:c to highly stylized. You can control this through your choice of 
+adjec:ves and style tags in the prompt: 
+
+• 
+
+Ligh2ng: Describe the ligh:ng condi:ons, as ligh:ng drama:cally aﬀects mood. 
+Examples: so. morning sunlight, harsh neon lighMng, warm golden hour glow, dim 
+candlelight. Speciﬁc ligh:ng cues help Kling replicate that 
+ambianceblog.segmind.com. For a drama:c cinema:c feel, you might say “dramaMc, 
+high-contrast lighMng” or “so. diﬀused backlight outlining the subject.” 
+
+•  Color Pale‘e: Men:on the overall color tone if you have a preference. E.g. “warm, 
+earthy tones”, “cool blue and silver tones”, “vibrant neon colors”. This ensures the 
+video’s color grading matches your visionblog.segmind.com. For instance, “muted 
+pastel paleLe” would yield a diﬀerent feel than “bold primary colors.” 
+
+•  Visual Style or Genre: Include keywords for the style or genre. For example, cinemaMc 
+(for ﬁlm-like polish), documentary-style, cartoonish, surreal, photorealisMc, arMsMc, 
+hyper-real, retro, cyberpunk, etc. A prompt could say “in a cinema2c style” or “with 
+comic-book style visuals” depending on the output you wantblog.segmind.com. We’ll 
+explore speciﬁc styles (cinema:c, animated, etc.) in a dedicated sec:on below. 
+•  Camera Angles & Composi2on: You can specify the type of shot as part of the style. 
+For example, “wide-angle view”, “close-up shot”, “ﬁrst-person perspecMve”, “low-
+angle shot looking up”, etc.blog.segmind.com. This is especially useful if you want a 
+par:cular framing – a wide establishing shot versus an in:mate close-up can change 
+the storytelling. You might say “over-the-shoulder shot” for a perspec:ve peeking 
+from behind a character, or “aerial drone view” for a bird’s-eye scene. 
+
+•  Mood/Atmosphere: Descrip:ve mood words can inﬂuence the tone. Terms like 
+
+dreamy, whimsical, tense, gloomy, cheerful, epic, tranquil help convey the emo:onal 
+atmospherelearn.rundiﬀusion.com. For example, “a tense, griLy atmosphere” vs “a 
+playful, magical atmosphere” will guide Kling to add appropriate touches (like darker 
+shadows and handheld camera for grit, or bright ligh:ng and smooth mo:on for a 
+magical feel). 
+
+•  Stylis2c References: You can reference known art or ﬁlm styles in modera:on. For 
+
+instance, “in the style of an anime ﬁlm”, “Pixar-like 3D animaMon”, or “ﬁlm noir style”. 
+Be cau:ous with trademarked names or exact :tles, but general references (e.g. 
+“Studio Ghibli-inspired”, “80s cartoon style”, “modern Marvel movie style”) can steer 
+the aesthe:c. Make sure all style references in one prompt are compa:ble; avoid 
+mixing too many diﬀerent styles together (e.g. “watercolor painMng style” with 
+“photorealisMc” in one scene might confuse the model). 
+
+•  Consistency in Style: If you plan to chain mul:ple scenes or just want a cohesive look, 
+keep your style descriptors consistent across prompts. For example, if the ﬁrst scene 
+is “bright and cartoonish”, use similar language for the next scenes so the visuals 
+match. If you switch styles (say, from realisMc to sketch drawing style in the next 
+prompt) the diﬀerence will be no:ceable if those scenes are placed back-to-back. 
+
+Example: “A medieval marketplace at noon, depicted in a painterly, oil pain/ng style. So; 
+sunlight falls on stone walls, and colors are slightly muted for an old-fashioned look.” – This 
+
+prompt deﬁnes a stylized look (painterly), ligh:ng (soZ noon sun), and color tone (muted), 
+guiding Kling toward an ar:s:c, historic feel rather than modern photorealism. 
+3. Mo2on Cues and Camera Instruc2ons 
+One of the most exci:ng parts of promp:ng Kling is describing movement – both of the 
+subject and the camera. Mo:on brings your video to life, so providing clear instruc:ons here 
+is crucial. 
+
+•  Subject Movement: Describe how the main subject moves or changes. This could be 
+an ac:on (“a man jogs down the street”, “a cat jumps onto a table”, “volcanic smoke 
+billows from the crater”) or even subtle mo:on (“the girl’s hair s/rs in the wind”). If 
+the subject is staMc but something else in the scene moves (like falling leaves or 
+waves), you can treat those moving elements as part of the scene descrip:on. Be 
+speciﬁc: instead of “make it move” or “there is movement”, say “the camera crane 
+rises as the eagle takes oﬀ, following the eagle’s ascent” or “the train approaches in 
+the distance”. The more clearly you describe the mo:on, the more likely Kling will 
+render it correctlyblog.segmind.com. Avoid vague phrases like “add movement” – 
+always specify what moves and how. 
+
+•  Camera Movement & Angles: You can direct the “virtual camera” ﬁlming the scene. 
+
+Common camera movements include: 
+
+o  Panning: e.g. “camera pans slowly from le. to right”. 
+o  TilMng: e.g. “camera Mlts upward to reveal the skyline”. 
+o  Tracking/Following: e.g. “camera tracks the horse from the side as it runs” or 
+
+“camera follows behind the cyclist”. (This is like the camera moving along with 
+the subject). 
+
+o  Zooming: e.g. “gradual zoom in on the face” or for a quick drama:c eﬀect 
+
+“fast zoom toward the object”landofgeek.com. 
+
+o  OrbiMng: e.g. “camera circles around the statue 360 degrees”. 
+o  StaMc: If you do NOT want the camera to move at all (a locked-oﬀ shot), 
+
+explicitly say so. Use phrases like “staMc camera”, “staMc shot”, or “camera 
+remains sMll” at the start of your promptageoﬂlms.comreddit.com. For 
+example: “StaMc camera shot of a puppy si[ng in place…”. This tells Kling to 
+keep the viewpoint ﬁxed. (By default, AI videos oZen introduce some camera 
+driZ, so adding “staMc” ensures a stable shot.) 
+
+Camera cues in the prompt can be appended aZer describing the scene, or even integrated 
+as a clause: e.g. “…as seen in a steady, sta/c wide shot” or “…the camera zooming in slowly 
+on the ﬂower”. Many users ﬁnd success by men:oning the camera movement aBer 
+describing the subject’s ac:on, tying it to the subject. For instance: “A dancer twirls on stage, 
+the camera smoothly orbi/ng around her.” This approach keeps the prompt natural and 
+clear about how the camera relates to the subjectytscribe.com. 
+
+•  Cinema2c Mo2on Eﬀects: You can ask for advanced eﬀects: 
+
+o  Slow Mo2on: Use phrases like “in slow moMon” or “a slow-moMon sequence 
+of...” to have Kling simulate high-frame-rate slow-mo:onfal.ai. For example: 
+“slow-moMon shot of a glass shaLering, parMcles glinMng in the light.” 
+
+o  Fast Mo2on/Time-Lapse: Words like “fast-paced” or “Mme-lapse” can indicate 
+rapid mo:on. E.g. “Mme-lapse of stars moving across the night sky”. Be careful 
+mixing this with normal speed ac:on in one short video; if needed, dedicate 
+the whole prompt to a :me-lapse style scene. 
+
+o  First-Person View (FPV): If you want the perspec:ve as if through the eyes of 
+the subject (common in ac:on or drone shots), use “FPV” or describe it as 
+“ﬁrst-person perspecMve”. For instance: “FPV footage of racing through a 
+forest” gives a visceral, from-the-eyes viewlandofgeek.com. 
+
+o  Handheld/Shaky Cam: Including “handheld camera” or “shaky” can introduce 
+a realis:c shake (like a documentary or found-footage style). “Camera shakes 
+as it follows the running protagonist” implies a frene:c, urgent mood. Use 
+this sparingly – while “shaky cam” can add drama, too much shake might 
+make the video chao:c or reduce visual consistencylandofgeek.com. A hint 
+like “slightly shaky, handheld feel for realism” can suﬃce. 
+
+o  Drone or Crane Shots: Words like “drone shot”, “bird’s-eye view”, or “crane 
+shot” indicate high, sweeping camera moves. E.g. “aerial drone shot rising 
+above the treetops to reveal a mountain”. 
+
+o  Focus and Depth of Field: Though Kling might not explicitly simulate camera 
+lens seRngs, you can try phrases like “shallow depth of ﬁeld” (to focus on 
+subject and blur background) or “rack focus to the background”. For example: 
+“close-up on the ﬂower with shallow depth of ﬁeld, background so.ly blurred.” 
+This is an advanced cue and results can vary, but Kling does understand many 
+cinema:c terms. 
+
+•  Order of Mo2on Phrases: Generally, describe the subject and scene ﬁrst, then 
+
+men:on the camera movement and style. For example: “A surfer rides a huge wave 
+at sunset, spray ﬂying in the air. Cinema/c slow-mo/on, with the camera panning 
+to follow from a low angle.” By structuring it this way, Kling ﬁrst knows what’s 
+happening, then how to ﬁlm it. 
+
+•  Avoid Conﬂic2ng Mo2ons: Don’t ask for contradictory movements at the same :me. 
+For instance, avoid combining “fast shaky close-ups” with “smooth slow wide pans” in 
+one prompt – the model can’t do both simultaneously in one con:nuous 
+shotblog.segmind.com. If you need mul:ple styles (like a quick-cut montage), you will 
+likely need separate video clips or use edi:ng; a single generated clip should focus on 
+one style of movement for coherence. 
+
+Tip: If the camera is doing something very speciﬁc and important (like a complex dolly zoom 
+or a sequence of moves), you might need to experiment with phrasing to get it right. Start 
+with a simple version of the move in your prompt and generate a test clip. If it’s not what you 
+want, adjust the wording. For instance, if “camera pulls back from the subject revealing the 
+landscape” doesn’t yield enough pull-back, try elabora:ng: “camera starts close on the 
+subject’s face then gradually pulls back to a wide shot revealing the landscape.” Clarity can 
+help the AI catch the nuance. 
+4. Using Nega2ve Prompts for Higher Quality 
+Nega2ve promp2ng is a powerful feature in Kling 2.0 that lets you specify what not to 
+include in the video. This can greatly improve quality by elimina:ng unwanted elements, 
+ar:facts, or styles. Kling provides a separate ﬁeld for nega:ve prompts, so you don’t need to 
+write nega:ves in the main prompt. Here’s how to use them eﬀec:vely: 
+
+•  How Nega2ve Prompts Work: In the nega:ve prompt input, list the things you want 
+the AI to avoid. The model interprets any term in this ﬁeld as “do not include this.” 
+Therefore, you do not need to add words like "no" or "not" – just puRng the noun 
+or adjec:ve is suﬃcientpollo.ai. For example, if you want no text or watermark on the 
+
+video, simply add “text, watermark” to the nega:ve prompt. If you want to avoid a 
+par:cular color tone, you might add “monochrome” or “sepia” as nega:ves. 
+
+•  Avoiding Undesired Visual Ar2facts: Common nega:ve prompts for quality include 
+terms like “low resoluMon”, “blurry”, “grainy”, “pixelated”, “dark” (if the scene is 
+uninten:onally too dark)pollo.ai. Instead of a generic phrase like “low quality”, be 
+speciﬁc: for example, use “blurriness” or “low clarity” to target image qualitypollo.ai. 
+If Kling some:mes adds unwanted borders or distor:ons, include those (e.g. “frame 
+borders”, “distorMon”). 
+
+•  Stylis2c Nega2ves: If the model tends to add a style you don’t want, negate it. For 
+
+instance, if you’re aiming for realism but the output looks cartoonish, you could put 
+“cartoon, illustraMon” in the nega:ve prompts. Conversely, if you want a ﬂat cartoon, 
+you might negate “photorealism” or “shadows” to avoid realis:c shading. Be cau:ous 
+not to negate something essen:al, though – for example, nega:ng “shadows” might 
+remove all depth from an image. 
+
+•  Scene and Subject Exclusions: To ensure certain things don’t appear, list them as 
+
+• 
+
+nega:ves. Suppose you’re genera:ng a forest scene and you absolutely don’t want 
+any animals in it, you can add “animals” or even speciﬁc ones like “no birds” (just put 
+“birds” in nega:ve prompt)pollo.ai. If you want no people, put “people” as a nega:ve. 
+Being speciﬁc helps – e.g. “dog” or “robot” is clearer than a broad “creature”. Kling 
+will interpret the listed term as something to avoid genera:ngpollo.ai. 
+Improving Composi2on and Ligh2ng: You can use nega:ves to avoid certain 
+composi:ons or ligh:ng condi:ons that ruin the image. For example, if you ﬁnd the 
+video oZen has odd angles or an “unbalanced layout,” you could put “unbalanced 
+composiMon” in nega:vespollo.ai. Or if it’s adding “ﬁsh-eye lens” distor:on and you 
+don’t want that, negate “ﬁsheye”. Ligh:ng nega:ves might include “overexposed”, 
+“too dark”, “harsh shadows”, etc., if those issues come uppollo.ai. For instance, 
+adding “overly dark, overly vibrant colors” to nega:ves can push the model toward a 
+more moderate, natural exposurepollo.ai. 
+
+•  Tone and Emo2on Nega2ves: You can even inﬂuence the mood by nega:ng tones. If 
+
+you don’t want a video to feel sad or gloomy, you might add “sad, depressing, 
+gloomy” as nega:ves (assuming your main prompt doesn’t explicitly require those). 
+Kling will then try to avoid those emo:onal tonespollo.ai. This is subtle, but can be 
+useful for steering the output (for example, avoiding “angry tone” if you want a happy 
+scene)pollo.ai. 
+
+•  When Not to Use Nega2ves: Overusing nega:ve prompts can limit creaMvity and 
+some:mes cause the video to look plainpollo.ai. Only use nega:ves for things you 
+genuinely want to avoid. If you specify a huge list of nega:ves, you might 
+inadvertently strip away too much. For instance, puRng too many visual nega:ves 
+might remove both bad and good details. A good prac:ce is to start with just a few 
+cri:cal nega:ves (like quality issues or a speciﬁc unwanted object). If the output s:ll 
+has undesired elements, itera:vely add to the nega:ve list. Remember, do not 
+include the word “no” in the nega:ve prompt ﬁeld – just list the terms (e.g. say 
+“rain” rather than “no rain”)pollo.ai. And don’t put nega2ves in the main prompt 
+sentence, as Kling’s parser might ignore or misinterpret phrases like “no blur, no 
+camera shake” in the promptreddit.com. Use the dedicated nega:ve prompt input for 
+those. 
+
+•  Examples of Nega2ve Prompts: 
+
+o  Quality: “blurry, low resolu:on, dark tone, oversaturated” (these aim for a 
+
+sharp, well-exposed result)pollo.ai. 
+
+o  Scene: “indoor” (if you want to ensure an outdoor look, you might negate 
+indoor), “rainy, cloudy” (to avoid bad weather if not desired)pollo.ai. 
+
+o  Subjects: “text, watermark, logo” (to avoid AI puRng gibberish text), “insects” 
+(if you hate random bugs appearing), “weapons” (if you want to keep it kid-
+friendly)pollo.ai. 
+
+o  Style: “cartoon, 2D, drawing” (to avoid an illustrated look if you want realism), 
+or the opposite: “photo, realis:c” (if you want it purely cartoon and the AI 
+keeps blending in realism). 
+
+o  ArMfacts: “glitches, duplicates” (if some:mes an extra deformed ﬁgure 
+appears, you could try nega:ng “duplicate subject” or “double image”). 
+
+Using nega:ve prompts thoughIully can sharpen the focus of your video and reduce the 
+trial-and-error needed to get a clean resultpollo.aipollo.ai. It’s especially useful for improving 
+realism and clarity. As an example, many creators always include a basic set of nega:ves like 
+“low quality, blurry, ﬂicker” to pre-empt common issues, then add scene-speciﬁc nega:ves as 
+needed. 
+Strategies for Camera Mo2on and Cinema2c Eﬀects 
+To achieve professional-looking results, it helps to borrow concepts from ﬁlmmaking. Kling 
+2.0’s strength is its ability to mimic various camera techniques and cinema:c eﬀects when 
+prompted correctly. Here are some strategies: 
+
+• 
+
+Leverage Camera Presets (Mentally): The Kling interface (Pro mode) includes preset 
+camera movements (orbit, steady follow, etc.), which hints at the kinds of mo:ons 
+the model excels atlandofgeek.com. Even if you’re wri:ng prompts manually, you can 
+mimic these. Think in terms of dis:nct camera styles: 
+
+o  Smooth Orbit: The camera revolves around the subject – prompt with words 
+like “orbit around” or “360° around the subject”. Great for showcasing an 
+object or character from all sides. 
+
+o  Steady Follow: Camera follows the subject steadily – use “the camera follows 
+[subject]” or “tracking shot following [subject]”. Ideal for chase or movement 
+scenes. 
+
+o  Handheld/POV: For realism or intensity – phrases like “handheld shot”, “ﬁrst-
+
+person view running behind”. This introduces shake and immediacy. 
+
+o  Sta2onary Tripod: As discussed, “staMc camera” for no movement, focusing 
+
+aMen:on on internal mo:on within the frameageoﬂlms.com. 
+
+o  Drama2c Angles: “Low-angle shot” (camera looks up at subject, making them 
+appear larger or heroic) or “high-angle shot” (camera looks down, making 
+subject appear small or vulnerable). Use these to set the mood. 
+•  Combine Mo2on Keywords for Impact: You can stack mo:on-related keywords to 
+
+dial up the cinema:c intensity. For example: 
+
+o  “High speed, shaky acMon shot” – implies a fast-moving, shaking camera (like 
+an ac:on scene). Words like “high speed” or “fast-paced” combined with a 
+camera cue will tell Kling to make everything feel quickerlandofgeek.com. 
+o  “Slow moMon, sweeping pan” – suggests a drama:c slow-mo with a wide pan 
+
+for grandeur. 
+
+o  “FPV drone ﬂy-through” – ﬁrst-person fast movement through a space. 
+
+o 
+
+If doing an ac2on scene, terms like “high acMon”, “intense”, “dynamic 
+camera” can be added. One creator noted that using *“high ac:on” and 
+“shaky” together made the output feel like a Michael Bay movie – very 
+energe:c and griMylandofgeek.com. Just remember that too much shake can 
+reduce frame consistency, so you might balance “shaky” with a lower intensity 
+descrip:on (e.g. “slightly shaky”). 
+
+•  Cinema2c Eﬀects: Think about ﬁlm techniques: 
+
+o  Drama2c Reveal: e.g. “camera starts close on the arMfact and then pulls back 
+to reveal the enMre temple hall”. This implies a zoom-out or backward dolly 
+movement revealing new parts of the scene over :me. 
+
+o  Rack Focus: e.g. “focus shi.s from the foreground candle to the person in the 
+
+background”. It’s an advanced concept and Kling might not perfectly execute a 
+focus shiZ, but including it can some:mes yield a moment where one element 
+comes into clarity. 
+
+o  Montage or Quick Cuts: Kling won’t cut between totally diﬀerent scenes on its 
+own in one genera:on, but you can simulate a quick-cut feel by describing 
+very fast mo:on or chaos. Otherwise, actual separate clips edited together is 
+needed (discussed in mul:-scene sec:on). If you aMempt mul:ple shots in 
+one prompt (like “ﬁrst do this, then suddenly cut to that”), the model might 
+blend them into one scene. It’s safer to s:ck to one con:nuous shot per 
+prompt. 
+
+o  Lens and Filters: You can men:on lens types or ﬁlm ar:facts: “wide-angle 
+lens” (might exaggerate perspec:ve), “telephoto shot” (compressed 
+background), “GoPro style ﬁsheye”, “infrared camera view”, “black and white 
+ﬁlm grain”. Kling has been known to respond to many of these stylis:c cues. 
+For example, “grainy 16mm footage” could add noise and a vintage vibe. Use 
+these to match a desired era or medium (like “VHS quality” for a retro eﬀect, 
+or “surveillance camera staMc angle” for a security footage feel). 
+•  Example – Cinema2c Ac2on: “The sports car dri.s around a corner on a mountain 
+
+road at dusk, Mres kicking up dust. Camera races low and fast alongside the car, with 
+a shaky, high-speed chase feellandofgeek.com. Drama/c ligh/ng from the sunset 
+silhoueLes the dust cloud.” – This prompt uses camera placement (low and fast 
+alongside), adds a shaky high-speed eﬀect for intensity, and ensures ligh:ng is 
+drama:c. The result would likely resemble an ac:on movie chase scene. 
+
+•  Example – Gentle Cinema2c: “A couple walks through a quiet park in autumn. Slow, 
+steady cam follows them from a distance as leaves fall. So; backligh/ng from the 
+late a.ernoon sun creates a warm glow, cinema/c depth of ﬁeld blurring the 
+foreground branches.” – This one uses a steady cam (no shake) and slow movement 
+for a peaceful tone, plus cinema:c ligh:ng and depth cues. 
+
+•  Check the Result and Iterate: AZer genera:on, review how the mo:on turned out. If 
+the camera moved but not as expected, adjust the prompt wording. For instance, if 
+you wrote “camera pans” and it barely moved, try “camera pans wide across the 
+scene” or increase the emphasis (maybe by phrasing it as an important part of the 
+sentence). If the mo:on was too much, you can tone down words like “rapidly” to 
+“slowly”, or remove “shaky” if it caused distor:on. 
+
+Remember, cinema:c promp:ng is part art and part science – don’t hesitate to experiment 
+with phrasing. Kling 2.0 is quite advanced and “understands” many ﬁlm terms, so enjoy 
+pushing the limits of its camera work capabili:es! 
+Promp2ng Diﬀerent Types of Video Outputs 
+Now let’s focus on :ps for speciﬁc genres or styles of videos. Kling 2.0 can produce a range of 
+outputs, from ultra-realis:c footage to stylized fantasy anima:ons. Below are guidelines for 
+promp:ng various common categories (cinema:c live-ac:on, animated/cartoon, stylized art, 
+product showcases, natural scenes, and sci-ﬁ). 
+Cinema2c Videos 
+Cinema2c outputs aim to look like professional ﬁlm scenes. The goal is realism with drama:c 
+ﬂair, as if shot with a high-end movie camera: 
+
+•  Use Filmic Language: Include words like “cinemaMc”, “ﬁlm-like”, or even speciﬁc ﬁlm 
+techniques as men:oned earlier. Describe ligh:ng in cinema:c terms: “dramaMc 
+Hollywood lighMng”, “moody shadows”, “so. focus background”. Men:on camera 
+equipment if relevant: e.g. “shot on a Steadicam” or “wide anamorphic shot” might 
+introduce lens ﬂares or wider aspect feel. 
+
+•  Dynamic Camera and Angles: Cinema:c scenes oZen employ movement. You can 
+
+prompt “tracking shot”, “dolly shot”, “crane shot sweeping over” etc. For epic scale, 
+try wide establishing shots (“wide shot of a vast desert as the camera pans across”). 
+For in:mate drama, go for close-ups (“Mght close-up on the character’s face as a tear 
+falls”). Don’t overload the prompt with too many at once; pick the style that matches 
+the scene’s mood. 
+
+•  High Detail and Realism: Emphasize realis:c details – lens ﬂare, depth of ﬁeld, ﬁlm 
+
+grain, etc., if you want a cinema:c realism. For example, “sunlight ﬂares into the lens 
+as the camera moves” or “subtle ﬁlm grain for a realisMc touch”. You can also men:on 
+frame rate if trying to emulate something (though the model might not strictly 
+adhere, phrases like “24fps cinemaMc moMon” could inﬂuence the vibe). 
+•  Story and Emo2on: Cinema:c prompts oZen beneﬁt from an implied story or 
+
+emo:on. If relevant, include the character’s emo:on or the scene’s tension. E.g. “a 
+cinemaMc sequence of a hero standing amidst a baLleﬁeld, triumphant stance, 
+embers ﬂoaMng in the air”. Words like “tense, triumphant, melancholic, suspenseful” 
+can guide the atmosphere. 
+
+•  Consistent Tone: Keep the tone consistent. If it’s a dark, griMy scene, maintain that 
+through descrip:ons of ligh:ng (dim, shadowy), color (desaturated or cool tones), 
+and mo:on (handheld, jiMery perhaps). If it’s a bright adventure, use warm tones, 
+smooth movements, etc. Avoid mixing, say, “griLy documentary style” with 
+“whimsical magical lighMng” in one scene. 
+
+•  Example Prompt (Cinema2c Live-Ac2on): “At sunset, a lone samurai stands on a 
+
+windy hilltop, cherry blossom petals dri.ing by. Cinema/c composi/on, with a wide-
+angle shot capturing the dramaMc sky and the warrior’s silhoueLe. Lens ﬂare from 
+the sun peeks around his ﬁgure. Epic, sweeping camera movement slowly circles him, 
+and dust motes glow in the golden light.” – This prompt uses cinema:c keywords 
+(composi:on, wide-angle, lens ﬂare), descrip:ve imagery, and a grand camera move 
+to evoke a ﬁlm scene. 
+Animated or Cartoon-Style Videos 
+To create outputs that look like anima:ons or cartoons (rather than realis:c footage), adjust 
+your prompt wording to emphasize illustra:on and animated quali:es: 
+
+•  Specify the Anima2on Style: Use terms like “3D animaMon”, “Pixar-like CGI”, “Disney 
+cartoon style”, “2D anime style”, “stop-moMon claymaMon” depending on what you 
+want. For example, “a scene in the style of a hand-drawn Studio Ghibli animaMon” or 
+“Pixar style 3D characters with big eyes”. This immediately tells Kling you’re not 
+aiming for strict realism. 
+
+•  Exaggerate and Simplify: Animated visuals oZen have exaggerated features or 
+
+simpliﬁed textures. You can men:on this: “caricatured proporMons”, “bright ﬂat 
+colors, minimal texture”, “outline drawing”, etc. For a cartoon, you might say “cel-
+shaded look with bold outlines”. For clayma:on, “slightly jerky, stop-moMon feel, with 
+handcra.ed look”. 
+
+•  Color and Ligh2ng: Cartoons oZen use vibrant, clean colors. Use adjec:ves like 
+
+“vibrant, colorful” or speciﬁc paleMe cues like “pastel cartoon paleLe”. Ligh:ng in 
+anima:on can be more stylized (e.g. “even lighMng, no dramaMc shadows” for a ﬂat 
+cartoon, or “high contrast comic-book shading” for a graphic novel look). 
+
+•  Movement Style: If you want the mo:on to feel animated, you could specify “bouncy 
+
+movement”, “cartoon physics”, or “smooth 2D animaMon at 12fps” (tradi:onal 
+anima:on oZen animated on twos). For example, “the character runs in place with a 
+comical, exaggerated cycle”. Kling might not perfectly simulate frame rate, but 
+indica:ng “animated feel” can inﬂuence the result. 
+
+•  Avoiding Unwanted Realism: Use nega:ve prompts to remove realis:c ar:facts. For 
+instance, if Kling tends to make things too real, put “photorealisMc, realisMc skin 
+texture, live-acMon” in the nega:ve prompt. That encourages the model to s:ck to a 
+purely animated look. 
+
+•  Example Prompt (Cartoon): “A playful 2D animated scene of a cat and mouse chasing 
+
+each other in a kitchen. Bright, saturated colors and bold black outlines on 
+characters. The moMon is exaggerated and bouncy, with cartoon dust clouds when 
+they zoom by. Sta/c camera framing the scene like a classic cartoon shot.” – Here we 
+clearly asked for 2D anima:on with outlines, vivid colors, exaggerated/bouncy 
+mo:on, and even speciﬁed a sta:c camera to mimic how classic cartoons oZen have 
+the background sta:c while characters move within the frame. 
+
+•  Example Prompt (Anime style): “An anime-style video of a futurisMc city. The 
+
+heroine’s hair and coat ﬂuLer drama/cally as she stands on a skyscraper ledge. 
+Dynamic anime ac/on lines and streaked mo/on as a ﬂying car rushes past. Cel-
+shaded look with high-contrast shadows, and the background painted in detailed 
+neon city lights.” – This mixes content (futuris:c city, heroine) with anime-speciﬁc 
+cues (ac:on lines, cel-shading, high contrast shadow style). 
+
+Stylized Ar2s2c Videos 
+“Stylized” videos refer to outputs with a dis:nc:ve art style or crea:ve visual twist – for 
+example, a video that looks like an oil pain:ng come to life, or a surreal dream sequence with 
+distorted reality. To prompt these: 
+
+•  Pick an Art Medium or Style: Iden:fy if you want it to look like a pain:ng, sketch, 
+sculpture, etc. E.g. “watercolor painMng style”, “oil painMng style with visible 
+brushstrokes”, “chalk drawing animaMon”, “stained glass look”. Kling can oZen mimic 
+art mediums if described clearly. “A video in the style of a Van Gogh painMng” (i.e. 
+swirling impressionist strokes) is possible, though if referencing a speciﬁc ar:st, the 
+results can vary and the system might avoid explicit famous ar:st copying – but 
+generic art style descrip:ons work well. 
+
+•  Surreal or Abstract Elements: If you want a dreamlike or abstract vibe, say so. 
+
+“surreal atmosphere, objects morph slowly”, “melMng clocks and ﬂoaMng islands (in a 
+nod to Dali)” – you can be quite imagina:ve. Kling 2.0 is capable of moderate 
+surrealism, especially if your prompt guides it through transi:ons or morphing. But 
+note that extreme abstract sequences might be challenging to control; you may need 
+to experiment with diﬀerent phrasings or possibly generate as mul:ple segments. 
+
+•  Color and Form: Stylized outputs oZen emphasize certain colors or forms. For 
+
+example: “monochromaMc paleLe in red tones”, or “high-contrast black and white ink 
+drawing style”. You could also specify geometry like “in a low-poly 3D style” for a 
+stylized CGI look. 
+
+•  Movement for Stylized Videos: If the style is like a pain:ng, you might keep 
+
+movement gentle or minimal so the frame looks like art with slight mo:on (like a 
+cinemagraph). For instance, “a living watercolor painMng of a seaside – camera 
+locked sta/c, only the water waves and clouds move with a gentle painted eﬀect.” On 
+the other hand, if it’s a bold style, you can add “dramaMc transiMons” like “the scene 
+splashes into new colors as the mood shi.s” (though Kling might not interpret 
+“splashes into new colors” literally, it sets the expecta:on of a color-changing eﬀect). 
+•  Combine with Nega2ve Prompts: Nega:ves can remove realism or certain unwanted 
+details. If you want a clean cartoonish style, you might negate “texture, detail” (to 
+avoid realis:c skin pores or such). If you want an old pain:ng style, you might negate 
+“modern objects” to avoid anything anachronis:c. 
+
+•  Example Prompt (Ar2s2c Styliza2on): “A surreal, dreamlike video of a desert where 
+the sand dunes ﬂow like waves. Painted oil-pain/ng style with visible brushstrokes 
+on the moving sand. The sky is swirling with purple and orange hues in an 
+impressionis/c manner. Slow, poe/c camera pan, as shapes in the sand subtly morph 
+into silhoueLes of animals and then back into dunes.” – This prompt tells Kling to 
+produce an ar:s:c, painterly look with surreal morphing elements. We set a slow 
+pace and included plenty of art-style descriptors (oil pain:ng, brushstrokes, 
+impressionis:c). 
+
+•  Example Prompt (Minimalist Graphic Style): “A minimalis/c ﬂat-design animaMon of 
+a city skyline. Buildings are simple shapes in solid colors. No gradients or textures 
+(ﬂat colors only). Smooth mo/on of a rising sun icon above the skyline. The style is 
+like a moving infographic, very clean and modern.” – Here we explicitly negated 
+textures, asked for ﬂat design, and described the simpliﬁed style to get a stylized 
+outcome. 
+Product-Focused Videos 
+When showcasing a product (for an adver:sement or demo), the prompt should emphasize 
+the product and its features, ensuring clarity and appeal. Kling 2.0 can make great product 
+shots if guided properly: 
+
+•  Foreground the Product: Start the scene descrip:on with the product as the main 
+
+subject. E.g. “A sleek smartphone ﬂoaMng in mid-air” or “A pair of running shoes on a 
+rotaMng plalorm”. Make it clear the product is center-stage, not a :ny part of a 
+bigger scene. 
+
+•  Simple, Clean Background: OZen for product videos, less is more in the background. 
+You can explicitly men:on the background: “on a solid white backdrop”, “in a minimal 
+studio se[ng”, or “on a simple wooden table with blurred background”. This ensures 
+the model doesn’t cluMer the scene with unrelated elements. If you want some 
+
+• 
+
+environment (like the product in a lifestyle seRng), keep it controlled: “a watch 
+placed on a rock by a waterfall (to imply ruggedness), with the waterfall so.ly blurred 
+behind”. 
+Ligh2ng to Highlight the Product: Good product shots have great ligh:ng. You might 
+say “studio so.box lighMng illuminaMng the product evenly” or “dramaMc spotlight 
+from above” for a more ar:s:c product shot. Describe reﬂec:ons or highlights if 
+applicable: “the boLle has a subtle highlight along its side”. For reﬂec:ve products, 
+men:on “reﬂecMve surface” or “glossy ﬁnish reﬂecMng light”. For tech gadgets, 
+maybe “cool-toned lighMng for a sleek look”. 
+
+•  Mo2on Showcasing Features: The camera movement should show oﬀ the product 
+
+details: 
+
+o  A common approach is a 360° rota2on or an orbit: e.g. “camera slowly rotates 
+
+360° around the sneaker, showing all angles”blog.segmind.com. 
+
+o  Or “the product itself rotates”: e.g. “the camera stays staMc while the watch 
+
+spins to reveal its sides”. 
+
+o  Zooms can highlight features: “slow zoom in to the phone’s screen to show the 
+
+o 
+
+display”. 
+If mul:ple features, you might need mul:ple shots (or generate separate 
+videos focusing on each feature, then edit). In a single prompt, you could try: 
+“First, a wide shot of the laptop, then a close-up on its keyboard”, but this may 
+be too complex for one genera:on – it might blur those into one scene. If 
+aMempted, ensure transi:onal phrasing like “camera cuts to a close-up of the 
+keyboard”, though there's no guarantee Kling will do an actual cut. It might be 
+beMer to generate two clips. 
+
+•  Clarity and Quality: Use adjec:ves that imply sharpness and quality, such as “ultra-
+detailed, high-deﬁniMon, crisp focus”. Also ensure in nega:ve prompts to remove 
+anything that could mar the quality (e.g. “blurry, grainy”). For product shots, you 
+likely want “clean” output: so nega:ve prompt could include “dirt, scratches” unless 
+the product is supposed to be dirty or rugged. 
+
+•  Stylish Presenta2on: If it’s a luxury item, add “luxurious lighMng” or “dramaMc 
+shadows under it for a premium look”. If it’s a tech item, maybe “futurisMc 
+holographic eﬀects around it”. Tailor the style to the product’s brand image (modern, 
+playful, eco-friendly, etc., with appropriate descriptors). 
+
+•  Example Prompt (Product Showcase): “Scene: A white ceramic coﬀee mug is 
+
+centered on a glossy black marble countertop in a minimalist 
+kitchenblog.segmind.com. Style: So. studio lighMng from the side highlights the 
+mug’s texture, with warm tones matching a morning mood. Mo/on: The camera 
+slowly orbits 360° around the mug, pausing brieﬂy to focus on the printed logo, then 
+conMnuing aroundblog.segmind.com. The background is so.ly blurred, keeping the 
+mug in sharp focus.” – This prompt clearly deﬁnes the product and seRng, uses 
+appropriate ligh:ng, and a smooth showcasing mo:on. (Note: We structured it with 
+“Scene: … Style: … Mo:on: …” just for clarity here, but you can write it as full 
+sentences in actual use.) 
+
+•  Example Prompt (Tech Product): “A new smartphone ﬂoats in a dark void. Studio rim 
+ligh/ng outlines its silhoueLe and so; front light reveals its screen. The phone slowly 
+rotates to show its front and back. Cinema/c glow on the edges, and a blue techy 
+background light faintly shines behind. The camera gently zooms in as it rotates, 
+
+emphasizing the ultra-slim proﬁle.” – A typical tech ad style: dark background, 
+drama:c ligh:ng, rota:ng product, slight zoom for emphasis. 
+
+Using Kling 2.0 for product videos can yield impressive results if you focus the prompt on the 
+product and keep everything else minimal and suppor:ve of itblog.segmind.com. Always 
+review if the model added any unwanted text or extra objects on the product (some:mes AI 
+might put nonsense logos – use nega:ve prompts like “text” to avoid that). 
+Natural Scenes and Landscapes 
+Natural scenes (like landscapes, wildlife, weather phenomena) require a slightly diﬀerent 
+approach. Consistency and realism are key to avoid weird glitches (like objects morphing). 
+Here’s how to prompt for nature: 
+
+•  Describe the Environment in Detail: Nature can be expansive, so set the scene 
+
+thoroughly. If it’s a landscape, men:on terrain features (mountains, rivers, trees, 
+etc.), sky condi:ons, and ligh:ng. For example: “a lush green valley with rolling hills, a 
+river snaking through the center, and a misty mountain range in the distance under a 
+dawn sky”. This gives Kling a lot to render. If focusing on a speciﬁc natural subject 
+(like a single tree or animal in its habitat), you can narrow in on that but s:ll men:on 
+the surroundings: “a close-up shot of a sunﬂower ﬁeld on a sunny day, bees buzzing 
+around the blossoms, distant hills under a clear blue sky”. 
+
+•  Use Scenic Adjec2ves: Words like majesMc, tranquil, rugged, prisMne help convey the 
+feeling. If you want a cinema2c nature documentary feel, say “documentary style 
+footage of ...” or “NaMonal Geographic-like scene of ...”. This may encourage realis:c, 
+stable output. 
+
+•  Camera Sugges2ons: OZen, wide steady shots or gentle pans work well for nature: 
+
+o  “slow panoramic pan across the desert at sunset”, 
+o  “steady aerial drone shot over the forest canopy”, 
+o  “Mme-lapse steady shot of a ﬂower blooming”. 
+
+For wildlife ac:on, you could do “camera tracks the eagle as it soars”, but 
+keep in mind complex animal mo:on might be hit-or-miss. Simpler is safer: 
+“the eagle glides across the sky, camera follows from behind”. 
+
+•  Weather and Time of Day: These hugely aﬀect the visuals. Include them if relevant: 
+“a rainforest in the rain with raindrops paLering on leaves”, or “a beach at golden 
+hour with orange-pink sky colors reﬂecMng on the water”. If you want dynamic 
+weather changes (like day to night), you might need separate prompts or the 
+start/end frame feature. It’s tough to have one short video smoothly change from 
+noon to night without an explicit feature. 
+
+•  Stability and Consistency: Nature scenes can some:mes suﬀer from ﬂicker if too 
+many elements are moving or changing (like lots of animals or complex water 
+reﬂec:ons). To avoid this: 
+
+o  Don’t overload the prompt with many diﬀerent moving parts; focus on a few 
+
+key elements. 
+
+o  Use sta2c camera if appropriate, which oZen yields more stable imagery of 
+
+o 
+
+landscapes (since the frame isn’t also moving). 
+If your scene has repe::ve paMerns (like a forest of many trees or a ﬂock of 
+birds), AI might struggle to keep them consistent. You can mi:gate this by not 
+emphasizing the number, or using phrases like “vast forest” (implied many 
+trees but not individually tracked). Kling is quite advanced, but it’s s:ll 
+genera:ve – minor con:nuity oddi:es can happen. 
+
+•  Example Prompt (Landscape): “A grand panoramic view of the Swiss Alps at dawn. 
+Snow-capped peaks glow as the ﬁrst sunlight of day hits them. Camera is sta/c, 
+showing a valley below with a winding river reﬂecMng the pink sky. So; clouds hang 
+around the mountain tops, slowly dissipa/ng as the sky brightens. The scene is serene 
+and majes/c, with crystal clear details.” – This prompt sets a speciﬁc place (Alps at 
+dawn) and uses terms to ensure a stable, beau:ful shot (sta:c camera, clear details, 
+slow movement of clouds only). 
+
+•  Example Prompt (Wildlife close-up): “A close-up, documentary-style shot of a lioness 
+walking through golden savanna grass. Shallow depth of ﬁeld keeps the focus on her 
+face while the background is a so. blur of grass. Natural ligh/ng of late a.ernoon 
+sun casts a warm glow on her fur. Camera tracks gently alongside her at eye level as 
+she moves gracefully.” – This describes a natural animal scene with cinema:c 
+documentary feel (close-up, shallow DOF, tracking camera, warm natural light). It also 
+implicitly avoids quick cuts or anything unnatural. 
+
+Use nega:ve prompts in nature scenes for things like “blurry, ﬂicker” if needed, or if the AI 
+some:mes introduces human structures or animals you didn’t ask for (e.g. nega:ng “people” 
+or certain animals if they keep appearing unwanted). 
+Sci-Fi and Fantasy Scenes 
+Sci-ﬁ (science ﬁc:on) and fantasy prompts allow you to really ﬂex crea:ve descrip:ons. Kling 
+2.0 can generate futuris:c ci:es, mythical creatures, and imagina:ve worlds with the right 
+cues: 
+
+•  Use Imagina2ve Detail: Don’t shy away from inven:ng details. Sci-ﬁ city? Describe 
+
+neon signs, ﬂying vehicles, towering skyscrapers, maybe mul:ple moons or futuris:c 
+tech. Fantasy forest? Describe bioluminescent plants, magical creatures, ethereal light 
+rays. For example: “a sprawling cyberpunk city at night, with hovering cars zipping 
+between neon-lit skyscrapers and giant holographic billboards in the sky”. Or “an 
+ancient ﬂoa/ng island in the sky with waterfalls spilling into the clouds below, and 
+dragons circling its craggy peaks”. The more vividly you paint the scene, the beMer 
+Kling can aMempt to visualize it. 
+Incorporate Genre Keywords: Words like futurisMc, cyberpunk, dystopian, utopian, 
+alien, magical, ethereal, steampunk immediately set a tone. For sci-ﬁ, men:oning 
+technology or advanced materials (holographic, nanotech, robo:c) can help. For 
+fantasy, invoking magic or mythical elements (ancient rune-covered stones, 
+shimmering spells) is useful. 
+Ligh2ng and Color for Eﬀect: Sci-ﬁ oZen has bold ligh:ng – e.g. neon blues, reds, 
+holographic glows. Fantasy might have more natural but intensiﬁed ligh:ng – e.g. 
+glowing orbs, mys:cal moonlight. Tailor it: “pulsaMng neon lights and holograms” for 
+sci-ﬁ, versus “so. enchanted forest glow with ﬂoaMng parMcles” for fantasy. These 
+touches add atmosphere. 
+
+• 
+
+• 
+
+•  Camera and Mo2on in Sci-ﬁ/Fantasy: Both genres can beneﬁt from dynamic camera 
+
+work: 
+
+o  Sci-ﬁ ac:on: “the camera dives between skyscrapers following a ﬂying car”, 
+or “Zero-G perspecMve, camera rolls as the astronaut tumbles in space”. 
+
+o  Fantasy epic: “sweeping aerial shot over the fantasy kingdom”, “dramaMc orbit 
+
+o 
+
+around the dragon as it takes ﬂight”. 
+If a lot is happening (like a baMle), you might describe one con:nuous mo:on 
+that captures it, or consider spliRng scenes. 
+
+o  First-person view can be cool in sci-ﬁ (e.g. FPV of a mech suit running, or an 
+
+alien’s POV). 
+
+o  For more surreal fantasy, a slower, smooth camera might let the viewer soak 
+
+in the environment details. 
+
+•  Consistency of Design: One challenge: ensuring all elements ﬁt the same world. If 
+
+you men:on “robot” and “wizard” in one scene, it will try to mix them (which might 
+be ﬁne if that’s the intent). But generally, keep your theme cohesive. All futuris:c 
+tech, or all medieval magic – unless your concept is explicitly a mashup. 
+•  Example Prompt (Sci-Fi City): “A futuris/c sci-ﬁ cityscape at night, ﬁlled with 
+
+towering skyscrapers and giant holographic adverMsements. Flying vehicles zip 
+through the sky lanes between buildings. Rain-soaked streets reﬂect the neon signs. 
+The camera glides forward at street level, smoothly weaving through traﬃc. 
+Cyberpunk atmosphere with vibrant blues and pinks, and steam rising from vents.” – 
+This packs in a lot of cyberpunk detail: neon, rain reﬂec:ons, ﬂying cars, etc., with a 
+smooth camera mo:on to set a scene like a movie opening. 
+
+•  Example Prompt (Fantasy Scene): “In a magical forest clearing, a unicorn stands by a 
+tranquil pool under the full moon. Fireﬂies dri; in the air leaving Mny light trails. The 
+scene has a so; blue glow with mist hugging the ground. Camera slowly pans 
+around the unicorn, capturing the sparkling horn and the ancient glowing runes on 
+the surrounding trees. The mood is otherworldly and serene.” – This describes a 
+fantasy environment with magical elements, speciﬁes gentle mo:on, and maintains a 
+consistent enchanted mood. 
+
+•  Nega2ve Prompts for Sci-Fi/Fantasy: If the model tends to insert things like random 
+text or unwanted anachronisms, negate them (e.g. “text” if signs have gibberish, or 
+“cars” if you want pure medieval fantasy and it keeps throwing a car in the distance!). 
+Also, for highly detailed scenes, some:mes ar:facts might appear – nega:ng “glitch, 
+distor:on” can help if you see any. 
+
+Sci-ﬁ and fantasy prompts can be some of the most fun – let your imagina:on lead, and use 
+the prompt to communicate that vivid mental image to Kling. The more clearly you describe 
+the crea:ve elements, the beMer the chance the model will include them. 
+Chaining Prompts for Mul2-Scene or Story-Based Videos 
+Kling 2.0 (like most AI video models) typically generates a short clip for a given prompt. If you 
+want to create a longer video with mul:ple scenes (for example, telling a short story with a 
+beginning, middle, and end, or just a sequence of diﬀerent shots), you will need to chain 
+prompts – essen:ally, create mul:ple clips and combine them, or use Kling’s advanced 
+features to transi:on between scenes. 
+Here are strategies for mul:-scene videos: 
+
+•  Sequen2al Genera2on: The straighIorward approach is to plan out your scenes and 
+generate them one by one. Write a separate prompt for each scene. Ensure each 
+scene’s prompt is self-contained and focused. For example, if you want a 3-scene 
+story (Scene1: character waking up, Scene2: character running in park, Scene3: 
+character at night looking at stars), you’d generate three clips: 
+
+1.  Prompt for Scene 1 – e.g. “Morning light spills into a bedroom. A man wakes 
+up and stretches by the window. Camera staMc, so. warm light, calm mood.” 
+2.  Prompt for Scene 2 – e.g. “Now outside, the man jogs through a city park with 
+trees swaying. Camera follows from the side, energeMc morning atmosphere.” 
+
+3.  Prompt for Scene 3 – e.g. “At night, the man stands on a hill under a starry sky, 
+
+gazing upwards. SilhoueLe shot, cool blue moonlight, peaceful vibe.” 
+
+Each is generated separately. Then you can edit these clips together in post-processing 
+(manually outside of Kling). Tip: To make the transi:ons feel smooth, you can try to have a 
+linking element (like end Scene2 with him looking up, start Scene3 with sky, etc.). 
+
+•  Using Start/End Frames (Transi2on within one clip): Kling’s advanced Start/End 
+Frame feature allows you to specify a star:ng image and an ending image for one 
+video, and the AI will generate frames transi:oning between thempollo.ai. This is one 
+way to do a two-part scene in a single clip (e.g. start in Scene A, end in Scene B 
+seamlessly). For example, you could upload an image of your character in loca:on A 
+and another image of the character in loca:on B; Kling will animate a transi:on from 
+A to B. When using this: 
+
+o  Keep Scenes Related: The start and end should be somewhat similar in 
+composi:on or content to avoid bizarre morphingpollo.ai. For instance, 
+transi:oning from a close-up face to a wide landscape might not turn out well. 
+But transi:oning from one landscape to another, or one pose to another, can 
+work if done carefully. 
+
+o  Prompt for the Transi2on: You s:ll provide a prompt describing the overall 
+transforma:on or mo:on that connects the two states. E.g. “Start frame: a 
+closed ﬂower bud; End frame: the ﬂower fully bloomed. Prompt: a Mme-lapse 
+of a rose blooming in sunlight”. Kling will try to go from the bud image to the 
+bloom image over the clippollo.ai. This is great for transformaMons or scene 
+changes like season change, object morphs, etc. 
+
+o  Limit to Two Scenes: Start/end frame method eﬀec:vely can handle one 
+
+transi:on (A to B). If you need mul:ple transi:ons (A to B to C), you’d have to 
+chain mul:ple clips (A->B, then B->C, etc. as separate genera:ons). 
+•  Video Extension and Mul2-Elements: Kling also has features like Video Extension (to 
+make a clip longer by con:nuing it) and Mul2-Elements (to add or remove elements 
+in a video)pollo.aipollo.ai. In the context of promp:ng: 
+
+o  Video Extension: If you have a clip and want to con:nue the ac:on beyond its 
+original dura:on, you might use the extension feature with a new prompt to 
+carry on. This is a form of chaining where the end of the ﬁrst clip becomes the 
+start of the next segment. The beneﬁt is maintaining con:nuity (less jump 
+between clips). For instance, generate a 5s clip of Scene1. Then use the last 
+frame of Scene1 as the start for Scene2 (via the start frame feature, or Kling’s 
+internal memory if using extension) and prompt what happens next. This way, 
+Scene2 begins exactly where Scene1 leZ oﬀ. The UI might allow directly 
+extending with a prompt, or you might simulate it by extrac:ng the last frame 
+and using it as an image input for the next genera:on. 
+
+o  MulM-Elements for Consistency: With Kling’s Elements tool (currently in Kling 
+
+1.6 for complex editslandofgeek.com), advanced users can composite mul:ple 
+characters or objects to ensure consistency. For example, you could generate 
+a character in one scene, then import that same character image into another 
+scene as an element to keep their appearance iden:callandofgeek.com. This is 
+quite advanced and oZen not purely prompt-based (it involves the UI where 
+you highlight and replace elements). But it’s good to know if you need two 
+characters to persist across scenes without change. 
+
+o  MoMon Brushes: Another advanced tool – if you plan to chain within one 
+
+scene, the mo2on brush can set speciﬁc paths for objects or sta:c regions to 
+hold s:llpollo.ai. For a story, perhaps less relevant unless you are doing 
+complex mul:-character interac:ons. 
+
+•  Maintaining Narra2ve Consistency: If you want the same character or object to 
+
+appear in mul:ple scenes, be consistent in your descrip:ons: 
+
+o  Use the same keywords for them each :me (e.g. “the man with the red 
+
+o 
+
+jacket” – repeat that in each prompt, so Kling tries to keep him red-jacketed). 
+If possible, use an image of that character as a star:ng point for each scene 
+(image-to-video advantage). For example, generate a good portrait of your 
+character ﬁrst, then feed that as the image for various scenes of the story, 
+changing only the background and ac:on in prompts. This can signiﬁcantly 
+improve consistency of the character’s face/ouIit across scenes. 
+
+o  Keep the art style the same across scenes (as men:oned earlier) unless the 
+
+story inten:onally changes style. 
+
+o  Accept that perfect con:nuity (like the exact same face or exact same layout 
+persis:ng) can be tricky with genera:ve AI. Minor diﬀerences might occur. 
+Clever use of images and prompts can minimize it, but a 100% match is hard. 
+S:ll, many users achieve visually consistent results by reusing reference 
+images. 
+
+•  Transi2ons Between Scenes: AI won’t automa:cally add a transi:on eﬀect (like a 
+
+fade or cut) when you join clips. That’s something you do in edi:ng aZer. However, 
+you can design the last frame of one clip and the ﬁrst frame of the next to be similar 
+for an in-scene cut. For example, end Scene1 prompt with “…camera turns towards 
+the door as it opens” and start Scene2 prompt with “Through the door, now in the 
+next room, …”. When you cut those together, the viewer’s eye follows the door 
+transi:on. This requires manual planning and maybe trial to get the last frame you 
+want. 
+Length and Cuts: If you try to cram too much into a single 5-10 second genera:on 
+(like 3 diﬀerent mini-scenes), the AI might produce a muddled result with ﬂickering as 
+it tries to morph between unrelated scenes quickly. It’s beMer to keep each generated 
+clip focused on one scene or con:nuous ac:on. Quick cuts (like a fast-paced music 
+video style) are best done by genera:ng mul:ple short clips and cuRng them 
+externally, rather than one genera:on with a super complex prompt. 
+Example of a Chained Story: Imagine a short story of a girl ﬁnding a magic sword: 
+
+• 
+
+•  Scene 1 Prompt: “A young girl in ragged clothes walks through a dense forest at 
+
+dusk, looking weary. Camera follows from front as she pushes past branches. Faint 
+rays of light ﬁlter through trees.” (Generate 5s clip.) 
+
+•  Scene 2 Prompt (next scene, new clip): “She enters an ancient ruined temple covered 
+in vines. In the center, a sword is embedded in a stone. Camera pans from her face (in 
+awe) to the glowing sword. Dust parMcles ﬂoat in the torchlight.” (Generate clip.) 
+•  Scene 3 Prompt: “She grasps the sword and pulls it out. Bright light erupts from the 
+stone as the temple shakes. Close-up shot of her determined face lit by the magical 
+glow. Rocks start falling as she holds the sword alo..” (Generate clip.) 
+
+•  Scene 4 Prompt: “Outside the temple, night has fallen. The girl stands atop the temple 
+stairs with the sword shining, full moon behind her. Epic wide shot as she raises the 
+
+sword, beams of light shooMng into the sky, signifying the prophecy is fulﬁlled.” 
+(Generate ﬁnal clip.) 
+
+AZer genera:ng each, you’d s:tch them. To improve con:nuity, you could: 
+
+•  Use the last frame of Scene 1 (her approaching temple) as the start frame image for 
+
+Scene 2 genera:on. 
+
+•  Ensure the sword’s look is similar in scenes 2–4 (perhaps take an image from scene 2 
+of the sword and include it if needed, or consistently describe it like “glowing blue 
+runed sword” each :me). 
+
+•  Keep the ligh:ng/:me consistent from end of scene 3 to start of scene 4 (in this story, 
+scene 4 jumps to outside at night, which is an inten:onal drama:c transi:on, so it’s 
+ﬁne being diﬀerent). 
+
+Chaining prompts requires some experimenta:on. You might regenerate a scene if it doesn’t 
+match well with the previous. But with prac:ce, you can create impressive mul:-shot 
+sequences. 
+Best Prac2ces for Realism, Styliza2on, and Consistency 
+Finally, let’s summarize some best prac:ces to get the most out of Kling 2.0 and avoid 
+common mistakes, whether you want photorealis:c videos or wildly stylized ones: 
+
+•  Clarity and Focus: Always aim for clarity in your prompt. Clearly separate the subject, 
+ac:on, and seRng in your descrip:on. Keep each prompt focused on a few main 
+ideas (experts suggest 2–4 key points maximum) to avoid confusing the 
+modellearn.rundiﬀusion.com. If you ﬁnd yourself wri:ng a paragraph with ten 
+diﬀerent clauses, consider spliRng into mul:ple prompts/scenes or simplifying the 
+scene. 
+
+•  Don’t Overload with Adjec2ves: While details are good, packing too many adjec:ves 
+or style tags can backﬁre. For example, “a beauMful, stunning, highly detailed, ultra-
+realisMc, professional, award-winning photograph of X” is overkill and some terms 
+conﬂict or are too abstract (“beauMful” is subjec:ve and can confuse the 
+AIblog.segmind.com). Instead, pick a couple of strong, speciﬁc descriptors: e.g. “so. 
+natural morning light and sharp focus” conveys beauty in a concrete way, rather than 
+just saying “beau:ful ligh:ng.”blog.segmind.com 
+
+•  Avoid Conﬂic2ng Instruc2ons: As men:oned, ensure all parts of your prompt work 
+together. PiIall examples: asking for “fast-paced ac:on in dreamy slow mo:on” 
+(choose one), or “ultra-realis:c cartoon” (oxymoron). If you inadvertently include 
+opposites, Kling will struggleblog.segmind.com. Decide on one style per scene or ﬁnd 
+a phrasing that actually makes sense (e.g. “a realisMc scene with a dreamlike 
+atmosphere” could work if you mean realis:c rendering with foggy ligh:ng, but be 
+careful). 
+
+•  Consistent Terminology for Consistent Output: Use the same names for things each 
+:me. If in one sentence you call the subject “a young boy” and later “the child” and 
+later “the teenager,” the model might think they are diﬀerent en::es. S:ck to one 
+term (unless you mean diﬀerent things). This is especially important if genera:ng 
+mul:ple scenes – refer to your main character the same way each :me. Also, if you 
+want a mo:f or object to persist (like a “red balloon”), men:on it whenever needed 
+so the AI knows it should be there. 
+Leverage High Relevance (Prompt Weight): Kling presumably has some internal 
+prompt adherence seRng (some UIs call it “relevance” or “guidance scale”). If you 
+ﬁnd Kling is not following the prompt strictly (maybe wandering oﬀ topic), check if 
+
+• 
+
+you can increase prompt strength. In Kling’s interface there might be a slider for how 
+strongly it s:cks to your descrip:on. Users have found that maximizing this can yield 
+more prompt-loyal resultsytscribe.com, though it might reduce crea:vity slightly. If 
+the op:on is available (e.g. “Professional mode” vs “Standard mode”), experiment 
+with it. Note: This is more of a soZware seRng than promp:ng, but it’s part of best 
+prac:ces to get the output you want. 
+
+•  Use Reference Images for Realism: If you have a target style or subject, consider 
+
+providing a reference image (if the plaIorm supports it) in addi:on to your prompt. 
+For instance, if you want a speciﬁc actor’s likeness or a speciﬁc art style, a reference 
+can guide Kling. Promp:ng alone might not exactly nail a famous face or a unique art 
+style due to limita:ons on using exact names, but a reference image can legally and 
+eﬀec:vely provide that guidance. Make sure you have rights to any image you use as 
+reference. 
+Itera2ve Reﬁnement: Rarely will a complex scene come out perfect on the ﬁrst try. 
+Expect to reﬁne. Maybe your ﬁrst output is too dark – so add “brighten ligh:ng” or 
+remove “night”. Or the camera moved too much – next :me specify “sta:c camera” 
+or “steady shot”. If an unwanted element appears, add it to nega:ves. Treat each 
+genera:on as a feedback loop to improve your prompt wording. This is normal even 
+for advanced users. 
+
+• 
+
+•  Avoiding Pioalls with Nega2ve Prompts: We’ve covered nega:ve prompts, but as a 
+best prac:ce: Always check if an odd ar:fact or element appears and then update 
+your nega:ve list. Common piIalls might be: 
+
+o  Flicker or frame inconsistencies: Harder to control via prompt, but some:mes 
+caused by too many conﬂic:ng style elements. Simplifying the prompt or 
+using nega:ve terms like “ﬂicker” or “unstable” may or may not help (stability 
+is oZen more about the model’s internals). If ﬂicker is severe, try a shorter 
+dura:on or a simpler scene. 
+
+o  Text or Logos appearing uninten2onally: Include “text, watermark, logo, 
+
+numbers” in nega:ve prompt if you see any AI-generated text on signs or such 
+– the model some:mes does this especially in city scenes or products. 
+o  Uncanny or distorted details: If faces look weird, you can try nega:ve terms 
+like “deformed, distorted, disﬁgured” though Kling 2.0 is quite advanced and 
+usually handles faces well if prompted clearly. If the distor:on persists, 
+consider a diﬀerent approach (like providing an ini:al image of the face, or 
+changing the angle/ligh:ng). 
+
+o  Model Misinterpre2ng a Word: If you use a word that has mul:ple meanings, 
+the AI might pick the wrong one. For example “bark” (could be a dog bark or 
+tree bark). If you got a dog and you meant tree, clarify in prompt (e.g. “tree 
+bark texture” vs “a dog barking”). In case of such misﬁres, reword with more 
+context. 
+
+•  Realism Tips: For highly realis:c videos, lean on photographic terms in your prompt: 
+“4K detail, photorealisMc, realisMc lighMng, cinemaMc grade”. Also ensure no stylis:c 
+terms that contradict realism (e.g. remove “illustra:on” or “Pixar” references). Use 
+nega:ve prompts to eliminate “cartoonish, CGI, pain:ng” if any hint of them appears. 
+Addi:onally, realis:c mo:on is typically smooth and not too fast unless it’s an ac:on 
+scene, so describe physics accurately (if something heavy moves, “slow and weighty 
+
+movement” etc.). LiMle details like “wind rustling leaves” or “dust in sunlight” can add 
+to realism because they are things a real camera might capture. 
+
+•  Styliza2on Tips: For very stylized results, some:mes you need to actually ﬁght the 
+
+model’s tendency to realism. This means heavily emphasizing the style: e.g. “en/rely 
+in pencil sketch style, black and white, no shading except crosshatch, looks like a 
+ﬂipbook drawing.” And as men:oned, nega:ve out realism. It might take a few tries 
+to get a strong styliza:on – the model was trained on a lot of real footage, so pushing 
+it to extreme art styles is possible but requires asser:ve promp:ng. If one approach 
+doesn’t work, try analogies: instead of “in watercolor”, maybe “as if each frame is a 
+watercolor pain:ng, colors soZly bleeding”. Some:mes a bit of poe:c descrip:on can 
+nudge it in the right direc:on. 
+
+•  Community Knowledge: Kling is evolving, and prompt techniques can change as 
+
+models update. A best prac:ce is to stay connected with the community (Discord, 
+forums) to learn new hacks or recommended phrases. For example, some users 
+discover certain shorthand tags or internal model “styles” that work (like some 
+models had things like “Unreal Engine style” or similar that triggers a look). Keep an 
+eye out for Kling-speciﬁc discoveries shared by others, and feel free to experiment 
+with those in your prompts. 
+
+•  Pa2ence and Crea2vity: Finally, the best prac:ce is pa:ence and having fun with the 
+crea:ve process. Genera:ng AI videos is part art, part trial-and-error. Some:mes 
+you’ll get a gem on ﬁrst try; other :mes you’ll need to tweak the prompt mul:ple 
+:mes. Use this guide as a star:ng point, but don’t hesitate to try wild ideas – you 
+might be surprised by what Kling 2.0 can do! 
+
+Common Pioalls and How to Avoid Them 
+Even with the best guidelines, it’s easy to make some mistakes when craZing prompts. Here 
+are common piIalls users encounter with Kling 2.0, and :ps to avoid them: 
+
+1.  Vague or Short Prompts: Pilall: Providing a one-liner with hardly any detail (e.g. “a 
+man on a beach” alone) will likely yield a very generic video. SoluMon: Add speciﬁc 
+details about the man (appearance, ac:on) and the beach (:me of day, weather, 
+camera shot)blog.segmind.com. Remember, be speciﬁc – if you don’t men:on it, 
+Kling has to guess it. 
+
+2.  Overly Complex Prompts: Pilall: Trying to describe an en:re movie in one prompt – 
+for example, “A man is born, grows up, ﬁghts in a war, then becomes an astronaut 
+and leaves Earth.” This is mul:ple scenes and too much for a single short video 
+genera:on. Kling might mishmash these into something incoherent. SoluMon: Break 
+story into mul:ple prompts/scenes. Focus each prompt on one key moment or 
+con:nuous ac:on. Also, avoid run-on sentences with endless commas. If your prompt 
+sentence is running very long, consider spliRng into two sentences or trimming less 
+cri:cal descriptors. 
+
+3.  Conﬂic2ng Style or Mo2on Instruc2ons: Pilall: Including incompa:ble styles (e.g. 
+“hyper-realis:c cartoon” unless you speciﬁcally want a mix) or mo:ons (e.g. “sta:c 
+camera and a rapid series of cuts” in one genera:on). The model can’t reconcile 
+opposites wellblog.segmind.com. SoluMon: Decide on one approach per scene. If you 
+want contrast (like a dreamy part and a frene:c part), do them as separate segments. 
+Keep each prompt internally consistent in tone and technique. 
+
+4.  Ambiguous Language and Filler Words: Pilall: Using words that are too abstract, like 
+“make it beau:ful” or “something interes:ng happens” or “cool scene”. These don’t 
+
+give concrete guidance and can confuse the AIblog.segmind.com. Or using ﬁller 
+words like “a nice video of…” – the word “nice” doesn’t tell the model what to do. 
+SoluMon: Replace abstract terms with descrip2ve imagery. Instead of “beau:ful 
+landscape”, say “a breathtaking mountain landscape with vibrant wildﬂowers and a 
+glowing sunset”blog.segmind.com. Instead of “cool eﬀect”, describe the eﬀect (e.g. “a 
+slow-mo:on explosion of color” if that’s what you mean by cool). 
+
+5.  Ignoring the Input Image Content (for image-to-video): Pilall: If using image-to-
+video, a prompt that describes something completely unrelated to the image can 
+cause bizarre outputs. For example, you feed in a photo of a cat and prompt “a 
+spaceship ﬂying through space”. The model will struggle (it might morph the cat into 
+a spaceship!). SoluMon: Either use an input image that matches the scene you want, 
+or tailor the prompt to naturally extend the image. If you want to go far oﬀ (turn the 
+cat photo into a spaceship scene), consider using the cat image only loosely (like as a 
+texture or something) or beMer, just do text-to-video for that scenario. Leverage the 
+image: men:on elements from it and how they change, rather than introducing 
+en:rely new subjects out of the blue (unless that’s the eﬀect you want, like a surreal 
+transforma:on, which should then be explicitly described as a transforma:on). 
+
+6.  Not U2lizing Nega2ve Prompts (or using them incorrectly): Pilall: Some users forget 
+the nega:ve prompt ﬁeld en:rely, and then get frustrated by recurring issues like 
+blurriness or unwanted objects. Others try to put nega:ves in the main prompt (e.g. 
+“no blur, no people”) which Kling will likely misinterpretreddit.com. SoluMon: Always 
+consider if a nega:ve prompt can solve a problem. Use the separate ﬁeld to list 
+undesirables clearly (as covered earlier). If Kling keeps doing something you don’t 
+like, chances are a nega:ve prompt can address it. And remember, just list the term 
+(e.g. “blur” or “people”) rather than phrasing “no X”pollo.ai. 
+
+7.  Varying Character or Object Descrip2on: Pilall: If in one part of the prompt you call 
+an important object “a red car” and later you call it “the vehicle” without specifying 
+red, the model might change it (maybe the second :me it’s blue or a diﬀerent car). Or 
+if you describe someone with certain features and then later describe them 
+diﬀerently, the output might shiZ. SoluMon: For consistency, keep referring to cri:cal 
+elements with the same descriptors each :me. Reinforce iden:ty: say “the red 
+vintage car” each :me, not “the vehicle” on second reference (unless there’s only one 
+vehicle and context is clear, but even then the AI might forget the detail). It can help 
+to re-state key aMributes in subsequent sentences if needed, to remind the model. 
+
+8.  A‘emp2ng Unfeasible Length or Aspect Ra2o via Prompt: Pilall: Wri:ng “a 30-
+
+minute long video” or “split-screen view” or “ver:cal video format” in the prompt. 
+The model is generally going to produce whatever length and format the system is set 
+to (usually you select dura:on and aspect ra:o in seRngs, not via prompt). SoluMon: 
+Use the tool’s interface to control length and aspect ra:o. Don’t rely on prompt to 
+dras:cally change those. You can men:on “wide cinema:c frame” or “ver:cal 
+smartphone view” if you want to hint at composi:on, but it’s not guaranteed to 
+leMerbox or change aspect ra:o; it might just arrange content in a way that suggests 
+it. For actual control, set the parameters outside of the prompt if available. 
+9.  Expec2ng Perfect Speciﬁc Text or Numbers: Pilall: Promp:ng something like “a 
+
+video of a phone showing the text ‘Hello World’ on screen” or “a person holds up 3 
+ﬁngers (exactly three).” AI image/video models are notoriously bad at precise text (it 
+will likely be gibberish) and can miscount limbs/ﬁngers. SoluMon: Avoid needing exact 
+
+text in the video. If you must show an interface or sign, consider adding that later 
+manually. If including it, use nega:ve prompt for “text” to avoid nonsense. For things 
+like numbers of objects, some:mes sta:ng the number helps (e.g. “three wolves 
+run…”) but be aware the AI might s:ll fudge it (maybe 2 or 4 show up). If the count is 
+crucial, be prepared to iterate or adjust expecta:on. 
+
+10. Not Reviewing and Learning: Pilall: Genera:ng once, geRng a bad result, and giving 
+up or not analyzing why it was bad. SoluMon: Always review the output cri:cally: Did 
+something odd happen at a certain point? Reread your prompt to see if maybe a 
+word triggered it. Some:mes even a single word can have a strong inﬂuence (for 
+example, “ﬂash” might inadvertently give a camera ﬂash eﬀect or a lightning ﬂash – 
+context maMers). If you see an undesired element, think “did I men:on anything 
+related to that?” If not, maybe it’s just the model’s crea:ve addi:on – then you know 
+to explicitly nega:ve it next :me. Each genera:on is feedback. Use it to reﬁne your 
+next prompt aMempt. 
+
+By being mindful of these piIalls and ac:vely adjus:ng your promp:ng approach, you’ll 
+signiﬁcantly improve your results with Kling 2.0. Promp:ng is a skill – it gets beMer with 
+prac:ce, experimenta:on, and some:mes seeing how others prompt (and learning from 
+their mistakes too). 
+
+Conclusion: Promp:ng Kling 2.0 eﬀec:vely is about balancing detailed guidance with clear, 
+crea:ve vision. Start simple and build up complexity as you get comfortable. Use the 
+structure and :ps provided in this guide as a founda:on. Whether you’re aiming for a 
+Hollywood-like clip, a whimsical cartoon, a stylish art piece, a polished product ad, a 
+breathtaking nature shot, or a futuris:c adventure, Kling 2.0 can likely produce it with the 
+right prompt (and maybe a liMle pa:ence). Keep reﬁning your prompts, u:lize features like 
+nega:ve prompts and frame controls, and tap into the community for new ideas. Enjoy the 
+process of bringing your ideas to life – with prac:ce, you’ll be “cas:ng spells” in Kling like a 
+pro! 
+Further Resources and Community Plaoorms 
+For more insights, examples, and community-shared knowledge on Kling 2.0 promp:ng, 
+check out the following resources and plaIorms (no direct links, but you can search for 
+them): 
+
+•  Kling AI Oﬃcial Documenta2on and Guides – The oﬃcial best prac:ces and how-to 
+
+guides from the creators of Kling (oZen updated for new features). 
+
+•  Kling AI Discord Community – An ac:ve community of Kling users sharing prompts, 
+:ps, and feedback. Great for asking ques:ons and seeing others’ prompt results. 
+•  Reddit – r/AIVideo & r/Kling (if available) – Reddit communi:es discussing AI video 
+genera:on, where Kling is frequently a topic. Users oZen share prompt experiments 
+and troubleshoo:ng :ps. 
+
+•  Pollo AI Plaoorm and Blog – Pollo integrates Kling and oZen posts tutorials (e.g. 
+nega:ve prompt guides, free usage :ps) and allows experimen:ng with Kling 
+alongside other models. 
+
+•  Segmind Blog – They have ar:cles and example prompt guides for Kling (and other AI 
+
+models) that demonstrate eﬀec:ve promp:ng techniques. 
+
+•  RunDiﬀusion’s Learning Center – RunDiﬀusion (which hosts Kling models on their 
+
+plaIorm) provides prompt guides and pro :ps, which are directly applicable to using 
+Kling 1.5/1.6/2.0. 
+
+ 
+•  YouTube Tutorials (e.g. by AI ﬁlmmakers) – Several AI ar:sts and ﬁlmmakers on 
+
+YouTube release videos demonstra:ng Kling 2.0’s capabili:es, prompt walkthroughs, 
+and crea:ve techniques (search for “Kling 2.0 tutorial” or “Kling prompt guide”). 
+•  Age of AI/LLMs Blogs – Websites like AgeofLLMs, LandofGeek, etc., oZen publish 
+
+deep-dives into prompt strategies, including advanced Kling 2.0 use-cases and new 
+features explora:on. 
+
+•  Oﬃcial Kling AI Social Media – Follow Kling AI’s oﬃcial channels (TwiMer/X, etc.) for 
+announcements of new features (like camera presets, mo:on brush updates) which 
+oZen come with usage :ps. 
+
+By leveraging these resources and communi:es, you can stay up-to-date on the latest 
+prompt techniques and get inspira:on for your own Kling 2.0 crea:ons. Happy promp:ng 
+and video genera:ng! 
+
+ 
+

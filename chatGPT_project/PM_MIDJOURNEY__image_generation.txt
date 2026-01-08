@@ -1,0 +1,294 @@
+Mastering Prompt Engineering in Midjourney V7
+
+Midjourney V7 is a powerful AI image generation model, and crafting effective prompts for it
+is an art and science of its own. This comprehensive guide will help advanced users refine
+their prompt engineering techniques to get the most out of Midjourney V7’s capabilities.
+
+This guide covers:
+- Prompt structure and interpretation
+- Best practices for wording and style cues
+- Advanced parameters
+- Prompt combining and weighting
+- Consistency strategies
+- Negative prompts
+- Iterative refinement workflows
+- Use-case specific techniques
+
+Note:
+This guide focuses on Midjourney-specific prompt techniques and features (current as of
+Midjourney V7). At the end, you will find a list of reliable resources and communities to stay
+up to date.
+
+----------------------------------------------------------------------
+UNDERSTANDING MIDJOURNEY’S PROMPT STRUCTURE
+----------------------------------------------------------------------
+
+Midjourney prompts are textual instructions describing the image you want. Understanding
+how Midjourney parses and prioritizes your prompt is crucial.
+
+Prompt Syntax:
+Write a descriptive sentence, then add parameters at the end.
+
+Example:
+/imagine A bustling futuristic cityscape at dusk, neon lights reflecting on wet streets
+--ar 16:9 --v 7
+
+Rules:
+- Always place parameters after the descriptive text
+- Do not insert parameters mid-sentence
+- Avoid punctuation directly before parameters
+
+Natural Language vs Keywords:
+Midjourney V7 understands full natural language and keyword-based prompts equally well.
+Clear phrasing often yields more nuanced results.
+
+Parsing and Emphasis:
+- Midjourney considers the entire prompt
+- Earlier terms may have slightly more influence
+- Clarity and specificity matter more than word order
+- Group related descriptors (subject, setting, style)
+
+Punctuation and Separators:
+- Commas, hyphens, and “and” separate concepts
+- Use :: for strong conceptual separation (multi-prompts)
+
+Prompt Length:
+- Soft limit around 60 words
+- Ideal range: 20–50 words
+- Avoid redundancy and over-description
+
+Key Takeaway:
+Structure your prompt clearly, be specific but concise, and avoid contradictions.
+
+----------------------------------------------------------------------
+CORE ELEMENTS OF AN EFFECTIVE MIDJOURNEY PROMPT
+----------------------------------------------------------------------
+
+Common components:
+
+- Subject & Focus
+  Clearly identify the main subject (e.g., medieval castle, astronaut portrait)
+
+- Context & Setting
+  Location, environment, or era (misty forest, Mars, Victorian street)
+
+- Mood & Atmosphere
+  Emotional tone (serene, ominous, whimsical, tense)
+
+- Artistic Style or Genre
+  Photorealistic, oil painting, watercolor, cyberpunk, fantasy concept art
+
+- Color & Lighting
+  Golden hour, neon lighting, diffused light, monochrome tones
+
+- Composition & Perspective
+  Close-up, wide-angle, overhead, cinematic angle, rule of thirds
+
+- Detailed Descriptors
+  Textures, expressions, materials, fine details
+
+- Medium or Material (Optional)
+  Pencil sketch, digital render, watercolor, charcoal
+
+- Avoid Ambiguity
+  Clarify terms with multiple meanings
+
+Example:
+/imagine A lone traveler stands before a medieval castle ruin at twilight,
+surrounded by misty woods, dramatic sunset lighting piercing fog,
+moss-covered stone walls, epic mysterious mood
+--ar 3:2 --v 7 --stylize 100
+
+Prompt Layering Tip:
+Start with subject and setting, then style and mood, then fine details.
+
+----------------------------------------------------------------------
+WORD ORDER AND PROMPT EMPHASIS
+----------------------------------------------------------------------
+
+- Put the primary subject first
+- Keep descriptors close to what they modify
+- Order importance: subject → action/setting → details → style
+- Avoid contradictory descriptions
+- Avoid repetition; use clarity or weighting instead
+
+----------------------------------------------------------------------
+DESCRIPTIVE MODIFIERS AND STYLE REFERENCES
+----------------------------------------------------------------------
+
+Useful categories:
+
+- Visual Adjectives:
+  shimmering, gritty, matte, glossy, ethereal
+
+- Motion and Dynamics:
+  cinematic, motion blur, long exposure, dynamic angle
+
+- Art and Genre Terms:
+  impressionist, pop art, concept art, surrealism, ukiyo-e
+
+- Artist and Media References:
+  Studio Ghibli style, Pixar-like render, Monet-inspired
+  (respect content rules)
+
+- Photography Terms:
+  DSLR photo, 85mm lens, shallow depth of field, bokeh
+
+- Lighting Details:
+  rim lighting, volumetric rays, candle-lit, high-key, low-key
+
+- Color Palettes and Materials:
+  monochrome, neon palette, marble, metal, wood
+
+- Level of Detail:
+  highly detailed, minimalist, vector style
+
+- Aesthetic and Era Keywords:
+  Victorian, steampunk, dystopian, futuristic, ancient Roman
+
+----------------------------------------------------------------------
+ADVANCED MIDJOURNEY PARAMETERS
+----------------------------------------------------------------------
+
+--ar (Aspect Ratio)
+Controls image shape (1:1, 3:2, 16:9, 9:16)
+
+--v (Version)
+Use --v 7 for Midjourney V7
+
+--q / --quality
+0.5 = fast draft
+1 = default
+2 = high detail
+
+--stylize / --s
+Controls artistic interpretation
+Low: literal
+High: artistic freedom
+
+--chaos
+0–100
+Higher values = more variation
+
+--seed
+Locks randomness for reproducibility
+
+--no (Negative Prompt)
+Exclude unwanted elements
+Examples:
+--no text
+--no people
+--no watermark
+
+--raw
+Disables default artistic bias for more literal results
+
+----------------------------------------------------------------------
+IMAGE PROMPTS AND REFERENCES
+----------------------------------------------------------------------
+
+- Place image URLs at the start of the prompt
+- --iw controls image influence (0–3)
+- --sref uses an image purely as a style reference
+- --profile applies a personalized style profile
+
+----------------------------------------------------------------------
+MULTI-PROMPTING AND WEIGHTING
+----------------------------------------------------------------------
+
+Use :: to combine concepts.
+
+Example:
+/imagine castle ruins:: futuristic city skyline
+
+Weighted:
+/imagine castle ruins::2 futuristic city skyline::1
+
+Negative weight:
+/imagine still life painting:: fruit::-0.5
+
+----------------------------------------------------------------------
+CONSISTENCY ACROSS MULTIPLE IMAGES
+----------------------------------------------------------------------
+
+Techniques:
+- Reuse prompt structure
+- Fix the seed
+- Use character reference (--cref + --cw)
+- Use style reference (--sref)
+- Remix mode for iterative refinement
+- Keep parameters consistent
+- Generate multiple options and curate manually
+
+----------------------------------------------------------------------
+NEGATIVE PROMPTING STRATEGIES
+----------------------------------------------------------------------
+
+- Use --no sparingly
+- Avoid over-negating
+- Combine with negative weights for subtle control
+- Refine iteratively if unwanted elements persist
+
+----------------------------------------------------------------------
+ITERATIVE PROMPT OPTIMIZATION WORKFLOW
+----------------------------------------------------------------------
+
+1. Start simple
+2. Evaluate result
+3. Add detail gradually
+4. Use variations and remix
+5. Apply weighting if needed
+6. Clean and consolidate prompt
+7. Final high-quality render
+8. Upscale and touch-up
+9. Document what works
+
+----------------------------------------------------------------------
+USE-CASE SPECIFIC PROMPTING
+----------------------------------------------------------------------
+
+Covered domains:
+- Portrait photography
+- Concept art & illustration
+- Product visualization
+- Fantasy & sci-fi environments
+- Architectural rendering
+- Cinematic compositions
+- Fashion and texture design
+- Abstract and surreal imagery
+
+Each section emphasizes:
+- Subject clarity
+- Style and lighting
+- Composition
+- Appropriate parameters
+
+----------------------------------------------------------------------
+CONCLUSION
+----------------------------------------------------------------------
+
+Effective Midjourney prompting is both technical and artistic.
+
+Key principles:
+- Be clear and specific
+- Use parameters intentionally
+- Combine and weight prompts thoughtfully
+- Use negative prompts wisely
+- Iterate systematically
+- Adapt prompts to the use case
+- Stay updated with new features
+
+Practice is essential. Iteration leads to mastery.
+
+----------------------------------------------------------------------
+FURTHER RESOURCES
+----------------------------------------------------------------------
+
+- Official Midjourney Documentation: docs.midjourney.com
+- Midjourney Discord (official)
+- r/midjourney subreddit
+- Midjourney Community Showcase
+- AI art blogs and tutorials
+- YouTube AI art creators
+
+Happy prompting!
