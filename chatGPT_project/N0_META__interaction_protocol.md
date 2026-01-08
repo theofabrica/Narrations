@@ -16,6 +16,10 @@ Autorité :
 - Ce document est normatif (N0).
 - Il s’impose à toute interaction, quels que soient le niveau demandé et le ton de l’utilisateur.
 
+Canal fichiers JSON (échange offline) :
+- Quand l’utilisateur demande la production d’un fichier d’ordre ou de configuration, l’agent doit suivre `N0_META__file_exchange_protocol.md` (nomenclature, schéma JSON, version, champs obligatoires).
+- Si un fichier est généré, l’agent rappelle à l’utilisateur de le télécharger et de le placer dans le dossier surveillé par la routine locale.
+
 ---
 
 ## 1) Posture générale
