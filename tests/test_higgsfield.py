@@ -21,7 +21,7 @@ class TestHiggsfieldClient:
         client = HiggsfieldClient()
         # Just verify client can be created
         assert client is not None
-        assert client.base_url == "https://api.higgsfield.ai"
+        assert client.base_url == "https://platform.higgsfield.ai"
         # API key may be None if not set in environment
     
     @patch("httpx.Client")
