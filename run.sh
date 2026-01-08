@@ -47,7 +47,7 @@ if [ "${ENABLE_CLOUDFLARE_TUNNEL:-0}" = "1" ]; then
         TUNNEL_HOSTNAME="$TUNNEL_HOSTNAME" \
         TUNNEL_NAME="$TUNNEL_NAME" \
         TARGET_URL="$TARGET_URL" \
-        nohup ./scripts/expose_cloudflare.sh > "$LOG_DIR/tunnel.log" 2>&1 &
+        nohup bash ./scripts/expose_cloudflare.sh > "$LOG_DIR/tunnel.log" 2>&1 &
         echo -e "${BLUE}🪄 Logs tunnel : $LOG_DIR/tunnel.log${NC}"
     fi
 fi
