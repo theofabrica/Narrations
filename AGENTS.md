@@ -14,6 +14,7 @@ Supporting folders include `tests/` for pytest coverage, `docs/` for provider no
 - `pip install -r requirements.txt` installs Python dependencies.
 - `python -m uvicorn app.main:app --host 0.0.0.0 --port 3333 --reload` runs the API in dev mode.
 - `./run.sh` launches the server and can optionally start a Cloudflare tunnel.
+- `./scripts/dev_all.sh` launches API + interface and honors `ENABLE_CLOUDFLARE_TUNNEL=1`.
 - `pytest` runs the full test suite.
 - `pytest -v` adds verbose output.
 - `pytest tests/test_mcp.py -v` runs a focused test file.

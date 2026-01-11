@@ -14,6 +14,7 @@ Le Niveau 3 transforme l’architecture (N2) en **traitement jouable** :
 - description visuelle exploitable,
 - description sonore exploitable,
 - préparation explicite du passage au Niveau 4 (moments incontournables, props, continuité).
+- estimation quantitative du **nombre de plans vidéo** et du **nombre de clips audio** (par séquence).
 
 ---
 
@@ -125,6 +126,7 @@ Toléré (si utile à la clarté et à la préparation de N4) :
 - répliques clés (courtes) ou intentions de réplique,
 - liste de beats (progression interne),
 - indications audio macro (entrée/sortie musique, densité ambiance, signature SFX).
+- estimation **quantitative** (pas de liste de plans) du nombre de plans vidéo et de clips audio.
 
 ---
 
@@ -135,6 +137,7 @@ La sortie N3 doit contenir :
 A) **Index des unités traitées** (liste `U###` + statut : brouillon/proposé/validé + version)  
 B) **Fiches d’unités** (gabarit obligatoire ci-dessous)  
 C) **Préparation N4** incluse dans chaque fiche (moments incontournables, props, continuité)  
+D) **Estimation du nombre de plans vidéo et de clips audio par séquence** (quantitatif)  
 D) (Recommandé si plusieurs unités) **Table de continuité globale** (récap personnages/props/infos)  
 E) (Optionnel) **Notes de conception (internes)** (concept → SRC_NARRATOLOGY → application)  
 F) (Si nécessaire) **Hypothèses à valider** + **Questions minimales** (3–6 max)
@@ -213,6 +216,7 @@ meta:
 - Type : séquence | scène
 - Titre court : (reprendre ou affiner N2, 2–6 mots)
 - Durée estimée (optionnel) : cohérente avec N0
+- Rythme (obligatoire si sequence) : lent | moyen | rapide (justification 1 ligne)
 - Lieu(x) : (référence N1 ; si nouveau → **AJOUT PROPOSÉ**)
 - Temps : jour/nuit, saison, période (macro)
 
@@ -298,6 +302,33 @@ Limites :
 ### 7.13 Notes de conception (internes) (optionnel)
 - Concept → source (SRC_NARRATOLOGY) → application (1 ligne)
 
+### 7.14 Decoupage technique (quantitatif, par sequence)
+Objectif :
+Donner un **nombre de plans video** et un **nombre de clips audio** pour la sequence,
+sans liste de plans ni choix de camera.
+
+Regles :
+- Obligatoire si l'unite est une **sequence** (G1 ou mix G3).
+- Optionnel si l'unite est une scene (G2), sauf demande explicite.
+- Utiliser la duree de l'unite + le rythme pour estimer.
+
+Format :
+- Duree totale : X s
+- Rythme : lent | moyen | rapide (justifie en 1 ligne)
+- Duree moyenne d'un plan (estimation) : Y s
+- Nombre de plans video (estimation) : N
+- Nombre de clips audio (estimation) : M
+  - ambiances : a
+  - sfx : b
+  - musique : c
+  - dialogues : d
+
+Heuristiques (guide, a adapter) :
+- rythme lent : 4-6 s / plan
+- rythme moyen : 2-4 s / plan
+- rythme rapide : 1-2 s / plan
+- audio : au minimum 1 ambiance par sequence ; sfx/dialogues/musique selon densite.
+
 ---
 
 ## 8) Continuité : table récap (recommandée si plusieurs unités)
@@ -370,6 +401,7 @@ Avant de finaliser :
 - **Actionnable pour N4** : moments incontournables + props + continuité + audio présents.
 - **Vibration** : enjeu humain + matière sensorielle (au moins 1 ancre) + (motif si pertinent).
 - **Économie expressive** : pas d’exposition longue ni de commentaires inutiles.
+- **Decoupage quantitatif** : plans video + clips audio estimes pour chaque sequence (si applicable).
 
 ---
 

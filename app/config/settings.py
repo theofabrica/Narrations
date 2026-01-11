@@ -44,6 +44,7 @@ class Settings(BaseSettings):
     STORAGE_PATH: Optional[str] = None  # Default: Media/ at project root
     STORAGE_DOWNLOAD_ENABLED: bool = True  # Automatically download and store media files
     STORAGE_FTP_ENABLED: bool = False  # Enable SFTP upload for media files
+    DATA_PATH: Optional[str] = None  # Default: data/ at project root
 
     # FTP/SFTP settings
     FTP_HOST: Optional[str] = None

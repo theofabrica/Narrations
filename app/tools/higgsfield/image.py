@@ -52,7 +52,17 @@ def generate_image(payload: Dict[str, Any]) -> Dict[str, Any]:
         
         # Extract optional parameters
         optional_params = {}
-        for key in ["width", "height", "steps", "guidance_scale", "seed"]:
+        for key in [
+            "width",
+            "height",
+            "steps",
+            "guidance_scale",
+            "seed",
+            "aspect_ratio",
+            "num_images",
+            "output_format",
+            "input_images"
+        ]:
             if key in payload:
                 optional_params[key] = payload[key]
         
@@ -61,6 +71,7 @@ def generate_image(payload: Dict[str, Any]) -> Dict[str, Any]:
             model=model,
             **optional_params
         )
+        provider_debug = response.pop("_provider_debug", None)
         
         # Check if response contains job_id (async) or direct result
         if "job_id" in response:
@@ -68,11 +79,15 @@ def generate_image(payload: Dict[str, Any]) -> Dict[str, Any]:
             status = "pending"
             completed_at = None
             links = []
+            status_url = response.get("status_url")
             
             # Poll for completion if requested
             if wait_for_completion:
                 logger.info(f"Polling for job completion: job_id={job_id}")
-                final_status = client.poll_job(job_id)
+                if model and model.replace("_", "-").lower() in {"nano-banana", "nano-banana-pro"}:
+                    final_status = client.poll_request(job_id)
+                else:
+                    final_status = client.poll_job(job_id)
                 status = final_status.get("status", "pending").lower()
                 
                 if status == "completed":
@@ -110,7 +125,7 @@ def generate_image(payload: Dict[str, Any]) -> Dict[str, Any]:
                         }
                     }
             
-            return {
+            result = {
                 "job_id": job_id,
                 "status": status,
                 "provider": "higgsfield",
@@ -124,11 +139,35 @@ def generate_image(payload: Dict[str, Any]) -> Dict[str, Any]:
                 "links": links,
                 "error": None
             }
+            if provider_debug:
+                result["provider_debug"] = provider_debug
+            if status_url:
+                result["status_url"] = status_url
+            return result
         else:
             # Synchronous response with image
             image_url = response.get("image_url") or response.get("url") or response.get("result_url")
             if not image_url and "image" in response:
                 image_url = f"data:image/png;base64,{response.get('image', '')[:50]}..."
+
+            if not image_url:
+                result = {
+                    "job_id": response.get("job_id", job_id),
+                    "status": "pending",
+                    "provider": "higgsfield",
+                    "model": model or "default",
+                    "params": {
+                        "prompt": prompt,
+                        **optional_params
+                    },
+                    "created_at": created_at,
+                    "completed_at": None,
+                    "links": [],
+                    "error": None
+                }
+                if provider_debug:
+                    result["provider_debug"] = provider_debug
+                return result
             
             completed_at = generate_timestamp()
             
@@ -143,7 +182,7 @@ def generate_image(payload: Dict[str, Any]) -> Dict[str, Any]:
             # Process links (download and store if enabled)
             links = process_asset_links([asset_link], project_name, "image", completed_at)
             
-            return {
+            result = {
                 "job_id": job_id,
                 "status": "completed",
                 "provider": "higgsfield",
@@ -157,6 +196,9 @@ def generate_image(payload: Dict[str, Any]) -> Dict[str, Any]:
                 "links": links,
                 "error": None
             }
+            if provider_debug:
+                result["provider_debug"] = provider_debug
+            return result
     
     except Exception as e:
         logger.error(f"Error generating image: {e}", exc_info=True)

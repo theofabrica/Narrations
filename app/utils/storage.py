@@ -47,7 +47,7 @@ def ensure_project_directory(project_name: str, asset_type: str) -> Path:
         safe_project_name = "default"
     
     storage_root = get_storage_path()
-    project_path = storage_root / safe_project_name / asset_type
+    project_path = storage_root / safe_project_name / "Media" / asset_type
     
     # Create directory if it doesn't exist
     project_path.mkdir(parents=True, exist_ok=True)
@@ -216,5 +216,5 @@ def get_asset_url(project_name: str, asset_type: str, filename: str) -> str:
     if not safe_project_name:
         safe_project_name = "default"
     
-    relative_path = f"{safe_project_name}/{asset_type}/{filename}"
+    relative_path = f"{safe_project_name}/Media/{asset_type}/{filename}"
     return f"/assets/{relative_path}"

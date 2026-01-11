@@ -1,0 +1,3 @@
+[submodule "agentic/r2r/R2R"]
+	path = agentic/r2r/R2R
+	url = https://github.com/SciPhi-AI/R2R

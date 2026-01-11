@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "project": "test",
+    "level": "N2",
+    "type": "narrative_architecture",
+    "id": "",
+    "ts": "",
+    "source": {
+      "N0": "",
+      "N1": ""
+    }
+  },
+  "global": {
+    "format": "",
+    "total_duration_sec": 0,
+    "tone": [],
+    "narrative_curve": "",
+    "thematic_axis": []
+  },
+  "units": [],
+  "readability": {
+    "intended_usage": [],
+    "unit_independence": false,
+    "sequence_granularity": ""
+  }
+}

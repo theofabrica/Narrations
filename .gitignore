@@ -1,5 +1,7 @@
 # Virtual environment
 .venv/
+venv-app/
+agentic/venv-r2r/
 
 # Environment variables
 .env

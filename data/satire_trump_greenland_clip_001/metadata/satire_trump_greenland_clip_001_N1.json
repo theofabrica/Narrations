@@ -1,0 +1,79 @@
+{
+  "project_id": "satire_trump_greenland_clip_001",
+  "strata": "n1",
+  "updated_at": "2026-01-09T18:57:21.673117Z",
+  "data": {
+    "meta": {
+      "status": "draft",
+      "version": "0.1",
+      "temperature_creative": 2
+    },
+    "pitch": "Un clip-satire court et violent, con\u00e7u comme un objet de choc : une fable grotesque o\u00f9 une figure de pouvoir transform\u00e9e en mascotte impose sa vision du monde \u00e0 coups de slogans, de gestes obsc\u00e8nes et d\u2019images publicitaires.\n\nLe r\u00e9cit ne progresse pas par explication mais par collision : chaque tableau amplifie la logique du spectacle, de la marchandisation et de la domination jusqu\u2019\u00e0 ce que la r\u00e9alit\u00e9 devienne m\u00e9connaissable \u2014 et pourtant famili\u00e8re.\n\nLe spectateur est pris \u00e0 la gorge par une accumulation de signes (corps, drapeaux, argent, micros, foules), comme si la propagande se retournait contre elle-m\u00eame et r\u00e9v\u00e9lait sa propre monstruosit\u00e9.\n\nIl n\u2019y a pas de r\u00e9solution ni de morale finale : le clip s\u2019interrompt au moment o\u00f9 la saturation devient insoutenable, laissant une sensation de rire nerveux, de malaise et de honte par reconnaissance.",
+    "intention": "Produire une exp\u00e9rience de sid\u00e9ration : faire ressentir avant de faire comprendre, et forcer le spectateur \u00e0 traverser le d\u00e9go\u00fbt, le rire et l\u2019inconfort comme conditions d\u2019acc\u00e8s au sens.\n\nAssumer la satire comme violence symbolique : pousser les m\u00e9canismes de pouvoir, de spectacle et d\u2019infantilisation jusqu\u2019\u00e0 l\u2019obsc\u00e9nit\u00e9, non pour divertir gentiment, mais pour exposer ce qui est d\u00e9j\u00e0 \u00e0 l\u2019\u0153uvre dans le r\u00e9el.\n\nRefuser la p\u00e9dagogie : le clip ne prouve rien, il accuse par exc\u00e8s ; le sens doit appara\u00eetre apr\u00e8s coup, comme une id\u00e9e fixe qui reste en t\u00eate et contamine le souvenir des images.",
+    "axes_artistiques": "Axe 1 \u2014 Grotesque assum\u00e9 : tout est trop grand, trop brillant, trop vulgaire ; la mise en sc\u00e8ne est frontale, intruse, et transforme le pouvoir en carnaval obsc\u00e8ne.\n\nAxe 2 \u2014 Saturation sensorielle : couleurs agressives, ruptures de rythme, r\u00e9p\u00e9titions absurdes, mont\u00e9e sonore et visuelle jusqu\u2019\u00e0 l\u2019asphyxie ; le montage et le son deviennent les moteurs de la violence symbolique.",
+    "dynamique_globale": "Le clip fonctionne comme une escalade : intrusion brutale, surench\u00e8re d\u2019images-slogans, saturation, puis effondrement visuel et sonore \u2014 sans conclusion, sans apaisement, avec une coupure nette qui laisse le spectateur seul face au malaise.",
+    "personnages": [
+      {
+        "name": "Le Pr\u00e9sident-Mascotte",
+        "role": "Figure de pouvoir grotesque (ic\u00f4ne-fiction)",
+        "function": "Incarnation du spectacle politique : transformer tout en marchandise, r\u00e9duire le langage \u00e0 des slogans, hypnotiser la foule par la performance.",
+        "description": "Un dirigeant caricatural, plus image que personne, qui parle en punchlines et existe dans une logique publicitaire permanente ; il ne r\u00e9fl\u00e9chit pas, il vend, et son corps est mis en sc\u00e8ne comme un territoire de conqu\u00eate.",
+        "appearance": "Corps sur-signifiant, maquillage/teint artificiel, expression faciale th\u00e9\u00e2trale, gestuelle dominatrice et infantile ; pr\u00e9sence envahissante en gros plans.",
+        "signature": "Rictus de triomphe, pouces lev\u00e9s m\u00e9caniques, r\u00e9p\u00e9tition de formules courtes, posture d\u2019appropriation (il s\u2019assoit partout comme si tout lui appartenait).",
+        "images": [],
+        "costumes": [
+          {
+            "description": "Costume trop ajust\u00e9 et trop brillant, cravate agressive, accessoires ostentatoires (pin\u2019s, bijoux), variations possibles : tenue \"show\" (paillettes) ou tenue \"martiale\" (surplus de symboles).",
+            "images": []
+          }
+        ]
+      },
+      {
+        "name": "La Foule-\u00c9cran",
+        "role": "Ch\u0153ur passif (collectif)",
+        "function": "R\u00e9agir \u00e0 l\u2019image : applaudir, r\u00e9p\u00e9ter, consommer, normaliser le grotesque ; servir de surface de projection au pouvoir.",
+        "description": "Un ensemble de silhouettes interchangeables qui ne vivent qu\u2019\u00e0 travers le regard port\u00e9 sur le leader ; la foule est un dispositif, pas une communaut\u00e9.",
+        "appearance": "Visages souriants fig\u00e9s, pancartes, v\u00eatements de meeting, mouvements synchrones ; parfois des regards vides qui trahissent la m\u00e9canique.",
+        "signature": "Rires automatiques, applaudissements en rafales, chants-slogans, gestes copi\u00e9s-coll\u00e9s du leader.",
+        "images": [],
+        "costumes": [
+          {
+            "description": "Tenues de meeting uniformis\u00e9es (casquettes, t-shirts, badges), palette volontairement criarde ; variations : foule \"VIP\" plus luxueuse, foule \"fan-zone\" plus vulgaire.",
+            "images": []
+          }
+        ]
+      }
+    ],
+    "monde_epoque": "\u00c9poque contemporaine tr\u00e8s proche, mais l\u00e9g\u00e8rement d\u00e9cal\u00e9e, comme un r\u00e9el compress\u00e9 et acc\u00e9l\u00e9r\u00e9. Le monde ob\u00e9it \u00e0 une loi unique : tout se transforme en spectacle et en marchandise. Le grotesque y est normalis\u00e9, et l\u2019absurde devient la forme ordinaire du pouvoir.",
+    "esthetique": "Image satur\u00e9e, agressive, presque publicitaire, avec des gros plans intrusifs et des cadrages instables qui emp\u00eachent toute distance confortable. Le montage privil\u00e9gie la rupture, la r\u00e9p\u00e9tition, la collision de tableaux, et une progression par surench\u00e8re plut\u00f4t que par narration explicative. La direction artistique transforme les symboles (drapeau, micro, argent, corps) en objets lourds, visibles, presque obsc\u00e8nes.",
+    "son": {
+      "ambiances": "Ambiances d\u2019ar\u00e8ne (meeting, foule, ventilation, bourdonnements) qui montent progressivement jusqu\u2019\u00e0 l\u2019asphyxie.",
+      "musique": "Musique martiale ou grotesque, utilis\u00e9e comme propagande invers\u00e9e : triomphale au d\u00e9part puis de plus en plus d\u00e9rangeante.",
+      "sfx": "SFX signatures trop pr\u00e9sents (flashs, caisses enregistreuses, buzzers, impacts sourds) pour mat\u00e9rialiser la marchandisation et l\u2019agression symbolique.",
+      "dialogues": "Dialogues r\u00e9duits \u00e0 des slogans, mots courts et r\u00e9p\u00e9titions, avec une diction performative plus proche du show que de la parole."
+    },
+    "motifs": [
+      {
+        "description": "Motif visuel central : le corps comme territoire (gros plans, gestes d\u2019appropriation) et l\u2019argent comme liquide/flux ; motif de variation : plus le clip avance, plus ces motifs deviennent litt\u00e9raux, envahissants, et impossibles \u00e0 ignorer.",
+        "images": [],
+        "audio": []
+      },
+      {
+        "description": "Motif sonore central : applaudissements m\u00e9caniques + caisse enregistreuse/buzzer ; variation : le rythme se d\u00e9r\u00e8gle, les boucles se superposent, jusqu\u2019\u00e0 produire un malaise quasi physique.",
+        "images": [],
+        "audio": []
+      }
+    ],
+    "ancres_canon_continuite": [
+      "Aucune morale finale, aucune conclusion explicative : coupure nette en fin de saturation.",
+      "Le Pr\u00e9sident-Mascotte est une ic\u00f4ne-fiction (composite), jamais une int\u00e9riorit\u00e9 r\u00e9aliste.",
+      "Le grotesque est la norme : tout \u00e9l\u00e9ment doit sembler \"trop\" mais coh\u00e9rent dans le monde.",
+      "Mont\u00e9e par accumulation (intrusion \u2192 escalade \u2192 saturation \u2192 effondrement), sans d\u00e9coupage en actes.",
+      "Symboles lourds et imm\u00e9diats : corps/territoire, argent/flux, drapeau/objet domestique, micro/arme.",
+      "Son agressif et signifiant : ambiances d\u2019ar\u00e8ne, musique triomphale qui tourne au d\u00e9rangeant, SFX marchands."
+    ],
+    "sources": "[N] Narratologie : Aristote (imitation du grotesque), McKee (antagonisme), Truby (d\u00e9sir\u2192action\u2192effondrement), Lavandier (objectif/obstacles et action difficile \u00e0 regarder) \u2014 mobilis\u00e9s comme cadre de coh\u00e9rence, pas comme dogme.\n[S] R\u00e9f\u00e9rences de style : clip-propagande, publicit\u00e9 agressive, farce noire, esth\u00e9tique de saturation sensorielle (\u00e0 pr\u00e9ciser si besoin).\n[H] Hypoth\u00e8se artistique : la sid\u00e9ration prime sur la compr\u00e9hension imm\u00e9diate ; le sens doit surgir apr\u00e8s coup.",
+    "hypotheses": "\u00c0 VALIDER : dur\u00e9e cible du clip, niveau exact de vulgarit\u00e9 lexicale (slogans), et degr\u00e9 de r\u00e9f\u00e9rentialit\u00e9 (plus abstrait/composite vs plus directement reconnaissable).",
+    "questions": "1) Tu vises quelle dur\u00e9e (30\u201345s / 60\u201390s / 2\u20133 min) ?\n2) Tu veux une satire plut\u00f4t \"composite\" (ic\u00f4ne-fiction) ou plus frontalement reconnaissable (sans mentionner de noms) ?\n3) Le son : plut\u00f4t martiale (propagande) ou plut\u00f4t techno\u00efde/indus (machine \u00e0 spectacle) ?"
+  }
+}

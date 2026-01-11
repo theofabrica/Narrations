@@ -1,0 +1,467 @@
+{
+  "project_id": "satire_trump_greenland_clip_001",
+  "strata": "n2",
+  "updated_at": "2026-01-09T18:57:21.691917Z",
+  "data": {
+    "project_id": "satire_trump_greenland_clip_001",
+    "document_level": "N2",
+    "document_name": "N2_ARCHITECTURE__global_structure",
+    "version": "1.0.0",
+    "meta": {
+      "format": {
+        "target_duration_tc": "00:01:00",
+        "target_duration_s": 60,
+        "aspect_ratio": "16:9",
+        "timebase": "TC_NDF_00_60s",
+        "language": "fr"
+      },
+      "granularity": {
+        "n2": "ACTES > SEQUENCES > SCENES",
+        "n3_target": "G2 (Scenes)"
+      },
+      "canon": {
+        "tone": [
+          "satire",
+          "dark",
+          "provocateur",
+          "trash"
+        ],
+        "visual_style": "realisme arctique grave + overlays branding vulgaires (logos, stickers, sharpie borders, UI immobiliere) + glitch",
+        "sound_style": "vent/glace/silence + glitch/cash/coins + stingers pseudo-patriotiques deformes + silences 'mur du reel'",
+        "characters": [
+          "President-Mascotte",
+          "Foule-Ecran"
+        ],
+        "narrative_arc": [
+          "intrusion",
+          "surenchere",
+          "saturation",
+          "effondrement",
+          "cut_sans_morale"
+        ]
+      }
+    },
+    "timeline": {
+      "acts_count": 3,
+      "sequences_count": 6,
+      "scenes_count": 12,
+      "duration_s_total": 60,
+      "timecode_in": "00:00",
+      "timecode_out": "01:00"
+    },
+    "cast": {
+      "primary": [
+        {
+          "id": "CHAR_01",
+          "name": "President-Mascotte",
+          "function": "ic\u00f4ne-fiction, posture de domination/infantilisme, performance sans int\u00e9riorit\u00e9"
+        },
+        {
+          "id": "CHAR_02",
+          "name": "Foule-Ecran",
+          "function": "validation m\u00e9canique, r\u00e9p\u00e9tition, consommation, preuve sociale vide"
+        }
+      ],
+      "rule": "max_2_figures_actives (pas d'adversaire humain explicite ; l'adversaire est le reel)"
+    },
+    "structure": {
+      "acts": [
+        {
+          "id": "U001",
+          "type": "act",
+          "index": 1,
+          "title": "Surface blanche / Intrusion",
+          "timecode_in": "00:00",
+          "timecode_out": "00:18",
+          "duration_s": 18,
+          "narrative": {
+            "function": "installer le r\u00e9el (Groenland) comme masse indiff\u00e9rente puis le contaminer",
+            "local_objective": "faire na\u00eetre l\u2019id\u00e9e 'disponible = poss\u00e9dable'",
+            "main_obstacle": "silence / vide (pas d\u2019adversaire humain)",
+            "stakes": [
+              "imposer une lecture marchande du monde",
+              "d\u00e9clencher la machine du spectacle"
+            ],
+            "character_evolution": "le pouvoir appara\u00eet comme signe avant de devenir corps (Pr\u00e9sident-Mascotte)",
+            "act_exit_change": "passage du r\u00e9el 'pur' au r\u00e9el 'marqu\u00e9' (propri\u00e9t\u00e9 affich\u00e9e)"
+          },
+          "sequences": [
+            {
+              "id": "U002",
+              "type": "sequence",
+              "index": 1,
+              "title": "La carte blanche",
+              "timecode_in": "00:00",
+              "timecode_out": "00:09",
+              "duration_s": 9,
+              "narrative": {
+                "function": "exposition froide + premier accroc satirique",
+                "local_objective": "poser 'immense/blanc/muet' puis injecter un label qui veut r\u00e9duire le r\u00e9el",
+                "main_obstacle": "indiff\u00e9rence totale du paysage",
+                "sequence_exit_change": "un overlay suffit \u00e0 'r\u00e9\u00e9crire' le r\u00e9el (d\u00e9but de l'attaque symbolique)",
+                "progression": {
+                  "from_previous": "N/A (d\u00e9but du film)",
+                  "to_next": "du monde \u2192 vers le branding/personnage"
+                }
+              },
+              "scenes": [
+                {
+                  "id": "U003",
+                  "type": "scene",
+                  "index": 1,
+                  "title": "Reel arctique 'pur'",
+                  "budget_duration_s": 5,
+                  "summary": "R\u00e9alisme arctique s\u00e9rieux : immensit\u00e9, vent, silence, inertie du monde.",
+                  "focus": [
+                    "reel",
+                    "silence",
+                    "echelle"
+                  ],
+                  "entry_to_exit": "du calme total \u00e0 une attente de sens"
+                },
+                {
+                  "id": "U004",
+                  "type": "scene",
+                  "index": 2,
+                  "title": "Premier marquage (overlay/UI/label)",
+                  "budget_duration_s": 4,
+                  "summary": "Une surimpression vulgaire (UI/label/branding) contamine l'image, comme un sticker de propri\u00e9t\u00e9.",
+                  "focus": [
+                    "branding",
+                    "overlay",
+                    "contamination"
+                  ],
+                  "entry_to_exit": "le r\u00e9el devient surface d'affichage"
+                }
+              ]
+            },
+            {
+              "id": "U005",
+              "type": "sequence",
+              "index": 2,
+              "title": "Arrivee du President-Mascotte",
+              "timecode_in": "00:09",
+              "timecode_out": "00:18",
+              "duration_s": 9,
+              "narrative": {
+                "function": "intrusion du corps-spectacle dans le vide",
+                "local_objective": "occuper l'image, s'autoproclamer proprietaire",
+                "main_obstacle": "le monde ne valide rien, ne r\u00e9pond pas",
+                "sequence_exit_change": "premier 'tampon' (claim) = appropriation explicite",
+                "progression": {
+                  "from_previous": "signe/overlay \u2192 apparition incarn\u00e9e",
+                  "to_next": "vers le cadastre : tracer et d\u00e9couper"
+                }
+              },
+              "scenes": [
+                {
+                  "id": "U006",
+                  "type": "scene",
+                  "index": 3,
+                  "title": "Apparition 'pub' de la mascotte",
+                  "budget_duration_s": 5,
+                  "summary": "Entr\u00e9e envahissante du Pr\u00e9sident-Mascotte : pr\u00e9sence 'pub' dans un d\u00e9cor trop grand.",
+                  "focus": [
+                    "personnage",
+                    "occupation_cadre",
+                    "decalage"
+                  ],
+                  "entry_to_exit": "le vide devient plateau"
+                },
+                {
+                  "id": "U007",
+                  "type": "scene",
+                  "index": 4,
+                  "title": "Premier geste de propriete",
+                  "budget_duration_s": 4,
+                  "summary": "Sticker/tampon/claim de propri\u00e9t\u00e9 sur le paysage : appropriation par le signe.",
+                  "focus": [
+                    "propriete",
+                    "tampon",
+                    "branding"
+                  ],
+                  "entry_to_exit": "le r\u00e9el est d\u00e9clar\u00e9 poss\u00e9d\u00e9"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "U008",
+          "type": "act",
+          "index": 2,
+          "title": "Cadastre / Deal / Validation",
+          "timecode_in": "00:18",
+          "timecode_out": "00:44",
+          "duration_s": 26,
+          "narrative": {
+            "function": "transformer le territoire en produit puis le 'rendre vrai' via la foule",
+            "local_objective": "surench\u00e9rir : tracer \u2192 vendre \u2192 applaudir \u2192 symboliser",
+            "main_obstacle": "\u00e9chelle du r\u00e9el + validation m\u00e9canique creuse",
+            "stakes": [
+              "faire accepter une domination sans contenu, uniquement par signes",
+              "acc\u00e9l\u00e9rer la mont\u00e9e sensorielle vers la saturation"
+            ],
+            "character_evolution": "Pr\u00e9sident-Mascotte = performance pure ; Foule-Ecran = dispositif de validation",
+            "act_exit_change": "la logique du deal atteint une zone obsc\u00e8ne (symboles + bruit + collage)"
+          },
+          "sequences": [
+            {
+              "id": "U009",
+              "type": "sequence",
+              "index": 3,
+              "title": "Frontieres au feutre \u2192 Produit",
+              "timecode_in": "00:18",
+              "timecode_out": "00:31",
+              "duration_s": 13,
+              "narrative": {
+                "function": "bascule 'geographie' \u2192 'cadastre' \u2192 'annonce'",
+                "local_objective": "reduire le Groenland \u00e0 des lignes et un prix",
+                "main_obstacle": "fissures/craquements : le r\u00e9el refuse la g\u00e9om\u00e9trie",
+                "sequence_exit_change": "territoire officiellement 'packag\u00e9' (UI listing)",
+                "progression": {
+                  "from_previous": "appropriation \u2192 contr\u00f4le graphique",
+                  "to_next": "contr\u00f4le \u2192 vente"
+                }
+              },
+              "scenes": [
+                {
+                  "id": "U010",
+                  "type": "scene",
+                  "index": 5,
+                  "title": "Decoupage du territoire (sharpie borders)",
+                  "budget_duration_s": 6,
+                  "summary": "Fronti\u00e8res trac\u00e9es au feutre ; la glace fissure/craque, annulant la pr\u00e9tention du trait.",
+                  "focus": [
+                    "sharpie_borders",
+                    "reel_resistance",
+                    "ridicule_violent"
+                  ],
+                  "entry_to_exit": "du trait de contr\u00f4le \u2192 \u00e0 la fissure qui contredit"
+                },
+                {
+                  "id": "U011",
+                  "type": "scene",
+                  "index": 6,
+                  "title": "Listing immobilier (UI prix/badges)",
+                  "budget_duration_s": 7,
+                  "summary": "Le Groenland devient une annonce premium : UI de vente, prix, badges, claims.",
+                  "focus": [
+                    "ui_immobiliere",
+                    "prix",
+                    "marchandisation"
+                  ],
+                  "entry_to_exit": "du territoire \u2192 au produit"
+                }
+              ]
+            },
+            {
+              "id": "U012",
+              "type": "sequence",
+              "index": 4,
+              "title": "Foule-Ecran \u2192 Symboles",
+              "timecode_in": "00:31",
+              "timecode_out": "00:44",
+              "duration_s": 13,
+              "narrative": {
+                "function": "validation m\u00e9canique + d\u00e9monstration obsc\u00e8ne des embl\u00e8mes",
+                "local_objective": "fabriquer une victoire par applaudissements puis la sceller par symboles",
+                "main_obstacle": "la foule n'est qu'un \u00e9cho vide, donc la surench\u00e8re compense",
+                "sequence_exit_change": "approche de la saturation (trop de signes / trop de bruit)",
+                "progression": {
+                  "from_previous": "vente \u2192 besoin de preuve sociale",
+                  "to_next": "validation \u2192 asphyxie"
+                }
+              },
+              "scenes": [
+                {
+                  "id": "U013",
+                  "type": "scene",
+                  "index": 7,
+                  "title": "Foule comme ecran de validation",
+                  "budget_duration_s": 5,
+                  "summary": "Foule-pancartes, applaudissements automatiques, sourire fig\u00e9 : preuve sociale creuse.",
+                  "focus": [
+                    "foule_ecran",
+                    "repetition",
+                    "mecanique"
+                  ],
+                  "entry_to_exit": "la validation devient boucle"
+                },
+                {
+                  "id": "U014",
+                  "type": "scene",
+                  "index": 8,
+                  "title": "Drapeau / micro / argent (collage obsc\u00e8ne)",
+                  "budget_duration_s": 8,
+                  "summary": "Drapeau domestique, micro-arme, argent-flux : collage agressif, d\u00e9monstration vide qui gonfle le bruit.",
+                  "focus": [
+                    "symboles",
+                    "argent_flux",
+                    "micro_arme",
+                    "drapeau"
+                  ],
+                  "entry_to_exit": "la logique du show bascule en obsc\u00e9nit\u00e9"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "U015",
+          "type": "act",
+          "index": 3,
+          "title": "Saturation / Effondrement / CUT",
+          "timecode_in": "00:44",
+          "timecode_out": "01:00",
+          "duration_s": 16,
+          "narrative": {
+            "function": "culminer en surcharge puis laisser le r\u00e9el gagner par silence",
+            "local_objective": "rendre la saturation insoutenable puis couper net",
+            "main_obstacle": "le syst\u00e8me se d\u00e9r\u00e8gle lui-m\u00eame (boucles, glitch, rupture)",
+            "stakes": [
+              "finir sur victoire creuse + malaise",
+              "aucune morale, juste mur du r\u00e9el"
+            ],
+            "act_exit_change": "effondrement \u2192 mur du r\u00e9el \u2192 coupure"
+          },
+          "sequences": [
+            {
+              "id": "U016",
+              "type": "sequence",
+              "index": 5,
+              "title": "Saturation",
+              "timecode_in": "00:44",
+              "timecode_out": "00:54",
+              "duration_s": 10,
+              "narrative": {
+                "function": "climax sensoriel (image + son)",
+                "local_objective": "accumulation jusqu'\u00e0 l'asphyxie",
+                "main_obstacle": "m\u00e9canique incontr\u00f4lable (boucles superpos\u00e9es)",
+                "sequence_exit_change": "rupture / freeze / d\u00e9crochement sonore (effondrement)",
+                "progression": {
+                  "from_previous": "obsc\u00e9nit\u00e9 \u2192 surcharge totale",
+                  "to_next": "du trop-plein \u2192 au vide"
+                }
+              },
+              "scenes": [
+                {
+                  "id": "U017",
+                  "type": "scene",
+                  "index": 9,
+                  "title": "Montee overlays + slogans + loops",
+                  "budget_duration_s": 5,
+                  "summary": "Accumulation d'overlays, slogans, boucles audio jusqu'\u00e0 l'asphyxie.",
+                  "focus": [
+                    "saturation",
+                    "loops",
+                    "glitch"
+                  ],
+                  "entry_to_exit": "la lisibilit\u00e9 se noie"
+                },
+                {
+                  "id": "U018",
+                  "type": "scene",
+                  "index": 10,
+                  "title": "Dereglage \u2192 rupture / freeze",
+                  "budget_duration_s": 5,
+                  "summary": "Buzzer/ka-ching glitch, boucles qui se cassent, rupture brutale (freeze / d\u00e9crochement).",
+                  "focus": [
+                    "effondrement",
+                    "rupture",
+                    "systeme_en_panne"
+                  ],
+                  "entry_to_exit": "la machine tombe"
+                }
+              ]
+            },
+            {
+              "id": "U019",
+              "type": "sequence",
+              "index": 6,
+              "title": "Victoire creuse / Mur du reel",
+              "timecode_in": "00:54",
+              "timecode_out": "01:00",
+              "duration_s": 6,
+              "narrative": {
+                "function": "r\u00e9solution n\u00e9gative : proclamation sans validation",
+                "local_objective": "montrer que 'gagner' ne produit rien (aucune adh\u00e9sion du monde)",
+                "main_obstacle": "silence sec (mur du r\u00e9el)",
+                "sequence_exit_change": "CUT net (aucune morale)",
+                "progression": {
+                  "from_previous": "effondrement \u2192 vide",
+                  "to_next": "N/A (fin)"
+                }
+              },
+              "scenes": [
+                {
+                  "id": "U020",
+                  "type": "scene",
+                  "index": 11,
+                  "title": "Proclamation tombe a plat",
+                  "budget_duration_s": 4,
+                  "summary": "Une proclamation de victoire dans le vide, imm\u00e9diatement contredite par le silence.",
+                  "focus": [
+                    "victoire_creuse",
+                    "silence",
+                    "malaise"
+                  ],
+                  "entry_to_exit": "la victoire n'a aucun effet"
+                },
+                {
+                  "id": "U021",
+                  "type": "scene",
+                  "index": 12,
+                  "title": "Dernier signe ridicule \u2192 CUT net",
+                  "budget_duration_s": 2,
+                  "summary": "Dernier sticker mal coll\u00e9 / label grotesque, puis coupure nette.",
+                  "focus": [
+                    "dernier_signe",
+                    "cut",
+                    "sans_morale"
+                  ],
+                  "entry_to_exit": "arr\u00eat brutal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "constraints_check": {
+      "duration_sum_ok": true,
+      "duration_breakdown_s": {
+        "act_1": 18,
+        "act_2": 26,
+        "act_3": 16,
+        "total": 60
+      },
+      "sequence_duration_sum_ok": true,
+      "scene_budget_sum_ok_per_sequence": true,
+      "casting_ok": true,
+      "ending_rule_ok": true
+    },
+    "handoff_to_n3": {
+      "n3_units_to_expand": [
+        "U003",
+        "U004",
+        "U006",
+        "U007",
+        "U010",
+        "U011",
+        "U013",
+        "U014",
+        "U017",
+        "U018",
+        "U020",
+        "U021"
+      ],
+      "n3_expectations": [
+        "beats/actions concrets par scene",
+        "continuit\u00e9 audio/visuelle (entr\u00e9es/sorties)",
+        "transitions et motifs r\u00e9currents",
+        "intensit\u00e9 (mont\u00e9e) et densit\u00e9 overlays/son"
+      ]
+    }
+  }
+}

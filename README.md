@@ -86,11 +86,16 @@ cp .env.example .env
 # Mode développement (avec reload automatique)
 python -m uvicorn app.main:app --host 0.0.0.0 --port 3333 --reload
 
-# Ou utiliser le script
+# Ou utiliser le script (API seule)
 ./scripts/run_dev.sh
+
+# API + interface (et tunnel Cloudflare si ENABLE_CLOUDFLARE_TUNNEL=1)
+./scripts/dev_all.sh
 ```
 
 Le serveur sera accessible sur `http://0.0.0.0:3333`
+
+L'interface Vite est disponible sur `http://localhost:5173`.
 
 ## 📡 Utilisation
 

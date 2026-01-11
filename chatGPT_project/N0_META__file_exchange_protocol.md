@@ -1,74 +1,143 @@
-diff --git a/chatGPT_project/N0_META__file_exchange_protocol.md b/chatGPT_project/N0_META__file_exchange_protocol.md
-index 1d9a0a68b1ac49bc550d1276e55d8610fb635a42..bc482421ffb9792c0f25fcce44e5ff0bb8ec15da 100644
---- a/chatGPT_project/N0_META__file_exchange_protocol.md
-+++ b/chatGPT_project/N0_META__file_exchange_protocol.md
-@@ -45,64 +45,68 @@
- - Champs obligatoires : `version`, `kind`, `action`, `id`, `ts`, `payload`.
- - Champs recommandés : `from`, `meta.project`.
- - Champs optionnels : `meta.user`, `meta.checksum`, tout champ additionnel nécessaire à l’action.
- 
- ## Schéma JSON minimal (retour / ACK)
- ```json
- {
-   "version": "1.0",
-   "kind": "ACK",
-   "action": "pipeline_audio_stack",
-   "id": "req001",
-   "ts": "2026-01-08T14:21:30Z",
-   "from": "local_app",
-   "status": "done",
-   "result": {
-     "links": ["https://.../audio1.mp3"],
-     "job_id": "job-xyz"
-   },
-   "error": null
- }
- ```
- - `status` : `done` ou `error`.
- - `error` : null ou objet `{ "code": "...", "message": "...", "retryable": false }`.
- 
- ## Règles côté ChatGPT (production du fichier)
-+- **Obligation de production** : si une action serveur est demandée (image/vidéo/audio/pipeline), l’agent **doit produire immédiatement** un fichier JSON conforme, **sans demander d’autorisation**.
-+- **Sortie attendue** : présenter un **fichier prêt à télécharger** avec :
-+  1) le **nom exact du fichier** (nomenclature),
-+  2) le **contenu JSON** complet.
-+- **Interdiction** : ne pas fournir “juste un extrait” ou un JSON “à copier/coller”. Le format doit être explicitement livré comme **fichier à enregistrer**.
- - Respecter strictement la nomenclature du nom de fichier et le schéma.
- - Ne jamais inclure de secrets ou de tokens.
- - Préférer des payloads courts et explicites ; si des assets sont requis, référencer des URLs déjà publiques ou fournir des instructions de récupération.
- - Toujours inclure `version` (actuelle : `1.0`).
- 
- ## Règles côté routine locale
- - Surveiller le dossier de téléchargements utilisateur.
- - Filtrer uniquement les fichiers qui matchent `NARR_*.json`.
- - Valider le JSON (structure minimale + `kind/action/id/ts/payload`).
- - Déplacer le fichier validé dans un répertoire “spool” local (ex. `~/narrations_spool/inbox/`).
- - Transmettre le contenu au serveur via l’endpoint HTTP exposé derrière Cloudflare (POST `/mcp` ou endpoint dédié si différent).
- - Enregistrer la réponse dans `~/narrations_spool/outbox/` en respectant la nomenclature `NARR_ACK_<ACTION>_<ID>_<TS>.json`.
- - Option : supprimer ou archiver le fichier d’origine après traitement réussi.
- 
- ## Sécurité & résilience
- - Aucun secret ne transite dans les JSON générés par ChatGPT.
- - Si un chiffrement est nécessaire, seul le côté local devrait chiffrer/déchiffrer (clé non partagée avec ChatGPT).
- - Idempotence : la routine locale doit ignorer un fichier dont l’`id` a déjà été traité et loguer les doublons.
- - Journalisation minimale : consigner les événements (détection, validation, envoi, retour, erreur).
- - En cas d’échec réseau, réessayer avec backoff ou placer le fichier en `spool/retry/`.
- 
- ## Évolutions de version
- - `version` du schéma suit `MAJOR.MINOR`.
- - Incrémenter `MINOR` pour des ajouts rétro-compatibles, `MAJOR` pour des ruptures.
- - La routine locale doit refuser poliment une version inconnue ou supérieure (log + éventuellement message d’erreur en retour).
- 
- ## Bonnes pratiques pour ACTION/PAYLOAD
- - `action` doit être stable et documenté (ex. `pipeline_audio_stack`, `elevenlabs_voice`, `higgsfield_video`).
- - `payload` doit contenir uniquement les paramètres nécessaires à l’action (limiter la taille).
- - Inclure un champ `wait_for_completion` si l’action est asynchrone et que l’appelant veut attendre ou non.
- - Pour le suivi, inclure `trace` ou `meta` avec `project`, `session`, `requester`.
- 
- ## Résumé du flux
- 1) ChatGPT génère un fichier de commande : `NARR_CMD_<ACTION>_<ID>_<TS>.json`.
- 2) L’utilisateur le télécharge ; il arrive dans le dossier de téléchargements.
- 3) La routine locale le détecte, le valide, le déplace en “spool”, l’envoie au serveur.
- 4) Le serveur répond ; la routine écrit un fichier ACK : `NARR_ACK_<ACTION>_<ID>_<TS>.json`.
- 5) ChatGPT peut consommer le contenu de l’ACK si l’utilisateur le lui fournit (copier-coller ou re-téléversement).
--
+# N0_META__file_exchange_protocol — Protocole d'echange par fichiers
+
+## Statut du document
+Document normatif N0. Il definit comment le projet ChatGPT produit des fichiers de commande
+et comment l'application locale renvoie des ACK.
+
+## Objectif
+Mettre en place une communication fiable sans MCP direct : un fichier JSON telechargeable
+sert de commande, puis un fichier ACK est renvoye apres execution.
+
+## Nomenclature des fichiers
+- Commande : `NARR_CMD_<ACTION>_<ID>_<TS>.json`
+- ACK : `NARR_ACK_<ACTION>_<ID>_<TS>.json`
+
+Regles :
+- `<ACTION>` doit correspondre a une action serveur en snake_case (ex: `pipeline_audio_stack`).
+- `<ID>` unique par commande (ex: `req_0001`).
+- `<TS>` au format `YYYYMMDDTHHMMSSZ` (UTC).
+
+## Compatibilite serveur MCP (obligatoire)
+Le serveur `/mcp` attend au minimum :
+`action`, `payload`, `request_id` (optionnel), `trace` (optionnel).
+
+Regles de mapping :
+- `id` (fichier) = `request_id` (serveur). Les deux doivent etre identiques.
+- `meta.project` peut etre copie dans `trace.project`.
+- Les champs `version`, `kind`, `id`, `ts`, `meta` sont ignores par le serveur mais utiles au protocole fichier.
+
+## Schema JSON minimal (commande)
+Champs obligatoires : `version`, `kind`, `action`, `id`, `ts`, `payload`.
+Champs recommandes : `request_id`, `trace`, `from`, `meta.project`.
+Champs optionnels : `meta.user`, `meta.checksum`, champs specifiques a l'action.
+
+Exemple :
+{
+  "version": "1.0",
+  "kind": "CMD",
+  "action": "pipeline_audio_stack",
+  "id": "req_0001",
+  "request_id": "req_0001",
+  "ts": "2026-01-08T14:21:30Z",
+  "from": "chatgpt",
+  "meta": { "project": "Narrations" },
+  "trace": { "project": "Narrations" },
+  "payload": {
+    "voice": { "text": "Hello", "voice_id": "21m00Tcm4TlvDq8ikWAM" },
+    "music": { "prompt": "Ambient", "duration": 20 },
+    "wait_for_completion": true
+  }
+}
+
+## Schema JSON minimal (ACK)
+Champs obligatoires : `version`, `kind`, `action`, `id`, `ts`, `from`, `status`.
+Champs optionnels : `result`, `error`.
+
+Exemple :
+{
+  "version": "1.0",
+  "kind": "ACK",
+  "action": "pipeline_audio_stack",
+  "id": "req_0001",
+  "ts": "2026-01-08T14:21:30Z",
+  "from": "local_app",
+  "status": "done",
+  "result": { "links": ["https://.../audio1.mp3"], "job_id": "job-xyz" },
+  "error": null
+}
+
+## Regles cote ChatGPT (production du JSON)
+- Obligation : si une action serveur est demandee (image/video/audio/pipeline), produire
+  immediatement un JSON conforme, sans demander d'autorisation.
+- Sortie attendue : fournir uniquement un bloc de code JSON (fence ```json), sans texte
+  avant/apres, sans commentaire, sans nom de fichier, et sans analyse.
+- Interdiction : ne pas demander a l'utilisateur de telecharger un fichier.
+- Toujours inclure `version` (actuelle : `1.0`).
+- Ne jamais inclure de secrets ou de tokens.
+
+## Regles cote routine locale
+- Surveiller le dossier de telechargements.
+- Filtrer `NARR_*.json`.
+- Valider la structure minimale (`kind/action/id/ts/payload`).
+- Deposer dans un spool local (ex: `~/narrations_spool/inbox/`).
+- Envoyer le contenu au serveur local (`POST /mcp` ou endpoint dedie).
+- Ecrire un ACK dans `~/narrations_spool/outbox/` selon la nomenclature.
+
+## Securite et resilience
+- Aucun secret ne transite dans les JSON.
+- Idempotence : ignorer un `id` deja traite.
+- En cas d'echec reseau : retry avec backoff ou dossier `spool/retry/`.
+
+## Bonnes pratiques ACTION/PAYLOAD
+- `action` doit correspondre aux actions disponibles (ex: `elevenlabs_voice`, `higgsfield_video`).
+- `payload` doit etre minimal et explicite.
+- Ajouter `wait_for_completion` pour choisir sync/async.
+
+## N0 JSON (obligatoire) - Format attendu
+Le fichier N0 doit contenir tous les champs ci-dessous. Le projet ChatGPT doit tenter
+de remplir chaque champ a partir des references disponibles (N0/N1/N2/N3/N4),
+sauf `references` qui doit rester vide (chaine vide) jusqu'a ce que des fichiers
+soient effectivement disponibles.
+
+Schema attendu (exemple exact):
+{
+  "project_id": "test",
+  "strata": "n0",
+  "updated_at": "2026-01-08T21:27:19.217837Z",
+  "data": {
+    "production_summary": {
+      "summary": "",
+      "production_type": "",
+      "primary_output_format": "",
+      "target_duration": "",
+      "aspect_ratio": "",
+      "visual_style": "",
+      "tone": "",
+      "era": ""
+    },
+    "deliverables": {
+      "visuals": {
+        "images_enabled": true,
+        "videos_enabled": true
+      },
+      "audio_stems": {
+        "dialogue": true,
+        "sfx": true,
+        "music": true
+      }
+    },
+    "art_direction": {
+      "description": "",
+      "references": ""
+    },
+    "sound_direction": {
+      "description": "",
+      "references": ""
+    }
+  }
+}
+
+Regles:
+- Toujours produire tous les champs (meme si vides).
+- `references` doit rester vide ("") dans le JSON produit par ChatGPT.
+- Les valeurs doivent etre remplies a partir des sources narratives (MD/TXT) du dossier.

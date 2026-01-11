@@ -1,0 +1,2616 @@
+{
+  "project_id": "satire_trump_greenland_clip_001",
+  "strata": "n3",
+  "updated_at": "2026-01-09T19:09:05.438600Z",
+  "data": {
+    "project_id": "satire_trump_greenland_clip_001",
+    "document_level": "N3",
+    "document_name": "N3_UNITS__sequences_scenes",
+    "version": "0.1.0",
+    "meta": {
+      "status": "draft",
+      "language": "fr",
+      "target_duration_s": 60,
+      "aspect_ratio": "16:9",
+      "granularity": "G2",
+      "dependencies": {
+        "n0_updated_at": "2026-01-09T00:40:37.432745Z",
+        "n1_version": "0.1",
+        "n1_updated_at": "2026-01-09T00:40:37.437643Z",
+        "n2_version": "1.0.0",
+        "n2_updated_at": "2026-01-09T16:04:43.437331Z"
+      },
+      "canon": {
+        "tone": [
+          "satire",
+          "dark",
+          "provocateur",
+          "trash"
+        ],
+        "visual_style": "r\u00e9alisme arctique grave + overlays branding vulgaires (logos, stickers, sharpie borders, UI immobili\u00e8re) + glitch",
+        "sound_style": "vent/glace/silence + glitch/cash/coins + stingers pseudo-patriotiques d\u00e9form\u00e9s + silences 'mur du r\u00e9el'",
+        "casting_rule": "max_2_figures_actives (pas d'adversaire humain explicite ; l'adversaire est le r\u00e9el)",
+        "ending_rule": "cut_sans_morale"
+      },
+      "constraints": {}
+    },
+    "units_index": [
+      {
+        "id": "U003",
+        "type": "scene",
+        "title": "R\u00e9el arctique pur",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U004",
+        "type": "scene",
+        "title": "Premier marquage",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U006",
+        "type": "scene",
+        "title": "Apparition pub mascotte",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U007",
+        "type": "scene",
+        "title": "Premier geste de propri\u00e9t\u00e9",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U010",
+        "type": "scene",
+        "title": "D\u00e9coupage au marqueur",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U011",
+        "type": "scene",
+        "title": "Listing immobilier",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U013",
+        "type": "scene",
+        "title": "Foule-\u00e9cran de validation",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U014",
+        "type": "scene",
+        "title": "Collage symboles obsc\u00e8nes",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U017",
+        "type": "scene",
+        "title": "Mont\u00e9e saturation",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U018",
+        "type": "scene",
+        "title": "D\u00e9r\u00e8glement et rupture",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U020",
+        "type": "scene",
+        "title": "Proclamation tombe \u00e0 plat",
+        "status": "draft",
+        "version": "0.1"
+      },
+      {
+        "id": "U021",
+        "type": "scene",
+        "title": "Dernier signe, arr\u00eat net",
+        "status": "draft",
+        "version": "0.1"
+      }
+    ],
+    "units": [
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U003",
+          "type": "scene",
+          "title_short": "R\u00e9el arctique pur",
+          "duration_s": 5,
+          "timecode_in": "00:00",
+          "timecode_out": "00:05",
+          "location": [
+            "Groenland \u2014 \u00e9tendue de glace (r\u00e9el)"
+          ],
+          "time": "jour polaire / froid sec (contemporain)",
+          "characters_present": [],
+          "intensity": {
+            "visual_overlay_density_0to5": 0,
+            "audio_density_0to5": 1,
+            "music_intensity_0to5": 0
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "R\u00e9alit\u00e9 arctique s\u00e9rieuse : immensit\u00e9, vent, silence, inertie du monde.",
+          "stakes": [
+            "installer le r\u00e9el (Groenland) comme masse indiff\u00e9rente",
+            "cr\u00e9er une attente de sens sans en donner"
+          ],
+          "exit_change": "du calme total \u00e0 une attente de sens"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Besoin de projeter du sens sur un vide qui ne r\u00e9pond pas (pr\u00e9pare la violence symbolique \u00e0 venir).",
+          "ancre_sensorielle": "Blanc \u00e9touffant, souffle du vent, grains de glace, rare craquement lointain.",
+          "motif_mobilise_variation": "Motif 'mur du r\u00e9el' : le silence/vent domine, aucune validation."
+        },
+        "situation_initiale": {
+          "qui_est_present": "Personne. Aucun signe humain.",
+          "ou_quand": "Groenland, maintenant. Un monde froid, stable, indiff\u00e9rent.",
+          "pourquoi_ici_maintenant": "Point z\u00e9ro : le r\u00e9el avant la contamination par le signe.",
+          "etat": {
+            "monde": "inertie, \u00e9chelle inhumaine, indiff\u00e9rence",
+            "tension": "quasi nulle, mais une attente se forme"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Faire exister le Groenland comme mati\u00e8re pure (pas encore r\u00e9cit, juste pr\u00e9sence).",
+          "objectif_secondaire": "Installer un 'manque' : absence totale de r\u00e9ponse, de voix, d'intention.",
+          "obstacle_principal": "Le vide (aucune accroche humaine).",
+          "obstacles_secondaires": [
+            "le froid et le vent qui effacent toute trace",
+            "le silence comme refus de signification"
+          ],
+          "nature_de_la_difficulte": [
+            "environnement"
+          ]
+        },
+        "deroule_detaille": [
+          "Une \u00e9tendue blanche, infinie, sans rep\u00e8re. Le vent circule comme une respiration sourde.",
+          "Quelques d\u00e9tails physiques accrochent : grains de glace, reliefs minimes, une ligne d\u2019horizon presque abstraite.",
+          "Un craquement tr\u00e8s lointain sugg\u00e8re une mati\u00e8re vivante, mais sans intention.",
+          "Rien n'indique qu'un r\u00e9cit va commencer : c'est pr\u00e9cis\u00e9ment cette absence qui cr\u00e9e l'attente."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Blanc total, pr\u00e9sence du vent : l'espace impose sa loi."
+          },
+          {
+            "id": "B2",
+            "description": "D\u00e9tail de texture (glace, givre, souffle) : la mati\u00e8re existe, mais ne parle pas."
+          },
+          {
+            "id": "B3",
+            "description": "Craquement lointain : signe de r\u00e9sistance passive du r\u00e9el."
+          },
+          {
+            "id": "B4",
+            "description": "Retour au silence : attente de sens sans d\u00e9livrance."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Aucune figure humaine ; le 'r\u00e9el' domine par indiff\u00e9rence.",
+          "conflit_alliance_ambivalence": "Conflit latent : d\u00e9sir humain (\u00e0 venir) vs monde muet."
+        },
+        "dialogues": [],
+        "decor_visuel": {
+          "ambiance_visuelle": "Froid arctique r\u00e9aliste, contrastes nets, blancheur grave et presque clinique.",
+          "elements_visibles_cles": [
+            "glace et neige (texture granuleuse)",
+            "horizon blanc",
+            "micro-reliefs / fissures lointaines (subtiles)",
+            "aucune trace humaine"
+          ],
+          "personnages_etat": [],
+          "notes_promptables_sans_prompt": [
+            "sensation d'\u00e9chelle \u00e9crasante",
+            "blanc non 'mignon' : blanc lourd, indiff\u00e9rent",
+            "absence totale de marque, logo, texte"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent arctique dominant, souffle large, tr\u00e8s peu d'\u00e9l\u00e9ments.",
+          "music": "Absente (ou quasi subliminale) pour pr\u00e9server le 'mur du r\u00e9el'.",
+          "sfx": "Craquement lointain et rare, aucune surench\u00e8re.",
+          "dialogues_traitement": "Aucun.",
+          "silence": "Pr\u00e9sent comme mati\u00e8re (le vide sonne)."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "\u00c9tendue blanche sans trace humaine",
+            "Vent perceptible (poussi\u00e8re de neige / mouvement subtil)",
+            "Texture r\u00e9aliste de glace",
+            "Craquement discret (sans source visible)",
+            "Aucun texte / aucun logo",
+            "Sensation d'attente avant intrusion"
+          ],
+          "props": [],
+          "continuity": {
+            "characters": [],
+            "props": [],
+            "world": [
+              "Groenland 'pur' (avant contamination)",
+              "m\u00e9t\u00e9o stable : vent froid"
+            ],
+            "info": [
+              "Aucune information narrative explicite : seulement le r\u00e9el."
+            ],
+            "audio_motifs": [
+              "vent/glace",
+              "silence-mur"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "Objectif vs obstacle (Lavandier) : objectif 'exister sans signe' contre obstacle 'vide/indiff\u00e9rence' \u2192 cr\u00e9e le manque."
+        ],
+        "id": "U003",
+        "title": "R\u00e9el arctique pur",
+        "duration_s": 5,
+        "treatment": [
+          "Une \u00e9tendue blanche, infinie, sans rep\u00e8re. Le vent circule comme une respiration sourde.",
+          "Quelques d\u00e9tails physiques accrochent : grains de glace, reliefs minimes, une ligne d\u2019horizon presque abstraite.",
+          "Un craquement tr\u00e8s lointain sugg\u00e8re une mati\u00e8re vivante, mais sans intention.",
+          "Rien n'indique qu'un r\u00e9cit va commencer : c'est pr\u00e9cis\u00e9ment cette absence qui cr\u00e9e l'attente."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U004",
+          "type": "scene",
+          "title_short": "Premier marquage",
+          "duration_s": 4,
+          "timecode_in": "00:05",
+          "timecode_out": "00:09",
+          "location": [
+            "Groenland \u2014 m\u00eame \u00e9tendue de glace (r\u00e9el) + contamination graphique"
+          ],
+          "time": "jour polaire / froid sec (contemporain)",
+          "characters_present": [],
+          "intensity": {
+            "visual_overlay_density_0to5": 1,
+            "audio_density_0to5": 2,
+            "music_intensity_0to5": 0
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Une surimpression vulgaire (UI/label/branding) contamine l'image, comme un sticker de propri\u00e9t\u00e9.",
+          "stakes": [
+            "r\u00e9\u00e9crire le r\u00e9el par le signe",
+            "d\u00e9marrer l'attaque symbolique"
+          ],
+          "exit_change": "le r\u00e9el devient surface d'affichage"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Impulsion de poss\u00e9der : r\u00e9duire le monde \u00e0 une \u00e9tiquette pour calmer l'angoisse du vide.",
+          "ancre_sensorielle": "Le vent continue, mais un parasite num\u00e9rique appara\u00eet comme une salissure.",
+          "motif_mobilise_variation": "Motif 'argent/flux' : premier 'clic' de valeur (comme si le r\u00e9el avait un prix)."
+        },
+        "situation_initiale": {
+          "qui_est_present": "Toujours personne physiquement.",
+          "ou_quand": "M\u00eame espace arctique, imm\u00e9diatement apr\u00e8s le silence.",
+          "pourquoi_ici_maintenant": "Premi\u00e8re collision : la r\u00e9alit\u00e9 devient support de publicit\u00e9.",
+          "etat": {
+            "monde": "indiff\u00e9rent",
+            "tension": "monte d'un cran : quelque chose force l'entr\u00e9e"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Introduire le langage de la propri\u00e9t\u00e9 (marquage) sur un monde sans propri\u00e9taire.",
+          "objectif_secondaire": "Rendre le marquage l\u00e9g\u00e8rement ridicule d\u00e8s son apparition (vulgaire, hors-sol).",
+          "obstacle_principal": "Le paysage ne change pas : il refuse toute validation.",
+          "obstacles_secondaires": [
+            "le vent qui sugg\u00e8re l'\u00e9ph\u00e9m\u00e8re",
+            "la froideur qui rend l'intrusion incongrue"
+          ],
+          "nature_de_la_difficulte": [
+            "environnement",
+            "symbolique"
+          ]
+        },
+        "deroule_detaille": [
+          "Un parasite discret s'insinue : lignes, coins d'interface, artefacts de compression.",
+          "Un label surgit comme un autocollant pos\u00e9 sur la glace : propre, brillant, trop 'marketing' pour ce d\u00e9cor.",
+          "Le label tente de d\u00e9finir ce qui est l\u00e0 : un nom, un statut, un prix, une disponibilit\u00e9.",
+          "Le vent et la mati\u00e8re continuent sans r\u00e9agir, rendant l'\u00e9tiquette imm\u00e9diatement absurde."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Premiers artefacts (glitch l\u00e9ger) : le r\u00e9el est 'attaqu\u00e9'."
+          },
+          {
+            "id": "B2",
+            "description": "Apparition du label (sticker/UI) : d\u00e9claration d'existence par le texte."
+          },
+          {
+            "id": "B3",
+            "description": "Le label s'impose (prix/badge) : le monde devient 'annonce'."
+          },
+          {
+            "id": "B4",
+            "description": "Le vent continue identique : la non-r\u00e9ponse du r\u00e9el fait la blague."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Toujours aucune figure humaine ; la domination vient du signe, pas d'un corps.",
+          "conflit_alliance_ambivalence": "Conflit : signe agressif vs monde muet (aucun feedback)."
+        },
+        "dialogues": [],
+        "decor_visuel": {
+          "ambiance_visuelle": "M\u00eame r\u00e9alisme glac\u00e9, contamin\u00e9 par une surcouche graphique clinquante (or, badges, UI).",
+          "elements_visibles_cles": [
+            "label/sticker de propri\u00e9t\u00e9",
+            "coins d'interface (surcouche UI)",
+            "texte court, agressif, 'deal'",
+            "glitch discret (artefacts)"
+          ],
+          "personnages_etat": [],
+          "notes_promptables_sans_prompt": [
+            "contraste 'glace grave' vs 'UI vulgaire'",
+            "le label doit sembler trop propre / trop publicitaire",
+            "le monde derri\u00e8re reste inchang\u00e9"
+          ],
+          "texte_overlay_suggestions": [
+            "LISTING #0001 \u2014 GREENLAND",
+            "STATUS: AVAILABLE",
+            "BADGE: PREMIUM WHITE",
+            "PRICE: (absurde / d\u00e9mesur\u00e9) [\u00c0 VALIDER]"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent arctique maintenu (r\u00e9f\u00e9rence).",
+          "music": "Toujours absente (laisser la place au parasite).",
+          "sfx": "Petit 'pop' num\u00e9rique + micro 'clic' type interface ; tr\u00e8s l\u00e9ger 'ka-ching' fant\u00f4me.",
+          "dialogues_traitement": "Aucun.",
+          "silence": "Le silence reste la base, seulement sali par l'UI."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Glace r\u00e9aliste inchang\u00e9e",
+            "Glitch discret en bord d'image (artefacts)",
+            "Label/sticker clinquant pos\u00e9 sur le paysage",
+            "Texte court de type annonce / listing",
+            "Contraste or/blanc froid",
+            "Le label ne 'fait rien' au monde : il n'a que l'air ridicule"
+          ],
+          "props": [
+            {
+              "name": "overlay_label_listing_001",
+              "role": "premier acte de marchandisation (le monde devient 'annonce')",
+              "continuity": "introduit ici ; la contamination peut persister en filigrane jusqu'\u00e0 U006"
+            }
+          ],
+          "continuity": {
+            "characters": [],
+            "props": [
+              "overlay_label_listing_001 actif (faible densit\u00e9)"
+            ],
+            "world": [
+              "Groenland toujours intact, indiff\u00e9rent",
+              "m\u00e9t\u00e9o : vent froid constant"
+            ],
+            "info": [
+              "Le monde est d\u00e9sormais 'd\u00e9sign\u00e9' par un label (d\u00e9but du deal)."
+            ],
+            "audio_motifs": [
+              "vent/glace",
+              "glitch l\u00e9ger",
+              "mini 'ka-ching' (naissance du motif)"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "McKee (antagonisme) : l'antagoniste n'est pas humain \u2192 c'est l'absence de r\u00e9ponse du monde ; le signe se heurte au silence."
+        ],
+        "id": "U004",
+        "title": "Premier marquage",
+        "duration_s": 4,
+        "treatment": [
+          "Un parasite discret s'insinue : lignes, coins d'interface, artefacts de compression.",
+          "Un label surgit comme un autocollant pos\u00e9 sur la glace : propre, brillant, trop 'marketing' pour ce d\u00e9cor.",
+          "Le label tente de d\u00e9finir ce qui est l\u00e0 : un nom, un statut, un prix, une disponibilit\u00e9.",
+          "Le vent et la mati\u00e8re continuent sans r\u00e9agir, rendant l'\u00e9tiquette imm\u00e9diatement absurde."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U006",
+          "type": "scene",
+          "title_short": "Apparition pub mascotte",
+          "duration_s": 5,
+          "timecode_in": "00:09",
+          "timecode_out": "00:14",
+          "location": [
+            "Groenland \u2014 \u00e9tendue de glace + surcouche branding"
+          ],
+          "time": "jour polaire / froid sec (contemporain)",
+          "characters_present": [
+            "President-Mascotte"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 1,
+            "audio_density_0to5": 2,
+            "music_intensity_0to5": 1
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Entr\u00e9e envahissante du Pr\u00e9sident-Mascotte : pr\u00e9sence 'pub' dans un d\u00e9cor trop grand.",
+          "stakes": [
+            "occuper l'image",
+            "s'autoproclamer propri\u00e9taire"
+          ],
+          "exit_change": "le vide devient plateau"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Besoin de validation et de domination : exister en performance, m\u00eame sans public.",
+          "ancre_sensorielle": "Souffle froid, v\u00eatements qui claquent, vent qui avale la parole.",
+          "motif_mobilise_variation": "Motif 'corps comme territoire' : le corps de la mascotte envahit l'espace comme un logo vivant."
+        },
+        "situation_initiale": {
+          "qui_est_present": "Le Pr\u00e9sident-Mascotte (seul humain).",
+          "ou_quand": "Dans le paysage arctique marqu\u00e9 d'un premier label.",
+          "pourquoi_ici_maintenant": "Le signe appelle un corps : la propri\u00e9t\u00e9 veut un propri\u00e9taire visible.",
+          "etat": {
+            "president_mascotte": "confiance m\u00e9canique, sourire de triomphe, gestuelle de show",
+            "monde": "froid, muet, disproportionn\u00e9"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "S'imposer comme figure centrale et rendre le lieu '\u00e0 lui' par simple pr\u00e9sence.",
+          "objectif_secondaire": "Vendre l'id\u00e9e que le lieu est 'parfait' parce qu'il est grand et vide.",
+          "obstacle_principal": "Aucun public, aucune r\u00e9ponse : le monde ne valide rien.",
+          "obstacles_secondaires": [
+            "le vent qui d\u00e9forme / dissout les mots",
+            "l'\u00e9chelle du paysage qui ridiculise la performance"
+          ],
+          "nature_de_la_difficulte": [
+            "environnement",
+            "social (absence de foule)",
+            "symbolique"
+          ]
+        },
+        "deroule_detaille": [
+          "Le Pr\u00e9sident-Mascotte surgit dans le froid comme une publicit\u00e9 tomb\u00e9e au mauvais endroit : costume trop brillant, cravate agressive, teint artificiel.",
+          "Il prend imm\u00e9diatement une posture de possession : sourire fig\u00e9, pouces lev\u00e9s automatiques, regard qui cherche une cam\u00e9ra invisible (sans jamais la nommer).",
+          "Il essaie de 'parler' au paysage comme \u00e0 un public : formules courtes, ton vendeur, mais le vent emporte tout.",
+          "Un micro-stinger pseudo-triomphal tente de lancer une 'entr\u00e9e', puis se fait d\u00e9vorer par l'air arctique.",
+          "Il compense l'absence de retour par plus de gestuelle : posture d'appropriation, comme s'il s'asseyait symboliquement sur le territoire."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Arriv\u00e9e choc de la mascotte : le r\u00e9el re\u00e7oit une figure trop brillante."
+          },
+          {
+            "id": "B2",
+            "description": "Gestes de show (pouces lev\u00e9s, rictus) : la domination comme routine."
+          },
+          {
+            "id": "B3",
+            "description": "Tentative de parole-vendeur : le vent refuse d'\u00e9couter."
+          },
+          {
+            "id": "B4",
+            "description": "Micro-stinger triomphal avort\u00e9 : le d\u00e9cor \u00e9crase la mise en sc\u00e8ne."
+          },
+          {
+            "id": "B5",
+            "description": "Il insiste par le corps : la performance remplace la preuve."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "President-Mascotte domine par exc\u00e8s de pr\u00e9sence ; le monde domine par indiff\u00e9rence.",
+          "conflit_alliance_ambivalence": "Conflit : 'je suis le centre' vs 'rien ne te regarde'.",
+          "sous_texte": "Sans public, la mascotte r\u00e9v\u00e8le sa peur : ne pas exister."
+        },
+        "dialogues": [
+          {
+            "speaker": "President-Mascotte",
+            "line": "Regardez-moi \u00e7a\u2026 c\u2019est parfait.",
+            "intention": "Vendre le vide comme luxe."
+          },
+          {
+            "speaker": "President-Mascotte",
+            "line": "Grand. Blanc. \u00c0 prendre.",
+            "intention": "R\u00e9duire le territoire \u00e0 une opportunit\u00e9."
+          }
+        ],
+        "decor_visuel": {
+          "ambiance_visuelle": "R\u00e9alisme arctique grave + intrusion d'une figure ultra-signifiante (brillant, artificiel).",
+          "elements_visibles_cles": [
+            "costume brillant, cravate agressive",
+            "teint / maquillage artificiel",
+            "souffle visible dans le froid",
+            "premier label UI en filigrane"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "costume trop ajust\u00e9, trop brillant ; cravate agressive ; accessoires ostentatoires",
+              "etat_physique": "confortable, \u00e9nergique ; expos\u00e9 au vent",
+              "etat_emotionnel": "triomphe performatif, besoin de validation"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "contraste violent entre paysage s\u00e9rieux et figure 'pub'",
+            "gestuelle infantile/dominatrice",
+            "le froid doit rester cr\u00e9dible (souffle, vent)"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent fort + souffle ; espace sonore large et froid.",
+          "music": "Stinger pseudo-patriotique tr\u00e8s court, vite \u00e9touff\u00e9/d\u00e9form\u00e9.",
+          "sfx": "Petits glitchs et scintillements satiriques (discrets), froissement du costume au vent.",
+          "dialogues_traitement": "Voix projet\u00e9e, mais aval\u00e9e par le vent (pas de belle diction ; sensation d'inutilit\u00e9).",
+          "silence": "Intervalles de vide entre les mots, comme si le monde 'ne r\u00e9pondait pas'."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "La mascotte appara\u00eet comme une publicit\u00e9 'hors-sol'",
+            "Sourire fig\u00e9 + pouces lev\u00e9s m\u00e9caniques",
+            "Souffle visible dans le froid",
+            "Le vent rend la parole inutile",
+            "Le d\u00e9cor reste immense et indiff\u00e9rent",
+            "Un micro-stinger triomphal se fait avaler"
+          ],
+          "props": [
+            {
+              "name": "costume_mascotte_brillant",
+              "role": "transformer le pouvoir en objet publicitaire",
+              "continuity": "tenue stable U006\u2192U021 (sauf ajout d'accessoires micro/flag)"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "President-Mascotte pr\u00e9sent (seul), \u00e9nergie de show intacte"
+            ],
+            "props": [
+              "costume_mascotte_brillant",
+              "overlay_label_listing_001 (faible) peut rester visible"
+            ],
+            "world": [
+              "Groenland d\u00e9j\u00e0 'contamin\u00e9' par un premier label"
+            ],
+            "info": [
+              "Le propri\u00e9taire autoproclam\u00e9 est d\u00e9sormais l\u00e0 (incarnation du signe)."
+            ],
+            "audio_motifs": [
+              "vent/glace",
+              "stinger pseudo-triomphal (naissance)",
+              "glitch l\u00e9ger"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "Truby (d\u00e9sir \u2192 action) : d\u00e9sir de possession = action imm\u00e9diate (performance) sans r\u00e9flexion ; obstacle = monde muet."
+        ],
+        "id": "U006",
+        "title": "Apparition pub mascotte",
+        "duration_s": 5,
+        "treatment": [
+          "Le Pr\u00e9sident-Mascotte surgit dans le froid comme une publicit\u00e9 tomb\u00e9e au mauvais endroit : costume trop brillant, cravate agressive, teint artificiel.",
+          "Il prend imm\u00e9diatement une posture de possession : sourire fig\u00e9, pouces lev\u00e9s automatiques, regard qui cherche une cam\u00e9ra invisible (sans jamais la nommer).",
+          "Il essaie de 'parler' au paysage comme \u00e0 un public : formules courtes, ton vendeur, mais le vent emporte tout.",
+          "Un micro-stinger pseudo-triomphal tente de lancer une 'entr\u00e9e', puis se fait d\u00e9vorer par l'air arctique.",
+          "Il compense l'absence de retour par plus de gestuelle : posture d'appropriation, comme s'il s'asseyait symboliquement sur le territoire."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U007",
+          "type": "scene",
+          "title_short": "Premier geste de propri\u00e9t\u00e9",
+          "duration_s": 4,
+          "timecode_in": "00:14",
+          "timecode_out": "00:18",
+          "location": [
+            "Groenland \u2014 surface de glace (r\u00e9el) + marquage"
+          ],
+          "time": "jour polaire / froid sec (contemporain)",
+          "characters_present": [
+            "President-Mascotte"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 2,
+            "audio_density_0to5": 2,
+            "music_intensity_0to5": 1
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Sticker/tampon/claim de propri\u00e9t\u00e9 sur le paysage : appropriation par le signe.",
+          "stakes": [
+            "d\u00e9clarer le r\u00e9el poss\u00e9d\u00e9",
+            "poser une trace persistante"
+          ],
+          "exit_change": "le r\u00e9el est d\u00e9clar\u00e9 poss\u00e9d\u00e9"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Pulsion de marquer pour exister : si le nom colle, l'ego se croit r\u00e9el.",
+          "ancre_sensorielle": "Adh\u00e9sif, pression de la paume, vent qui tente de d\u00e9coller le signe.",
+          "motif_mobilise_variation": "Motif 'propri\u00e9t\u00e9 affich\u00e9e' : la marque na\u00eet mal (croche, fragile) \u2192 ridicule."
+        },
+        "situation_initiale": {
+          "qui_est_present": "President-Mascotte.",
+          "ou_quand": "Sur la glace ; l'espace est trop grand, le marquage trop petit.",
+          "pourquoi_ici_maintenant": "La performance doit se transformer en preuve : un 'tampon' mat\u00e9riel.",
+          "etat": {
+            "president_mascotte": "excitation de propri\u00e9taire, impatience",
+            "monde": "vent, froid, surface lisse"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Poser une marque de propri\u00e9t\u00e9 visible et durable.",
+          "objectif_secondaire": "Transformer la d\u00e9claration en fait (au moins visuellement).",
+          "obstacle_principal": "Le monde ne coop\u00e8re pas : surface froide, vent, adh\u00e9rence incertaine.",
+          "obstacles_secondaires": [
+            "le ridicule d'une marque minuscule sur un territoire immense",
+            "le marquage qui ne 'change' rien au r\u00e9el"
+          ],
+          "nature_de_la_difficulte": [
+            "environnement",
+            "symbolique"
+          ]
+        },
+        "deroule_detaille": [
+          "Le Pr\u00e9sident-Mascotte sort un sticker/tampon de propri\u00e9t\u00e9 comme s'il d\u00e9gainait un acte officiel.",
+          "Il le plaque sur la glace avec une satisfaction imm\u00e9diate.",
+          "Le sticker se soul\u00e8ve l\u00e9g\u00e8rement sur un coin (vent + surface froide) : la propri\u00e9t\u00e9 refuse de 'prendre'.",
+          "Il insiste, presse plus fort, lisse avec la paume, comme si sa volont\u00e9 pouvait coller le monde.",
+          "La marque finit par rester, mais mal : tordue, un coin relev\u00e9, d\u00e9j\u00e0 path\u00e9tique."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Sortie du sticker/tampon : annonce de propri\u00e9t\u00e9."
+          },
+          {
+            "id": "B2",
+            "description": "Application sur la glace : plaisir imm\u00e9diat de marquer."
+          },
+          {
+            "id": "B3",
+            "description": "Le sticker se d\u00e9colle : le r\u00e9el r\u00e9siste passivement."
+          },
+          {
+            "id": "B4",
+            "description": "Pression insistante : volont\u00e9 de contr\u00f4le par le geste."
+          },
+          {
+            "id": "B5",
+            "description": "La marque tient\u2026 de travers : victoire minable."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Mascotte domine par l'acte de marquer ; le monde gagne par simple friction/vent.",
+          "conflit_alliance_ambivalence": "Conflit : 'je colle donc je poss\u00e8de' vs '\u00e7a ne colle pas donc tu n'as rien'."
+        },
+        "dialogues": [
+          {
+            "speaker": "President-Mascotte",
+            "line": "Propri\u00e9t\u00e9 priv\u00e9e.",
+            "intention": "Transformer une phrase en r\u00e9alit\u00e9."
+          },
+          {
+            "speaker": "President-Mascotte",
+            "line": "C\u2019est sign\u00e9.",
+            "intention": "Clore le d\u00e9bat qui n\u2019existe pas."
+          }
+        ],
+        "decor_visuel": {
+          "ambiance_visuelle": "Blanc r\u00e9aliste + intrusion d'une \u00e9tiquette tape-\u00e0-l'\u0153il.",
+          "elements_visibles_cles": [
+            "sticker/tampon de propri\u00e9t\u00e9",
+            "main qui lisse et presse",
+            "coin du sticker qui se rel\u00e8ve",
+            "vent soulevant un peu de neige"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "identique U006",
+              "etat_physique": "gestes rapides, mains actives",
+              "etat_emotionnel": "triomphe enfantin, satisfaction imm\u00e9diate"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "la marque doit sembler vulgaire et trop brillante",
+            "le sticker doit \u00eatre visiblement imparfait (coin d\u00e9coll\u00e9)",
+            "le paysage reste immense, la marque petite"
+          ],
+          "texte_overlay_suggestions": [
+            "PROPERTY OF \u2026 [\u00c0 VALIDER]",
+            "SOLD",
+            "CLAIMED"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent arctique constant.",
+          "music": "Micro-stinger triomphal tr\u00e8s court (optionnel), vite sali.",
+          "sfx": "Son d'adh\u00e9sif ('slap' + frottement) + micro 'ka-ching' ; petit souffle de vent sur le coin qui se d\u00e9colle.",
+          "dialogues_traitement": "Voix courte, performative, sans chaleur.",
+          "silence": "Un micro-blanc apr\u00e8s la d\u00e9claration, comme attente d'applaudissements inexistants."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Sticker/tampon d\u00e9gain\u00e9 comme un acte officiel",
+            "Application sur la glace",
+            "Coin du sticker qui se d\u00e9colle au vent",
+            "Paume qui lisse/force l'adh\u00e9rence",
+            "Marque finale tordue et ridicule",
+            "Le monde derri\u00e8re ne change pas"
+          ],
+          "props": [
+            {
+              "name": "sticker_propriete_001",
+              "role": "premi\u00e8re trace durable de possession (branding physique)",
+              "continuity": "introduit U007 ; doit rester visible (m\u00eame partiellement) jusqu'\u00e0 la fin ; peut r\u00e9appara\u00eetre sous forme variantes en U021"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "President-Mascotte : posture de propri\u00e9taire renforc\u00e9e"
+            ],
+            "props": [
+              "sticker_propriete_001 coll\u00e9 de travers sur la glace"
+            ],
+            "world": [
+              "Groenland d\u00e9sormais marqu\u00e9 (au moins une \u00e9tiquette visible)"
+            ],
+            "info": [
+              "La propri\u00e9t\u00e9 est 'd\u00e9clar\u00e9e' (m\u00eame si elle n'a aucun effet r\u00e9el)."
+            ],
+            "audio_motifs": [
+              "vent/glace",
+              "adh\u00e9sif/slap",
+              "mini ka-ching"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "Aristote (plaisir de l'imitation du vil) : l'\u00e9tiquette vulgaire rend visible la violence symbolique sans l'expliquer."
+        ],
+        "id": "U007",
+        "title": "Premier geste de propri\u00e9t\u00e9",
+        "duration_s": 4,
+        "treatment": [
+          "Le Pr\u00e9sident-Mascotte sort un sticker/tampon de propri\u00e9t\u00e9 comme s'il d\u00e9gainait un acte officiel.",
+          "Il le plaque sur la glace avec une satisfaction imm\u00e9diate.",
+          "Le sticker se soul\u00e8ve l\u00e9g\u00e8rement sur un coin (vent + surface froide) : la propri\u00e9t\u00e9 refuse de 'prendre'.",
+          "Il insiste, presse plus fort, lisse avec la paume, comme si sa volont\u00e9 pouvait coller le monde.",
+          "La marque finit par rester, mais mal : tordue, un coin relev\u00e9, d\u00e9j\u00e0 path\u00e9tique."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U010",
+          "type": "scene",
+          "title_short": "D\u00e9coupage au marqueur",
+          "duration_s": 6,
+          "timecode_in": "00:18",
+          "timecode_out": "00:24",
+          "location": [
+            "Groenland \u2014 surface de glace (r\u00e9el) transform\u00e9e en 'cadastre' par le geste"
+          ],
+          "time": "jour polaire / froid sec (contemporain)",
+          "characters_present": [
+            "President-Mascotte"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 2,
+            "audio_density_0to5": 3,
+            "music_intensity_0to5": 1
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Fronti\u00e8res trac\u00e9es au feutre ; la glace fissure/craque, annulant la pr\u00e9tention du trait.",
+          "stakes": [
+            "r\u00e9duire le Groenland \u00e0 des lignes de contr\u00f4le",
+            "montrer la r\u00e9sistance passive du r\u00e9el"
+          ],
+          "exit_change": "du trait de contr\u00f4le \u00e0 la fissure qui contredit"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Volont\u00e9 de contr\u00f4le : rendre le monde simple parce qu'on ne supporte pas sa complexit\u00e9.",
+          "ancre_sensorielle": "Grincement du marqueur sur surface froide, craquement sourd qui r\u00e9pond sans langage.",
+          "motif_mobilise_variation": "Motif 'mur du r\u00e9el' : le r\u00e9el r\u00e9pond par fissure, pas par parole."
+        },
+        "situation_initiale": {
+          "qui_est_present": "President-Mascotte, seul.",
+          "ou_quand": "Sur la glace marqu\u00e9e d'un sticker ; il passe du 'claim' au 'd\u00e9coupage'.",
+          "pourquoi_ici_maintenant": "\u00c9tape sup\u00e9rieure de la possession : tracer, diviser, administrer.",
+          "etat": {
+            "president_mascotte": "assur\u00e9, autoritaire, impatient",
+            "monde": "glace vivante, pr\u00eate \u00e0 craquer"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Tracer des fronti\u00e8res nettes pour transformer un territoire en parcelle contr\u00f4lable.",
+          "objectif_secondaire": "Faire appara\u00eetre la violence du geste (trait noir sur blanc).",
+          "obstacle_principal": "La glace fissure selon sa logique, pas celle du trait.",
+          "obstacles_secondaires": [
+            "le vent qui rend le geste d\u00e9risoire",
+            "l'\u00e9chelle du territoire qui d\u00e9passe le dessin"
+          ],
+          "nature_de_la_difficulte": [
+            "environnement",
+            "symbolique"
+          ]
+        },
+        "deroule_detaille": [
+          "Le Pr\u00e9sident-Mascotte sort un marqueur noir \u00e9pais : un outil vulgaire pour un geste imp\u00e9rial.",
+          "Il commence \u00e0 tirer une ligne franche sur la blancheur, comme s'il pouvait imposer une g\u00e9om\u00e9trie au monde.",
+          "La mati\u00e8re r\u00e9pond : une fissure na\u00eet et traverse le trait, comme une correction naturelle.",
+          "Il redessine plus fort, \u00e9paissit, insiste : la ligne devient agressive.",
+          "La fissure se propage, d\u00e9forme la fronti\u00e8re, la rend illisible : la carte mentale s'effondre sur place.",
+          "Le r\u00e9sultat final est un cadastre sale : traits noirs + fractures, un contr\u00f4le qui se contredit lui-m\u00eame."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Marqueur noir d\u00e9gain\u00e9 : passage du symbole au geste de contr\u00f4le."
+          },
+          {
+            "id": "B2",
+            "description": "Tra\u00e7age d'une fronti\u00e8re nette : pr\u00e9tention \u00e0 la g\u00e9om\u00e9trie."
+          },
+          {
+            "id": "B3",
+            "description": "Premi\u00e8re fissure : le r\u00e9el r\u00e9pond par rupture."
+          },
+          {
+            "id": "B4",
+            "description": "Insistance (\u00e9paissir, recommencer) : surench\u00e8re du contr\u00f4le."
+          },
+          {
+            "id": "B5",
+            "description": "Propagation des fissures : la fronti\u00e8re devient non-sens."
+          },
+          {
+            "id": "B6",
+            "description": "Cadastre sale final : contr\u00f4le affich\u00e9, invalid\u00e9 par la mati\u00e8re."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Mascotte domine par le trait ; la glace domine par la fissure (antagonisme du r\u00e9el).",
+          "conflit_alliance_ambivalence": "Conflit : 'ligne = loi' vs 'mati\u00e8re = v\u00e9rit\u00e9'.",
+          "sous_texte": "Plus il trace, plus il r\u00e9v\u00e8le qu'il ne contr\u00f4le rien."
+        },
+        "dialogues": [
+          {
+            "speaker": "President-Mascotte",
+            "line": "Ici\u2026 c\u2019est moi.",
+            "intention": "R\u00e9duire un continent \u00e0 une phrase."
+          },
+          {
+            "speaker": "President-Mascotte",
+            "line": "On d\u00e9coupe. Simple.",
+            "intention": "Faire passer la violence pour de la simplicit\u00e9."
+          }
+        ],
+        "decor_visuel": {
+          "ambiance_visuelle": "Blanc arctique r\u00e9aliste souill\u00e9 par des traits noirs \u00e9pais ; sensation de geste brutal sur mati\u00e8re fragile.",
+          "elements_visibles_cles": [
+            "marqueur noir \u00e9pais",
+            "traits noirs sur glace",
+            "fissures qui traversent et d\u00e9forment",
+            "sticker de propri\u00e9t\u00e9 encore pr\u00e9sent (trace)"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "identique",
+              "etat_physique": "geste autoritaire, pression, agitation",
+              "etat_emotionnel": "confiance agressive, irritation quand \u00e7a fissure"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "le trait doit para\u00eetre mat\u00e9riel (encre/trace), pas juste graphique",
+            "la fissure doit contredire le trait (croisements, ruptures)",
+            "contraste noir/blanc tr\u00e8s lisible"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent + frottement a\u00e9rien ; espace sonore froid.",
+          "music": "Pulse tendu/ironique tr\u00e8s l\u00e9ger (optionnel) ; pas envahissant.",
+          "sfx": "Grincement du marqueur + impacts sourds de fissure ; micro glitch quand la ligne 'casse'.",
+          "dialogues_traitement": "Phrases courtes, s\u00e8ches, sans empathie.",
+          "silence": "Micro-suspension au moment o\u00f9 la fissure contredit (laisser le r\u00e9el parler)."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Marqueur noir \u00e9pais dans la main",
+            "Trait noir net sur blancheur",
+            "Fissure qui traverse le trait",
+            "Insistance : trait \u00e9paissi, plus violent",
+            "Propagation des fissures qui rendent la fronti\u00e8re absurde",
+            "Cadastre final sale (traits + fractures) visible"
+          ],
+          "props": [
+            {
+              "name": "marqueur_noir_epais_001",
+              "role": "outil de domination graphique (sharpie borders)",
+              "continuity": "introduit U010 ; peut rester en main / visible en filigrane jusqu'\u00e0 U017"
+            },
+            {
+              "name": "traces_bordures_noires_001",
+              "role": "r\u00e9sultat persistant du geste (fronti\u00e8res)",
+              "continuity": "doit rester visible en arri\u00e8re-plan des sc\u00e8nes suivantes (U011\u2192U021), m\u00eame si recouvert par d'autres overlays"
+            },
+            {
+              "name": "fissures_glace_001",
+              "role": "r\u00e9ponse du r\u00e9el (contradiction du contr\u00f4le)",
+              "continuity": "introduit U010 ; persiste en d\u00e9cor / motif jusqu'\u00e0 la fin"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "President-Mascotte : irritation accrue mais posture de contr\u00f4le maintenue"
+            ],
+            "props": [
+              "marqueur_noir_epais_001",
+              "traces_bordures_noires_001",
+              "fissures_glace_001",
+              "sticker_propriete_001 (toujours pr\u00e9sent)"
+            ],
+            "world": [
+              "Groenland d\u00e9sormais d\u00e9coup\u00e9 par traces + fissures"
+            ],
+            "info": [
+              "Le r\u00e9el 'r\u00e9pond' : chaque ligne est contest\u00e9e par la mati\u00e8re."
+            ],
+            "audio_motifs": [
+              "vent/glace",
+              "grincement marqueur",
+              "craquement (r\u00e9el qui contredit)"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "Lavandier (objectif-obstacle) : objectif 'dessiner pour contr\u00f4ler' ; obstacle 'mati\u00e8re qui fissure' \u2192 conflit visible sans discours."
+        ],
+        "id": "U010",
+        "title": "D\u00e9coupage au marqueur",
+        "duration_s": 6,
+        "treatment": [
+          "Le Pr\u00e9sident-Mascotte sort un marqueur noir \u00e9pais : un outil vulgaire pour un geste imp\u00e9rial.",
+          "Il commence \u00e0 tirer une ligne franche sur la blancheur, comme s'il pouvait imposer une g\u00e9om\u00e9trie au monde.",
+          "La mati\u00e8re r\u00e9pond : une fissure na\u00eet et traverse le trait, comme une correction naturelle.",
+          "Il redessine plus fort, \u00e9paissit, insiste : la ligne devient agressive.",
+          "La fissure se propage, d\u00e9forme la fronti\u00e8re, la rend illisible : la carte mentale s'effondre sur place.",
+          "Le r\u00e9sultat final est un cadastre sale : traits noirs + fractures, un contr\u00f4le qui se contredit lui-m\u00eame."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U011",
+          "type": "scene",
+          "title_short": "Listing immobilier",
+          "duration_s": 7,
+          "timecode_in": "00:24",
+          "timecode_out": "00:31",
+          "location": [
+            "Groenland \u2014 m\u00eame surface, d\u00e9sormais surcharg\u00e9e par UI 'vente'"
+          ],
+          "time": "jour polaire / froid sec (contemporain)",
+          "characters_present": [
+            "President-Mascotte"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 3,
+            "audio_density_0to5": 3,
+            "music_intensity_0to5": 2
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Le Groenland devient une annonce premium : UI de vente, prix, badges, claims.",
+          "stakes": [
+            "marchandisation totale du territoire",
+            "acc\u00e9l\u00e9ration sensorielle vers la surench\u00e8re"
+          ],
+          "exit_change": "du territoire au produit"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Transformer l'incontr\u00f4lable en produit pour se rassurer : si c'est list\u00e9, c'est ma\u00eetris\u00e9.",
+          "ancre_sensorielle": "Bips d'interface, scintillement vulgaire, froid qui reste inchang\u00e9 derri\u00e8re l'or.",
+          "motif_mobilise_variation": "Motif 'argent/flux' : le prix et les badges remplacent le paysage (valeur au lieu du r\u00e9el)."
+        },
+        "situation_initiale": {
+          "qui_est_present": "President-Mascotte.",
+          "ou_quand": "Sur un Groenland d\u00e9j\u00e0 marqu\u00e9 de fronti\u00e8res et fissures.",
+          "pourquoi_ici_maintenant": "Apr\u00e8s le d\u00e9coupage : \u00e9tape suivante logique \u2192 mettre un prix, vendre.",
+          "etat": {
+            "president_mascotte": "euphorie vendeuse",
+            "monde": "toujours muet, fissur\u00e9"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Packager le Groenland comme une annonce premium (prix + badges + statut).",
+          "objectif_secondaire": "Obtenir une 'preuve' de r\u00e9ussite (tampon SOLD).",
+          "obstacle_principal": "La fissure et le vent rappellent l'impossibilit\u00e9 de poss\u00e9der r\u00e9ellement.",
+          "obstacles_secondaires": [
+            "la vulgarit\u00e9 de l'UI face au sacr\u00e9 du paysage",
+            "le vide d'un achat sans vendeur/acheteur r\u00e9el"
+          ],
+          "nature_de_la_difficulte": [
+            "symbolique",
+            "environnement"
+          ]
+        },
+        "deroule_detaille": [
+          "Une interface de vente s'impose : cadre premium, badges, \u00e9toiles, promesses absurdes.",
+          "Le territoire se r\u00e9sume \u00e0 une fiche : prix, surface, 'caract\u00e9ristiques' ridicules (blanc, froid, silence).",
+          "Le prix s'affiche comme un chiffre obscene (ou un symbole d'infini) et pulse comme un c\u0153ur artificiel.",
+          "Un bouton d'achat appara\u00eet ; la mascotte valide comme si elle signait un monde.",
+          "Un tampon de vente (SOLD / PAID) surgit avec agressivit\u00e9, accompagn\u00e9 d'un mini-d\u00e9luge de symboles (pi\u00e8ces, confettis).",
+          "Derri\u00e8re l'annonce, la glace fissur\u00e9e reste identique : elle ne devient pas plus '\u00e0 lui' qu'avant."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "UI premium envahit : le monde devient fiche produit."
+          },
+          {
+            "id": "B2",
+            "description": "Badges/\u00e9toiles/claims : surench\u00e8re marketing."
+          },
+          {
+            "id": "B3",
+            "description": "Prix obsc\u00e8ne qui pulse : argent comme organisme."
+          },
+          {
+            "id": "B4",
+            "description": "Validation d'achat : geste de signature sans adversaire."
+          },
+          {
+            "id": "B5",
+            "description": "Tampon SOLD/PAID : preuve sociale artificielle."
+          },
+          {
+            "id": "B6",
+            "description": "R\u00e9v\u00e9lation implicite : le r\u00e9el derri\u00e8re ne change pas."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Mascotte domine par la plateforme de vente ; le r\u00e9el domine par sa permanence indiff\u00e9rente.",
+          "conflit_alliance_ambivalence": "Conflit : 'acheter = transformer' vs 'acheter = rien'."
+        },
+        "dialogues": [
+          {
+            "speaker": "President-Mascotte",
+            "line": "C\u2019est une affaire historique.",
+            "intention": "Grandir l'acte en mythe commercial."
+          },
+          {
+            "speaker": "President-Mascotte",
+            "line": "Premium. Le plus premium.",
+            "intention": "Remplacer le r\u00e9el par des adjectifs."
+          }
+        ],
+        "decor_visuel": {
+          "ambiance_visuelle": "UI immobili\u00e8re vulgaire (or, badges, fl\u00e8ches, tampons) sur paysage arctique cr\u00e9dible et fissur\u00e9.",
+          "elements_visibles_cles": [
+            "interface listing (cadre premium)",
+            "prix + badges + \u00e9toiles",
+            "tampon SOLD/PAID",
+            "pi\u00e8ces/confettis stylis\u00e9s",
+            "fronti\u00e8res noires + fissures visibles derri\u00e8re"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "identique",
+              "etat_physique": "gestes de validation (signature / pression / approbation)",
+              "etat_emotionnel": "jubilation vendeuse"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "l'UI doit \u00eatre lisible mais agressive (trop de badges)",
+            "le paysage doit rester visible derri\u00e8re (r\u00e9alit\u00e9 contredit le listing)",
+            "tampon SOLD/PAID doit \u00eatre brutal (comme un coup)"
+          ],
+          "texte_overlay_suggestions": [
+            "GREENLAND \u2014 PREMIUM LISTING",
+            "BADGES: BIG / WHITE / QUIET",
+            "PRICE: \u221e (ou chiffre absurde) [\u00c0 VALIDER]",
+            "STATUS: SOLD / PAID"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent toujours pr\u00e9sent, comme un rappel de r\u00e9alit\u00e9.",
+          "music": "Pulsation ironique plus nette (d\u00e9but de 'propagande' qui tourne), sans couvrir l'UI.",
+          "sfx": "Bips UI + 'ka-ching' plus franc ; mini fanfare d\u00e9form\u00e9e au tampon SOLD.",
+          "dialogues_traitement": "Voix performative, ton pub/meeting.",
+          "silence": "Tr\u00e8s court blanc juste apr\u00e8s SOLD (pour sentir le vide derri\u00e8re la preuve)."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Interface listing premium envahissante",
+            "Badges/\u00e9toiles multipli\u00e9s",
+            "Prix obsc\u00e8ne (ou symbole d'infini)",
+            "Geste de validation d'achat par la mascotte",
+            "Tampon SOLD/PAID agressif",
+            "Paysage fissur\u00e9 visible derri\u00e8re (contradiction)"
+          ],
+          "props": [
+            {
+              "name": "ui_listing_overlay_001",
+              "role": "transformer le territoire en produit",
+              "continuity": "introduit U011 ; r\u00e9utilis\u00e9/multipli\u00e9 en U017 (saturation)"
+            },
+            {
+              "name": "tampon_sold_paid_001",
+              "role": "preuve artificielle de 'victoire'",
+              "continuity": "appara\u00eet U011 ; peut r\u00e9appara\u00eetre comme motif en U017/U021"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "President-Mascotte : euphorie renforc\u00e9e ; croit avoir 'gagn\u00e9'"
+            ],
+            "props": [
+              "ui_listing_overlay_001 actif",
+              "tampon_sold_paid_001",
+              "traces_bordures_noires_001",
+              "fissures_glace_001",
+              "sticker_propriete_001"
+            ],
+            "world": [
+              "Groenland 'packag\u00e9' (visuellement), mais physiquement inchang\u00e9"
+            ],
+            "info": [
+              "Le territoire est officiellement 'vendu' dans la logique du show."
+            ],
+            "audio_motifs": [
+              "ka-ching renforc\u00e9",
+              "bips UI",
+              "stinger pseudo-triomphal d\u00e9form\u00e9"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "McKee (progression) : le signe passe de 'label' \u00e0 'transaction' ; la valeur remplace la r\u00e9alit\u00e9."
+        ],
+        "id": "U011",
+        "title": "Listing immobilier",
+        "duration_s": 7,
+        "treatment": [
+          "Une interface de vente s'impose : cadre premium, badges, \u00e9toiles, promesses absurdes.",
+          "Le territoire se r\u00e9sume \u00e0 une fiche : prix, surface, 'caract\u00e9ristiques' ridicules (blanc, froid, silence).",
+          "Le prix s'affiche comme un chiffre obscene (ou un symbole d'infini) et pulse comme un c\u0153ur artificiel.",
+          "Un bouton d'achat appara\u00eet ; la mascotte valide comme si elle signait un monde.",
+          "Un tampon de vente (SOLD / PAID) surgit avec agressivit\u00e9, accompagn\u00e9 d'un mini-d\u00e9luge de symboles (pi\u00e8ces, confettis).",
+          "Derri\u00e8re l'annonce, la glace fissur\u00e9e reste identique : elle ne devient pas plus '\u00e0 lui' qu'avant."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U013",
+          "type": "scene",
+          "title_short": "Foule-\u00e9cran validation",
+          "duration_s": 5,
+          "timecode_in": "00:31",
+          "timecode_out": "00:36",
+          "location": [
+            "Groenland (r\u00e9el) + surimpression 'ar\u00e8ne meeting' (foule-\u00e9cran)"
+          ],
+          "time": "contemporain (hors-sol, logique spectacle)",
+          "characters_present": [
+            "President-Mascotte",
+            "Foule-Ecran"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 3,
+            "audio_density_0to5": 4,
+            "music_intensity_0to5": 2
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Foule-pancartes, applaudissements automatiques, sourire fig\u00e9 : preuve sociale creuse.",
+          "stakes": [
+            "fabriquer une victoire par l'\u00e9cho",
+            "transformer le deal en spectacle valid\u00e9"
+          ],
+          "exit_change": "la validation devient boucle"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Besoin d'\u00eatre applaudi : sans \u00e9cho, la victoire n'existe pas.",
+          "ancre_sensorielle": "Applaudissements m\u00e9caniques, bourdonnement d'ar\u00e8ne, chaleur artificielle dans le froid.",
+          "motif_mobilise_variation": "Motif 'applaudissements + caisse' : naissance d'une boucle qui commence \u00e0 d\u00e9railler."
+        },
+        "situation_initiale": {
+          "qui_est_present": "President-Mascotte + Foule-Ecran (collectif).",
+          "ou_quand": "Une foule appara\u00eet comme un dispositif, pas comme une communaut\u00e9 : meeting fant\u00f4me plaqu\u00e9 sur le Groenland.",
+          "pourquoi_ici_maintenant": "Apr\u00e8s l'achat : besoin de preuve sociale (applaudissements) pour rendre le mensonge 'vrai'.",
+          "etat": {
+            "president_mascotte": "exalt\u00e9, cherche l'ovation",
+            "foule_ecran": "sourires fig\u00e9s, m\u00e9caniques, regard vide sous la r\u00e9p\u00e9tition"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Obtenir une validation visible et sonore (applaudissements/chant) pour sceller la victoire.",
+          "objectif_secondaire": "Montrer que cette validation est un pur automatisme.",
+          "obstacle_principal": "La foule est un \u00e9cho vide : plus elle applaudit, plus elle r\u00e9v\u00e8le l'absence de sens.",
+          "obstacles_secondaires": [
+            "la r\u00e9p\u00e9tition qui devient inqui\u00e9tante",
+            "l'indiff\u00e9rence du r\u00e9el derri\u00e8re (vent) qui contredit l'euphorie"
+          ],
+          "nature_de_la_difficulte": [
+            "social (faux)",
+            "symbolique"
+          ]
+        },
+        "deroule_detaille": [
+          "La Foule-Ecran appara\u00eet comme un mur de pancartes et de sourires : trop uniformes, trop synchrones.",
+          "Les applaudissements d\u00e9marrent imm\u00e9diatement, comme un sample d\u00e9clench\u00e9 : parfaits, sans respiration.",
+          "La mascotte se nourrit de ce retour : elle amplifie ses gestes, multiplie les pouces lev\u00e9s.",
+          "Un d\u00e9tail trahit la m\u00e9canique : un visage qui 'glitche', un rire qui boucle, un regard vide qui persiste une fraction de trop.",
+          "La boucle se met \u00e0 dominer : la validation devient une machine autonome, plus forte que ce qu'elle est cens\u00e9e valider."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Apparition de la foule comme dispositif (pancartes, uniformes)."
+          },
+          {
+            "id": "B2",
+            "description": "Applaudissements automatiques : preuve sociale imm\u00e9diate."
+          },
+          {
+            "id": "B3",
+            "description": "Mascotte sur-joue : se gonfle au retour."
+          },
+          {
+            "id": "B4",
+            "description": "Glitch dans un sourire/rire : r\u00e9v\u00e9lation de la boucle."
+          },
+          {
+            "id": "B5",
+            "description": "La validation devient machine : elle n'a plus besoin de sens."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Mascotte domine la foule par performance ; la foule domine la sc\u00e8ne par le volume et la r\u00e9p\u00e9tition.",
+          "conflit_alliance_ambivalence": "Alliance toxique : le leader a besoin du ch\u0153ur ; le ch\u0153ur ne vit que comme surface.",
+          "evolution_relationnelle_macro": "On passe de 'validation' \u00e0 'syst\u00e8me de validation' (d\u00e9shumanisation)."
+        },
+        "dialogues": [
+          {
+            "speaker": "Foule-Ecran",
+            "line": "Bravo ! Bravo !",
+            "intention": "\u00c9cho simple et creux (boucle)."
+          },
+          {
+            "speaker": "Foule-Ecran",
+            "line": "Deal ! Deal ! Deal !",
+            "intention": "Chant sloganis\u00e9, m\u00e9canique."
+          },
+          {
+            "speaker": "President-Mascotte",
+            "line": "Vous voyez ? C\u2019est officiel.",
+            "intention": "Transformer le bruit en v\u00e9rit\u00e9."
+          }
+        ],
+        "decor_visuel": {
+          "ambiance_visuelle": "Esth\u00e9tique de meeting incrust\u00e9e : pancartes criardes, badges, logos, sourires fig\u00e9s ; toujours contamin\u00e9e par le froid arctique derri\u00e8re.",
+          "elements_visibles_cles": [
+            "pancartes / casquettes / badges",
+            "logos r\u00e9p\u00e9t\u00e9s",
+            "synchronisation de gestes",
+            "glitch sur quelques visages (boucle visible)",
+            "traces du Groenland en arri\u00e8re (blanc/fissures) si possible"
+          ],
+          "personnages_etat": [
+            {
+              "name": "Foule-Ecran",
+              "costume": "tenues de meeting uniformis\u00e9es (casquettes, t-shirts, badges), palette criarde",
+              "etat_physique": "applaudissements synchrones, mouvements en rafales",
+              "etat_emotionnel": "joie artificielle, m\u00e9canique"
+            },
+            {
+              "name": "President-Mascotte",
+              "costume": "identique",
+              "etat_physique": "gestes amplifi\u00e9s, posture de show",
+              "etat_emotionnel": "sati\u00e9t\u00e9 temporaire (nourri par l'\u00e9cho)"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "la foule doit sembler 'copier-coller'",
+            "les applaudissements doivent se voir autant qu'ils s'entendent",
+            "garder un rappel arctique (blanc/froid) pour le d\u00e9calage"
+          ]
+        },
+        "audio": {
+          "ambiance": "Bourdonnement d'ar\u00e8ne + ventilation ; le vent arctique reste en sous-couche (contrepoint).",
+          "music": "Musique triomphale qui commence \u00e0 se tordre (ironie).",
+          "sfx": "Applaudissements en boucle (signature), petits 'ka-ching' int\u00e9gr\u00e9s au rythme, glitchs d'\u00e9chantillons.",
+          "dialogues_traitement": "Chants de foule compress\u00e9s, un peu irr\u00e9els ; voix leader br\u00e8ve, micro-agressive.",
+          "silence": "Pas de silence ici : l'asphyxie commence."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Foule uniforme (pancartes, casquettes) comme mur",
+            "Applaudissements synchrones (gestes r\u00e9p\u00e9titifs)",
+            "Un sourire/visage qui glitch (boucle visible)",
+            "Mascotte qui se gonfle au bruit (pouces lev\u00e9s)",
+            "Logos r\u00e9p\u00e9t\u00e9s sur la foule",
+            "Sensation que la foule est un dispositif, pas une communaut\u00e9"
+          ],
+          "props": [
+            {
+              "name": "pancartes_meeting_001",
+              "role": "surface de projection (preuve sociale)",
+              "continuity": "introduites U013 ; peuvent revenir en fragments U017 (saturation)"
+            },
+            {
+              "name": "logo_repetition_layer_001",
+              "role": "normaliser le grotesque par r\u00e9p\u00e9tition",
+              "continuity": "U013\u2192U017 (augmentation de densit\u00e9)"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "Foule-Ecran active (joie m\u00e9canique)",
+              "President-Mascotte : aliment\u00e9 par l'\u00e9cho"
+            ],
+            "props": [
+              "pancartes_meeting_001",
+              "logo_repetition_layer_001",
+              "ui_listing_overlay_001 (peut appara\u00eetre en coin, rappel du deal)",
+              "traces_bordures_noires_001 + fissures_glace_001 (si le Groenland reste visible)"
+            ],
+            "world": [
+              "Le Groenland est d\u00e9sormais envahi par l'imagerie d'ar\u00e8ne (spectacle)."
+            ],
+            "info": [
+              "La victoire est 'valid\u00e9e' par une boucle, pas par un fait."
+            ],
+            "audio_motifs": [
+              "applaudissements boucle (dominant)",
+              "ka-ching rythmique",
+              "musique triomphale qui se tord"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "Truby (puzzle info cach\u00e9e) : le public voit la foule, mais comprend progressivement qu'elle n'est qu'une boucle (indices glitch)."
+        ],
+        "id": "U013",
+        "title": "Foule-\u00e9cran validation",
+        "duration_s": 5,
+        "treatment": [
+          "La Foule-Ecran appara\u00eet comme un mur de pancartes et de sourires : trop uniformes, trop synchrones.",
+          "Les applaudissements d\u00e9marrent imm\u00e9diatement, comme un sample d\u00e9clench\u00e9 : parfaits, sans respiration.",
+          "La mascotte se nourrit de ce retour : elle amplifie ses gestes, multiplie les pouces lev\u00e9s.",
+          "Un d\u00e9tail trahit la m\u00e9canique : un visage qui 'glitche', un rire qui boucle, un regard vide qui persiste une fraction de trop.",
+          "La boucle se met \u00e0 dominer : la validation devient une machine autonome, plus forte que ce qu'elle est cens\u00e9e valider."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U014",
+          "type": "scene",
+          "title_short": "Collage symboles obsc\u00e8nes",
+          "duration_s": 8,
+          "timecode_in": "00:36",
+          "timecode_out": "00:44",
+          "location": [
+            "Groenland (r\u00e9el) + surcouches symboles (drapeau/micro/argent)"
+          ],
+          "time": "contemporain (spectacle acc\u00e9l\u00e9r\u00e9)",
+          "characters_present": [
+            "President-Mascotte",
+            "Foule-Ecran"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 4,
+            "audio_density_0to5": 5,
+            "music_intensity_0to5": 3
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Drapeau domestique, micro-arme, argent-flux : collage agressif, d\u00e9monstration vide qui gonfle le bruit.",
+          "stakes": [
+            "sceller la victoire par symboles",
+            "basculer dans l'obsc\u00e9nit\u00e9 et la surench\u00e8re"
+          ],
+          "exit_change": "la logique du show bascule en obsc\u00e9nit\u00e9"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Perversion de la preuve : faute de sens, on augmente la quantit\u00e9 de symboles jusqu'\u00e0 la naus\u00e9e.",
+          "ancre_sensorielle": "M\u00e9tal qui claque, buzzers, chants compress\u00e9s, scintillement agressif, souffle court.",
+          "motif_mobilise_variation": "Motif 'argent/flux' devient litt\u00e9ral (pluie de pi\u00e8ces, coul\u00e9e graphique), \u00e9touffant le r\u00e9el."
+        },
+        "situation_initiale": {
+          "qui_est_present": "President-Mascotte + Foule-Ecran.",
+          "ou_quand": "Juste apr\u00e8s la boucle de validation : on passe \u00e0 la d\u00e9monstration (drapeau/micro/argent).",
+          "pourquoi_ici_maintenant": "La boucle ne suffit pas : il faut 'sceller' par embl\u00e8mes lourds.",
+          "etat": {
+            "president_mascotte": "excitation conqu\u00e9rante, agressivit\u00e9 performative",
+            "foule_ecran": "r\u00e9p\u00e9tition plus rapide, quasi trance"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Transformer la victoire en ic\u00f4ne : drapeau, micro, argent comme preuve totale.",
+          "objectif_secondaire": "Faire sentir l'obsc\u00e9nit\u00e9 (trop de signes, trop de bruit) sans discours explicatif.",
+          "obstacle_principal": "Le vide du sens : plus on ajoute, plus on voit que c'est creux.",
+          "obstacles_secondaires": [
+            "la saturation qui commence \u00e0 d\u00e9truire la lisibilit\u00e9",
+            "le r\u00e9el (vent) qui continue sous la d\u00e9monstration"
+          ],
+          "nature_de_la_difficulte": [
+            "symbolique",
+            "sensorielle"
+          ]
+        },
+        "deroule_detaille": [
+          "Les embl\u00e8mes s'empilent : un drapeau devient objet domestique et publicitaire \u00e0 la fois (tissu trop propre, trop satur\u00e9).",
+          "La mascotte brandit un micro comme une arme de show : pas pour parler, mais pour dominer l'espace, pointer, frapper l'air.",
+          "L'argent appara\u00eet comme flux : pluie de pi\u00e8ces, compteurs qui explosent, prix qui clignotent, 'ka-ching' qui se r\u00e9p\u00e8te.",
+          "La foule r\u00e9agit en miroir : applaudissements plus rapides, slogans plus courts, visages de plus en plus m\u00e9caniques.",
+          "La combinaison drapeau/micro/argent devient un collage agressif : le symbole remplace totalement le r\u00e9el.",
+          "La surcharge annonce la prochaine \u00e9tape : on approche l'asphyxie, la machine devient incontr\u00f4lable."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Drapeau sur-signifiant : embl\u00e8me transform\u00e9 en objet vulgaire."
+          },
+          {
+            "id": "B2",
+            "description": "Micro brandi comme arme : domination par amplification."
+          },
+          {
+            "id": "B3",
+            "description": "Argent en flux : pluie/compteurs/prix qui clignotent."
+          },
+          {
+            "id": "B4",
+            "description": "Foule acc\u00e9l\u00e8re : boucle plus serr\u00e9e, plus violente."
+          },
+          {
+            "id": "B5",
+            "description": "Collage agressif : les symboles prennent tout l'espace."
+          },
+          {
+            "id": "B6",
+            "description": "Pr\u00e9-saturation : la lisibilit\u00e9 se fissure, annonce du crash."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Mascotte domine en orchestrant la surench\u00e8re ; la foule amplifie et renvoie ; ensemble ils produisent une machine.",
+          "conflit_alliance_ambivalence": "Alliance dans le grotesque ; conflit implicite avec le r\u00e9el (qui reste absent du rituel).",
+          "evolution_relationnelle_macro": "La foule cesse d'\u00eatre 'public' : elle devient instrument."
+        },
+        "dialogues": [
+          {
+            "speaker": "President-Mascotte",
+            "line": "Victoire. Totale.",
+            "intention": "R\u00e9duire le monde \u00e0 deux mots."
+          },
+          {
+            "speaker": "Foule-Ecran",
+            "line": "Totale ! Totale !",
+            "intention": "Echo automatique, acc\u00e9l\u00e9r\u00e9."
+          },
+          {
+            "speaker": "President-Mascotte",
+            "line": "On signe. On prend. On gagne.",
+            "intention": "Rythme slogan (martel\u00e9)."
+          }
+        ],
+        "decor_visuel": {
+          "ambiance_visuelle": "Surcharge vulgaire : drapeau satur\u00e9, micro iconis\u00e9, pluie de pi\u00e8ces, UI qui clignote ; glitch plus visible.",
+          "elements_visibles_cles": [
+            "drapeau (tissu, embl\u00e8me, usage domestique/publicitaire)",
+            "microphone (objet central, agressif)",
+            "pi\u00e8ces/argent (flux visuel)",
+            "badges/prix/compteurs (UI)",
+            "foule en arri\u00e8re (pancartes, visages fig\u00e9s)"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "identique + accessoire micro (et \u00e9ventuellement drapeau)",
+              "etat_physique": "gestes amples, domination par le mouvement",
+              "etat_emotionnel": "exaltation agressive"
+            },
+            {
+              "name": "Foule-Ecran",
+              "costume": "meeting uniforme",
+              "etat_physique": "applaudissements plus rapides, slogans martel\u00e9s",
+              "etat_emotionnel": "trance m\u00e9canique"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "les symboles doivent \u00eatre lourds et imm\u00e9diats (pas subtils)",
+            "la surcharge doit commencer \u00e0 nuire \u00e0 la lisibilit\u00e9",
+            "glitch et artefacts doivent augmenter"
+          ]
+        },
+        "audio": {
+          "ambiance": "Ar\u00e8ne compress\u00e9e + vent sous-jacent (contrepoint).",
+          "music": "Triomphale puis de plus en plus d\u00e9rangeante (d\u00e9formation, dissonances).",
+          "sfx": "Ka-ching + pi\u00e8ces m\u00e9talliques + buzzers ; glitchs ; impacts sourds (signature du 'pouvoir-objet').",
+          "dialogues_traitement": "Voix leader amplifi\u00e9e/agressive (m\u00eame sans micro 'r\u00e9el') ; foule en loop.",
+          "silence": "Aucun silence : on vise l'asphyxie."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Drapeau utilis\u00e9 comme objet vulgaire (pas solennel)",
+            "Micro brandi comme instrument de domination",
+            "Argent en flux (pluie de pi\u00e8ces / compteurs)",
+            "UI prix/badges qui clignotent partout",
+            "Foule acc\u00e9l\u00e9r\u00e9e (applaudissements plus rapides)",
+            "Glitch renforc\u00e9 (d\u00e9but du d\u00e9bordement)"
+          ],
+          "props": [
+            {
+              "name": "microphone_dore_001",
+              "role": "micro-objet = arme symbolique (pouvoir par amplification)",
+              "continuity": "introduit U014 ; doit exister jusqu'\u00e0 U020 (proclamation)"
+            },
+            {
+              "name": "drapeau_001",
+              "role": "embl\u00e8me transform\u00e9 en objet domestique/show",
+              "continuity": "appara\u00eet U014 ; peut revenir en fragments U017"
+            },
+            {
+              "name": "flux_argent_pieces_001",
+              "role": "argent-litt\u00e9ral (motif envahissant)",
+              "continuity": "U014\u2192U017 (saturation)"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "President-Mascotte : agressivit\u00e9 performative max",
+              "Foule-Ecran : boucle acc\u00e9l\u00e9r\u00e9e, moins humaine"
+            ],
+            "props": [
+              "microphone_dore_001",
+              "drapeau_001",
+              "flux_argent_pieces_001",
+              "pancartes_meeting_001",
+              "logo_repetition_layer_001",
+              "ui_listing_overlay_001",
+              "traces_bordures_noires_001 + fissures_glace_001 (si visibles)",
+              "sticker_propriete_001"
+            ],
+            "world": [
+              "Surcharge de symboles : le Groenland n'est plus qu'un support."
+            ],
+            "info": [
+              "La victoire est 'scell\u00e9e' par signes, mais elle se vide en bruit."
+            ],
+            "audio_motifs": [
+              "applaudissements loop (acc\u00e9l\u00e9r\u00e9)",
+              "ka-ching + pi\u00e8ces m\u00e9talliques",
+              "buzzers/glitch",
+              "musique triomphale d\u00e9form\u00e9e"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "McKee (spectacle vs substance) : plus la preuve est vide, plus on augmente la quantit\u00e9 de signes \u2192 m\u00e8ne m\u00e9caniquement \u00e0 la saturation."
+        ],
+        "id": "U014",
+        "title": "Collage symboles obsc\u00e8nes",
+        "duration_s": 8,
+        "treatment": [
+          "Les embl\u00e8mes s'empilent : un drapeau devient objet domestique et publicitaire \u00e0 la fois (tissu trop propre, trop satur\u00e9).",
+          "La mascotte brandit un micro comme une arme de show : pas pour parler, mais pour dominer l'espace, pointer, frapper l'air.",
+          "L'argent appara\u00eet comme flux : pluie de pi\u00e8ces, compteurs qui explosent, prix qui clignotent, 'ka-ching' qui se r\u00e9p\u00e8te.",
+          "La foule r\u00e9agit en miroir : applaudissements plus rapides, slogans plus courts, visages de plus en plus m\u00e9caniques.",
+          "La combinaison drapeau/micro/argent devient un collage agressif : le symbole remplace totalement le r\u00e9el.",
+          "La surcharge annonce la prochaine \u00e9tape : on approche l'asphyxie, la machine devient incontr\u00f4lable."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U017",
+          "type": "scene",
+          "title_short": "Mont\u00e9e saturation",
+          "duration_s": 5,
+          "timecode_in": "00:44",
+          "timecode_out": "00:49",
+          "location": [
+            "Groenland + toutes surcouches (UI/branding/foule) en d\u00e9bordement"
+          ],
+          "time": "contemporain (climax sensoriel)",
+          "characters_present": [
+            "President-Mascotte",
+            "Foule-Ecran"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 5,
+            "audio_density_0to5": 5,
+            "music_intensity_0to5": 4
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Accumulation d'overlays, slogans, boucles audio jusqu'\u00e0 l'asphyxie.",
+          "stakes": [
+            "climax sensoriel",
+            "perte de lisibilit\u00e9"
+          ],
+          "exit_change": "la lisibilit\u00e9 se noie"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "La ma\u00eetrise se retourne : vouloir tout contr\u00f4ler finit par d\u00e9truire l'image de soi.",
+          "ancre_sensorielle": "Boucles trop fortes, battements artificiels, scintillement agressif, sensation d'\u00e9touffer.",
+          "motif_mobilise_variation": "Motifs (applaudissements/ka-ching/propri\u00e9t\u00e9) superpos\u00e9s jusqu'\u00e0 devenir bruit pur."
+        },
+        "situation_initiale": {
+          "qui_est_present": "Mascotte + foule (mais d\u00e9j\u00e0 dissoutes dans le syst\u00e8me).",
+          "ou_quand": "Apr\u00e8s le collage : la machine de signes n'a plus de freins.",
+          "pourquoi_ici_maintenant": "Climax : l'accumulation atteint un point insoutenable.",
+          "etat": {
+            "systeme": "hors contr\u00f4le",
+            "lisibilite": "en train de dispara\u00eetre"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Atteindre l'asphyxie par accumulation (image et son).",
+          "objectif_secondaire": "Faire sentir la perte de sens : tout devient slogan, tout devient prix.",
+          "obstacle_principal": "La surcharge elle-m\u00eame : la machine s'\u00e9trangle.",
+          "obstacles_secondaires": [
+            "glitch qui emp\u00eache la continuit\u00e9",
+            "la fatigue sensorielle du spectateur (recherch\u00e9e)"
+          ],
+          "nature_de_la_difficulte": [
+            "sensorielle",
+            "syst\u00e8me (auto-d\u00e9r\u00e8glement)"
+          ]
+        },
+        "deroule_detaille": [
+          "Les couches d\u00e9j\u00e0 pr\u00e9sentes (listing, SOLD, fronti\u00e8res, pi\u00e8ces, logos, foule) se multiplient et se recouvrent.",
+          "Des slogans courts apparaissent en rafales, se r\u00e9p\u00e8tent, se chevauchent, deviennent illisibles.",
+          "La foule et la mascotte se r\u00e9duisent \u00e0 des fragments : un rictus, un pouce lev\u00e9, un logo \u2014 r\u00e9p\u00e9t\u00e9s comme des autocollants.",
+          "Le son empile : applaudissements + ka-ching + buzzers + musique d\u00e9form\u00e9e + vent, jusqu'\u00e0 la saturation.",
+          "La sc\u00e8ne doit donner une sensation physique : trop-plein, asphyxie, perte de rep\u00e8res."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Multiplication des couches : tout se recouvre."
+          },
+          {
+            "id": "B2",
+            "description": "Slogans en rafale : la langue devient bruit."
+          },
+          {
+            "id": "B3",
+            "description": "Fragments de mascotte/foule en autocollants : d\u00e9shumanisation."
+          },
+          {
+            "id": "B4",
+            "description": "Empilement sonore maximal : boucles qui se superposent."
+          },
+          {
+            "id": "B5",
+            "description": "Asphyxie : perte totale de lisibilit\u00e9."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Le syst\u00e8me (boucles) domine tout ; les personnages deviennent des \u00e9l\u00e9ments graphiques.",
+          "conflit_alliance_ambivalence": "Conflit final : signe vs sens (le signe gagne en quantit\u00e9, le sens dispara\u00eet)."
+        },
+        "dialogues": [
+          {
+            "speaker": "Fragments (mix)",
+            "line": "MINE / SOLD / DEAL / WIN",
+            "intention": "Bribes r\u00e9p\u00e9t\u00e9es, plus proches d'UI que de parole."
+          }
+        ],
+        "decor_visuel": {
+          "ambiance_visuelle": "Overlays au maximum : glitch, logos, stickers, UI, textes ; image presque illisible.",
+          "elements_visibles_cles": [
+            "empilement UI listing + SOLD",
+            "fronti\u00e8res noires + fissures (si encore visibles)",
+            "pluie de pi\u00e8ces",
+            "mosa\u00efque foule/pancartes",
+            "morceaux de sourire/pouce lev\u00e9 r\u00e9p\u00e9t\u00e9s"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "identique (mais fragment\u00e9 par surcouches)",
+              "etat_physique": "indiscernable (r\u00e9duit \u00e0 signes)",
+              "etat_emotionnel": "triomphe devenu bruit"
+            },
+            {
+              "name": "Foule-Ecran",
+              "costume": "uniforme meeting (mais fusionn\u00e9 au collage)",
+              "etat_physique": "boucle",
+              "etat_emotionnel": "boucle"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "viser 'trop plein' mais garder 1\u20132 \u00e9l\u00e9ments reconnaissables (rictus, SOLD) pour ancrer",
+            "glitch doit \u00eatre organique (pas d\u00e9coratif)",
+            "l'asphyxie doit \u00eatre perceptible en 5s"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent encore l\u00e0, mais noy\u00e9.",
+          "music": "Pulse triomphal devenu indus/glitch ; niveau \u00e9lev\u00e9.",
+          "sfx": "Boucles (applaudissements/ka-ching/buzzers) empil\u00e9es ; saturation volontaire.",
+          "dialogues_traitement": "Fragments \u00e9cras\u00e9s, parfois \u00e0 la limite de l'intelligible.",
+          "silence": "Aucun : on pr\u00e9pare la rupture."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Slogans en rafales (surcouches texte)",
+            "Empilement UI listing + SOLD",
+            "Logos/stickers r\u00e9p\u00e9t\u00e9s (pattern)",
+            "Fragments mascotte (rictus/pouce) en copie multiple",
+            "Pluie de pi\u00e8ces + badges qui clignotent",
+            "Glitch visible, d\u00e9bordement total"
+          ],
+          "props": [
+            {
+              "name": "stack_overlays_bundle_001",
+              "role": "bundle de toutes les surcouches (saturation)",
+              "continuity": "sp\u00e9cifique U017 ; sert de base \u00e0 la panne U018"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "Les personnages sont encore 'l\u00e0' mais dissous en signes"
+            ],
+            "props": [
+              "stack_overlays_bundle_001 (max)",
+              "tous props visuels pr\u00e9c\u00e9dents (UI, stickers, logos, pi\u00e8ces, pancartes)"
+            ],
+            "world": [
+              "Le r\u00e9el est presque invisible sous la couche spectacle"
+            ],
+            "info": [
+              "Point de non-retour : le syst\u00e8me est trop charg\u00e9."
+            ],
+            "audio_motifs": [
+              "applaudissements loop (max)",
+              "ka-ching (max)",
+              "buzzers/glitch (max)",
+              "musique d\u00e9form\u00e9e (max)"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "McKee (climax) : la progression culmine quand l'accumulation devient son propre antagoniste."
+        ],
+        "id": "U017",
+        "title": "Mont\u00e9e saturation",
+        "duration_s": 5,
+        "treatment": [
+          "Les couches d\u00e9j\u00e0 pr\u00e9sentes (listing, SOLD, fronti\u00e8res, pi\u00e8ces, logos, foule) se multiplient et se recouvrent.",
+          "Des slogans courts apparaissent en rafales, se r\u00e9p\u00e8tent, se chevauchent, deviennent illisibles.",
+          "La foule et la mascotte se r\u00e9duisent \u00e0 des fragments : un rictus, un pouce lev\u00e9, un logo \u2014 r\u00e9p\u00e9t\u00e9s comme des autocollants.",
+          "Le son empile : applaudissements + ka-ching + buzzers + musique d\u00e9form\u00e9e + vent, jusqu'\u00e0 la saturation.",
+          "La sc\u00e8ne doit donner une sensation physique : trop-plein, asphyxie, perte de rep\u00e8res."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U018",
+          "type": "scene",
+          "title_short": "D\u00e9r\u00e8glement et rupture",
+          "duration_s": 5,
+          "timecode_in": "00:49",
+          "timecode_out": "00:54",
+          "location": [
+            "M\u00eame espace (syst\u00e8me en panne) \u2192 bascule vers vide"
+          ],
+          "time": "contemporain (panne)",
+          "characters_present": [
+            "President-Mascotte",
+            "Foule-Ecran"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 4,
+            "audio_density_0to5": 4,
+            "music_intensity_0to5": 2
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Buzzer/ka-ching glitch, boucles qui se cassent, rupture brutale (figement / d\u00e9crochage).",
+          "stakes": [
+            "effondrement du syst\u00e8me",
+            "pr\u00e9parer le 'mur du r\u00e9el' (silence)"
+          ],
+          "exit_change": "la machine tombe"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Quand le spectacle perd le contr\u00f4le, il r\u00e9v\u00e8le son vide : plus rien ne tient.",
+          "ancre_sensorielle": "Stutter, gr\u00e9sillement, arr\u00eat brutal, puis un air froid qui revient.",
+          "motif_mobilise_variation": "Motif 'silence-mur' revient comme une punition : apr\u00e8s le bruit, le vide."
+        },
+        "situation_initiale": {
+          "qui_est_present": "Mascotte + foule (encore fragment\u00e9es), mais le syst\u00e8me l\u00e2che.",
+          "ou_quand": "Juste apr\u00e8s l'asphyxie : le d\u00e9bordement casse la machine.",
+          "pourquoi_ici_maintenant": "La surench\u00e8re atteint ses limites physiques : rupture in\u00e9vitable.",
+          "etat": {
+            "systeme": "instable, glitch violent",
+            "public": "boucle se brise"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Montrer la panne : boucles qui se cassent, signes qui se figent.",
+          "objectif_secondaire": "Cr\u00e9er une chute sonore brutale (pr\u00e9pare le silence sec).",
+          "obstacle_principal": "Le syst\u00e8me est trop charg\u00e9 : il se d\u00e9truit lui-m\u00eame.",
+          "obstacles_secondaires": [
+            "la fragmentation rend tout inconfortable (recherch\u00e9)",
+            "le retour du r\u00e9el (vent) d\u00e9gonfle la grandeur"
+          ],
+          "nature_de_la_difficulte": [
+            "syst\u00e8me",
+            "sensorielle"
+          ]
+        },
+        "deroule_detaille": [
+          "Le son commence \u00e0 b\u00e9gayer : applaudissements saccad\u00e9s, ka-ching hach\u00e9, buzzers qui se mordent.",
+          "Les surcouches visuelles d\u00e9crochent : textes tronqu\u00e9s, logos qui se d\u00e9calent, symbole SOLD qui se r\u00e9p\u00e8te trop vite puis se d\u00e9forme.",
+          "Un instant de figement : tout semble rester accroch\u00e9, comme si la machine retenait son souffle.",
+          "Un dernier pic (buzzer/gr\u00e9sillement) \u2014 puis chute : le volume tombe.",
+          "Le vent arctique revient en premier, comme si le r\u00e9el reprenait la place, sans triomphe, juste pr\u00e9sence."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "B\u00e9gaiement audio : boucles cass\u00e9es."
+          },
+          {
+            "id": "B2",
+            "description": "D\u00e9crochage visuel : textes/logos d\u00e9cal\u00e9s."
+          },
+          {
+            "id": "B3",
+            "description": "Instant de figement : suspension."
+          },
+          {
+            "id": "B4",
+            "description": "Dernier pic (buzzer) : surcharge terminale."
+          },
+          {
+            "id": "B5",
+            "description": "Chute : retour du vent, retour du r\u00e9el."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Le syst\u00e8me l\u00e2che ; les personnages perdent leur 'support' (ils ne sont plus que du bruit).",
+          "conflit_alliance_ambivalence": "Conflit : la machine du show vs ses propres limites."
+        },
+        "dialogues": [],
+        "decor_visuel": {
+          "ambiance_visuelle": "Glitch violent, d\u00e9crochages, figement bref, puis baisse de surcouches.",
+          "elements_visibles_cles": [
+            "texte tronqu\u00e9 / d\u00e9cal\u00e9",
+            "logo r\u00e9p\u00e9t\u00e9 qui se d\u00e9forme",
+            "symbole SOLD/PAID glitch\u00e9",
+            "retour partiel du blanc arctique derri\u00e8re"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "identique",
+              "etat_physique": "fig\u00e9/fragment\u00e9 (moment de panne)",
+              "etat_emotionnel": "ind\u00e9termin\u00e9 (la machine parle \u00e0 sa place)"
+            },
+            {
+              "name": "Foule-Ecran",
+              "costume": "identique",
+              "etat_physique": "boucle cass\u00e9e (gestes saccad\u00e9s)",
+              "etat_emotionnel": "ind\u00e9termin\u00e9"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "le figement doit \u00eatre bref mais perceptible",
+            "le retour du blanc arctique doit se voir (respiration visuelle)",
+            "la panne doit sembler m\u00e9canique, pas 'artistique' gratuite"
+          ]
+        },
+        "audio": {
+          "ambiance": "Le vent revient progressivement apr\u00e8s la chute.",
+          "music": "Se casse / se coupe (d\u00e9crochage).",
+          "sfx": "Stutter de loops + buzzer terminal + gr\u00e9sillement ; chute de volume.",
+          "dialogues_traitement": "Aucun (ou inaudible).",
+          "silence": "Apr\u00e8s la chute, un silence sec partiel fait exister le 'mur du r\u00e9el'."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Applaudissements/ka-ching qui b\u00e9gayent",
+            "Textes/logos qui se d\u00e9calent et se tronquent",
+            "Symbole SOLD qui se d\u00e9forme",
+            "Instant de figement (tr\u00e8s bref)",
+            "Dernier buzzer/gr\u00e9sillement",
+            "Retour partiel du blanc arctique (respiration) + vent"
+          ],
+          "props": [
+            {
+              "name": "breakdown_glitch_layer_001",
+              "role": "effondrement visuel/sonore (panne du syst\u00e8me)",
+              "continuity": "U018 seulement ; doit permettre transition vers U020 (vide)"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "Foule-Ecran se 'dissout' (sortie implicite)",
+              "President-Mascotte reste (pr\u00e9pare sc\u00e8ne de proclamation)"
+            ],
+            "props": [
+              "breakdown_glitch_layer_001",
+              "microphone_dore_001 doit rester disponible (si introduit U014)",
+              "traces_bordures_noires_001 + fissures_glace_001 + sticker_propriete_001"
+            ],
+            "world": [
+              "R\u00e9duction brutale des surcouches : retour du r\u00e9el arctique"
+            ],
+            "info": [
+              "Le syst\u00e8me de validation s'effondre : plus de foule fonctionnelle."
+            ],
+            "audio_motifs": [
+              "stutter loops",
+              "buzzer terminal",
+              "retour vent/silence"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "Truby (organique vs m\u00e9canique) : la m\u00e9canique du show s'effondre, r\u00e9v\u00e9lant le 'corps' du r\u00e9el en dessous (vent)."
+        ],
+        "id": "U018",
+        "title": "D\u00e9r\u00e8glement et rupture",
+        "duration_s": 5,
+        "treatment": [
+          "Le son commence \u00e0 b\u00e9gayer : applaudissements saccad\u00e9s, ka-ching hach\u00e9, buzzers qui se mordent.",
+          "Les surcouches visuelles d\u00e9crochent : textes tronqu\u00e9s, logos qui se d\u00e9calent, symbole SOLD qui se r\u00e9p\u00e8te trop vite puis se d\u00e9forme.",
+          "Un instant de figement : tout semble rester accroch\u00e9, comme si la machine retenait son souffle.",
+          "Un dernier pic (buzzer/gr\u00e9sillement) \u2014 puis chute : le volume tombe.",
+          "Le vent arctique revient en premier, comme si le r\u00e9el reprenait la place, sans triomphe, juste pr\u00e9sence."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U020",
+          "type": "scene",
+          "title_short": "Proclamation tombe \u00e0 plat",
+          "duration_s": 4,
+          "timecode_in": "00:54",
+          "timecode_out": "00:58",
+          "location": [
+            "Groenland \u2014 retour au r\u00e9el marqu\u00e9 (traces, fissures, stickers)"
+          ],
+          "time": "jour polaire / froid sec (contemporain)",
+          "characters_present": [
+            "President-Mascotte"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 1,
+            "audio_density_0to5": 1,
+            "music_intensity_0to5": 0
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Une proclamation de victoire dans le vide, imm\u00e9diatement contredite par le silence.",
+          "stakes": [
+            "victoire creuse",
+            "malaise final"
+          ],
+          "exit_change": "la victoire n'a aucun effet"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Sans public, l'ego se parle \u00e0 lui-m\u00eame : besoin de validation contre mur de silence.",
+          "ancre_sensorielle": "Vent froid, souffle, micro qui ne 'rend' rien, absence totale d'applaudissements.",
+          "motif_mobilise_variation": "Retour du motif 'mur du r\u00e9el' : le silence annule le slogan."
+        },
+        "situation_initiale": {
+          "qui_est_present": "President-Mascotte seul.",
+          "ou_quand": "Apr\u00e8s la panne : le d\u00e9cor redevient arctique, mais souill\u00e9 de traces (fronti\u00e8res, fissures, stickers).",
+          "pourquoi_ici_maintenant": "Moment de v\u00e9rit\u00e9 : la victoire proclam\u00e9e n'a aucun t\u00e9moin.",
+          "etat": {
+            "president_mascotte": "encore dans le triomphe performatif, mais fragile",
+            "monde": "vent, indiff\u00e9rence, traces visibles"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Proclamer la victoire comme si la parole suffisait \u00e0 faire exister l'acte.",
+          "objectif_secondaire": "Attendre une r\u00e9ponse (m\u00eame un instant) \u2014 et ne rien obtenir.",
+          "obstacle_principal": "Silence sec : aucune validation, aucun \u00e9cho.",
+          "obstacles_secondaires": [
+            "microphone sans 'magie' (ou son inutile)",
+            "le paysage qui reste identique malgr\u00e9 l'achat"
+          ],
+          "nature_de_la_difficulte": [
+            "social (absence de public)",
+            "environnement",
+            "moral (vide de sens)"
+          ]
+        },
+        "deroule_detaille": [
+          "La mascotte se tient face au vide, avec ses traces de conqu\u00eate autour (fronti\u00e8res noires, fissures, stickers).",
+          "Elle prend une posture officielle et prononce une phrase de victoire \u2014 courte, d\u00e9finitive.",
+          "Elle s'arr\u00eate, comme si l'applaudissement devait tomber du ciel.",
+          "Rien. Juste le vent. La phrase se dissout dans l'air.",
+          "Une micro-faille dans l'expression : le sourire vacille une fraction, puis revient (m\u00e9canique)."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Retour au vide arctique marqu\u00e9 : traces visibles."
+          },
+          {
+            "id": "B2",
+            "description": "Proclamation : la parole veut sceller."
+          },
+          {
+            "id": "B3",
+            "description": "Attente : posture fig\u00e9e, besoin de retour."
+          },
+          {
+            "id": "B4",
+            "description": "Silence/vent : mur du r\u00e9el."
+          },
+          {
+            "id": "B5",
+            "description": "Rictus vacille puis se recompose : malaise."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Mascotte tente de dominer par parole ; le monde domine par silence.",
+          "conflit_alliance_ambivalence": "Conflit : 'je gagne' vs '\u00e7a ne veut rien dire'.",
+          "sous_texte": "La peur d'\u00eatre insignifiant appara\u00eet bri\u00e8vement."
+        },
+        "dialogues": [
+          {
+            "speaker": "President-Mascotte",
+            "line": "C\u2019est fait. C\u2019est \u00e0 moi.",
+            "intention": "Clore le r\u00e9el par d\u00e9claration."
+          },
+          {
+            "speaker": "President-Mascotte",
+            "line": "Victoire.",
+            "intention": "Dernier mot qui devrait suffire."
+          }
+        ],
+        "decor_visuel": {
+          "ambiance_visuelle": "Retour au r\u00e9alisme arctique, mais avec cicatrices : traits noirs, fissures, stickers mal coll\u00e9s.",
+          "elements_visibles_cles": [
+            "fronti\u00e8res noires (sales)",
+            "fissures de glace",
+            "sticker de propri\u00e9t\u00e9 (coin d\u00e9coll\u00e9)",
+            "mascotte seule dans l'immensit\u00e9",
+            "microphone pr\u00e9sent (si retenu)"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "identique + microphone_dore_001 si continuit\u00e9",
+              "etat_physique": "posture officielle, immobile un instant",
+              "etat_emotionnel": "triomphe sans t\u00e9moin \u2192 vacillement micro"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "le vide doit revenir comme 'punition' apr\u00e8s la saturation",
+            "les traces doivent \u00eatre visibles mais ridicules",
+            "l'expression doit laisser passer une micro-faille"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent arctique + souffle ; espace sonore tr\u00e8s vide.",
+          "music": "Absente (ou coup\u00e9e net depuis U018).",
+          "sfx": "Tr\u00e8s l\u00e9ger bruit de micro manipul\u00e9 (optionnel) ; aucun applaudissement.",
+          "dialogues_traitement": "Voix seule, s\u00e8che, sans soutien ; la r\u00e9verb\u00e9ration naturelle doit sembler inutile.",
+          "silence": "Silence sec imm\u00e9diatement apr\u00e8s la proclamation : 'mur du r\u00e9el'."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Retour au Groenland r\u00e9aliste (apr\u00e8s surcharge)",
+            "Traces visibles : fronti\u00e8res noires + fissures",
+            "Sticker de propri\u00e9t\u00e9 encore l\u00e0 (imparfait)",
+            "Mascotte seule (pas de foule)",
+            "Proclamation officielle",
+            "Silence/vent qui contredit imm\u00e9diatement"
+          ],
+          "props": [
+            {
+              "name": "microphone_dore_001",
+              "role": "outil de proclamation devenu inutile",
+              "continuity": "pr\u00e9sent U020 ; peut \u00eatre tenu en main ou proche"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "Foule-Ecran absente (dissoute apr\u00e8s panne)",
+              "President-Mascotte : micro-vacillement, mais masque rapidement"
+            ],
+            "props": [
+              "microphone_dore_001",
+              "traces_bordures_noires_001",
+              "fissures_glace_001",
+              "sticker_propriete_001"
+            ],
+            "world": [
+              "Le r\u00e9el reprend la place : les surcouches sont quasi parties",
+              "Les traces de conqu\u00eate restent comme cicatrices absurdes"
+            ],
+            "info": [
+              "La victoire proclam\u00e9e n'a aucune cons\u00e9quence observable."
+            ],
+            "audio_motifs": [
+              "vent/glace",
+              "silence-mur (dominant)"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "McKee (r\u00e9solution n\u00e9gative) : la 'victoire' est une r\u00e9solution qui retire du sens au lieu d'en donner."
+        ],
+        "id": "U020",
+        "title": "Proclamation tombe \u00e0 plat",
+        "duration_s": 4,
+        "treatment": [
+          "La mascotte se tient face au vide, avec ses traces de conqu\u00eate autour (fronti\u00e8res noires, fissures, stickers).",
+          "Elle prend une posture officielle et prononce une phrase de victoire \u2014 courte, d\u00e9finitive.",
+          "Elle s'arr\u00eate, comme si l'applaudissement devait tomber du ciel.",
+          "Rien. Juste le vent. La phrase se dissout dans l'air.",
+          "Une micro-faille dans l'expression : le sourire vacille une fraction, puis revient (m\u00e9canique)."
+        ]
+      },
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "0.1",
+          "statut": "draft",
+          "granularity": "G2",
+          "dependencies": {
+            "n0": "timestamp:2026-01-09T00:40:37.432745Z",
+            "n1": "v0.1",
+            "n2": "v1.0.0"
+          }
+        },
+        "identity": {
+          "id": "U021",
+          "type": "scene",
+          "title_short": "Dernier signe, arr\u00eat net",
+          "duration_s": 2,
+          "timecode_in": "00:58",
+          "timecode_out": "01:00",
+          "location": [
+            "Groenland \u2014 r\u00e9el marqu\u00e9"
+          ],
+          "time": "jour polaire / froid sec (contemporain)",
+          "characters_present": [
+            "President-Mascotte"
+          ],
+          "intensity": {
+            "visual_overlay_density_0to5": 1,
+            "audio_density_0to5": 1,
+            "music_intensity_0to5": 0
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "Dernier sticker mal coll\u00e9 / label grotesque, puis arr\u00eat brutal.",
+          "stakes": [
+            "dernier rire nerveux",
+            "couper sans morale"
+          ],
+          "exit_change": "arr\u00eat brutal"
+        },
+        "vibration": {
+          "enjeu_humain_actif": "Dernier r\u00e9flexe narcissique : laisser une signature m\u00eame quand tout s'\u00e9croule.",
+          "ancre_sensorielle": "Son d'adh\u00e9sif + souffle, puis arr\u00eat total.",
+          "motif_mobilise_variation": "Motif 'propri\u00e9t\u00e9' en version finale : signe minuscule, path\u00e9tique, puis n\u00e9ant."
+        },
+        "situation_initiale": {
+          "qui_est_present": "President-Mascotte seul.",
+          "ou_quand": "Imm\u00e9diatement apr\u00e8s la proclamation qui tombe \u00e0 plat.",
+          "pourquoi_ici_maintenant": "Dernier geste pour 'sauver' la victoire : une \u00e9tiquette finale.",
+          "etat": {
+            "president_mascotte": "automatisme, besoin de signature",
+            "monde": "silence et vent"
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "Poser un ultime signe de possession (signature/label).",
+          "objectif_secondaire": "Finir sur une image ridicule, pas une morale.",
+          "obstacle_principal": "La fragilit\u00e9 du signe (mal coll\u00e9, d\u00e9risoire).",
+          "obstacles_secondaires": [
+            "l'arr\u00eat net coupe toute interpr\u00e9tation confortable"
+          ],
+          "nature_de_la_difficulte": [
+            "symbolique"
+          ]
+        },
+        "deroule_detaille": [
+          "La mascotte pose un dernier sticker/label, plus petit, plus m\u00e9diocre encore, comme une signature de fin.",
+          "Le sticker se fixe mal (coin lev\u00e9) \u2014 rappel du premier geste.",
+          "L'image et le son s'interrompent brutalement, sans conclusion."
+        ],
+        "beats": [
+          {
+            "id": "B1",
+            "description": "Dernier sticker/label : signature."
+          },
+          {
+            "id": "B2",
+            "description": "Imparfait (coin lev\u00e9) : ridicule final."
+          },
+          {
+            "id": "B3",
+            "description": "Arr\u00eat net : pas de morale."
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "Mascotte agit par r\u00e9flexe ; le r\u00e9el n'a m\u00eame pas besoin de r\u00e9sister : l'arr\u00eat suffit.",
+          "conflit_alliance_ambivalence": "Conflit final : laisser une trace vs dispara\u00eetre."
+        },
+        "dialogues": [],
+        "decor_visuel": {
+          "ambiance_visuelle": "Minimal : r\u00e9el froid + une derni\u00e8re \u00e9tiquette absurde.",
+          "elements_visibles_cles": [
+            "dernier sticker/label",
+            "coin d\u00e9coll\u00e9",
+            "traces pr\u00e9c\u00e9dentes (fissures, fronti\u00e8res) en arri\u00e8re",
+            "absence de foule/overlays"
+          ],
+          "personnages_etat": [
+            {
+              "name": "President-Mascotte",
+              "costume": "identique",
+              "etat_physique": "geste bref (poser)",
+              "etat_emotionnel": "automatisme, sans r\u00e9solution int\u00e9rieure"
+            }
+          ],
+          "notes_promptables_sans_prompt": [
+            "le dernier sticker doit \u00eatre minable (mal coll\u00e9)",
+            "arr\u00eat brutal sans transition explicative",
+            "pas de nouvelle information : juste la trace"
+          ],
+          "texte_overlay_suggestions": [
+            "PAID",
+            "SOLD",
+            "PROPERTY OF \u2026 [\u00c0 VALIDER]"
+          ]
+        },
+        "audio": {
+          "ambiance": "Vent tr\u00e8s l\u00e9ger (ou presque silence).",
+          "music": "Aucune.",
+          "sfx": "Slap adh\u00e9sif tr\u00e8s court.",
+          "dialogues_traitement": "Aucun.",
+          "silence": "Arr\u00eat total imm\u00e9diat."
+        },
+        "n4_preparation": {
+          "moments_visuels_incontournables": [
+            "Dernier sticker/label pos\u00e9",
+            "Coin du sticker lev\u00e9",
+            "Arri\u00e8re-plan : fissures + fronti\u00e8res + traces",
+            "Mascotte seule",
+            "Absence totale de musique",
+            "Arr\u00eat net image + son"
+          ],
+          "props": [
+            {
+              "name": "sticker_final_001",
+              "role": "signature finale grotesque",
+              "continuity": "U021 seulement ; peut \u00eatre variation de sticker_propriete_001"
+            }
+          ],
+          "continuity": {
+            "characters": [
+              "President-Mascotte : aucun apaisement ; fin sur automatisme"
+            ],
+            "props": [
+              "sticker_final_001",
+              "sticker_propriete_001",
+              "traces_bordures_noires_001",
+              "fissures_glace_001",
+              "microphone_dore_001 (optionnel, peut \u00eatre hors main)"
+            ],
+            "world": [
+              "Groenland reste indiff\u00e9rent, juste marqu\u00e9"
+            ],
+            "info": [
+              "Fin : pas de morale, pas d'explication."
+            ],
+            "audio_motifs": [
+              "silence (arr\u00eat net)"
+            ]
+          }
+        },
+        "notes_de_conception_internal": [
+          "Aristote (coupure) : l'arr\u00eat net laisse le spectateur avec malaise + rire nerveux, sans catharsis 'propre'."
+        ],
+        "id": "U021",
+        "title": "Dernier signe, arr\u00eat net",
+        "duration_s": 2,
+        "treatment": [
+          "La mascotte pose un dernier sticker/label, plus petit, plus m\u00e9diocre encore, comme une signature de fin.",
+          "Le sticker se fixe mal (coin lev\u00e9) \u2014 rappel du premier geste.",
+          "L'image et le son s'interrompent brutalement, sans conclusion."
+        ]
+      }
+    ],
+    "sequence_estimates": [],
+    "global_continuity": {
+      "characters": {
+        "President-Mascotte": {
+          "costume_continuity": "Costume brillant + cravate agressive + teint artificiel ; stable de U006 \u00e0 U021. Accessoires peuvent s'ajouter (micro \u00e0 partir de U014).",
+          "signature_gestures": [
+            "rictus de triomphe",
+            "pouces lev\u00e9s m\u00e9caniques",
+            "posture d'appropriation (comme s'asseoir/occuper)"
+          ],
+          "emotional_curve_macro": [
+            "U006-U011: euphorie vendeuse (convaincu par ses propres signes)",
+            "U013-U017: exaltation aliment\u00e9e par boucle (perte d'humanit\u00e9)",
+            "U018: panne (plus de support)",
+            "U020-U021: victoire proclam\u00e9e sans validation \u2192 micro-vacillement, puis automatisme"
+          ],
+          "props_in_possession": [
+            "sticker_propriete_001 (manipul\u00e9 U007)",
+            "marqueur_noir_epais_001 (U010)",
+            "microphone_dore_001 (U014\u2192U020)",
+            "sticker_final_001 (U021)"
+          ]
+        },
+        "Foule-Ecran": {
+          "costume_continuity": "Tenues de meeting uniformis\u00e9es (casquettes/t-shirts/badges), palette criarde.",
+          "signature_gestures": [
+            "applaudissements en boucle",
+            "rires automatiques",
+            "chants-slogans r\u00e9p\u00e9t\u00e9s"
+          ],
+          "presence_windows": [
+            "U013-U014 (pr\u00e9sence pleine)",
+            "U017 (pr\u00e9sence fragment\u00e9e, dissoute en signes)",
+            "U018 (boucle cass\u00e9e, puis dissipation)"
+          ],
+          "state_note": "Jamais une communaut\u00e9 : toujours un dispositif."
+        }
+      },
+      "props": {
+        "sticker_propriete_001": {
+          "introduced_in": "U007",
+          "variations": [
+            "peut \u00eatre pr\u00e9c\u00e9d\u00e9 par overlay_label_listing_001 (U004)",
+            "peut avoir une variation finale (sticker_final_001 en U021)"
+          ],
+          "continuity_note": "Doit rester visible (au moins en partie) jusqu'\u00e0 la fin ; coin d\u00e9coll\u00e9 recommand\u00e9."
+        },
+        "marqueur_noir_epais_001": {
+          "introduced_in": "U010",
+          "continuity_note": "Peut rester en main ou \u00eatre visible bri\u00e8vement ensuite ; surtout, ses traces doivent persister."
+        },
+        "traces_bordures_noires_001": {
+          "introduced_in": "U010",
+          "continuity_note": "Persistantes en d\u00e9cor jusqu'\u00e0 U021, m\u00eame si recouvertes pendant saturation."
+        },
+        "fissures_glace_001": {
+          "introduced_in": "U010",
+          "continuity_note": "Persistantes jusqu'\u00e0 la fin ; rappel du 'r\u00e9el qui contredit'."
+        },
+        "ui_listing_overlay_001": {
+          "introduced_in": "U011",
+          "continuity_note": "Peut revenir en fragments U013-U017 ; dispara\u00eet fortement apr\u00e8s panne (U018\u2192U020)."
+        },
+        "microphone_dore_001": {
+          "introduced_in": "U014",
+          "continuity_note": "Doit \u00eatre disponible pour U020 (proclamation) ; peut \u00eatre tenu ou simplement pr\u00e9sent."
+        }
+      },
+      "audio_motifs": {
+        "vent_glace": {
+          "where": [
+            "U003-U004 (dominant)",
+            "U006-U011 (contrepoint)",
+            "U013-U018 (sous-couche, parfois noy\u00e9e)",
+            "U020-U021 (dominant \u00e0 nouveau)"
+          ],
+          "variation": "Noy\u00e9 pendant saturation puis revient comme 'punition'."
+        },
+        "glitch": {
+          "where": [
+            "U004 (naissance)",
+            "U011 (renfort UI)",
+            "U013-U017 (augmentation)",
+            "U018 (panne)"
+          ],
+          "variation": "De parasite discret \u00e0 rupture."
+        },
+        "ka_ching_pieces": {
+          "where": [
+            "U004 (fant\u00f4me)",
+            "U007 (clair)",
+            "U011 (fort)",
+            "U014-U017 (max)",
+            "U018 (b\u00e9gaiement)"
+          ],
+          "variation": "Devient rythme, puis se casse."
+        },
+        "applaudissements_loop": {
+          "where": [
+            "U013-U017 (dominant)",
+            "U018 (cass\u00e9)"
+          ],
+          "variation": "De 'preuve' \u00e0 'machine'."
+        },
+        "stinger_pseudo_patriotique": {
+          "where": [
+            "U006 (court, aval\u00e9)",
+            "U011-U014 (triomphal puis d\u00e9form\u00e9)",
+            "U017 (indus/glitch)",
+            "U018 (se coupe)"
+          ],
+          "variation": "Propagande invers\u00e9e (triomphe \u2192 d\u00e9rangement)."
+        },
+        "silence_mur_du_reel": {
+          "where": [
+            "U003 (base)",
+            "U020 (r\u00e9ponse du monde)",
+            "U021 (arr\u00eat total)"
+          ],
+          "variation": "Silence comme contradiction active."
+        }
+      }
+    },
+    "design_notes_internal": [
+      "Principe cl\u00e9 : l'antagoniste est le r\u00e9el (glace, vent, silence). Plus la mascotte affirme, plus le monde refuse de valider.",
+      "Progression : intrusion (label) \u2192 incarnation (mascotte) \u2192 contr\u00f4le (fronti\u00e8res) \u2192 vente (listing) \u2192 validation (foule) \u2192 saturation (boucles) \u2192 effondrement (panne) \u2192 victoire creuse (silence) \u2192 arr\u00eat net."
+    ],
+    "alertes_incoherences": [],
+    "hypotheses": [
+      "H1 (dialogue) : dialogues tr\u00e8s courts, performatifs ; si besoin de r\u00e9duire la production voix, basculer une partie des slogans en texte overlay uniquement (sans changer l'action).",
+      "H2 (r\u00e9f\u00e9rentialit\u00e9) : usage possible du mot 'TRUMP' dans certains stickers/overlays (coh\u00e9rent N0), mais peut \u00eatre remplac\u00e9 par une marque g\u00e9n\u00e9rique 'PRESIDENT' si souhait de r\u00e9duire la frontalit\u00e9.",
+      "H3 (obsc\u00e9nit\u00e9) : obsc\u00e9nit\u00e9 trait\u00e9e par symboles (micro-objet comme arme, argent en flux) sans violence physique ni sexualisation explicite.",
+      "H4 (lieu) : la foule est une surimpression de meeting (pas un nouveau lieu r\u00e9aliste) pour garder le Groenland comme ar\u00e8ne unique."
+    ],
+    "questions": [
+      "Q1 : Souhaites-tu que les stickers/overlays affichent explicitement le mot \u00ab TRUMP \u00bb (branding frontal), ou plut\u00f4t un branding g\u00e9n\u00e9rique (ex. \u00ab PRESIDENT \u00bb) ?",
+      "Q2 : Pr\u00e9f\u00e8res-tu une voix audible du Pr\u00e9sident-Mascotte (quelques slogans), ou 100% slogans en texte/overlays (avec seulement ambiance + SFX + musique) ?",
+      "Q3 : La musique doit-elle pencher davantage vers (A) fanfare/pseudo-patriotique d\u00e9form\u00e9e, ou (B) indus/techno\u00efde machine \u00e0 spectacle ?"
+    ]
+  }
+}

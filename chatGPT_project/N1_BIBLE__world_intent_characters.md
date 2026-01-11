@@ -93,6 +93,76 @@ La bible doit être suffisamment précise pour que **N2** puisse construire l’
 tout en restant indépendante du découpage.
 
 ------------------------------------------------------------
+2.1) Format JSON N1 (obligatoire pour la production de fichier)
+------------------------------------------------------------
+
+Quand une bible N1 est produite sous forme de JSON, elle doit suivre strictement ce format.
+Le JSON doit contenir au moins **un personnage**, **un costume** (dans ce personnage),
+et **un motif**. Les images/sons de référence doivent rester **vides** (listes vides).
+
+Contraintes de contenu :
+- Pitch : **4 paragraphes**.
+- Intention : **3 paragraphes**.
+- Axes artistiques : **2 paragraphes**.
+- Dynamique globale : **1 paragraphe**.
+- Monde & epoque : **3 phrases**.
+- Esthetique : **3 phrases**.
+- Son : **1 phrase par champ** (ambiances, musique, sfx, dialogues).
+- Personnage : au moins 1, avec 1 costume (description + images vides).
+- Motif : au moins 1, avec description + images/audio vides.
+- Ne pas inclure d’images de references dans les tableaux `images` ou `audio`.
+
+Schema JSON attendu (exemple de structure, valeurs a remplir) :
+{
+  "meta": {
+    "status": "draft",
+    "version": "0.1",
+    "temperature_creative": 2
+  },
+  "pitch": "",
+  "intention": "",
+  "axes_artistiques": "",
+  "dynamique_globale": "",
+  "personnages": [
+    {
+      "name": "",
+      "role": "",
+      "function": "",
+      "description": "",
+      "appearance": "",
+      "signature": "",
+      "images": [],
+      "costumes": [
+        {
+          "description": "",
+          "images": []
+        }
+      ]
+    }
+  ],
+  "monde_epoque": "",
+  "esthetique": "",
+  "son": {
+    "ambiances": "",
+    "musique": "",
+    "sfx": "",
+    "dialogues": ""
+  },
+  "motifs": [
+    {
+      "description": "",
+      "images": [],
+      "audio": []
+    }
+  ]
+}
+
+Regles additionnelles :
+- Les champs sont toujours presents, meme si vides.
+- Ne pas inventer d’autres cles.
+- Les listes `images` et `audio` doivent rester vides dans le JSON produit par ChatGPT.
+
+------------------------------------------------------------
 3) Interdits stricts au Niveau 1
 ------------------------------------------------------------
 
