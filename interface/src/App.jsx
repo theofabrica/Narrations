@@ -4188,6 +4188,10 @@ function App() {
                       items={calendarItems}
                       defaultTimeStart={moment(0)}
                       defaultTimeEnd={moment(timelineTotalMs || 60000)}
+                      visibleTimeStart={moment(0)}
+                      visibleTimeEnd={moment(timelineTotalMs || 60000)}
+                      minZoom={timelineTotalMs || 60000}
+                      maxZoom={timelineTotalMs || 60000}
                       canMove={false}
                       canResize={false}
                       canChangeGroup={false}
