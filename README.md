@@ -2,6 +2,7 @@
 # MCP Narrations Server
 
 # Ecriture win - git - kubuntu : 01 from win
+# Ecriture win - git - kubuntu : 01 from win
 
 Serveur MCP (FastAPI) pour orchestrer la génération de médias via Higgsfield et ElevenLabs.
 
