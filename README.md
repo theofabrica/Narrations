@@ -3,6 +3,7 @@
 
 # Ecriture win - git - kubuntu : 01 from win
 # Ecriture win - git - kubuntu : 01 from win
+# Ecriture ub -git -win :01
 
 Serveur MCP (FastAPI) pour orchestrer la génération de médias via Higgsfield et ElevenLabs.
 
