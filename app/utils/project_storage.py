@@ -15,7 +15,8 @@ STRATA_FILES = {
     "n1": "dynamic",
     "n2": "n2_architecture.json",
     "n3": "n3_sequences.json",
-    "n4": "n4_media.json",
+    "n4": "n4_timeline.json",
+    "n5": "n5_media.json",
 }
 
 
@@ -82,11 +83,15 @@ def get_strata_path(project_id: str, strata: str) -> Path:
     if strata == "n1":
         safe_project_id = _safe_project_id(project_id)
         return get_project_dir(project_id) / f"{safe_project_id}_N1.json"
-    if strata in ("n2", "n3", "n4"):
+    if strata in ("n2", "n3", "n4", "n5"):
         safe_project_id = _safe_project_id(project_id)
         legacy_path = get_project_dir(project_id) / f"{safe_project_id}_{strata.upper()}.json"
         if legacy_path.exists():
             return legacy_path
+    if strata == "n5":
+        legacy_media = get_project_dir(project_id) / "n4_media.json"
+        if legacy_media.exists():
+            return legacy_media
     if strata not in STRATA_FILES:
         raise ValueError(f"Unknown strata: {strata}")
     return get_project_dir(project_id) / STRATA_FILES[strata]
@@ -205,12 +210,25 @@ def create_project(project_id: str) -> None:
         },
     }
     write_strata(project_id, "n2", n2_payload)
-    for strata in ("n1", "n2", "n3", "n4"):
-        if strata == "n1":
-            continue
-        if strata == "n2":
-            continue
-        write_strata(project_id, strata, {})
+    timeline_payload = {
+        "meta": {
+            "status": "draft",
+            "version": "0.1",
+            "dependencies": {
+                "n2": "",
+                "n3": "",
+            },
+        },
+        "tracks": [
+            {"id": "V1", "type": "video", "label": "Video 1", "segments": []},
+            {"id": "A1", "type": "audio", "label": "Audio 1", "segments": []},
+            {"id": "A2", "type": "audio", "label": "Audio 2", "segments": []},
+            {"id": "A3", "type": "audio", "label": "Audio 3", "segments": []},
+        ],
+        "notes": "",
+    }
+    write_strata(project_id, "n4", timeline_payload)
+    write_strata(project_id, "n5", {})
 
 
 def _read_json(path: Path) -> Dict[str, Any]:

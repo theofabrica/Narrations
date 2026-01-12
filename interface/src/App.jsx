@@ -132,6 +132,12 @@ function App() {
   const [n3PasteText, setN3PasteText] = useState('')
   const [n3PasteError, setN3PasteError] = useState('')
   const [selectedN3UnitId, setSelectedN3UnitId] = useState('')
+  const [n4Data, setN4Data] = useState(null)
+  const [n4Status, setN4Status] = useState('idle')
+  const [n4Error, setN4Error] = useState('')
+  const [n4UpdatedAt, setN4UpdatedAt] = useState('')
+  const [n4PasteText, setN4PasteText] = useState('')
+  const [n4PasteError, setN4PasteError] = useState('')
   const [isN0EsthetiqueOpen, setIsN0EsthetiqueOpen] = useState(true)
   const [mediaModalOpen, setMediaModalOpen] = useState(false)
   const [mediaModalKind, setMediaModalKind] = useState('')
@@ -156,6 +162,7 @@ function App() {
     bible: 'bible',
     architecture: 'architecture',
     sequences: 'sequences',
+    timeline: 'timeline',
     media: 'media',
     console: 'console'
   }
@@ -852,6 +859,47 @@ function App() {
       children: []
     }))
 
+  const sanitizeN4Timeline = (payload) => {
+    const root = payload && typeof payload === 'object' ? payload : {}
+    const data =
+      root.data && typeof root.data === 'object'
+        ? root.data
+        : root
+    const sanitizeSegment = (segment) => {
+      const entry = segment && typeof segment === 'object' ? segment : {}
+      return {
+        id: entry.id || '',
+        label: entry.label || '',
+        start_tc: entry.start_tc || '',
+        end_tc: entry.end_tc || '',
+        duration_ms: Number.isFinite(entry.duration_ms) ? entry.duration_ms : null,
+        source_ref: entry.source_ref || '',
+        notes: entry.notes || ''
+      }
+    }
+    const sanitizeTrack = (track) => {
+      const t = track && typeof track === 'object' ? track : {}
+      return {
+        id: t.id || '',
+        type: t.type || '',
+        label: t.label || t.id || '',
+        segments: Array.isArray(t.segments) ? t.segments.map(sanitizeSegment) : []
+      }
+    }
+    return {
+      meta: {
+        status: data.meta?.status || 'draft',
+        version: data.meta?.version || '0.1',
+        dependencies: {
+          n2: data.meta?.dependencies?.n2 || '',
+          n3: data.meta?.dependencies?.n3 || ''
+        }
+      },
+      tracks: Array.isArray(data.tracks) ? data.tracks.map(sanitizeTrack) : [],
+      notes: data.notes || ''
+    }
+  }
+
   const getN2Outline = (data) => {
     if (!data) return []
     const summaryFromNarrative = (narrative) =>
@@ -886,7 +934,22 @@ function App() {
                   duration_s: sequence.duration_s,
                   timecode_in: sequence.timecode_in,
                   timecode_out: sequence.timecode_out,
-                  children: []
+                  children: Array.isArray(sequence.scenes)
+                    ? sequence.scenes.map((scene, sceneIndex) => ({
+                        id: scene.id || `SC${String(sceneIndex + 1).padStart(3, '0')}`,
+                        kind: 'SCENE',
+                        title: scene.title || `Scene ${sceneIndex + 1}`,
+                        summary:
+                          scene.summary ||
+                          scene.narrative?.function ||
+                          scene.narrative?.sequence_exit_change ||
+                          '',
+                        duration_s: scene.budget_duration_s,
+                        timecode_in: scene.timecode_in,
+                        timecode_out: scene.timecode_out,
+                        children: []
+                      }))
+                    : []
                 }
               })
             : []
@@ -1034,12 +1097,33 @@ function App() {
     }
   }
 
+  const fetchN4 = async (projectId) => {
+    setN4Status('loading')
+    setN4Error('')
+    try {
+      const resp = await fetch(getProjectStrataUrl(projectId, 'n4'))
+      const data = await resp.json()
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      setN4Data(sanitizeN4Timeline(data?.data || null))
+      setN4UpdatedAt(data?.updated_at || '')
+      setN4Status('done')
+    } catch (err) {
+      setN4Status('error')
+      setN4Error(err.message)
+      setN4Data(null)
+      setN4UpdatedAt('')
+    }
+  }
+
   useEffect(() => {
     if (selectedProject) {
       fetchN0(selectedProject)
       fetchN1(selectedProject)
       fetchN2(selectedProject)
       fetchN3(selectedProject)
+      fetchN4(selectedProject)
     } else {
       setN0Data(null)
       setN0UpdatedAt('')
@@ -1057,6 +1141,10 @@ function App() {
       setN3UpdatedAt('')
       setN3Status('idle')
       setN3Error('')
+      setN4Data(null)
+      setN4UpdatedAt('')
+      setN4Status('idle')
+      setN4Error('')
     }
   }, [selectedProject])
 
@@ -1843,6 +1931,31 @@ function App() {
     }
   }
 
+  const applyN4FromJson = async () => {
+    if (!n4PasteText.trim()) {
+      setN4PasteError('Colle un JSON avant de remplacer.')
+      return
+    }
+    try {
+      const cleaned = normalizeJsonInput(n4PasteText)
+      const parsed = JSON.parse(cleaned)
+      const payload = parsed && typeof parsed === 'object' && 'data' in parsed
+        ? parsed.data
+        : parsed
+      if (!payload || typeof payload !== 'object') {
+        throw new Error('JSON invalide')
+      }
+      const normalized = sanitizeN4Timeline(payload)
+      setN4Data(normalized)
+      setN4PasteError('')
+      if (selectedProject) {
+        await handleN4Save(normalized)
+      }
+    } catch (err) {
+      setN4PasteError('JSON invalide ou incomplet.')
+    }
+  }
+
   const handleN0Save = async (overrideData = null) => {
     let payload = overrideData || n0Data
     if (!selectedProject || !payload) {
@@ -2047,6 +2160,35 @@ function App() {
     }
   }
 
+  const handleN4Save = async (overrideData = null) => {
+    let payload = overrideData || n4Data
+    if (!selectedProject || !payload) {
+      return false
+    }
+    payload = sanitizeN4Timeline(payload)
+    setN4Status('saving')
+    setN4Error('')
+    try {
+      const body = JSON.stringify(payload)
+      const resp = await fetch(getProjectStrataUrl(selectedProject, 'n4'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body
+      })
+      const data = await resp.json()
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      setN4UpdatedAt(data?.updated_at || n4UpdatedAt)
+      setN4Status('done')
+      return true
+    } catch (err) {
+      setN4Status('error')
+      setN4Error(err.message)
+      return false
+    }
+  }
+
   const closeProject = async () => {
     if (!selectedProject) {
       return
@@ -2076,6 +2218,13 @@ function App() {
       const saved = await handleN3Save()
       if (!saved) {
         setActivePage('sequences')
+        return
+      }
+    }
+    if (n4Data) {
+      const saved = await handleN4Save()
+      if (!saved) {
+        setActivePage('timeline')
         return
       }
     }
@@ -2348,6 +2497,63 @@ function App() {
   const n2Outline = getN2Outline(n2Data)
   const n3UnitsIndex = n3Data?.units_index || []
   const n3Units = n3Data?.units || []
+  const n2SourceLookup = useMemo(() => {
+    const map = {}
+    const walk = (nodes) => {
+      if (!Array.isArray(nodes)) return
+      nodes.forEach((node) => {
+        if (node?.id) {
+          map[node.id] = { title: node.title || '', summary: node.summary || '' }
+        }
+        if (Array.isArray(node?.children)) {
+          walk(node.children)
+        }
+      })
+    }
+    walk(n2Outline)
+    return map
+  }, [n2Outline])
+  const n3SourceLookup = useMemo(() => {
+    const map = {}
+    n3Units.forEach((unit) => {
+      const id = unit?.identity?.id || unit?.id
+      if (!id) return
+      const title =
+        unit?.identity?.title_short || unit?.title || unit?.identity?.title || ''
+      const summary =
+        unit?.n2_recall?.function_narrative ||
+        (Array.isArray(unit?.treatment) && unit.treatment[0]) ||
+        (Array.isArray(unit?.deroule_detaille) && unit.deroule_detaille[0]) ||
+        ''
+      map[id] = { title, summary }
+    })
+    return map
+  }, [n3Units])
+  const timelineTracks = useMemo(() => {
+    if (Array.isArray(n4Data?.tracks) && n4Data.tracks.length) {
+      return n4Data.tracks
+    }
+    return [
+      { id: 'V1', type: 'video', label: 'Video 1', segments: [] },
+      { id: 'A1', type: 'audio', label: 'Audio 1', segments: [] },
+      { id: 'A2', type: 'audio', label: 'Audio 2', segments: [] },
+      { id: 'A3', type: 'audio', label: 'Audio 3', segments: [] }
+    ]
+  }, [n4Data])
+  const getSourceSummary = (ref) => {
+    if (!ref) return null
+    return n3SourceLookup[ref] || n2SourceLookup[ref] || null
+  }
+  const formatDurationMs = (ms) => {
+    if (!Number.isFinite(ms)) return ''
+    const seconds = ms / 1000
+    if (seconds >= 60) {
+      const m = Math.floor(seconds / 60)
+      const s = Math.round(seconds % 60)
+      return `${m}m${String(s).padStart(2, '0')}s`
+    }
+    return `${seconds.toFixed(1)}s`
+  }
   const n3SequenceList =
     n3Data?.sequence_estimates && n3Data.sequence_estimates.length
       ? n3Data.sequence_estimates
@@ -2421,10 +2627,24 @@ function App() {
                 </button>
                 <button
                   type="button"
+                  className={activePage === 'timeline' ? 'active' : ''}
+                  onClick={() => setActivePage('timeline')}
+                >
+                  Timeline (N4)
+                </button>
+                <button
+                  type="button"
+                  className={activePage === 'script' ? 'active' : ''}
+                  onClick={() => setActivePage('script')}
+                >
+                  Script
+                </button>
+                <button
+                  type="button"
                   className={activePage === 'media' ? 'active' : ''}
                   onClick={() => setActivePage('media')}
                 >
-                  Media (N4)
+                  Media (N5)
                 </button>
               </>
             ) : null}
@@ -2588,22 +2808,19 @@ function App() {
                 {n0Data ? (
                   <div className="project-form">
                   <section>
-                    <h3>Importer N0</h3>
-                    <div className="n0-import">
-                      <textarea
+                    <h3>Coller N0.json</h3>
+                    <div className="n0-import n0-import-inline">
+                      <input
+                        type="text"
                         placeholder="Colle ici le JSON N0 fourni par ChatGPT"
                         value={n0PasteText}
                         onChange={(event) => setN0PasteText(event.target.value)}
                       />
-                      <div className="n0-import-actions">
-                        <button type="button" onClick={applyN0FromJson}>
-                          Remplacer le N0
-                        </button>
-                        {n0PasteError ? (
-                          <span className="hint error">{n0PasteError}</span>
-                        ) : null}
-                      </div>
+                      <button type="button" onClick={applyN0FromJson}>
+                        Remplacer
+                      </button>
                     </div>
+                    {n0PasteError ? <span className="hint error">{n0PasteError}</span> : null}
                   </section>
                   <section>
                     <h3>Log orchestration N0</h3>
@@ -3733,14 +3950,281 @@ function App() {
         </section>
       ) : null}
 
+      {activePage === 'timeline' ? (
+        <section className="project-page">
+          <div className="panel">
+            <div className="panel-head">
+              <h2>Timeline (N4)</h2>
+              <div className="panel-actions">
+                <button
+                  type="button"
+                  onClick={() => selectedProject && fetchN4(selectedProject)}
+                  disabled={!selectedProject}
+                >
+                  Rafraichir
+                </button>
+                <button
+                  type="button"
+                  className="primary"
+                  onClick={handleN4Save}
+                  disabled={!selectedProject || !n4Data || n4Status === 'saving'}
+                >
+                  Enregistrer
+                </button>
+              </div>
+            </div>
+            {!selectedProject ? (
+              <p className="hint">Selectionne un projet dans l’accueil.</p>
+            ) : n4Status === 'error' ? (
+              <p className="hint error">Erreur: {n4Error}</p>
+            ) : null}
+            {selectedProject ? (
+              <div className="project-detail timeline-layout">
+                <section>
+                  <h3>Coller N4 Timeline</h3>
+                  <div className="timeline-import">
+                    <textarea
+                      placeholder="Colle ici le JSON N4 Timeline (pistes V1/A1/A2/A3)"
+                      value={n4PasteText}
+                      onChange={(event) => setN4PasteText(event.target.value)}
+                    />
+                    <div className="n0-import-actions">
+                      <button type="button" onClick={applyN4FromJson}>
+                        Remplacer
+                      </button>
+                      {n4PasteError ? <span className="hint error">{n4PasteError}</span> : null}
+                    </div>
+                  </div>
+                  {n4UpdatedAt ? (
+                    <p className="hint">Derniere mise a jour: {n4UpdatedAt}</p>
+                  ) : null}
+                </section>
+
+                <section>
+                  <h3>Pistes</h3>
+                  <div className="timeline-grid">
+                    {timelineTracks.map((track, trackIndex) => (
+                      <div key={track.id || trackIndex} className="timeline-track">
+                        <div className="timeline-track-head">
+                          <div>
+                            <div className="script-id">{track.id || `Track ${trackIndex + 1}`}</div>
+                            <div className="timeline-track-title">{track.label || 'Sans titre'}</div>
+                          </div>
+                          <span className="timeline-track-type">{track.type || 'track'}</span>
+                        </div>
+                        {Array.isArray(track.segments) && track.segments.length ? (
+                          <div className="timeline-segments">
+                            {track.segments.map((segment, segIndex) => {
+                              const label = segment.label || segment.id || `Segment ${segIndex + 1}`
+                              const timeRange =
+                                (segment.start_tc || segment.end_tc) &&
+                                `${segment.start_tc || '--:--'} - ${segment.end_tc || '--:--'}`
+                              const durationText = formatDurationMs(segment.duration_ms)
+                              const sourceInfo = getSourceSummary(segment.source_ref)
+                              return (
+                                <div key={segment.id || segIndex} className="timeline-segment">
+                                  <div className="timeline-segment-head">
+                                    <strong>{label}</strong>
+                                    <span className="script-meta">
+                                      {timeRange}
+                                      {timeRange && durationText ? ' · ' : ''}
+                                      {durationText}
+                                    </span>
+                                  </div>
+                                  {segment.source_ref ? (
+                                    <div className="timeline-segment-meta">
+                                      <span className="script-id">{segment.source_ref}</span>
+                                      <span className="timeline-source">
+                                        {sourceInfo
+                                          ? `${sourceInfo.title} — ${sourceInfo.summary || ''}`
+                                          : 'Reference inconnue'}
+                                      </span>
+                                    </div>
+                                  ) : null}
+                                  {segment.notes ? (
+                                    <p className="timeline-notes">{segment.notes}</p>
+                                  ) : null}
+                                  {!segment.notes && sourceInfo ? (
+                                    <p className="timeline-notes hint">
+                                      {sourceInfo.summary || sourceInfo.title}
+                                    </p>
+                                  ) : null}
+                                </div>
+                              )
+                            })}
+                          </div>
+                        ) : (
+                          <p className="hint">Aucun segment.</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {n4Data?.notes ? (
+                  <section>
+                    <h3>Notes</h3>
+                    <p>{n4Data.notes}</p>
+                  </section>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      {activePage === 'script' ? (
+        <section className="project-page">
+          <div className="panel">
+            <div className="panel-head">
+              <h2>Script</h2>
+              <div className="panel-actions">
+                <button
+                  type="button"
+                  onClick={() => selectedProject && fetchN1(selectedProject)}
+                  disabled={!selectedProject}
+                >
+                  Rafraichir N1
+                </button>
+                <button
+                  type="button"
+                  onClick={() => selectedProject && fetchN2(selectedProject)}
+                  disabled={!selectedProject}
+                >
+                  Rafraichir N2
+                </button>
+                <button
+                  type="button"
+                  onClick={() => selectedProject && fetchN3(selectedProject)}
+                  disabled={!selectedProject}
+                >
+                  Rafraichir N3
+                </button>
+              </div>
+            </div>
+            {!selectedProject ? (
+              <p className="hint">Selectionne un projet dans l’accueil.</p>
+            ) : (
+              <div className="project-detail script-layout-vertical">
+                <section className="script-bible">
+                  <h3>N1 — Bible</h3>
+                  {n1Data ? (
+                    <div className="script-card">
+                      <strong>Pitch</strong>
+                      <p>{n1Data.pitch || '—'}</p>
+                      <strong>Intention</strong>
+                      <p>{n1Data.intention || '—'}</p>
+                      <strong>Dynamique</strong>
+                      <p>{n1Data.dynamique_globale || '—'}</p>
+                      <strong>Axes artistiques</strong>
+                      <p>{n1Data.axes_artistiques || '—'}</p>
+                    </div>
+                  ) : (
+                    <p className="hint">Charge ou colle un N1 pour afficher le résumé.</p>
+                  )}
+                </section>
+
+                <section className="script-tree">
+                  <h3>N2 + N3 — Arborescence et scènes</h3>
+                  {n2Outline && n2Outline.length ? (
+                    <div className="script-tree-list">
+                      {n2Outline.map((act, actIndex) => (
+                        <div key={act.id || actIndex} className="script-card">
+                          <div className="script-id">{act.id || `ACT${actIndex + 1}`}</div>
+                          <div className="script-title">{act.title || 'Acte'}</div>
+                          <div className="script-meta">
+                            {(act.timecode_in || act.timecode_out) &&
+                              `${act.timecode_in || '--:--'} - ${act.timecode_out || '--:--'}`}
+                            {act.duration_s ? ` · ${act.duration_s}s` : ''}
+                          </div>
+                          <p>{act.summary || '—'}</p>
+
+                          {Array.isArray(act.children) && act.children.length ? (
+                            <div className="script-sublist">
+                              {act.children.map((seq, seqIndex) => (
+                                <div key={seq.id || seqIndex} className="script-subcard">
+                                  <div className="script-id">{seq.id || `SEQ${seqIndex + 1}`}</div>
+                                  <div className="script-title">{seq.title || 'Sequence'}</div>
+                                  <div className="script-meta">
+                                    {(seq.timecode_in || seq.timecode_out) &&
+                                      `${seq.timecode_in || '--:--'} - ${seq.timecode_out || '--:--'}`}
+                                    {seq.duration_s ? ` · ${seq.duration_s}s` : ''}
+                                  </div>
+                                  <p>{seq.summary || '—'}</p>
+
+                                  {Array.isArray(seq.children) && seq.children.length ? (
+                                    <div className="script-scenes">
+                                      {seq.children.map((scene, sceneIndex) => {
+                                        const n3Scene =
+                                          n3Units &&
+                                          n3Units.find(
+                                            (entry) =>
+                                              entry?.identity?.id === scene.id || entry?.id === scene.id
+                                          )
+                                        const sceneDuration =
+                                          n3Scene?.identity?.duration_s ||
+                                          n3Scene?.duration_s ||
+                                          scene.duration_s ||
+                                          scene.budget_duration_s
+                                        const sceneTimecodeIn =
+                                          n3Scene?.identity?.timecode_in || scene.timecode_in
+                                        const sceneTimecodeOut =
+                                          n3Scene?.identity?.timecode_out || scene.timecode_out
+                                        const sceneTitle =
+                                          n3Scene?.identity?.title_short ||
+                                          n3Scene?.title ||
+                                          n3Scene?.identity?.title ||
+                                          scene.title ||
+                                          'Scene'
+                                        const sceneSummary =
+                                          n3Scene?.n2_recall?.function_narrative ||
+                                          (Array.isArray(n3Scene?.treatment) && n3Scene.treatment[0]) ||
+                                          (Array.isArray(n3Scene?.deroule_detaille) &&
+                                            n3Scene.deroule_detaille[0]) ||
+                                          scene.summary ||
+                                          ''
+                                        return (
+                                          <div key={scene.id || sceneIndex} className="script-scene">
+                                            <div className="script-id">{scene.id || `SC${sceneIndex + 1}`}</div>
+                                            <div className="script-title">{sceneTitle}</div>
+                                            <div className="script-meta">
+                                              {(sceneTimecodeIn || sceneTimecodeOut) &&
+                                                `${sceneTimecodeIn || '--:--'} - ${
+                                                  sceneTimecodeOut || '--:--'
+                                                }`}
+                                              {sceneDuration ? ` · ${sceneDuration}s` : ''}
+                                            </div>
+                                            <p>{sceneSummary || '—'}</p>
+                                          </div>
+                                        )
+                                      })}
+                                    </div>
+                                  ) : null}
+                                </div>
+                              ))}
+                            </div>
+                          ) : null}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="hint">Charge ou colle un N2 pour afficher l’arborescence.</p>
+                  )}
+                </section>
+              </div>
+            )}
+          </div>
+        </section>
+      ) : null}
+
       {activePage === 'media' ? (
         <section className="project-page">
           <div className="panel">
             <div className="panel-head">
-              <h2>Media (N4)</h2>
+              <h2>Media (N5)</h2>
             </div>
             <p className="hint">
-              Page N4 en preparation. Le projet selectionne est{' '}
+              Page N5 (prompts/generation) en preparation. Le projet selectionne est{' '}
               <strong>{selectedProject || 'aucun'}</strong>.
             </p>
           </div>
