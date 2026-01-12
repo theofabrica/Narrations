@@ -1,4 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import TimelineCalendar from 'react-calendar-timeline'
+import 'react-calendar-timeline/style.css'
+import moment from 'moment'
+import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react'
 import './App.css'
 
 const templates = {
@@ -2554,6 +2558,111 @@ function App() {
     }
     return `${seconds.toFixed(1)}s`
   }
+  const parseTcToMs = (tc) => {
+    if (!tc) return null
+    const match = tc.match(/^(\d\d):(\d\d):(\d\d)(?:\.(\d{1,3}))?$/)
+    if (!match) return null
+    const [, hh, mm, ss, msPart] = match
+    const ms = Number(msPart || 0)
+    return Number(hh) * 3600000 + Number(mm) * 60000 + Number(ss) * 1000 + ms
+  }
+  const timelineTotalMs = useMemo(() => {
+    const vTrack = timelineTracks.find((t) => t.id === 'V1') || timelineTracks[0]
+    if (vTrack && Array.isArray(vTrack.segments) && vTrack.segments.length) {
+      const maxEnd = vTrack.segments.reduce((acc, seg) => {
+        const end = seg.end_tc ? parseTcToMs(seg.end_tc) : null
+        const start = seg.start_tc ? parseTcToMs(seg.start_tc) : 0
+        const dur = Number.isFinite(seg.duration_ms) ? seg.duration_ms : null
+        const computedEnd = end ?? (dur != null ? start + dur : start)
+        return Math.max(acc, computedEnd || 0)
+      }, 0)
+      return maxEnd || 60000
+    }
+    return 60000
+  }, [timelineTracks])
+  const gravitySections = useMemo(() => {
+    const vTrack = timelineTracks.find((t) => t.id === 'V1') || timelineTracks[0]
+    if (!vTrack || !Array.isArray(vTrack.segments)) return []
+    const palette = ['rgba(120,180,255,0.35)', 'rgba(255,200,120,0.35)', 'rgba(200,255,180,0.35)', 'rgba(255,160,200,0.35)']
+    return vTrack.segments.map((seg, idx) => {
+      const start = parseTcToMs(seg.start_tc) ?? 0
+      const end = parseTcToMs(seg.end_tc) ?? (Number.isFinite(seg.duration_ms) ? start + seg.duration_ms : start)
+      return {
+        id: seg.id || `seg-${idx}`,
+        from: start,
+        to: end,
+        color: palette[idx % palette.length],
+        hoverColor: palette[idx % palette.length],
+      }
+    })
+  }, [timelineTracks])
+  const gravityMarkers = useMemo(() => {
+    const markers = []
+    const vTrack = timelineTracks.find((t) => t.id === 'V1') || timelineTracks[0]
+    if (vTrack && Array.isArray(vTrack.segments)) {
+      vTrack.segments.forEach((seg, idx) => {
+        const start = parseTcToMs(seg.start_tc)
+        const end = parseTcToMs(seg.end_tc)
+        if (Number.isFinite(start)) {
+          markers.push({
+            time: start,
+            color: '#5fb7ff',
+            activeColor: '#5fb7ff',
+            hoverColor: '#8ed1ff',
+            label: seg.label || seg.id || `Seg ${idx + 1}`
+          })
+        }
+        if (Number.isFinite(end)) {
+          markers.push({
+            time: end,
+            color: '#ff9f7f',
+            activeColor: '#ff9f7f',
+            hoverColor: '#ffc2a3',
+            label: (seg.label || seg.id || `Seg ${idx + 1}`) + ' fin'
+          })
+        }
+      })
+    }
+    return markers
+  }, [timelineTracks, parseTcToMs])
+  const { timeline: gravityTimeline } = useTimeline({
+    settings: {
+      start: 0,
+      end: timelineTotalMs || 60000,
+      axes: [],
+      events: [],
+      markers: gravityMarkers,
+      sections: gravitySections
+    },
+    viewConfiguration: {}
+  })
+  const calendarGroups = useMemo(() => {
+    return timelineTracks.map((track) => ({
+      id: track.id || track.label,
+      title: track.label || track.id || 'Track'
+    }))
+  }, [timelineTracks])
+  const calendarItems = useMemo(() => {
+    return timelineTracks.flatMap((track, trackIdx) => {
+      if (!Array.isArray(track.segments)) return []
+      return track.segments.map((seg, idx) => {
+        const startMs = parseTcToMs(seg.start_tc) ?? 0
+        const endMs =
+          parseTcToMs(seg.end_tc) ??
+          (Number.isFinite(seg.duration_ms) ? startMs + seg.duration_ms : startMs + 1000)
+        return {
+          id: seg.id || `${track.id || trackIdx}-seg-${idx}`,
+          group: track.id || track.label,
+          title: seg.label || seg.id || `Segment ${idx + 1}`,
+          start_time: moment(startMs),
+          end_time: moment(endMs),
+          itemProps: {
+            className: `calendar-item-${track.id || trackIdx}`
+          }
+        }
+      })
+    })
+  }, [timelineTracks])
   const n3SequenceList =
     n3Data?.sequence_estimates && n3Data.sequence_estimates.length
       ? n3Data.sequence_estimates
@@ -4059,6 +4168,36 @@ function App() {
                       </div>
                     ))}
                   </div>
+                </section>
+
+                <section>
+                  <h3>Moniteur (Gravity Timeline)</h3>
+                  <div className="gravity-wrapper">
+                    <TimelineCanvas timeline={gravityTimeline} />
+                  </div>
+                  <p className="hint">
+                    Vue compacte (canvas) basée sur V1 : segments colorés, marqueurs aux bornes. Zoom/pan natif Gravity UI.
+                  </p>
+                </section>
+
+                <section>
+                  <h3>Timeline (react-calendar-timeline)</h3>
+                  <div className="calendar-wrapper">
+                    <TimelineCalendar
+                      groups={calendarGroups}
+                      items={calendarItems}
+                      defaultTimeStart={moment(0)}
+                      defaultTimeEnd={moment(timelineTotalMs || 60000)}
+                      canMove={false}
+                      canResize={false}
+                      canChangeGroup={false}
+                      stackItems
+                      itemHeightRatio={0.75}
+                    />
+                  </div>
+                  <p className="hint">
+                    Vue multi-pistes (V1/A1/A2/A3) en lecture seule. Les items reflètent les segments définis dans le JSON N4.
+                  </p>
                 </section>
 
                 {n4Data?.notes ? (

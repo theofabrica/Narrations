@@ -10,7 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gravity-ui/timeline": "^1.27.0",
+    "dayjs": "^1.11.19",
+    "interactjs": "^1.10.27",
+    "moment": "^2.30.1",
     "react": "^19.2.0",
+    "react-calendar-timeline": "^0.30.0-beta.4",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {

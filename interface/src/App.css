@@ -648,6 +648,39 @@ body {
   margin: 0;
 }
 
+.gravity-wrapper {
+  border: 1px solid rgba(80, 98, 150, 0.3);
+  border-radius: 12px;
+  height: 220px;
+  background: rgba(10, 16, 30, 0.7);
+  overflow: hidden;
+}
+
+.calendar-wrapper {
+  border: 1px solid rgba(80, 98, 150, 0.3);
+  border-radius: 12px;
+  background: rgba(10, 16, 30, 0.7);
+  padding: 8px;
+}
+
+.rct-item {
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.calendar-item-V1 {
+  background: rgba(120, 180, 255, 0.35);
+}
+.calendar-item-A1 {
+  background: rgba(200, 255, 180, 0.35);
+}
+.calendar-item-A2 {
+  background: rgba(255, 200, 120, 0.35);
+}
+.calendar-item-A3 {
+  background: rgba(255, 160, 200, 0.35);
+}
+
 .n0-import textarea {
   border: 1px solid rgba(80, 98, 150, 0.7);
   border-radius: 12px;
