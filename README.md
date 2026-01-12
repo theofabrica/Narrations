@@ -1,6 +1,7 @@
 
 # MCP Narrations Server
 # Premier test depuis cusor Win 11
+# Deuxième test depuis cusor Win 11
 Serveur MCP (FastAPI) pour orchestrer la génération de médias via Higgsfield et ElevenLabs.
 
 ## 🎯 Objectif
