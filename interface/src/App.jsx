@@ -2637,20 +2637,57 @@ function App() {
     viewConfiguration: {}
   })
   const calendarGroups = useMemo(() => {
-    return timelineTracks.map((track) => ({
-      id: track.id || track.label,
-      title: track.label || track.id || 'Track'
-    }))
+    const groups = [
+      { id: 'ARCH', title: 'Architecture (Acts)' },
+      { id: 'SEQ', title: 'Sequences (N2)' },
+      ...timelineTracks.map((track) => ({
+        id: track.id || track.label,
+        title: track.label || track.id || 'Track'
+      }))
+    ]
+    return groups
   }, [timelineTracks])
   const calendarItems = useMemo(() => {
-    return timelineTracks.flatMap((track, trackIdx) => {
-      if (!Array.isArray(track.segments)) return []
-      return track.segments.map((seg, idx) => {
+    const items = []
+    // Acts (architecture)
+    n2Outline.forEach((act, actIndex) => {
+      const startMs = parseTcToMs(act.timecode_in) ?? 0
+      const endMs = parseTcToMs(act.timecode_out) ?? startMs + (act.duration_s || 0) * 1000
+      items.push({
+        id: act.id || `ACT-${actIndex + 1}`,
+        group: 'ARCH',
+        title: act.title || act.id || `Acte ${actIndex + 1}`,
+        start_time: moment(startMs),
+        end_time: moment(endMs),
+        itemProps: { className: 'calendar-item-ARCH' }
+      })
+      // sequences for this act
+      if (Array.isArray(act.children)) {
+        act.children.forEach((seq, seqIndex) => {
+          const seqStart = parseTcToMs(seq.timecode_in) ?? startMs
+          const seqEnd =
+            parseTcToMs(seq.timecode_out) ??
+            seqStart + (Number.isFinite(seq.duration_s) ? seq.duration_s * 1000 : 0)
+          items.push({
+            id: seq.id || `${act.id || actIndex}-SEQ-${seqIndex + 1}`,
+            group: 'SEQ',
+            title: seq.title || seq.id || `Sequence ${seqIndex + 1}`,
+            start_time: moment(seqStart),
+            end_time: moment(seqEnd),
+            itemProps: { className: 'calendar-item-SEQ' }
+          })
+        })
+      }
+    })
+    // N4 tracks (video/audio)
+    timelineTracks.forEach((track, trackIdx) => {
+      if (!Array.isArray(track.segments)) return
+      track.segments.forEach((seg, idx) => {
         const startMs = parseTcToMs(seg.start_tc) ?? 0
         const endMs =
           parseTcToMs(seg.end_tc) ??
           (Number.isFinite(seg.duration_ms) ? startMs + seg.duration_ms : startMs + 1000)
-        return {
+        items.push({
           id: seg.id || `${track.id || trackIdx}-seg-${idx}`,
           group: track.id || track.label,
           title: seg.label || seg.id || `Segment ${idx + 1}`,
@@ -2659,10 +2696,11 @@ function App() {
           itemProps: {
             className: `calendar-item-${track.id || trackIdx}`
           }
-        }
+        })
       })
     })
-  }, [timelineTracks])
+    return items
+  }, [timelineTracks, n2Outline])
   const n3SequenceList =
     n3Data?.sequence_estimates && n3Data.sequence_estimates.length
       ? n3Data.sequence_estimates

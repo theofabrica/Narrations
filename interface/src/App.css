@@ -680,6 +680,12 @@ body {
 .calendar-item-A3 {
   background: rgba(255, 160, 200, 0.35);
 }
+.calendar-item-ARCH {
+  background: rgba(120, 120, 255, 0.35);
+}
+.calendar-item-SEQ {
+  background: rgba(120, 200, 255, 0.35);
+}
 
 .n0-import textarea {
   border: 1px solid rgba(80, 98, 150, 0.7);
