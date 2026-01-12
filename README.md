@@ -1,8 +1,8 @@
 
 # MCP Narrations Server
-# Premier test depuis cusor Win 11
-# Deuxième test depuis cusor Win 11
-# Deuxième test depuis cusor Win 11
+
+# Ecriture win - git - kubuntu : 01 from win
+
 Serveur MCP (FastAPI) pour orchestrer la génération de médias via Higgsfield et ElevenLabs.
 
 ## 🎯 Objectif
