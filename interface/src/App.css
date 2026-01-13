@@ -680,10 +680,10 @@ body {
 .calendar-item-A3 {
   background: rgba(255, 160, 200, 0.35);
 }
-.calendar-item-ARCH {
+.calendar-item-STRUCT-ACT {
   background: rgba(120, 120, 255, 0.35);
 }
-.calendar-item-SEQ {
+.calendar-item-STRUCT-SEQ {
   background: rgba(120, 200, 255, 0.35);
 }
 

@@ -2638,8 +2638,7 @@ function App() {
   })
   const calendarGroups = useMemo(() => {
     const groups = [
-      { id: 'ARCH', title: 'Architecture (Acts)' },
-      { id: 'SEQ', title: 'Sequences (N2)' },
+      { id: 'STRUCT', title: 'Actes + Séquences (N2)' },
       ...timelineTracks.map((track) => ({
         id: track.id || track.label,
         title: track.label || track.id || 'Track'
@@ -2649,17 +2648,17 @@ function App() {
   }, [timelineTracks])
   const calendarItems = useMemo(() => {
     const items = []
-    // Acts (architecture)
+    // Acts + sequences (fusion sur une ligne)
     n2Outline.forEach((act, actIndex) => {
       const startMs = parseTcToMs(act.timecode_in) ?? 0
       const endMs = parseTcToMs(act.timecode_out) ?? startMs + (act.duration_s || 0) * 1000
       items.push({
         id: act.id || `ACT-${actIndex + 1}`,
-        group: 'ARCH',
+        group: 'STRUCT',
         title: act.title || act.id || `Acte ${actIndex + 1}`,
         start_time: moment(startMs),
         end_time: moment(endMs),
-        itemProps: { className: 'calendar-item-ARCH' }
+        itemProps: { className: 'calendar-item-STRUCT-ACT' }
       })
       // sequences for this act
       if (Array.isArray(act.children)) {
@@ -2670,11 +2669,11 @@ function App() {
             seqStart + (Number.isFinite(seq.duration_s) ? seq.duration_s * 1000 : 0)
           items.push({
             id: seq.id || `${act.id || actIndex}-SEQ-${seqIndex + 1}`,
-            group: 'SEQ',
+            group: 'STRUCT',
             title: seq.title || seq.id || `Sequence ${seqIndex + 1}`,
             start_time: moment(seqStart),
             end_time: moment(seqEnd),
-            itemProps: { className: 'calendar-item-SEQ' }
+            itemProps: { className: 'calendar-item-STRUCT-SEQ' }
           })
         })
       }
