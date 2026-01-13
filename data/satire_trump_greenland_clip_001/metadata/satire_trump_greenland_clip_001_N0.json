@@ -13,6 +13,16 @@
       "tone": "satirical, irreverent, dark, trashy",
       "era": "contemporary"
     },
+    "balises": [
+      {
+        "label": "Satire arctique",
+        "summary": "Clip satirique sur une conqu\u00eate fantasm\u00e9e du Groenland, opposant branding vulgaire et indiff\u00e9rence du r\u00e9el."
+      },
+      {
+        "label": "Contraste visuel",
+        "summary": "R\u00e9alisme arctique glacial perturb\u00e9 par des overlays marketing agressifs et des glitchs."
+      }
+    ],
     "deliverables": {
       "visuals": {
         "images_enabled": true,

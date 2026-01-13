@@ -133,6 +133,7 @@ def create_project(project_id: str) -> None:
             "tone": "",
             "era": "",
         },
+        "balises": [],
         "deliverables": {
             "visuals": {
                 "images_enabled": True,
@@ -160,6 +161,7 @@ def create_project(project_id: str) -> None:
             "version": "0.1",
             "temperature_creative": 2,
         },
+        "balises": [],
         "pitch": "",
         "intention": "",
         "axes_artistiques": "",
@@ -189,6 +191,7 @@ def create_project(project_id: str) -> None:
                 "n1": "",
             },
         },
+        "balises": [],
         "rappel_entrees": "",
         "structure": {
             "format": "",

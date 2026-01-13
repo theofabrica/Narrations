@@ -41,6 +41,16 @@
         ]
       }
     },
+    "balises": [
+      {
+        "label": "Arc en trois actes",
+        "summary": "Intrusion du branding, escalade du deal, puis saturation et effondrement sans morale finale."
+      },
+      {
+        "label": "Progression sensorielle",
+        "summary": "Mont\u00e9e d'overlays, slogans et bruit jusqu'au cut net et au silence."
+      }
+    ],
     "timeline": {
       "acts_count": 3,
       "sequences_count": 6,
