@@ -1,8 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import TimelineCalendar from 'react-calendar-timeline'
-import 'react-calendar-timeline/style.css'
-import moment from 'moment'
-import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react'
 import './App.css'
 
 const templates = {
@@ -142,6 +138,12 @@ function App() {
   const [n4UpdatedAt, setN4UpdatedAt] = useState('')
   const [n4PasteText, setN4PasteText] = useState('')
   const [n4PasteError, setN4PasteError] = useState('')
+  const [n5Data, setN5Data] = useState(null)
+  const [n5Status, setN5Status] = useState('idle')
+  const [n5Error, setN5Error] = useState('')
+  const [n5UpdatedAt, setN5UpdatedAt] = useState('')
+  const [n5PasteText, setN5PasteText] = useState('')
+  const [n5PasteError, setN5PasteError] = useState('')
   const [isN0EsthetiqueOpen, setIsN0EsthetiqueOpen] = useState(true)
   const [mediaModalOpen, setMediaModalOpen] = useState(false)
   const [mediaModalKind, setMediaModalKind] = useState('')
@@ -168,6 +170,7 @@ function App() {
     sequences: 'sequences',
     timeline: 'timeline',
     media: 'media',
+    prompts: 'prompts',
     console: 'console'
   }
 
@@ -904,6 +907,36 @@ function App() {
     }
   }
 
+  const sanitizeN5 = (payload) => {
+    const root = payload && typeof payload === 'object' ? payload : {}
+    const data =
+      root.data && typeof root.data === 'object'
+        ? root.data
+        : root
+    const sanitizeList = (entries) => (Array.isArray(entries) ? entries : [])
+    return {
+      project_id: data.project_id || root.project_id || '',
+      document_level: data.document_level || 'N5',
+      document_name: data.document_name || '',
+      version: data.version || '',
+      meta: {
+        status: data.meta?.status || 'draft',
+        language: data.meta?.language || '',
+        aspect_ratio: data.meta?.aspect_ratio || '',
+        timebase: data.meta?.timebase || '',
+        dependencies: data.dependencies || data.meta?.dependencies || {}
+      },
+      scope: data.meta?.scope || {},
+      stack: data.stack || {},
+      render_specs: data.render_specs || {},
+      safety_and_branding: data.safety_and_branding || {},
+      global_prompt_tokens: data.global_prompt_tokens || {},
+      assets: data.assets || {},
+      prompts: data.prompts || {},
+      notes: data.notes || ''
+    }
+  }
+
   const getN2Outline = (data) => {
     if (!data) return []
     const summaryFromNarrative = (narrative) =>
@@ -1121,6 +1154,26 @@ function App() {
     }
   }
 
+  const fetchN5 = async (projectId) => {
+    setN5Status('loading')
+    setN5Error('')
+    try {
+      const resp = await fetch(getProjectStrataUrl(projectId, 'n5'))
+      const data = await resp.json()
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      setN5Data(sanitizeN5(data?.data || null))
+      setN5UpdatedAt(data?.updated_at || '')
+      setN5Status('done')
+    } catch (err) {
+      setN5Status('error')
+      setN5Error(err.message)
+      setN5Data(null)
+      setN5UpdatedAt('')
+    }
+  }
+
   useEffect(() => {
     if (selectedProject) {
       fetchN0(selectedProject)
@@ -1128,6 +1181,7 @@ function App() {
       fetchN2(selectedProject)
       fetchN3(selectedProject)
       fetchN4(selectedProject)
+      fetchN5(selectedProject)
     } else {
       setN0Data(null)
       setN0UpdatedAt('')
@@ -1149,6 +1203,10 @@ function App() {
       setN4UpdatedAt('')
       setN4Status('idle')
       setN4Error('')
+      setN5Data(null)
+      setN5UpdatedAt('')
+      setN5Status('idle')
+      setN5Error('')
     }
   }, [selectedProject])
 
@@ -1960,6 +2018,31 @@ function App() {
     }
   }
 
+  const applyN5FromJson = async () => {
+    if (!n5PasteText.trim()) {
+      setN5PasteError('Colle un JSON avant de remplacer.')
+      return
+    }
+    try {
+      const cleaned = normalizeJsonInput(n5PasteText)
+      const parsed = JSON.parse(cleaned)
+      const payload = parsed && typeof parsed === 'object' && 'data' in parsed
+        ? parsed.data
+        : parsed
+      if (!payload || typeof payload !== 'object') {
+        throw new Error('JSON invalide')
+      }
+      const normalized = sanitizeN5(payload)
+      setN5Data(normalized)
+      setN5PasteError('')
+      if (selectedProject) {
+        await handleN5Save(normalized)
+      }
+    } catch (err) {
+      setN5PasteError('JSON invalide ou incomplet.')
+    }
+  }
+
   const handleN0Save = async (overrideData = null) => {
     let payload = overrideData || n0Data
     if (!selectedProject || !payload) {
@@ -2193,6 +2276,35 @@ function App() {
     }
   }
 
+  const handleN5Save = async (overrideData = null) => {
+    let payload = overrideData || n5Data
+    if (!selectedProject || !payload) {
+      return false
+    }
+    payload = sanitizeN5(payload)
+    setN5Status('saving')
+    setN5Error('')
+    try {
+      const body = JSON.stringify(payload)
+      const resp = await fetch(getProjectStrataUrl(selectedProject, 'n5'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body
+      })
+      const data = await resp.json()
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      setN5UpdatedAt(data?.updated_at || n5UpdatedAt)
+      setN5Status('done')
+      return true
+    } catch (err) {
+      setN5Status('error')
+      setN5Error(err.message)
+      return false
+    }
+  }
+
   const closeProject = async () => {
     if (!selectedProject) {
       return
@@ -2229,6 +2341,13 @@ function App() {
       const saved = await handleN4Save()
       if (!saved) {
         setActivePage('timeline')
+        return
+      }
+    }
+    if (n5Data) {
+      const saved = await handleN5Save()
+      if (!saved) {
+        setActivePage('prompts')
         return
       }
     }
@@ -2580,126 +2699,7 @@ function App() {
     }
     return 60000
   }, [timelineTracks])
-  const gravitySections = useMemo(() => {
-    const vTrack = timelineTracks.find((t) => t.id === 'V1') || timelineTracks[0]
-    if (!vTrack || !Array.isArray(vTrack.segments)) return []
-    const palette = ['rgba(120,180,255,0.35)', 'rgba(255,200,120,0.35)', 'rgba(200,255,180,0.35)', 'rgba(255,160,200,0.35)']
-    return vTrack.segments.map((seg, idx) => {
-      const start = parseTcToMs(seg.start_tc) ?? 0
-      const end = parseTcToMs(seg.end_tc) ?? (Number.isFinite(seg.duration_ms) ? start + seg.duration_ms : start)
-      return {
-        id: seg.id || `seg-${idx}`,
-        from: start,
-        to: end,
-        color: palette[idx % palette.length],
-        hoverColor: palette[idx % palette.length],
-      }
-    })
-  }, [timelineTracks])
-  const gravityMarkers = useMemo(() => {
-    const markers = []
-    const vTrack = timelineTracks.find((t) => t.id === 'V1') || timelineTracks[0]
-    if (vTrack && Array.isArray(vTrack.segments)) {
-      vTrack.segments.forEach((seg, idx) => {
-        const start = parseTcToMs(seg.start_tc)
-        const end = parseTcToMs(seg.end_tc)
-        if (Number.isFinite(start)) {
-          markers.push({
-            time: start,
-            color: '#5fb7ff',
-            activeColor: '#5fb7ff',
-            hoverColor: '#8ed1ff',
-            label: seg.label || seg.id || `Seg ${idx + 1}`
-          })
-        }
-        if (Number.isFinite(end)) {
-          markers.push({
-            time: end,
-            color: '#ff9f7f',
-            activeColor: '#ff9f7f',
-            hoverColor: '#ffc2a3',
-            label: (seg.label || seg.id || `Seg ${idx + 1}`) + ' fin'
-          })
-        }
-      })
-    }
-    return markers
-  }, [timelineTracks, parseTcToMs])
-  const { timeline: gravityTimeline } = useTimeline({
-    settings: {
-      start: 0,
-      end: timelineTotalMs || 60000,
-      axes: [],
-      events: [],
-      markers: gravityMarkers,
-      sections: gravitySections
-    },
-    viewConfiguration: {}
-  })
-  const calendarGroups = useMemo(() => {
-    const groups = [
-      { id: 'STRUCT', title: 'Actes + Séquences (N2)' },
-      ...timelineTracks.map((track) => ({
-        id: track.id || track.label,
-        title: track.label || track.id || 'Track'
-      }))
-    ]
-    return groups
-  }, [timelineTracks])
-  const calendarItems = useMemo(() => {
-    const items = []
-    // Acts + sequences (fusion sur une ligne)
-    n2Outline.forEach((act, actIndex) => {
-      const startMs = parseTcToMs(act.timecode_in) ?? 0
-      const endMs = parseTcToMs(act.timecode_out) ?? startMs + (act.duration_s || 0) * 1000
-      items.push({
-        id: act.id || `ACT-${actIndex + 1}`,
-        group: 'STRUCT',
-        title: act.title || act.id || `Acte ${actIndex + 1}`,
-        start_time: moment(startMs),
-        end_time: moment(endMs),
-        itemProps: { className: 'calendar-item-STRUCT-ACT' }
-      })
-      // sequences for this act
-      if (Array.isArray(act.children)) {
-        act.children.forEach((seq, seqIndex) => {
-          const seqStart = parseTcToMs(seq.timecode_in) ?? startMs
-          const seqEnd =
-            parseTcToMs(seq.timecode_out) ??
-            seqStart + (Number.isFinite(seq.duration_s) ? seq.duration_s * 1000 : 0)
-          items.push({
-            id: seq.id || `${act.id || actIndex}-SEQ-${seqIndex + 1}`,
-            group: 'STRUCT',
-            title: seq.title || seq.id || `Sequence ${seqIndex + 1}`,
-            start_time: moment(seqStart),
-            end_time: moment(seqEnd),
-            itemProps: { className: 'calendar-item-STRUCT-SEQ' }
-          })
-        })
-      }
-    })
-    // N4 tracks (video/audio)
-    timelineTracks.forEach((track, trackIdx) => {
-      if (!Array.isArray(track.segments)) return
-      track.segments.forEach((seg, idx) => {
-        const startMs = parseTcToMs(seg.start_tc) ?? 0
-        const endMs =
-          parseTcToMs(seg.end_tc) ??
-          (Number.isFinite(seg.duration_ms) ? startMs + seg.duration_ms : startMs + 1000)
-        items.push({
-          id: seg.id || `${track.id || trackIdx}-seg-${idx}`,
-          group: track.id || track.label,
-          title: seg.label || seg.id || `Segment ${idx + 1}`,
-          start_time: moment(startMs),
-          end_time: moment(endMs),
-          itemProps: {
-            className: `calendar-item-${track.id || trackIdx}`
-          }
-        })
-      })
-    })
-    return items
-  }, [timelineTracks, n2Outline])
+  // Custom simple timeline: ticks and empty tracks; acts/sequences info reused for ruler length
   const n3SequenceList =
     n3Data?.sequence_estimates && n3Data.sequence_estimates.length
       ? n3Data.sequence_estimates
@@ -2791,6 +2791,13 @@ function App() {
                   onClick={() => setActivePage('media')}
                 >
                   Media (N5)
+                </button>
+                <button
+                  type="button"
+                  className={activePage === 'prompts' ? 'active' : ''}
+                  onClick={() => setActivePage('prompts')}
+                >
+                  Prompts (N5)
                 </button>
               </>
             ) : null}
@@ -4208,36 +4215,47 @@ function App() {
                 </section>
 
                 <section>
-                  <h3>Moniteur (Gravity Timeline)</h3>
-                  <div className="gravity-wrapper">
-                    <TimelineCanvas timeline={gravityTimeline} />
+                  <h3>Timeline (personnalisée)</h3>
+                  <div className="timeline-custom">
+                    <div className="time-ruler">
+                      {Array.from({ length: Math.max(1, Math.ceil((timelineTotalMs || 60000) / 10000)) }).map((_, idx) => {
+                        const ms = idx * 10000
+                        const seconds = Math.floor(ms / 1000)
+                        const label = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
+                        return (
+                          <div key={idx} className="time-tick">
+                            <span>{label}</span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                    <div className="track-row">
+                      <div className="track-label">N0</div>
+                      <div className="track-body">—</div>
+                    </div>
+                    <div className="track-row">
+                      <div className="track-label">N1</div>
+                      <div className="track-body">—</div>
+                    </div>
+                    <div className="track-row">
+                      <div className="track-label">Video 1</div>
+                      <div className="track-body">—</div>
+                    </div>
+                    <div className="track-row">
+                      <div className="track-label">Audio 1</div>
+                      <div className="track-body">—</div>
+                    </div>
+                    <div className="track-row">
+                      <div className="track-label">Audio 2</div>
+                      <div className="track-body">—</div>
+                    </div>
+                    <div className="track-row">
+                      <div className="track-label">Audio 3</div>
+                      <div className="track-body">—</div>
+                    </div>
                   </div>
                   <p className="hint">
-                    Vue compacte (canvas) basée sur V1 : segments colorés, marqueurs aux bornes. Zoom/pan natif Gravity UI.
-                  </p>
-                </section>
-
-                <section>
-                  <h3>Timeline (react-calendar-timeline)</h3>
-                  <div className="calendar-wrapper">
-                    <TimelineCalendar
-                      groups={calendarGroups}
-                      items={calendarItems}
-                      defaultTimeStart={moment(0)}
-                      defaultTimeEnd={moment(timelineTotalMs || 60000)}
-                      visibleTimeStart={moment(0)}
-                      visibleTimeEnd={moment(timelineTotalMs || 60000)}
-                      minZoom={timelineTotalMs || 60000}
-                      maxZoom={timelineTotalMs || 60000}
-                      canMove={false}
-                      canResize={false}
-                      canChangeGroup={false}
-                      stackItems
-                      itemHeightRatio={0.75}
-                    />
-                  </div>
-                  <p className="hint">
-                    Vue multi-pistes (V1/A1/A2/A3) en lecture seule. Les items reflètent les segments définis dans le JSON N4.
+                    Timeline vide prête à accueillir des objets (drag & drop à implémenter). La règle de temps s’adapte à la durée estimée (N4/N2).
                   </p>
                 </section>
 
@@ -4407,6 +4425,143 @@ function App() {
               Page N5 (prompts/generation) en preparation. Le projet selectionne est{' '}
               <strong>{selectedProject || 'aucun'}</strong>.
             </p>
+          </div>
+        </section>
+      ) : null}
+
+      {activePage === 'prompts' ? (
+        <section className="project-page">
+          <div className="panel">
+            <div className="panel-head">
+              <h2>Prompts (N5)</h2>
+              <div className="panel-actions">
+                <button
+                  type="button"
+                  onClick={() => selectedProject && fetchN5(selectedProject)}
+                  disabled={!selectedProject}
+                >
+                  Rafraichir
+                </button>
+                <button
+                  type="button"
+                  className="primary"
+                  onClick={handleN5Save}
+                  disabled={!selectedProject || !n5Data || n5Status === 'saving'}
+                >
+                  Enregistrer
+                </button>
+              </div>
+            </div>
+            {!selectedProject ? (
+              <p className="hint">Selectionne un projet dans l’accueil.</p>
+            ) : n5Status === 'error' ? (
+              <p className="hint error">Erreur: {n5Error}</p>
+            ) : null}
+            {selectedProject ? (
+              <div className="project-detail script-layout-vertical">
+                <section>
+                  <h3>Coller N5.json</h3>
+                  <div className="timeline-import">
+                    <textarea
+                      placeholder="Colle ici le JSON N5 (prompts/plans)"
+                      value={n5PasteText}
+                      onChange={(event) => setN5PasteText(event.target.value)}
+                    />
+                    <div className="n0-import-actions">
+                      <button type="button" onClick={applyN5FromJson}>
+                        Remplacer
+                      </button>
+                      {n5PasteError ? <span className="hint error">{n5PasteError}</span> : null}
+                    </div>
+                  </div>
+                  {n5UpdatedAt ? (
+                    <p className="hint">Derniere mise a jour: {n5UpdatedAt}</p>
+                  ) : null}
+                </section>
+
+                {n5Data ? (
+                  <>
+                    <section>
+                      <h3>Meta</h3>
+                      <div className="script-card">
+                        <div>Status: {n5Data.meta?.status || '—'}</div>
+                        <div>Version: {n5Data.version || n5Data.meta?.version || '—'}</div>
+                        <div>Langue: {n5Data.meta?.language || '—'}</div>
+                        <div>Ratio: {n5Data.meta?.aspect_ratio || '—'}</div>
+                        <div>Timebase: {n5Data.meta?.timebase || '—'}</div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h3>Scope (N2/N3)</h3>
+                      <div className="script-card">
+                        <strong>Actes</strong>
+                        <ul>
+                          {(n5Data.meta?.scope?.acts || []).map((act) => (
+                            <li key={act.id || act.title}>
+                              {act.id || ''} {act.title || ''} ({act.timecode_in || '--'} -{' '}
+                              {act.timecode_out || '--'})
+                            </li>
+                          ))}
+                        </ul>
+                        <strong>Sequences</strong>
+                        <ul>
+                          {(n5Data.meta?.scope?.sequences || []).map((seq) => (
+                            <li key={seq.id || seq.title}>
+                              {seq.id || ''} {seq.title || ''} ({seq.timecode_in || '--'} -{' '}
+                              {seq.timecode_out || '--'})
+                            </li>
+                          ))}
+                        </ul>
+                        <strong>Scenes</strong>
+                        <ul>
+                          {(n5Data.meta?.scope?.scenes || []).map((scene) => (
+                            <li key={scene.id || scene.title}>
+                              {scene.id || ''} {scene.title || ''} ({scene.timecode_in || '--'} -{' '}
+                              {scene.timecode_out || '--'})
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h3>Tokens globaux</h3>
+                      <div className="script-card">
+                        {Object.entries(n5Data.global_prompt_tokens || {}).map(([key, value]) => (
+                          <div key={key}>
+                            <strong>{key}</strong>: {String(value)}
+                          </div>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section>
+                      <h3>Assets</h3>
+                      <div className="script-card">
+                        <div>Props: {(n5Data.assets?.visual_props || []).length}</div>
+                        <div>Audio assets: {(n5Data.assets?.audio_assets || []).length}</div>
+                        <div>Music assets: {(n5Data.assets?.music_assets || []).length}</div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h3>Stack / Render</h3>
+                      <div className="script-card">
+                        <div>Image: {n5Data.stack?.image_generation_primary || '—'}</div>
+                        <div>Video: {n5Data.stack?.video_generation || '—'}</div>
+                        <div>SFX: {n5Data.stack?.sound_sfx || '—'}</div>
+                        <div>Music: {n5Data.stack?.music || '—'}</div>
+                        <div>Resolution: {n5Data.render_specs?.resolution_px?.join('x') || '—'}</div>
+                        <div>FPS: {n5Data.render_specs?.fps || '—'}</div>
+                      </div>
+                    </section>
+                  </>
+                ) : (
+                  <p className="hint">Aucun N5 charge pour l’instant.</p>
+                )}
+              </div>
+            ) : null}
           </div>
         </section>
       ) : null}

@@ -648,43 +648,49 @@ body {
   margin: 0;
 }
 
-.gravity-wrapper {
-  border: 1px solid rgba(80, 98, 150, 0.3);
-  border-radius: 12px;
-  height: 220px;
-  background: rgba(10, 16, 30, 0.7);
-  overflow: hidden;
-}
-
-.calendar-wrapper {
+.timeline-custom {
   border: 1px solid rgba(80, 98, 150, 0.3);
   border-radius: 12px;
   background: rgba(10, 16, 30, 0.7);
-  padding: 8px;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
 }
 
-.rct-item {
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.time-ruler {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid rgba(80, 98, 150, 0.4);
+  padding-bottom: 8px;
+  overflow-x: auto;
 }
 
-.calendar-item-V1 {
-  background: rgba(120, 180, 255, 0.35);
+.time-tick {
+  min-width: 60px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  border-left: 1px solid rgba(80, 98, 150, 0.3);
 }
-.calendar-item-A1 {
-  background: rgba(200, 255, 180, 0.35);
+
+.track-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  gap: 12px;
 }
-.calendar-item-A2 {
-  background: rgba(255, 200, 120, 0.35);
+
+.track-label {
+  font-weight: 600;
+  color: var(--ink);
 }
-.calendar-item-A3 {
-  background: rgba(255, 160, 200, 0.35);
-}
-.calendar-item-STRUCT-ACT {
-  background: rgba(120, 120, 255, 0.35);
-}
-.calendar-item-STRUCT-SEQ {
-  background: rgba(120, 200, 255, 0.35);
+
+.track-body {
+  min-height: 36px;
+  border: 1px dashed rgba(80, 98, 150, 0.4);
+  border-radius: 8px;
+  padding: 6px;
+  color: var(--ink-soft);
 }
 
 .n0-import textarea {
