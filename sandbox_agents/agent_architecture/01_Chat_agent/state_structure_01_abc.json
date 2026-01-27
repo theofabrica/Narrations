@@ -1,0 +1,29 @@
+{
+  "state_id": "",
+  "state_version": "1abc_v1",
+  "completed_steps": [],
+  "core": {
+    "resume": "",
+    "questions_ouvertes": [],
+    "intentions": [],
+    "notes": ""
+  },
+  "thinker": {
+    "objectifs": [],
+    "contraintes": [],
+    "hypotheses": [],
+    "manques": [],
+    "clarifications": [],
+    "niveau_cible": "",
+    "notes": ""
+  },
+  "brief": {
+    "objectif_principal": "",
+    "objectifs_secondaires": [],
+    "contraintes": [],
+    "hypotheses": [],
+    "niveau_cible": "",
+    "priorites": []
+  },
+  "questions_en_suspens": []
+}

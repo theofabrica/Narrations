@@ -1,0 +1,67 @@
+{
+  "state_id": "s0001",
+  "state_version": "1abc_v1",
+  "completed_steps": [
+    "1a",
+    "1b",
+    "1c"
+  ],
+  "core": {
+    "resume": "Demande d'un clip hip hop mettant en scene Donald Trump envahissant le Groenland.",
+    "questions_ouvertes": [
+      "Quelle duree cible souhaites-tu (30s, 60s, 90s) ?",
+      "Quel niveau de satire veux-tu (leger, moyen, fort) ?"
+    ],
+    "intentions": [
+      "clip",
+      "hip_hop",
+      "satire",
+      "politique"
+    ],
+    "notes": ""
+  },
+  "thinker": {
+    "objectifs": [
+      "Produire un clip hip hop satirique avec Donald Trump"
+    ],
+    "contraintes": [
+      "Duree a definir",
+      "Niveau de satire a definir"
+    ],
+    "hypotheses": [
+      "Format clip court (30-90s)"
+    ],
+    "manques": [
+      "Duree cible",
+      "Niveau de satire"
+    ],
+    "clarifications": [
+      "Souhaites-tu un angle satirique specifique (politique, absurde, parodique) ?"
+    ],
+    "niveau_cible": "n2",
+    "notes": ""
+  },
+  "brief": {
+    "objectif_principal": "Clip hip hop satirique avec Donald Trump envahissant le Groenland",
+    "objectifs_secondaires": [
+      "Tonalite satirique claire",
+      "Style clip musical rythme hip hop"
+    ],
+    "contraintes": [
+      "Duree a definir",
+      "Niveau de satire a definir"
+    ],
+    "hypotheses": [
+      "Clip court (30-90s)"
+    ],
+    "niveau_cible": "n2",
+    "priorites": [
+      "Clarifier duree",
+      "Clarifier niveau de satire"
+    ]
+  },
+  "questions_en_suspens": [
+    "Duree cible",
+    "Niveau de satire"
+  ]
+}

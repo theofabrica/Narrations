@@ -1,0 +1,27 @@
+{
+  "app_name": "MCP Narrations",
+  "purpose": "Orchestrer la generation de medias (image, video, audio) a partir de briefs narratifs.",
+  "supported_outputs": [
+    "image",
+    "video",
+    "audio"
+  ],
+  "supported_strata": [
+    "n0",
+    "n1",
+    "n2",
+    "n3",
+    "n4",
+    "n5"
+  ],
+  "constraints": [
+    "Pas de secrets dans les JSON",
+    "Respecter les schemas canonises",
+    "Les prompts IA sont produits apres validation des strates"
+  ],
+  "alignment_criteria": [
+    "Demande coherente avec production de medias",
+    "Demande exprimable en brief narratif",
+    "Niveau cible identifiable (n0-n5)"
+  ]
+}
