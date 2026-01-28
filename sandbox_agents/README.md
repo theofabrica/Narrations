@@ -32,6 +32,7 @@ python /home/theoub02/code/MCP_Narrations/sandbox_agents/run_demo.py
 - `agents/planner_executor_agent.py` : planification puis exécution.
 - `agents/router_agent.py` : route une demande vers un agent spécialisé.
 - `run_demo.py` : exécute quelques exemples.
+- `agent_architecture/` : architecture multi-agents (couche 1 + writer).
 
 ## À faire ensuite
 - Ajouter des **contrats JSON** (schémas) par agent.

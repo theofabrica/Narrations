@@ -1,0 +1,17 @@
+{
+  "narration_id": "",
+  "source_state_ref": "",
+  "source_state_payload": null,
+  "target_strata": [
+    "n0",
+    "n1",
+    "n2",
+    "n3",
+    "n4",
+    "n5"
+  ],
+  "storage_root": "",
+  "config": {
+    "create_if_missing": true
+  }
+}

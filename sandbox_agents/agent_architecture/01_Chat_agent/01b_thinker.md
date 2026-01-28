@@ -7,6 +7,8 @@
 ## Contexte disponible
 - `resume_1a` et `questions_ouvertes_1a`
 - `objectifs_globaux_app` (optionnel)
+- `knowledge/app_scope.json`
+- `agent_architecture/hyperparameters.json` : `missing_sensitivity` commun a 1a/1b/1c.
 
 ## Entree attendue
 - `resume_1a` (texte)
@@ -24,6 +26,7 @@ Le schema JSON est externe et versionne :
   "state_id": "",
   "state_version": "1abc_v1",
   "completed_steps": ["1a", "1b"],
+  "manques": [],
   "core": {},
   "thinker": {
     "objectifs": [],
@@ -41,10 +44,11 @@ Le schema JSON est externe et versionne :
 
 ## Regles
 - Ne pas reposer les questions a l'utilisateur.
-- Si information manquante, remplir `manques`.
+- Si information manquante, remplir `manques` selon `missing_sensitivity`.
 - Si la demande n'est pas alignee avec les attendus du projet, remplir `clarifications`.
-- Si `manques` ou `clarifications` non vides, signaler un appel a `events_clarifier.md`.
+- Si `manques` ou `clarifications` non vides, les ajouter a `questions_en_suspens`.
 - Rester factuel, pas d'invention.
+ - Se referer a `_ownership` dans `state_structure_01_abc.json`.
 
 ## Exemple
 **Entree** :
@@ -56,6 +60,10 @@ Le schema JSON est externe et versionne :
   "state_id": "s0001",
   "state_version": "1abc_v1",
   "completed_steps": ["1a", "1b"],
+  "manques": [
+    "Sujet exact",
+    "Duree cible"
+  ],
   "core": {
     "resume": "Demande de narration courte et satirique, sujet a preciser.",
     "questions_ouvertes": [

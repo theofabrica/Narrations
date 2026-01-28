@@ -1,11 +1,11 @@
-# Memory des states
+# Chat memory des states
 
-Ce dossier stocke les **states** produits par la couche 1.
+Ce dossier stocke les **states** produits par la couche 1 (chat).
 
 ## Regles de nommage
 - Identifiant de state : `sNNNN` (ex: `s0001`, `s0002`, ...).
 - A chaque nouvelle demande utilisateur, on cree un dossier :
-  - `memory/sNNNN/`
+  - `01_Chat_agent/chat_memory/sNNNN/`
 
 ## Contenu attendu
 Dans chaque dossier de state :

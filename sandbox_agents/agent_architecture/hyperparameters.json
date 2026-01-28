@@ -1,0 +1,5 @@
+{
+  "missing_sensitivity": 0.5,
+  "max_self_refine_attempts": 1,
+  "self_refine_enabled": true
+}

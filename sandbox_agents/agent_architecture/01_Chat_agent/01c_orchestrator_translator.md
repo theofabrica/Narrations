@@ -7,6 +7,7 @@
 ## Contexte disponible
 - `objectifs`, `contraintes`, `hypotheses`, `manques`, `clarifications` (depuis 1b)
 - `format_attendu_orchestrateur` (schema ou contrat interne)
+- `agent_architecture/hyperparameters.json` : `missing_sensitivity` commun a 1a/1b/1c.
 
 ## Entree attendue
 - `sortie_1b` (structure 1b complete)
@@ -22,6 +23,7 @@ Le schema JSON est externe et versionne :
   "state_id": "",
   "state_version": "1abc_v1",
   "completed_steps": ["1a", "1b", "1c"],
+  "manques": [],
   "core": {},
   "thinker": {},
   "brief": {
@@ -39,7 +41,9 @@ Le schema JSON est externe et versionne :
 ## Regles
 - Ne pas inventer d'informations.
 - Si `manques` ou `clarifications` existent, les propager dans `questions_en_suspens`.
+- Mettre a jour `manques` selon `missing_sensitivity` si besoin.
 - Rester concis et factuel.
+ - Se referer a `_ownership` dans `state_structure_01_abc.json`.
 
 ## Exemple
 **Entree** : sortie_1b
@@ -50,6 +54,10 @@ Le schema JSON est externe et versionne :
   "state_id": "s0001",
   "state_version": "1abc_v1",
   "completed_steps": ["1a", "1b", "1c"],
+  "manques": [
+    "Sujet exact",
+    "Duree cible"
+  ],
   "core": {
     "resume": "Demande de narration courte et satirique, sujet a preciser.",
     "questions_ouvertes": [

@@ -1,12 +1,50 @@
 {
+  "_ownership": {
+    "core.resume": ["1a"],
+    "core.resume_detaille": ["1a"],
+    "core.questions_ouvertes": ["1a"],
+    "core.intentions": ["1a"],
+    "thinker.objectifs": ["1b"],
+    "thinker.contraintes": ["1b"],
+    "thinker.hypotheses": ["1b"],
+    "thinker.manques": ["1b"],
+    "thinker.clarifications": ["1b"],
+    "thinker.niveau_cible": ["1b"],
+    "brief.objectif_principal": ["1c"],
+    "brief.objectifs_secondaires": ["1c"],
+    "brief.contraintes": ["1c"],
+    "brief.hypotheses": ["1c"],
+    "brief.niveau_cible": ["1c"],
+    "brief.priorites": ["1c"],
+    "questions_en_suspens": ["1c"],
+    "manques": ["1a", "1b", "1c"]
+  },
+  "_redaction": {
+    "core.resume": true,
+    "core.resume_detaille": true
+  },
+  "_redaction_constraints": {
+    "core.resume": {
+      "min_chars": 80,
+      "max_chars": 240
+    },
+    "core.resume_detaille": {
+      "min_chars": 300,
+      "max_chars": 800
+    }
+  },
+  "_constraints": {
+    "core.intentions_max": 3
+  },
   "state_id": "",
   "state_version": "1abc_v1",
   "completed_steps": [],
+  "manques": [],
   "core": {
     "resume": "",
+    "resume_detaille": "",
     "questions_ouvertes": [],
-    "intentions": [],
-    "notes": ""
+    "intentions": []
   },
   "thinker": {
     "objectifs": [],
@@ -14,8 +52,7 @@
     "hypotheses": [],
     "manques": [],
     "clarifications": [],
-    "niveau_cible": "",
-    "notes": ""
+    "niveau_cible": ""
   },
   "brief": {
     "objectif_principal": "",

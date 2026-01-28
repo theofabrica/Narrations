@@ -1,0 +1,14 @@
+{
+  "plan_id": "",
+  "created_at": "",
+  "source_state_id": "",
+  "tasks": [
+    {
+      "id": "",
+      "agent": "",
+      "input_ref": "",
+      "output_ref": "",
+      "depends_on": []
+    }
+  ]
+}

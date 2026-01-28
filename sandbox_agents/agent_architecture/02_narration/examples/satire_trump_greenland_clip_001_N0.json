@@ -1,0 +1,36 @@
+{
+  "project_id": "satire_trump_greenland_clip_001",
+  "strata": "n0",
+  "updated_at": "2026-01-12T17:49:55.099452Z",
+  "data": {
+    "production_summary": {
+      "summary": "Ce clip, sous forme de satire incisive, illustre la conqu\u00eate fantasm\u00e9e du Groenland par Donald Trump. Il ne s\u2019agit pas d\u2019un acte g\u00e9opolitique classique, mais d\u2019un r\u00e9flexe purement narcissique o\u00f9 le territoire est per\u00e7u comme un espace immense, blanc et disponible, am\u00e9nageable selon une logique de deal et de branding. Trump y fait face non pas \u00e0 des adversaires humains, mais \u00e0 l\u2019opposition passive du monde : la glace, le vide, le silence. Alors qu\u2019il tente d\u2019affirmer sa domination \u00e0 coups de logos et d\u00e9clarations, le monde continue d\u2019exister dans son indiff\u00e9rence, fissurant ses ambitions. Ce film trash met en lumi\u00e8re l\u2019absurdit\u00e9 d\u2019une volont\u00e9 de possession aveugle et expose la faillite morale, tout en naviguant entre humour et ironie tragique. Il s'agit d'une micro-fable sur l\u2019illusion de la possession versus l\u2019existence, avec une imagerie imp\u00e9riale rabaiss\u00e9e \u00e0 une farce immobili\u00e8re grotesque.",
+      "production_type": "satirical short-form video clip",
+      "primary_output_format": "video",
+      "target_duration": "00:01:00",
+      "aspect_ratio": "16:9",
+      "visual_style": "Le style visuel adopte un r\u00e9alisme arctique glacial, soulign\u00e9 par des \u00e9l\u00e9ments satiriques \u00e9clatants. Des plans documentaires ou satellites de paysages enneig\u00e9s et vastes sont envahis par une imagerie de branding ostentatoire : logos en or, autocollants TRUMP sur les icebergs, et fronti\u00e8res dessin\u00e9es \u00e0 la main. L\u2019ensemble est mont\u00e9 de fa\u00e7on nerveuse avec des incrustations agressives, des artefacts de glitch, et des contrastes marqu\u00e9s, soulignant l\u2019\u00e9cart entre le s\u00e9rieux du d\u00e9cor et la vulgarit\u00e9 des gestes de possession.",
+      "tone": "satirical, irreverent, dark, trashy",
+      "era": "contemporary"
+    },
+    "deliverables": {
+      "visuals": {
+        "images_enabled": true,
+        "videos_enabled": true
+      },
+      "audio_stems": {
+        "dialogue": true,
+        "sfx": true,
+        "music": true
+      }
+    },
+    "art_direction": {
+      "description": "L'esth\u00e9tique visuelle trash et glaciale est continuellement perturb\u00e9e par des \u00e9l\u00e9ments visuels de deal et de branding : des logos dor\u00e9s, des stickers TRUMP outrageusement plac\u00e9s sur des icebergs, et des trac\u00e9s au feutre rappelant les cartes m\u00e9t\u00e9o. Des panneaux immobiliers absurdes affichent des messages du type \"PROPERTY OF...\". Le montage est dynamique et nerveux, avec des incrustations agressives et des glitchs cr\u00e9ant des contrastes nets. L'humour surgit du d\u00e9calage flagrant entre la gravit\u00e9 visuelle du paysage arctique et la vulgarit\u00e9 des marques et gestes de possession.",
+      "references": ""
+    },
+    "sound_direction": {
+      "description": "La bande sonore m\u00eale un design sonore arctique comprenant le vent, les souffles, et le craquement de la glace avec des touches satiriques : glitches, bruits d\u2019argent, et sonorit\u00e9s pseudo-patriotiques d\u00e9form\u00e9es. Les silences abrupts servent de \"mur du r\u00e9el\", accentuant le vide des proclamations de victoire. La musique est caract\u00e9ris\u00e9e par une pulsation tendue et ironique avec des interruptions brutales, soulignant l\u2019absurde et r\u00e9v\u00e9lant le vide final de cette conqu\u00eate narcissique. Il faut une grosse musique hip hop",
+      "references": ""
+    }
+  }
+}

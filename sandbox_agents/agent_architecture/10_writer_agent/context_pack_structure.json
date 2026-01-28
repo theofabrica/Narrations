@@ -1,0 +1,16 @@
+{
+  "target_path": "",
+  "source_state_id": "",
+  "core_resume": "",
+  "core_resume_detaille": "",
+  "intentions": [],
+  "thinker_contraintes": [],
+  "brief_contraintes": [],
+  "manques": [],
+  "questions_en_suspens": [],
+  "redaction_constraints": {
+    "min_chars": 0,
+    "max_chars": 0
+  },
+  "do_not_invent": true
+}

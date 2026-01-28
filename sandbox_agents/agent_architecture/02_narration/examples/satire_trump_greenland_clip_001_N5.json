@@ -1,0 +1,702 @@
+{
+  "project_id": "satire_trump_greenland_clip_001",
+  "strata": "n5",
+  "updated_at": "2026-01-12T00:00:00.000000Z",
+  "data": {
+  "project_id": "satire_trump_greenland_clip_001",
+  "document_level": "N5",
+  "document_name": "N5_PROMPTS__plans_and_generation",
+  "version": "0.1.0",
+  "meta": {
+  "status": "draft",
+  "language": "fr",
+  "aspect_ratio": "16:9",
+  "timebase": "TC_NDF_00_60s",
+  "scope": {
+  "acts": [
+  {
+  "id": "U001",
+  "title": "Surface blanche / Intrusion",
+  "timecode_in": "00:00",
+  "timecode_out": "00:18",
+  "duration_s": 18
+  }
+  ],
+  "sequences": [
+  {
+  "id": "U002",
+  "title": "La carte blanche",
+  "timecode_in": "00:00",
+  "timecode_out": "00:09",
+  "duration_s": 9
+  },
+  {
+  "id": "U005",
+  "title": "Arrivee du President-Mascotte",
+  "timecode_in": "00:09",
+  "timecode_out": "00:18",
+  "duration_s": 9
+  }
+  ],
+  "scenes": [
+  {
+  "id": "U003",
+  "title": "Réel arctique pur",
+  "timecode_in": "00:00",
+  "timecode_out": "00:05",
+  "duration_s": 5
+  },
+  {
+  "id": "U004",
+  "title": "Premier marquage (overlay/UI/label)",
+  "timecode_in": "00:05",
+  "timecode_out": "00:09",
+  "duration_s": 4
+  },
+  {
+  "id": "U006",
+  "title": "Apparition 'pub' de la mascotte",
+  "timecode_in": "00:09",
+  "timecode_out": "00:14",
+  "duration_s": 5
+  },
+  {
+  "id": "U007",
+  "title": "Premier geste de propriete",
+  "timecode_in": "00:14",
+  "timecode_out": "00:18",
+  "duration_s": 4
+  }
+  ]
+  },
+  "dependencies": {
+  "n0_updated_at": "2026-01-09T18:57:21.651727Z",
+  "n1_version": "0.1",
+  "n1_updated_at": "2026-01-09T18:57:21.673117Z",
+  "n2_version": "1.0.0",
+  "n2_updated_at": "2026-01-09T18:57:21.691917Z",
+  "n3_version": "0.1.0",
+  "n3_updated_at": "2026-01-09T19:09:05.438600Z",
+  "n4_version": "0.1",
+  "n4_updated_at": "2026-01-12T18:10:00.000Z"
+  },
+  "stack": {
+  "image_generation_primary": "midjourney",
+  "image_edit_optional": "nanobanana",
+  "video_generation": "kling_v2",
+  "sound_sfx": "elevenlabs_sfx",
+  "music": "elevenlabs_music",
+  "note": "Les overlays texte/UI sont recommandés en compositing (After Effects/Premiere) pour garder une typographie propre et éviter les artefacts de génération."
+  },
+  "render_specs": {
+  "resolution_px": [
+  1920,
+  1080
+  ],
+  "fps": 24,
+  "color_space": "Rec.709",
+  "audio_spec": {
+  "sample_rate_hz": 48000,
+  "deliver_stems": [
+  "DX",
+  "SFX",
+  "MX"
+  ],
+  "loudness_target_lufs": -14
+  }
+  },
+  "safety_and_branding": {
+  "satire_context": "Clip satirique / fiction (icône-fiction).",
+  "identity_note": "Éviter l'imitation 1:1 d'une personne réelle : privilégier une figure composite 'President-Mascotte' (caricature) plutôt qu'un sosie photoréaliste.",
+  "text_note": "Éviter de générer du texte dans Midjourney; préférer compositing ou outil d'édition pour des textes lisibles."
+  }
+  },
+  "global_prompt_tokens": {
+  "visual_base": "réalisme arctique grave, blanc lourd et indifférent, textures de glace et neige détaillées, lumière de jour polaire, vent perceptible (poussière de neige)",
+  "overlay_style": "surcouches branding/UI vulgaires, clinquantes, or et badges premium, légèrement glitchées, comme une annonce immobilière agressive",
+  "character_style": "figure de pouvoir transformée en mascotte publicitaire : costume trop brillant et trop ajusté, cravate agressive, maquillage/teint artificiel, sourire figé, pouces levés mécaniques, gestuelle dominatrice et infantile",
+  "negative_universal": "pas de watermark, pas de logo parasite, pas de texte illisible, pas d'artefacts grotesques involontaires, pas de personnages supplémentaires, pas de bâtiments, pas de véhicules, pas d'animaux"
+  },
+  "assets": {
+  "visual_props": [
+  {
+  "id": "overlay_label_listing_001",
+  "type": "overlay_ui",
+  "introduced_in": "U004",
+  "role": "premier acte de marchandisation: le monde devient 'annonce'",
+  "design_notes": {
+  "palette": [
+  "or clinquant",
+  "blanc froid",
+  "noir UI"
+  ],
+  "typography": "sans-serif UI, très lisible, capitales courtes, vibe 'real-estate app'",
+  "suggested_copy": [
+  "LISTING #0001 — GREENLAND",
+  "STATUS: AVAILABLE",
+  "BADGE: PREMIUM WHITE",
+  "PRICE: (absurde / démesuré) [À VALIDER]"
+  ]
+  }
+  },
+  {
+  "id": "costume_mascotte_brillant",
+  "type": "costume",
+  "introduced_in": "U006",
+  "role": "transformer le pouvoir en objet publicitaire",
+  "design_notes": {
+  "suit": "costume trop brillant, légèrement pailleté, coupe trop ajustée",
+  "tie": "cravate rouge agressive (ou rouge saturé) qui claque au vent",
+  "face": "teint artificiel, maquillage visible, expression figée",
+  "hair": "blond très clair, coiffure rigide"
+  }
+  },
+  {
+  "id": "sticker_propriete_001",
+  "type": "physical_prop",
+  "introduced_in": "U007",
+  "role": "première trace durable de possession (branding physique) collée sur la glace",
+  "design_notes": {
+  "material": "autocollant glossy bon marché, bords nets mais colle médiocre",
+  "imperfection": "un coin se décolle, la marque reste de travers",
+  "suggested_copy": [
+  "PROPERTY OF … [À VALIDER]",
+  "SOLD",
+  "CLAIMED"
+  ],
+  "scale_note": "petit dans le cadre; le paysage doit rester immense"
+  }
+  }
+  ],
+  "audio_assets": [
+  {
+  "id": "SFX_AMB_WIND_ARCTIC_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 20,
+  "looping": true,
+  "prompt_influence_percent": 40
+  },
+  "prompt": "Vent arctique — large étendue glacée — rafales froides avec léger hiss de neige fine — stéréo large — mic mi-distance (10–20 m) — niveau constant, pas de crescendos — loop-ready, aucune musique, bruit propre."
+  },
+  {
+  "id": "SFX_ICE_CRACK_DISTANT_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 1.2,
+  "looping": false,
+  "prompt_influence_percent": 45
+  },
+  "prompt": "Craquement de glace lointain — grondement très bref puis crack sec — espace arctique ouvert — très loin — naturel, pas d'effet dramatique, tail court."
+  },
+  {
+  "id": "SFX_UI_POP_CLICK_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 0.6,
+  "looping": false,
+  "prompt_influence_percent": 60
+  },
+  "prompt": "Pop numérique d'interface — clic propre + petit blip — très sec, sans reverb — style application mobile premium — ultra propre."
+  },
+  {
+  "id": "SFX_KA_CHING_GHOST_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 0.5,
+  "looping": false,
+  "prompt_influence_percent": 55
+  },
+  "prompt": "Mini 'ka-ching' fantôme — caisse enregistreuse très discrète, courte — légèrement étouffée — sans musicalité, pas de mélodie."
+  },
+  {
+  "id": "SFX_GLITCH_SPARKLE_SUBTLE_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 2,
+  "looping": false,
+  "prompt_influence_percent": 45
+  },
+  "prompt": "Glitch numérique subtil + petits scintillements satiriques — stutters de données, micro-chimes atonaux — stéréo large — très discret, clean."
+  },
+  {
+  "id": "SFX_STINGER_PSEUDO_PATRIOTIC_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 1.2,
+  "looping": false,
+  "prompt_influence_percent": 50
+  },
+  "prompt": "Très court stinger pseudo-patriotique — mini fanfare de cuivres triomphale mais immédiatement déformée (wow/flutter léger), étouffée comme si avalée par le vent — tail très court."
+  },
+  {
+  "id": "SFX_CLOTH_RUSTLE_WIND_SUIT_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 2.5,
+  "looping": false,
+  "prompt_influence_percent": 40
+  },
+  "prompt": "Frottement de costume au vent — tissu synthétique qui claque et frotte — close mic (0.5 m) — sec, réaliste — pas d'autres bruits."
+  },
+  {
+  "id": "SFX_STICKER_SLAP_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 0.5,
+  "looping": false,
+  "prompt_influence_percent": 60
+  },
+  "prompt": "Autocollant collé sur surface glacée — slap net + frottement bref — close mic — transitoire crisp — pas d'ambiance."
+  },
+  {
+  "id": "SFX_STICKER_CORNER_FLUTTER_001",
+  "tool": "elevenlabs_sfx",
+  "settings": {
+  "duration_s": 1,
+  "looping": false,
+  "prompt_influence_percent": 45
+  },
+  "prompt": "Coin d'autocollant qui se décolle et flotte au vent — petit flutter plastique + micro peel — close mic — sec, sans reverb."
+  }
+  ],
+  "music_assets": [
+  {
+  "id": "MX_NONE_ACT1",
+  "note": "Pour U003-U007, la musique est volontairement absente (ou réduite à micro-stingers SFX) afin de garder le 'mur du réel'."
+  }
+  ]
+  },
+  "plans_index": [
+  {
+  "id": "P001",
+  "title": "Établissement — Groenland intact (mur du réel)",
+  "timecode_in": "00:00",
+  "timecode_out": "00:05",
+  "scope": {
+  "act_id": "U001",
+  "sequence_id": "U002",
+  "scene_id": "U003"
+  }
+  },
+  {
+  "id": "P002",
+  "title": "Premier parasite — Overlay listing vulgaire sur la glace",
+  "timecode_in": "00:05",
+  "timecode_out": "00:09",
+  "scope": {
+  "act_id": "U001",
+  "sequence_id": "U002",
+  "scene_id": "U004"
+  }
+  },
+  {
+  "id": "P003",
+  "title": "Intrusion — Apparition pub du Président-Mascotte dans le vide",
+  "timecode_in": "00:09",
+  "timecode_out": "00:14",
+  "scope": {
+  "act_id": "U001",
+  "sequence_id": "U005",
+  "scene_id": "U006"
+  }
+  },
+  {
+  "id": "P004",
+  "title": "Geste de propriété — Sticker posé sur la glace (coin décollé)",
+  "timecode_in": "00:14",
+  "timecode_out": "00:18",
+  "scope": {
+  "act_id": "U001",
+  "sequence_id": "U005",
+  "scene_id": "U007"
+  }
+  }
+  ],
+  "plans": [
+  {
+  "id": "P001",
+  "title": "Établissement — Groenland intact (mur du réel)",
+  "scope": {
+  "act_id": "U001",
+  "sequence_id": "U002",
+  "scene_id": "U003"
+  },
+  "timecode_in": "00:00",
+  "timecode_out": "00:05",
+  "duration_s": 5,
+  "n3_beats": [
+  "B1",
+  "B2",
+  "B3",
+  "B4"
+  ],
+  "intent": "Installer un réel arctique grave, sans signe humain, pour que l'intrusion future fasse collision.",
+  "shot": {
+  "type": "establishing_wide",
+  "camera": {
+  "framing": "très large, horizon haut, immensité dominante",
+  "lens_mm_equiv": 24,
+  "movement": "quasi-statique avec micro drift (drone très stable) + poussière de neige portée par le vent",
+  "stabilization": "stable, documentaire",
+  "focus": "infini (net sur texture proche + reliefs lointains lisibles)"
+  },
+  "lighting": "jour polaire / ciel couvert, ombres bleutées très douces",
+  "art_direction": {
+  "must_have": [
+  "glace et neige (texture granuleuse)",
+  "horizon blanc",
+  "micro-reliefs / fissures lointaines (subtiles)",
+  "aucune trace humaine"
+  ],
+  "must_avoid": [
+  "toute trace humaine",
+  "tout texte",
+  "tout logo",
+  "empreintes",
+  "bâtiments"
+  ]
+  }
+  },
+  "prompts": {
+  "midjourney": {
+  "goal": "Créer la plate arctique de référence (clean) pour P001 et réutilisable en base pour P002.",
+  "prompt": "/imagine photorealistic Greenland ice sheet, vast empty white arctic landscape to the horizon, heavy indifferent white, subtle blue shadows, overcast polar daylight, fine snow dust blowing in the wind, crisp ice and snow texture, documentary realism, no footprints, no buildings --ar 16:9 --style raw --stylize 40 --chaos 2 --seed 1001 --no text --no logo --no watermark --no people --no animals --no buildings --no vehicles",
+  "notes": "Éviter toute écriture; privilégier la pureté du décor. Conserver une version 'plate' sans overlays."
+  },
+  "nanobanana_optional": {
+  "use_case": "Nettoyage si MJ introduit des artefacts (objets/structures) ou pour renforcer la texture de glace.",
+  "prompt": "Remove any artifacts, footprints, or man-made objects. Keep a vast empty Greenland ice sheet, realistic ice texture, overcast polar daylight, subtle blowing snow. No text, no logos. 16:9"
+  },
+  "kling_v2": {
+  "goal": "Animer la plate avec vent subtil et micro drift de caméra (5s).",
+  "prompt": "Wide establishing shot of a vast empty Greenland ice sheet under overcast polar daylight. Heavy indifferent white landscape to the horizon, subtle blue shadows. Fine snow dust blows across the surface in steady wind. Camera is extremely stable with a barely noticeable slow drift forward. No people, no buildings, no text.",
+  "inputs": {
+  "image_plate_ref": "P001_MJ_plate_clean"
+  },
+  "outputs": {
+  "video_clip_name": "P001_KLING_v01"
+  }
+  }
+  },
+  "audio": {
+  "stems_plan": [
+  {
+  "stem": "SFX",
+  "asset_ids": [
+  "SFX_AMB_WIND_ARCTIC_001",
+  "SFX_ICE_CRACK_DISTANT_001"
+  ],
+  "notes": "Vent dominant. Craquement unique très discret vers la fin du plan (≈00:03.5)."
+  },
+  {
+  "stem": "DX",
+  "asset_ids": [],
+  "notes": "Aucun dialogue. (Voir section 'dialogue' du plan.)"
+  },
+  {
+  "stem": "MX",
+  "asset_ids": [
+  "MX_NONE_ACT1"
+  ],
+  "notes": "Pas de musique."
+  }
+  ],
+  "mix_notes": "Laisser respirer le vide. Le vent doit être large et froid, mais pas cinématique 'trailer'. Le craquement reste rare."
+  }
+  },
+  {
+  "id": "P002",
+  "title": "Premier parasite — Overlay listing vulgaire sur la glace",
+  "scope": {
+  "act_id": "U001",
+  "sequence_id": "U002",
+  "scene_id": "U004"
+  },
+  "timecode_in": "00:05",
+  "timecode_out": "00:09",
+  "duration_s": 4,
+  "n3_beats": [
+  "B1",
+  "B2",
+  "B3",
+  "B4"
+  ],
+  "intent": "Contaminer le réel par un signe UI clinquant; le vent ne change pas => blague cruelle (non-réponse du monde).",
+  "shot": {
+  "type": "hold_wide_continuation",
+  "camera": {
+  "framing": "continuité de P001 (même axe), éventuellement léger push-in pour rapprocher la texture",
+  "lens_mm_equiv": 24,
+  "movement": "quasi-statique (match P001) pour que l'overlay soit l'événement",
+  "stabilization": "stable",
+  "focus": "infini"
+  },
+  "vfx_overlay": {
+  "overlay_id": "overlay_label_listing_001",
+  "placement": "coin haut-gauche (UI), ancré à l'écran",
+  "animation": "pop-in + micro glitch (1-2 frames), léger shimmer or, puis stable",
+  "note": "Recommandé en compositing pour texte propre. Si généré via IA, valider lisibilité."
+  }
+  },
+  "prompts": {
+  "midjourney": {
+  "goal": "Réutiliser la plate de P001 (idéal) ou générer une variante très proche pour continuité.",
+  "prompt": "/imagine photorealistic Greenland ice sheet, same angle as previous shot, vast empty white arctic landscape, overcast polar daylight, subtle wind-blown snow, documentary realism, clean frame with empty space in the top-left corner for UI overlay --ar 16:9 --style raw --stylize 35 --chaos 1 --seed 1002 --no text --no logo --no watermark --no people --no animals --no buildings --no vehicles",
+  "notes": "Si possible, utiliser EXACTEMENT la même image de P001 et ne faire qu'un overlay en post."
+  },
+  "nanobanana_optional": {
+  "use_case": "Option rapide si on veut générer l'overlay directement sur l'image (attention à la watermark).",
+  "prompt": "Add a clean luxury real-estate UI overlay in the top-left corner, glossy gold accents, subtle digital glitch artifacts. Text must be perfectly readable: 'LISTING #0001 — GREENLAND', 'STATUS: AVAILABLE', 'BADGE: PREMIUM WHITE', 'PRICE: (absurd / astronomical)'. Keep the arctic landscape unchanged, no other text anywhere. 16:9"
+  },
+  "kling_v2": {
+  "goal": "Animer le plan avec vent identique + légère micro fluctuation; overlay ajouté en post (ou intégré si plate éditée).",
+  "prompt": "Same wide shot of an empty Greenland ice sheet as previous. Overcast polar daylight, steady arctic wind blowing fine snow. Camera holds almost perfectly still. If an on-screen UI overlay is present, it should pop in subtly with a tiny glitch and then remain stable. No other changes in the environment.",
+  "inputs": {
+  "image_plate_ref": "P002_MJ_plate_clean_or_P001_reuse"
+  },
+  "outputs": {
+  "video_clip_name": "P002_KLING_v01"
+  }
+  }
+  },
+  "audio": {
+  "stems_plan": [
+  {
+  "stem": "SFX",
+  "asset_ids": [
+  "SFX_AMB_WIND_ARCTIC_001",
+  "SFX_UI_POP_CLICK_001",
+  "SFX_KA_CHING_GHOST_001"
+  ],
+  "notes": "Vent constant. UI pop/click synchro à l'apparition overlay (≈00:05.3). Ka-ching fantôme très léger en queue."
+  },
+  {
+  "stem": "DX",
+  "asset_ids": [],
+  "notes": "Aucun dialogue. (Voir section 'dialogue' du plan.)"
+  },
+  {
+  "stem": "MX",
+  "asset_ids": [
+  "MX_NONE_ACT1"
+  ],
+  "notes": "Pas de musique."
+  }
+  ],
+  "mix_notes": "Le 'pop' doit être presque gênant par sa propreté sur un décor naturel. Garder le ka-ching au seuil de perception."
+  }
+  },
+  {
+  "id": "P003",
+  "title": "Intrusion — Apparition pub du Président-Mascotte dans le vide",
+  "scope": {
+  "act_id": "U001",
+  "sequence_id": "U005",
+  "scene_id": "U006"
+  },
+  "timecode_in": "00:09",
+  "timecode_out": "00:14",
+  "duration_s": 5,
+  "n3_beats": [
+  "B1",
+  "B2",
+  "B3",
+  "B4",
+  "B5"
+  ],
+  "intent": "Faire entrer le corps-signe (mascotte) comme une pub hors-sol; il parle mais le vent avale tout.",
+  "shot": {
+  "type": "medium_wide_character_intro",
+  "camera": {
+  "framing": "plan moyen-large : personnage 1/3 cadre, paysage immense derrière",
+  "lens_mm_equiv": 35,
+  "movement": "léger push-in (≈5s) + micro tremblement de vent (mais stable)",
+  "stabilization": "stable ciné, pas handheld",
+  "focus": "personnage net, arrière-plan lisible"
+  },
+  "performance": {
+  "character": "President-Mascotte",
+  "gestures": [
+  "pouces levés mécaniques",
+  "rictus figé",
+  "posture d'appropriation (occuper le cadre)"
+  ],
+  "wardrobe": "costume_mascotte_brillant",
+  "details": [
+  "souffle visible",
+  "cravate qui claque au vent",
+  "teint artificiel"
+  ]
+  },
+  "overlay_continuity": "Possibilité de garder overlay_label_listing_001 très léger en filigrane (coin), sans dominer."
+  },
+  "prompts": {
+  "midjourney": {
+  "goal": "Créer un keyframe photo-réaliste avec le personnage (composite, caricatural) dans le décor arctique.",
+  "prompt": "/imagine photorealistic arctic ice sheet background, a flamboyant elderly male politician mascot stands alone in the snow, shiny overly tailored suit, aggressive red tie flapping in strong wind, orange-toned makeup, bleached blond hair, exaggerated fixed grin, mechanical thumbs-up gesture, visible breath in cold air, absurd contrast between serious landscape and vulgar advertising figure, documentary realism, medium wide shot --ar 16:9 --style raw --stylize 60 --chaos 4 --seed 1006 --no text --no logo --no watermark --no people --no crowd --no buildings --no vehicles",
+  "notes": "Éviter le sosie exact d'une personne réelle; rester 'icône-fiction'."
+  },
+  "nanobanana_optional": {
+  "use_case": "Uniformiser costume/visage si MJ dérive entre variations; corriger mains/pouces/visage.",
+  "prompt": "Make the character a consistent 'President-Mascotte' caricature: shiny tailored suit, aggressive red tie, orange-toned makeup, bleached blond hair, fixed grin, mechanical thumbs-up. Keep the photorealistic arctic landscape and overcast polar daylight. Add visible breath. No text, no logos. 16:9"
+  },
+  "kling_v2": {
+  "goal": "Animer la performance (pouces levés, bouche qui parle) + vent qui avale. 5s.",
+  "prompt": "Medium wide shot on an empty Greenland ice sheet. A flamboyant politician mascot in a shiny suit and aggressive red tie stands alone, giving a mechanical thumbs-up and talking to camera with an exaggerated fixed grin. Strong arctic wind, visible breath. The environment remains indifferent and huge behind him. Slow subtle push-in. No crowd, no buildings, no text.",
+  "inputs": {
+  "image_plate_ref": "P003_MJ_keyframe"
+  },
+  "outputs": {
+  "video_clip_name": "P003_KLING_v01"
+  }
+  }
+  },
+  "dialogue": {
+  "lines": [
+  {
+  "speaker": "President-Mascotte",
+  "text": "Regardez-moi ça… c’est parfait.",
+  "time_in_s_from_plan_start": 0.6,
+  "performance": "voix projetée mais vite avalée par le vent; performative, sourire figé"
+  },
+  {
+  "speaker": "President-Mascotte",
+  "text": "Grand. Blanc. À prendre.",
+  "time_in_s_from_plan_start": 2.8,
+  "performance": "slogan martelé; sans chaleur; le vent couvre la fin"
+  }
+  ],
+  "treatment_notes": "Enregistrer voix dry, puis ajouter souffle/vent et un léger EQ étouffé. Laisser des micro blancs entre les phrases."
+  },
+  "audio": {
+  "stems_plan": [
+  {
+  "stem": "SFX",
+  "asset_ids": [
+  "SFX_AMB_WIND_ARCTIC_001",
+  "SFX_GLITCH_SPARKLE_SUBTLE_001",
+  "SFX_CLOTH_RUSTLE_WIND_SUIT_001",
+  "SFX_STINGER_PSEUDO_PATRIOTIC_001"
+  ],
+  "notes": "Vent + froissement costume en sync. Micro-stinger pseudo-patriotique très court au début (≈00:09.1), vite étouffé."
+  },
+  {
+  "stem": "DX",
+  "asset_ids": [],
+  "notes": "2 lignes de la mascotte, traitées wind-swallow. (Voir section 'dialogue' du plan.)"
+  },
+  {
+  "stem": "MX",
+  "asset_ids": [
+  "MX_NONE_ACT1"
+  ],
+  "notes": "Pas de musique (stinger traité comme SFX)."
+  }
+  ],
+  "mix_notes": "Le stinger doit sembler 'lancé' puis immédiatement dévoré par l'air. Les glitchs restent discrets, comme des étincelles satiriques."
+  }
+  },
+  {
+  "id": "P004",
+  "title": "Geste de propriété — Sticker posé sur la glace (coin décollé)",
+  "scope": {
+  "act_id": "U001",
+  "sequence_id": "U005",
+  "scene_id": "U007"
+  },
+  "timecode_in": "00:14",
+  "timecode_out": "00:18",
+  "duration_s": 4,
+  "n3_beats": [
+  "B1",
+  "B2",
+  "B3",
+  "B4",
+  "B5"
+  ],
+  "intent": "Transformer la possession en geste enfantin: coller une étiquette sur l'immensité; le réel résiste (coin qui se décolle).",
+  "shot": {
+  "type": "macro_closeup_prop_action",
+  "camera": {
+  "framing": "gros plan macro sur main + sticker + texture glace; la vastitude se suggère par hors-focus",
+  "lens_mm_equiv": 100,
+  "movement": "caméra fixe, micro vibration de vent; focus pull très léger sur coin qui se décolle",
+  "stabilization": "très stable",
+  "focus": "shallow DOF, priorité sur sticker et coin"
+  },
+  "action": "La main applique le sticker, lisse, puis le coin se soulève au vent; la main insiste; le sticker tient de travers.",
+  "props": [
+  "sticker_propriete_001"
+  ],
+  "continuity_note": "Le sticker doit rester visible dans les plans suivants du film (hors scope)."
+  },
+  "prompts": {
+  "midjourney": {
+  "goal": "Keyframe macro réaliste du sticker sur glace (sans texte illisible).",
+  "prompt": "/imagine extreme close-up macro shot of a hand in a shiny suit sleeve pressing a cheap glossy property sticker onto an icy snow surface, sticker slightly crooked with one corner lifting in strong wind, cold overcast daylight, realistic ice texture, shallow depth of field, cinematic documentary realism --ar 16:9 --style raw --stylize 55 --chaos 3 --seed 1007 --no text --no watermark --no logo --no people",
+  "notes": "Ne pas demander de texte lisible; ajouter le copy en post/overlay propre si nécessaire."
+  },
+  "nanobanana_optional": {
+  "use_case": "Ajouter un copy lisible sur le sticker (si besoin) + accentuer le coin décollé.",
+  "prompt": "Make the sticker look like a cheap glossy property label, slightly crooked, with one corner visibly lifting in the wind. Optional readable sticker text: 'PROPERTY OF …' and a small 'SOLD' stamp. Keep the arctic ice texture realistic. No other text. 16:9"
+  },
+  "kling_v2": {
+  "goal": "Animer l'application: slap, pression, coin qui flotte. 4s.",
+  "prompt": "Extreme close-up macro shot of a hand pressing a cheap glossy property sticker onto icy snow. The sticker is slightly crooked; one corner lifts and flutters in the arctic wind. The hand smooths and presses harder to make it stick. Cold overcast polar daylight, realistic ice texture, shallow depth of field. Camera stable.",
+  "inputs": {
+  "image_plate_ref": "P004_MJ_keyframe"
+  },
+  "outputs": {
+  "video_clip_name": "P004_KLING_v01"
+  }
+  }
+  },
+  "dialogue": {
+  "lines": [
+  {
+  "speaker": "President-Mascotte",
+  "text": "Propriété privée.",
+  "time_in_s_from_plan_start": 0.8,
+  "performance": "court, performatif, sans chaleur"
+  },
+  {
+  "speaker": "President-Mascotte",
+  "text": "C’est signé.",
+  "time_in_s_from_plan_start": 2.3,
+  "performance": "clôture mécanique; micro blanc ensuite"
+  }
+  ],
+  "treatment_notes": "Voix courte, sèche; laisser le vent manger les consonnes. Micro blanc après la 2e phrase."
+  },
+  "audio": {
+  "stems_plan": [
+  {
+  "stem": "SFX",
+  "asset_ids": [
+  "SFX_AMB_WIND_ARCTIC_001",
+  "SFX_STICKER_SLAP_001",
+  "SFX_STICKER_CORNER_FLUTTER_001",
+  "SFX_KA_CHING_GHOST_001"
+  ],
+  "notes": "Slap sticker synchro au contact (≈00:14.4). Flutter coin dès 00:15.2. Mini ka-ching après 'C’est signé' très discret."
+  },
+  {
+  "stem": "DX",
+  "asset_ids": [],
+  "notes": "2 lignes courtes. Traitement wind + absence de chaleur. (Voir section 'dialogue' du plan.)"
+  },
+  {
+  "stem": "MX",
+  "asset_ids": [
+  "MX_NONE_ACT1"
+  ],
+  "notes": "Pas de musique."
+  }
+  ],
+  "mix_notes": "Le slap est net, presque obscène. Le flutter rend la victoire minable. Garder le ka-ching comme sarcasme."
+  }
+  }
+  ]
+  }
+  }

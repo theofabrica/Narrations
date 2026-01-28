@@ -2,7 +2,7 @@
   "states": [
     {
       "state_id": "s0001",
-      "file": "memory/s0001/state_01_abc.json",
+      "file": "01_Chat_agent/chat_memory/s0001/state_01_abc.json",
       "created_from": "01a_chat",
       "user_prompt": "Fais moi un clip de hip hop avec Donald Trump qui envahit le Groenland"
     }

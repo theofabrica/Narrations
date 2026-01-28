@@ -38,25 +38,16 @@ Le brief contient objectifs, priorités, contraintes, et le niveau cible (N0/N1/
 **Entrée** : sortie 1b  
 **Sortie** : `state_01_abc.json` (section `brief` remplie)
 
-## 1d — Clarification (events_clarifier.md)
-- **Rôle** : remonter des questions vers 1a pour clarification.
-- **Déclencheurs** : `thinker.manques` ou `thinker.clarifications` non vides, ou besoin de la couche 2a.
-  - Information obligatoire manquante (durée, format, niveau cible).
-  - Ambiguïté bloquante (objectif trop vague, périmètre flou).
-  - Contradiction entre éléments fournis.
-- **Contexte** : sortie 1b/2a + historique du dialogue.
-
-Propositions de FX  
-# Série d'appels dédiée avec son propre events_clarifier.md qui donne des instructions  
-Un agent model qui formule des questions ciblées pour compléter les informations manquantes.
-
-**Entrée** : alerte + contexte  
-**Sortie** : questions à poser à l’utilisateur via 1a
+## Auto-clarification (integrée 1a/1b/1c)
+- **Rôle** : chaque agent enrichit `state.manques` selon `missing_sensitivity`.
+- **Contexte** : `hyperparameters.json` (sensibilite commune).
+- **Sortie** : questions remontees dans `core.questions_ouvertes` ou `questions_en_suspens`.
 
 ## State unique (couche 1)
 - Schema commun : `state_structure_01_abc.json`.
 - Fichier par session : `memory/sNNNN/state_01_abc.json`.
 - Remplissage progressif : `core` → `thinker` → `brief`.
+- `manques` est global et alimente par 1a/1b/1c selon la sensibilite.
 
 # Tableau de synthèse (couche 1)
 
@@ -65,7 +56,6 @@ Un agent model qui formule des questions ciblées pour compléter les informatio
 | 1a Dialogue | Clarifier la demande | Message utilisateur brut | Contexte du dialogue (historique) | `state_01_abc.json` (core) |
 | 1b Thinker | Extraire objectifs/contraintes | `state_01_abc.json` | Contexte 1a + objectifs globaux | `state_01_abc.json` (thinker) |
 | 1c Translator | Brief structuré | `state_01_abc.json` | Contexte 1b + format attendu | `state_01_abc.json` (brief) |
-| 1d Clarifier | Remonter des questions | Alerte 1b/2a | Contexte 1b/2a + historique | Questions à poser via 1a |
 
 # 2) Orchestrateur / Routeur
 

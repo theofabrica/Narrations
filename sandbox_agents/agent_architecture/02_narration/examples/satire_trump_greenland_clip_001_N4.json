@@ -1,0 +1,97 @@
+{
+  "project_id": "satire_trump_greenland_clip_001",
+  "strata": "n4",
+  "updated_at": "2026-01-12T18:10:00.000Z",
+  "data": {
+    "meta": {
+      "status": "draft",
+      "version": "0.1",
+      "dependencies": {
+        "n2": "v1.0.0",
+        "n3": "v0.1"
+      }
+    },
+    "tracks": [
+      {
+        "id": "V1",
+        "type": "video",
+        "label": "Video 1",
+        "segments": [
+          {
+            "id": "SEG001",
+            "label": "La carte blanche",
+            "start_tc": "00:00:00.000",
+            "end_tc": "00:00:09.000",
+            "duration_ms": 9000,
+            "source_ref": "U002",
+            "notes": "Exposition froide + premier accroc satirique"
+          },
+          {
+            "id": "SEG002",
+            "label": "Arrivee du President-Mascotte",
+            "start_tc": "00:00:09.000",
+            "end_tc": "00:00:18.000",
+            "duration_ms": 9000,
+            "source_ref": "U005",
+            "notes": "Intrusion du corps-spectacle, premier claim"
+          },
+          {
+            "id": "SEG003",
+            "label": "Frontieres au feutre → Produit",
+            "start_tc": "00:00:18.000",
+            "end_tc": "00:00:31.000",
+            "duration_ms": 13000,
+            "source_ref": "U009",
+            "notes": "Cadastre, découpage, listing immobilier"
+          },
+          {
+            "id": "SEG004",
+            "label": "Foule-Ecran → Symboles",
+            "start_tc": "00:00:31.000",
+            "end_tc": "00:00:44.000",
+            "duration_ms": 13000,
+            "source_ref": "U012",
+            "notes": "Validation mécanique, collage obscène"
+          },
+          {
+            "id": "SEG005",
+            "label": "Saturation",
+            "start_tc": "00:00:44.000",
+            "end_tc": "00:00:54.000",
+            "duration_ms": 10000,
+            "source_ref": "U016",
+            "notes": "Climax sensoriel, overlays + loops"
+          },
+          {
+            "id": "SEG006",
+            "label": "Victoire creuse / Mur du reel",
+            "start_tc": "00:00:54.000",
+            "end_tc": "00:01:00.000",
+            "duration_ms": 6000,
+            "source_ref": "U019",
+            "notes": "Proclamation vide, cut net"
+          }
+        ]
+      },
+      {
+        "id": "A1",
+        "type": "audio",
+        "label": "Voix / dialogues",
+        "segments": []
+      },
+      {
+        "id": "A2",
+        "type": "audio",
+        "label": "Ambiances / SFX",
+        "segments": []
+      },
+      {
+        "id": "A3",
+        "type": "audio",
+        "label": "Musique",
+        "segments": []
+      }
+    ],
+    "notes": "Timeline initiale basée sur N2 (séquences 60s). Ajouter segments audio après choix voix/SFX/musique."
+  }
+}
