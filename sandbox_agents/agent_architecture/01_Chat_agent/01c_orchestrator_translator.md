@@ -1,31 +1,27 @@
-# 01c_orchestrator_translator.md — Agent translator (couche 1c)
+# 01c_orchestrator_translator.md - Translator agent (layer 1c)
 
 ## Role
-- Transformer la sortie de 1b en brief d'orchestration structuré.
-- Normaliser la demande pour l'orchestrateur.
+- Transform 1b output into a structured orchestration brief.
+- Normalize the request for the orchestrator.
 
-## Contexte disponible
-- `objectifs`, `contraintes`, `hypotheses`, `manques`, `clarifications` (depuis 1b)
-- `format_attendu_orchestrateur` (schema ou contrat interne)
-- `agent_architecture/hyperparameters.json` : `missing_sensitivity` commun a 1a/1b/1c.
+## Available context
+- `objectifs`, `contraintes`, `hypotheses`, `manques`, `clarifications` (from 1b)
+- `format_attendu_orchestrateur` (schema or internal contract)
+- `agent_architecture/hyperparameters.json`: `missing_sensitivity` shared by 1a/1b/1c.
 
-## Entree attendue
-- `sortie_1b` (structure 1b complete)
+## Expected input
+- `sortie_1b` (full 1b structure)
 
-## Sortie attendue (structure)
-Le schema JSON est externe et versionne :
+## Expected output (structure)
+The JSON schema is external and versioned:
 - `state_structure_01_abc.json`
 
-1c doit finaliser `state_01_abc.json` conforme a ce schema.
+1c must produce a **JSON patch** limited to the `brief` section and `questions_en_suspens`.
 
 ```json
 {
-  "state_id": "",
-  "state_version": "1abc_v1",
   "completed_steps": ["1a", "1b", "1c"],
   "manques": [],
-  "core": {},
-  "thinker": {},
   "brief": {
     "objectif_principal": "",
     "objectifs_secondaires": [],
@@ -38,52 +34,33 @@ Le schema JSON est externe et versionne :
 }
 ```
 
-## Regles
-- Ne pas inventer d'informations.
-- Si `manques` ou `clarifications` existent, les propager dans `questions_en_suspens`.
-- Mettre a jour `manques` selon `missing_sensitivity` si besoin.
-- Rester concis et factuel.
- - Se referer a `_ownership` dans `state_structure_01_abc.json`.
+## Rules
+- Do not invent information.
+- If `manques` or `clarifications` exist, propagate them into `questions_en_suspens`.
+- Update `manques` according to `missing_sensitivity` if needed.
+- Stay concise and factual.
+- Refer to `_ownership` in `state_structure_01_abc.json`.
+- Never produce `core` or `thinker`.
 
-## Exemple
-**Entree** : sortie_1b
+## Example
+**Input**: output_1b
 
-**Sortie** :
+**Output**:
 ```json
 {
-  "state_id": "s0001",
-  "state_version": "1abc_v1",
   "completed_steps": ["1a", "1b", "1c"],
   "manques": [
-    "Sujet exact",
-    "Duree cible"
+    "Exact topic",
+    "Target duration"
   ],
-  "core": {
-    "resume": "Demande de narration courte et satirique, sujet a preciser.",
-    "questions_ouvertes": [
-      "Quel est le sujet exact a traiter ?",
-      "Quelle duree visee (30s, 60s, 90s) ?"
-    ],
-    "intentions": ["narration", "satire"],
-    "notes": ""
-  },
-  "thinker": {
-    "objectifs": ["Produire une narration courte au ton satirique"],
-    "contraintes": ["Duree a definir", "Sujet a definir"],
-    "hypotheses": [],
-    "manques": ["Sujet exact", "Duree cible"],
-    "clarifications": ["Le ton satirique doit-il suivre un angle politique precis ?"],
-    "niveau_cible": "n1",
-    "notes": ""
-  },
   "brief": {
-    "objectif_principal": "Produire une narration courte au ton satirique",
+    "objectif_principal": "Produce a short narration with a satirical tone",
     "objectifs_secondaires": [],
-    "contraintes": ["Duree a definir", "Sujet a definir"],
+    "contraintes": ["Duration to define", "Topic to define"],
     "hypotheses": [],
     "niveau_cible": "n1",
-    "priorites": ["Clarifier sujet et duree"]
+    "priorites": ["Clarify topic and duration"]
   },
-  "questions_en_suspens": ["Sujet exact", "Duree cible"]
+  "questions_en_suspens": ["Exact topic", "Target duration"]
 }
 ```

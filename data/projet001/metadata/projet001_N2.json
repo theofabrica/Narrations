@@ -1,0 +1,120 @@
+{
+  "project_id": "project001",
+  "strata": "n2",
+  "updated_at": "",
+  "data": {
+    "project_id": "project001",
+    "document_level": "N2",
+    "document_name": "",
+    "version": "",
+    "meta": {
+      "format": {
+        "target_duration_tc": "",
+        "target_duration_s": 0,
+        "aspect_ratio": "",
+        "timebase": "",
+        "language": ""
+      },
+      "granularity": {
+        "n2": "",
+        "n3_target": ""
+      },
+      "canon": {
+        "tone": [],
+        "visual_style": "",
+        "sound_style": "",
+        "characters": [],
+        "narrative_arc": []
+      }
+    },
+    "timeline": {
+      "acts_count": 0,
+      "sequences_count": 0,
+      "scenes_count": 0,
+      "duration_s_total": 0,
+      "timecode_in": "",
+      "timecode_out": ""
+    },
+    "cast": {
+      "primary": [
+        {
+          "id": "",
+          "name": "",
+          "function": ""
+        }
+      ],
+      "rule": ""
+    },
+    "structure": {
+      "acts": [
+        {
+          "id": "",
+          "type": "act",
+          "index": 0,
+          "title": "",
+          "timecode_in": "",
+          "timecode_out": "",
+          "duration_s": 0,
+          "narrative": {
+            "function": "",
+            "local_objective": "",
+            "main_obstacle": "",
+            "stakes": [],
+            "character_evolution": "",
+            "act_exit_change": ""
+          },
+          "sequences": [
+            {
+              "id": "",
+              "type": "sequence",
+              "index": 0,
+              "title": "",
+              "timecode_in": "",
+              "timecode_out": "",
+              "duration_s": 0,
+              "narrative": {
+                "function": "",
+                "local_objective": "",
+                "main_obstacle": "",
+                "sequence_exit_change": "",
+                "progression": {
+                  "from_previous": "",
+                  "to_next": ""
+                }
+              },
+              "scenes": [
+                {
+                  "id": "",
+                  "type": "scene",
+                  "index": 0,
+                  "title": "",
+                  "budget_duration_s": 0,
+                  "summary": "",
+                  "focus": [],
+                  "entry_to_exit": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "constraints_check": {
+      "duration_sum_ok": false,
+      "duration_breakdown_s": {
+        "act_1": 0,
+        "act_2": 0,
+        "act_3": 0,
+        "total": 0
+      },
+      "sequence_duration_sum_ok": false,
+      "scene_budget_sum_ok_per_sequence": false,
+      "casting_ok": false,
+      "ending_rule_ok": false
+    },
+    "handoff_to_n3": {
+      "n3_units_to_expand": [],
+      "n3_expectations": []
+    }
+  }
+}

@@ -35,7 +35,7 @@ from app.utils.errors import to_mcp_error, ProviderError
 from app.utils.normalize import normalize_request
 from app.tools.registry import list_actions
 from app.tools.higgsfield.client import get_client as get_higgsfield_client
-from app.agentic.n0_orchestrator import orchestrate_n0
+from app.narration_agent.service import handle_narration_message
 from datetime import datetime, timezone
 import asyncio
 import json
@@ -166,6 +166,19 @@ if INTERFACE_DIST.exists():
     app.mount("/console", StaticFiles(directory=INTERFACE_DIST, html=True), name="console")
     logger.info("Console UI mounted at /console")
 
+LOG_DIR = Path(__file__).resolve().parent.parent / "logs"
+
+
+def _read_log_tail(path: Path, lines: int) -> str:
+    if not path.exists():
+        return ""
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if not text:
+        return ""
+    items = text.splitlines()
+    tail = items[-lines:] if lines > 0 else items
+    return "\n".join(tail)
+
 
 # -------------------------------------------------
 # Health check endpoint
@@ -179,6 +192,25 @@ def health_check():
         "service": "MCP Narrations",
         "version": "0.1.0",
         "time": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    }
+
+
+@app.get("/logs/{log_name}")
+def get_logs(log_name: str, lines: int = 200) -> Dict[str, Any]:
+    mapping = {
+        "api": "api.log",
+        "ui": "ui.log",
+        "agent": "agent.log",
+    }
+    if log_name not in mapping:
+        raise HTTPException(status_code=400, detail="Unknown log name")
+    path = LOG_DIR / mapping[log_name]
+    content = _read_log_tail(path, lines)
+    status = "ok" if path.exists() else "missing"
+    return {
+        "name": log_name,
+        "status": status,
+        "content": content,
     }
 
 
@@ -270,33 +302,18 @@ def post_project_strata(
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
-@app.post("/projects/{project_id}/n0/orchestrate")
-def post_project_n0_orchestrate(
-    project_id: str,
-    body: Dict[str, Any],
-) -> Dict[str, Any]:
-    n0_data = body.get("n0")
-    if not isinstance(n0_data, dict):
-        raise HTTPException(status_code=400, detail="Missing n0 payload")
-    try:
-        result = orchestrate_n0(n0_data)
-        return {"project_id": project_id, "data": result}
-    except Exception as e:
-        logger.error(
-            "Error orchestrating N0 project=%s: %s",
-            project_id,
-            e,
-            exc_info=True,
-        )
-        raise HTTPException(status_code=500, detail="Internal server error")
-
-
 class MediaUrlRequest(BaseModel):
     url: str
 
 
 class ProjectCreateRequest(BaseModel):
     project_id: str
+
+
+class NarrationMessageRequest(BaseModel):
+    message: str
+    session_id: str | None = None
+    auto_create: bool = True
 
 
 @app.post("/projects/{project_id}/media/pix/upload")
@@ -599,6 +616,32 @@ def upload_project_audio_url(project_id: str, body: MediaUrlRequest) -> Dict[str
         return {"status": "ok", **result}
     except Exception as e:
         logger.error("Error saving audio url project=%s: %s", project_id, e, exc_info=True)
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.post("/projects/{project_id}/narration/message")
+def post_narration_message(
+    project_id: str,
+    body: NarrationMessageRequest,
+) -> Dict[str, Any]:
+    try:
+        return handle_narration_message(
+            project_id=project_id,
+            message=body.message,
+            session_id=body.session_id,
+            auto_create=body.auto_create,
+        )
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Projet introuvable")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(
+            "Error handling narration message project=%s: %s",
+            project_id,
+            e,
+            exc_info=True,
+        )
         raise HTTPException(status_code=500, detail="Internal server error")
 
 

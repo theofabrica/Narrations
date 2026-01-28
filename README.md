@@ -94,6 +94,9 @@ python -m uvicorn app.main:app --host 0.0.0.0 --port 3333 --reload
 # Ou utiliser le script (API seule)
 ./scripts/run_dev.sh
 
+# API + interface (narration_agent + chat)
+./scripts/run_narration_dev.sh
+
 # API + interface (et tunnel Cloudflare si ENABLE_CLOUDFLARE_TUNNEL=1)
 ./scripts/dev_all.sh
 ```

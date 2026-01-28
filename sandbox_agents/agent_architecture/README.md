@@ -4,6 +4,14 @@
 Construire une architecture d'agents pour transformer une demande utilisateur en un
 state structuré, puis en briefs exploitables par l'orchestrateur.
 
+## Logique projet (niveau application)
+- L'utilisateur choisit un projet existant ou en cree un nouveau.
+- Un projet correspond a un dossier sous `/data/{project_id}/`.
+- A la creation, l'app initialise des states N0 a N5 vides.
+- Tant que N0-N5 sont vides ou incomplets, l'app ouvre un chat de cadrage.
+- Les messages du chat alimentent la couche 1 (1a->1b->1c), puis la couche 2 remplit N0-N5.
+- Si le projet existe, l'agent edite les states existants.
+
 ## Ce qui est prévu
 - **Couche 0** : super-orchestrateur (logique globale).
 - **Couche 0** : runner global (execution des taches).
@@ -30,7 +38,6 @@ state structuré, puis en briefs exploitables par l'orchestrateur.
     - exemple `s0001/state_01_abc.json`
 - `02_narration/` :
   - `02_00_narration_orchestrator.md`
-  - `02_00_task_planner.md`
   - `02_00_task_plan_structure.json`
 - `knowledge/` :
   - `app_scope.json` (scope minimal de l'application)

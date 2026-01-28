@@ -1806,6 +1806,117 @@ body {
   resize: vertical;
 }
 
+.projects-chat {
+  margin-top: 24px;
+}
+
+.chat-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.chat-log {
+  min-height: 180px;
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+  width: 100%;
+}
+
+.chat-input {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.chat-input textarea {
+  min-height: 90px;
+  width: 100%;
+  flex: 1;
+}
+
+.chat-input button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  font-size: 1.2rem;
+  align-self: flex-start;
+}
+
+.modal-body {
+  display: grid;
+  gap: 14px;
+}
+
+.modal-label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.modal-label input {
+  border: 1px solid rgba(80, 98, 150, 0.7);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: rgba(10, 16, 30, 0.9);
+  color: var(--ink);
+}
+
+.chat-box.disabled {
+  opacity: 0.5;
+}
+
+.log-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 16, 0.6);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 90px clamp(20px, 4vw, 64px) 40px;
+  z-index: 40;
+}
+
+.log-panel {
+  width: min(1200px, 100%);
+  background: var(--surface-strong);
+  border-radius: var(--radius);
+  border: 1px solid rgba(80, 98, 150, 0.7);
+  box-shadow: var(--shadow);
+  padding: 18px 20px 22px;
+}
+
+.log-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.log-column h3 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+}
+
+.log-column textarea {
+  width: 100%;
+  min-height: 200px;
+  border-radius: 12px;
+  border: 1px solid rgba(80, 98, 150, 0.7);
+  background: rgba(10, 16, 30, 0.9);
+  color: var(--ink);
+  padding: 12px;
+  font-family: 'Space Grotesk', 'Fira Code', monospace;
+  font-size: 0.8rem;
+  resize: vertical;
+  white-space: pre-wrap;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);

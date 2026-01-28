@@ -5,15 +5,15 @@
 - Extract objectives, constraints, hypotheses.
 
 ## Available context
-- `resume_1a` and `questions_ouvertes_1a`
-- `objectifs_globaux_app` (optional)
+- `summary_1a` and `open_questions_1a`
+- `app_global_objectives` (optional)
 - `knowledge/app_scope.json`
 - `agent_architecture/hyperparameters.json`: `missing_sensitivity` shared by 1a/1b/1c.
 
 ## Expected input
-- `resume_1a` (text)
-- `questions_ouvertes_1a` (list)
-- `message_utilisateur` (raw text, optional)
+- `summary_1a` (text)
+- `open_questions_1a` (list)
+- `user_message` (raw text, optional)
 
 ## Expected output (structure)
 The JSON schema is external and versioned:
@@ -24,14 +24,14 @@ The JSON schema is external and versioned:
 ```json
 {
   "completed_steps": ["1a", "1b"],
-  "manques": [],
+  "missing": [],
   "thinker": {
-    "objectifs": [],
-    "contraintes": [],
+    "objectives": [],
+    "constraints": [],
     "hypotheses": [],
-    "manques": [],
+    "missing": [],
     "clarifications": [],
-    "niveau_cible": "",
+    "target_level": "",
     "notes": ""
   }
 }
@@ -39,31 +39,31 @@ The JSON schema is external and versioned:
 
 ## Rules
 - Do not ask the user questions again.
-- If information is missing, fill `manques` according to `missing_sensitivity`.
+- If information is missing, fill `missing` according to `missing_sensitivity`.
 - If the request is not aligned with project expectations, fill `clarifications`.
 - Stay factual, no invention.
 - Refer to `_ownership` in `state_structure_01_abc.json`.
-- Never produce `core`, `brief`, or `questions_en_suspens`.
+- Never produce `core`, `brief`, or `pending_questions`.
 
 ## Example
 **Input**:
-- resume_1a: "Short satirical narration request, topic to define."
+- summary_1a: "Short satirical narration request, topic to define."
 
 **Output**:
 ```json
 {
   "completed_steps": ["1a", "1b"],
-  "manques": [
+  "missing": [
     "Exact topic",
     "Target duration"
   ],
   "thinker": {
-    "objectifs": ["Produce a short narration with a satirical tone"],
-    "contraintes": ["Duration to define", "Topic to define"],
+    "objectives": ["Produce a short narration with a satirical tone"],
+    "constraints": ["Duration to define", "Topic to define"],
     "hypotheses": [],
-    "manques": ["Exact topic", "Target duration"],
+    "missing": ["Exact topic", "Target duration"],
     "clarifications": ["Should the satirical tone follow a specific political angle?"],
-    "niveau_cible": "n1",
+    "target_level": "n1",
     "notes": ""
   }
 }

@@ -1,0 +1,12 @@
+{
+  "session_id": "",
+  "user_message": "",
+  "conversation_history": [],
+  "state_ref": "",
+  "state_payload": null,
+  "config": {
+    "missing_sensitivity": 0.5,
+    "writer_enabled": true,
+    "max_loops": 3
+  }
+}

@@ -41,8 +41,8 @@
     "units": [
       {
         "meta": {
-          "niveau": 0,
-          "document": "",
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
           "version": "",
           "statut": "",
           "granularity": "",
@@ -100,7 +100,25 @@
             "id": "",
             "description": ""
           }
-        ]
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "",
+          "conflit_alliance_ambivalence": ""
+        },
+        "dialogues": [],
+        "decor_visuel": {
+          "ambiance_visuelle": "",
+          "elements_visibles_cles": [],
+          "personnages_etat": [],
+          "notes_promptables_sans_prompt": []
+        },
+        "audio": {
+          "ambiance": "",
+          "music": "",
+          "sfx": "",
+          "dialogues_traitement": "",
+          "silence": ""
+        }
       }
     ]
   }

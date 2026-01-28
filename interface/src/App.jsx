@@ -98,6 +98,22 @@ function App() {
   const [projectsError, setProjectsError] = useState('')
   const [selectedProject, setSelectedProject] = useState('')
   const [newProjectId, setNewProjectId] = useState('')
+  const [createModalOpen, setCreateModalOpen] = useState(false)
+  const [createProjectName, setCreateProjectName] = useState('')
+  const [createProjectStatus, setCreateProjectStatus] = useState('idle')
+  const [createProjectError, setCreateProjectError] = useState('')
+  const [createdProjectId, setCreatedProjectId] = useState('')
+  const [chatMessages, setChatMessages] = useState([])
+  const [chatInput, setChatInput] = useState('')
+  const [chatStatus, setChatStatus] = useState('idle')
+  const [chatError, setChatError] = useState('')
+  const [chatSessionId, setChatSessionId] = useState('')
+  const [logOverlayOpen, setLogOverlayOpen] = useState(false)
+  const [logApiText, setLogApiText] = useState('')
+  const [logUiText, setLogUiText] = useState('')
+  const [logAgentText, setLogAgentText] = useState('')
+  const [logStatus, setLogStatus] = useState('idle')
+  const [logError, setLogError] = useState('')
   const [activePage, setActivePage] = useState('home')
   const [n0Data, setN0Data] = useState(null)
   const [n0Status, setN0Status] = useState('idle')
@@ -105,9 +121,6 @@ function App() {
   const [n0UpdatedAt, setN0UpdatedAt] = useState('')
   const [n0PasteText, setN0PasteText] = useState('')
   const [n0PasteError, setN0PasteError] = useState('')
-  const [n0OrchestratorStatus, setN0OrchestratorStatus] = useState('idle')
-  const [n0OrchestratorError, setN0OrchestratorError] = useState('')
-  const [n0OrchestratorLog, setN0OrchestratorLog] = useState('')
   const [editorOpen, setEditorOpen] = useState(false)
   const [editorValue, setEditorValue] = useState('')
   const [editorOriginal, setEditorOriginal] = useState('')
@@ -173,6 +186,11 @@ function App() {
     prompts: 'prompts',
     console: 'console'
   }
+  const resolvedChatProjectId = createModalOpen
+    ? createdProjectId
+    : selectedProject
+  const canSendChat = Boolean(chatInput.trim() && resolvedChatProjectId)
+  const chatDisabled = createModalOpen && !createdProjectId
 
   const normalizeJsonInput = (raw) => {
     let cleaned = raw.replace(/^\uFEFF/, '')
@@ -196,6 +214,54 @@ function App() {
       return { value: null, error: `${err.message}${detail}` }
     }
   }, [requestText])
+
+  const chatLogText = useMemo(() => {
+    if (!chatMessages.length) {
+      return ''
+    }
+    return chatMessages
+      .map((entry) => `${entry.role === 'user' ? 'Vous' : 'Aoid'}: ${entry.content}`)
+      .join('\n\n')
+  }, [chatMessages])
+
+  const fetchLogText = async (name, setter) => {
+    try {
+      const resp = await fetch(
+        `${apiOrigin}${joinPath(apiBasePath, `/logs/${name}?lines=200`)}`
+      )
+      const data = await resp.json()
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      setter(data?.content || '')
+    } catch (err) {
+      setLogError(err.message)
+    }
+  }
+
+  useEffect(() => {
+    if (!logOverlayOpen) {
+      return undefined
+    }
+    let timer = null
+    const loadLogs = async () => {
+      setLogStatus('loading')
+      setLogError('')
+      await Promise.all([
+        fetchLogText('api', setLogApiText),
+        fetchLogText('ui', setLogUiText),
+        fetchLogText('agent', setLogAgentText)
+      ])
+      setLogStatus('idle')
+    }
+    loadLogs()
+    timer = setInterval(loadLogs, 2000)
+    return () => {
+      if (timer) {
+        clearInterval(timer)
+      }
+    }
+  }, [logOverlayOpen])
 
 
   const uploadImageFile = async (file) => {
@@ -430,6 +496,25 @@ function App() {
   useEffect(() => {
     fetchProjects()
   }, [projectsEndpoint])
+
+  useEffect(() => {
+    setChatMessages([])
+    setChatSessionId('')
+    setChatError('')
+  }, [selectedProject])
+
+  useEffect(() => {
+    if (!createModalOpen) {
+      return
+    }
+    setChatMessages([])
+    setChatSessionId('')
+    setChatError('')
+    setChatInput('')
+    setCreateProjectError('')
+    setCreatedProjectId('')
+    setCreateProjectStatus('idle')
+  }, [createModalOpen])
 
   const sanitizeN0 = (payload) => {
     const root = payload && typeof payload === 'object' ? payload : {}
@@ -2072,58 +2157,6 @@ function App() {
     }
   }
 
-  const handleN0Orchestrate = async (overrideData = null) => {
-    const payloadData = overrideData || n0Data
-    if (!selectedProject || !payloadData) {
-      return
-    }
-    setN0OrchestratorStatus('loading')
-    setN0OrchestratorError('')
-    try {
-      const resp = await fetch(
-        `${apiOrigin}${joinPath(apiBasePath, `/projects/${selectedProject}/n0/orchestrate`)}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ n0: payloadData })
-        }
-      )
-      const data = await resp.json()
-      if (!resp.ok) {
-        throw new Error(`HTTP ${resp.status}`)
-      }
-      const payload = data?.data || {}
-      setN0OrchestratorLog(payload.narrative || '')
-      setN0Data((prev) => {
-        if (!prev) {
-          return prev
-        }
-        return {
-          ...prev,
-          production_summary: {
-            ...(prev.production_summary || {}),
-            summary: payload.summary ?? prev.production_summary?.summary,
-            visual_style: payload.esthetique ?? prev.production_summary?.visual_style
-          },
-          art_direction: {
-            ...(prev.art_direction || {}),
-            description:
-              payload.art_direction_description ?? prev.art_direction?.description
-          },
-          sound_direction: {
-            ...(prev.sound_direction || {}),
-            description:
-              payload.sound_direction_description ?? prev.sound_direction?.description
-          }
-        }
-      })
-      setN0OrchestratorStatus('done')
-    } catch (err) {
-      setN0OrchestratorStatus('error')
-      setN0OrchestratorError(err.message)
-    }
-  }
-
   const openEditor = (label, value) => {
     setEditorLabel(label)
     setEditorValue(value || '')
@@ -2153,7 +2186,6 @@ function App() {
     if (isSummary && n0Data) {
       const next = updateNestedValue(n0Data, ['production_summary', 'summary'], editorValue)
       setN0Data(next)
-      await handleN0Orchestrate(next)
     }
     target.value = editorValue
     target.dispatchEvent(new Event('input', { bubbles: true }))
@@ -2380,11 +2412,11 @@ function App() {
     }
   }
 
-  const createProject = async () => {
-    const projectId = newProjectId.trim()
+  const createProject = async (projectId, options = {}) => {
+    const { navigate = false } = options
     if (!projectId) {
       setProjectsError('Nom du projet requis.')
-      return
+      return false
     }
     setProjectsStatus('loading')
     setProjectsError('')
@@ -2397,13 +2429,105 @@ function App() {
       if (!resp.ok) {
         throw new Error(`HTTP ${resp.status}`)
       }
-      setNewProjectId('')
       await fetchProjects()
       setSelectedProject(projectId)
-      setActivePage('project')
+      if (navigate) {
+        setActivePage('project')
+      }
+      return true
     } catch (err) {
       setProjectsStatus('error')
       setProjectsError(err.message)
+      return false
+    }
+  }
+
+  const openCreateModal = () => {
+    setCreateProjectName('')
+    setCreateModalOpen(true)
+  }
+
+  const closeCreateModal = () => {
+    setCreateModalOpen(false)
+  }
+
+  const handleCreateProject = async () => {
+    const projectId = createProjectName.trim()
+    if (!projectId) {
+      setCreateProjectError('Nom du projet requis.')
+      return
+    }
+    setCreateProjectStatus('loading')
+    setCreateProjectError('')
+    const ok = await createProject(projectId, { navigate: false })
+    if (ok) {
+      setCreatedProjectId(projectId)
+      setCreateProjectStatus('done')
+    } else {
+      setCreateProjectStatus('error')
+      setCreateProjectError('Impossible de creer le projet.')
+    }
+  }
+
+  const handleNarrationChatSend = async () => {
+    const projectId = resolvedChatProjectId
+    const message = chatInput.trim()
+    if (!projectId) {
+      setChatError('Cree le projet pour activer le chat.')
+      return
+    }
+    if (!message) {
+      setChatError('Message requis.')
+      return
+    }
+    setChatStatus('sending')
+    setChatError('')
+    setChatMessages((prev) => [...prev, { role: 'user', content: message }])
+    setChatInput('')
+    try {
+      const resp = await fetch(
+        `${apiOrigin}${joinPath(apiBasePath, `/projects/${encodeURIComponent(projectId)}/narration/message`)}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message,
+            session_id: chatSessionId || null,
+            auto_create: !selectedProject
+          })
+        }
+      )
+      const data = await resp.json()
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      const nextSessionId = data?.session_id || chatSessionId || ''
+      if (nextSessionId) {
+        setChatSessionId(nextSessionId)
+      }
+      const assistantMessage = data?.assistant_message
+        ? data.assistant_message
+        : null
+      const replyText = assistantMessage
+        ? assistantMessage
+            .split('\n')
+            .filter((line) => !line.trim().startsWith('JSON'))
+            .join('\n')
+            .trim()
+        : 'Reponse vide.'
+      setChatMessages((prev) => [...prev, { role: 'assistant', content: replyText }])
+      if (!selectedProject) {
+        setSelectedProject(projectId)
+        await fetchProjects()
+      }
+    } catch (err) {
+      setChatError(err.message)
+      setChatMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: `Erreur: ${err.message}` }
+      ])
+    } finally {
+      setChatStatus('idle')
     }
   }
 
@@ -2814,6 +2938,13 @@ function App() {
           <span className="status-pill small">
             {pageLabel[activePage] || activePage}
           </span>
+          <button
+            type="button"
+            className={logOverlayOpen ? 'active' : ''}
+            onClick={() => setLogOverlayOpen((prev) => !prev)}
+          >
+            Logs
+          </button>
         </div>
       </header>
 
@@ -2847,15 +2978,8 @@ function App() {
               <div className="panel-head">
                 <h2>Projets</h2>
                 <div className="panel-actions">
-                  <input
-                    type="text"
-                    className="project-input"
-                    placeholder="Nouveau projet"
-                    value={newProjectId}
-                    onChange={(event) => setNewProjectId(event.target.value)}
-                  />
-                  <button type="button" onClick={createProject}>
-                    Creer
+                  <button type="button" onClick={openCreateModal}>
+                    Creer un projet
                   </button>
                   <button type="button" onClick={fetchProjects}>
                     Rafraichir
@@ -2908,6 +3032,7 @@ function App() {
               </ul>
             </div>
           </section>
+
         </>
       ) : null}
 
@@ -2933,13 +3058,6 @@ function App() {
                 </button>
                 <button
                   type="button"
-                  onClick={handleN0Orchestrate}
-                  disabled={!selectedProject || !n0Data || n0OrchestratorStatus === 'loading'}
-                >
-                  Orchestrer N0
-                </button>
-                <button
-                  type="button"
                   className="primary"
                   onClick={handleN0Save}
                   disabled={!selectedProject || !n0Data}
@@ -2954,9 +3072,6 @@ function App() {
               <div className="project-detail">
                 {n0Status === 'error' ? (
                   <p className="hint error">Erreur: {n0Error}</p>
-                ) : null}
-                {n0OrchestratorStatus === 'error' ? (
-                  <p className="hint error">Erreur orchestration: {n0OrchestratorError}</p>
                 ) : null}
                 {n0Data ? (
                   <div className="project-form">
@@ -2974,14 +3089,6 @@ function App() {
                       </button>
                     </div>
                     {n0PasteError ? <span className="hint error">{n0PasteError}</span> : null}
-                  </section>
-                  <section>
-                    <h3>Log orchestration N0</h3>
-                    {n0OrchestratorLog ? (
-                      <textarea readOnly value={n0OrchestratorLog} />
-                    ) : (
-                      <p className="hint">Aucun log pour l’instant.</p>
-                    )}
                   </section>
                   <section>
                     <h3>Resume</h3>
@@ -4694,6 +4801,102 @@ function App() {
           </section>
         </>
       ) : null}
+      {logOverlayOpen ? (
+        <div className="log-overlay">
+          <div className="log-panel">
+            <div className="panel-head">
+              <h2>Logs runtime</h2>
+              <div className="panel-actions">
+                <span className={`status-pill small ${logStatus === 'loading' ? 'sending' : ''}`}>
+                  {logStatus === 'loading' ? 'chargement' : 'actif'}
+                </span>
+                <button type="button" onClick={() => setLogOverlayOpen(false)}>
+                  Fermer
+                </button>
+              </div>
+            </div>
+            {logError ? <p className="hint error">Erreur: {logError}</p> : null}
+            <div className="log-grid">
+              <div className="log-column">
+                <h3>API</h3>
+                <textarea readOnly value={logApiText} placeholder="api.log" />
+              </div>
+              <div className="log-column">
+                <h3>UI</h3>
+                <textarea readOnly value={logUiText} placeholder="ui.log" />
+              </div>
+              <div className="log-column">
+                <h3>Agent</h3>
+                <textarea readOnly value={logAgentText} placeholder="agent.log" />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {createModalOpen ? (
+        <div className="modal-backdrop">
+          <div className="modal">
+            <div className="modal-head">
+              <h3>Creer un projet</h3>
+            </div>
+            <div className="modal-body">
+              <label className="modal-label">
+                Nom du projet (obligatoire)
+                <input
+                  type="text"
+                  value={createProjectName}
+                  onChange={(event) => setCreateProjectName(event.target.value)}
+                  placeholder="ex: projet001"
+                />
+              </label>
+              {createProjectError ? (
+                <p className="hint error">Erreur: {createProjectError}</p>
+              ) : null}
+              <button
+                type="button"
+                className="primary"
+                onClick={handleCreateProject}
+                disabled={!createProjectName.trim() || createProjectStatus === 'loading'}
+              >
+                {createProjectStatus === 'loading' ? 'Creation...' : 'Creer'}
+              </button>
+              <p className="hint">Decrivez votre projet</p>
+              <div className={`chat-box ${chatDisabled ? 'disabled' : ''}`}>
+                <textarea
+                  className="chat-log"
+                  readOnly
+                  value={chatLogText}
+                  placeholder="Historique du chat."
+                />
+                {chatError ? <p className="hint error">Erreur: {chatError}</p> : null}
+                <div className="chat-input">
+                  <textarea
+                    value={chatInput}
+                    onChange={(event) => setChatInput(event.target.value)}
+                    placeholder="Ecris un message pour cadrer le projet."
+                    disabled={chatDisabled}
+                  />
+                  <button
+                    type="button"
+                    className="primary"
+                    onClick={handleNarrationChatSend}
+                    disabled={chatDisabled || !canSendChat || chatStatus === 'sending'}
+                    aria-label="Envoyer le message"
+                    title="Envoyer"
+                  >
+                    {chatStatus === 'sending' ? '...' : '→'}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button type="button" onClick={closeCreateModal}>
+                Fermer
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
       {editorOpen ? (
         <div className="modal-backdrop">
           <div className="modal">
@@ -4712,16 +4915,8 @@ function App() {
                 type="button"
                 className="primary"
                 onClick={saveEditor}
-                disabled={n0OrchestratorStatus === 'loading'}
               >
-                {n0OrchestratorStatus === 'loading' ? (
-                  <>
-                    <span className="spinner" />
-                    Calcul en cours
-                  </>
-                ) : (
-                  'Valider'
-                )}
+                Valider
               </button>
             </div>
           </div>

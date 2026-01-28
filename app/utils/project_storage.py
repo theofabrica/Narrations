@@ -11,12 +11,12 @@ from app.utils.ids import generate_timestamp
 
 
 STRATA_FILES = {
-    "n0": "dynamic",
-    "n1": "dynamic",
-    "n2": "n2_architecture.json",
-    "n3": "n3_sequences.json",
-    "n4": "n4_timeline.json",
-    "n5": "n5_media.json",
+    "n0": "project_id_N0.json",
+    "n1": "project_id_N1.json",
+    "n2": "project_id_N2.json",
+    "n3": "project_id_N3.json",
+    "n4": "project_id_N4.json",
+    "n5": "project_id_N5.json",
 }
 
 
@@ -77,24 +77,44 @@ def delete_project(project_id: str) -> None:
 
 
 def get_strata_path(project_id: str, strata: str) -> Path:
-    if strata == "n0":
-        safe_project_id = _safe_project_id(project_id)
-        return get_project_dir(project_id) / f"{safe_project_id}_N0.json"
-    if strata == "n1":
-        safe_project_id = _safe_project_id(project_id)
-        return get_project_dir(project_id) / f"{safe_project_id}_N1.json"
-    if strata in ("n2", "n3", "n4", "n5"):
-        safe_project_id = _safe_project_id(project_id)
-        legacy_path = get_project_dir(project_id) / f"{safe_project_id}_{strata.upper()}.json"
+    if strata not in STRATA_FILES:
+        raise ValueError(f"Unknown strata: {strata}")
+    safe_project_id = _safe_project_id(project_id)
+    new_path = get_project_dir(project_id) / f"{safe_project_id}_{strata.upper()}.json"
+    if new_path.exists():
+        return new_path
+    legacy_map = {
+        "n2": "n2_architecture.json",
+        "n3": "n3_sequences.json",
+        "n4": "n4_timeline.json",
+        "n5": "n5_media.json",
+    }
+    legacy_name = legacy_map.get(strata)
+    if legacy_name:
+        legacy_path = get_project_dir(project_id) / legacy_name
         if legacy_path.exists():
             return legacy_path
     if strata == "n5":
         legacy_media = get_project_dir(project_id) / "n4_media.json"
         if legacy_media.exists():
             return legacy_media
-    if strata not in STRATA_FILES:
-        raise ValueError(f"Unknown strata: {strata}")
-    return get_project_dir(project_id) / STRATA_FILES[strata]
+    return new_path
+
+
+def _load_state_template(strata: str) -> Dict[str, Any]:
+    template_root = (
+        Path(__file__).resolve().parent.parent.parent
+        / "sandbox_agents"
+        / "agent_architecture"
+        / "02_narration"
+    )
+    template_path = template_root / f"state_structure_{strata}.json"
+    if not template_path.exists():
+        return {}
+    template = _read_json(template_path)
+    if isinstance(template, dict) and isinstance(template.get("data"), dict):
+        return template["data"]
+    return {}
 
 
 def read_strata(project_id: str, strata: str) -> Dict[str, Any]:
@@ -122,113 +142,9 @@ def create_project(project_id: str) -> None:
     if project_dir.exists() and any(project_dir.iterdir()):
         raise ValueError("Project already exists")
     project_dir.mkdir(parents=True, exist_ok=True)
-    n0_payload = {
-        "production_summary": {
-            "summary": "",
-            "production_type": "",
-            "primary_output_format": "",
-            "target_duration": "",
-            "aspect_ratio": "",
-            "visual_style": "",
-            "tone": "",
-            "era": "",
-        },
-        "deliverables": {
-            "visuals": {
-                "images_enabled": True,
-                "videos_enabled": True,
-            },
-            "audio_stems": {
-                "dialogue": True,
-                "sfx": True,
-                "music": True,
-            },
-        },
-        "art_direction": {
-            "description": "",
-            "references": "",
-        },
-        "sound_direction": {
-            "description": "",
-            "references": "",
-        },
-    }
-    write_strata(project_id, "n0", n0_payload)
-    n1_payload = {
-        "meta": {
-            "status": "draft",
-            "version": "0.1",
-            "temperature_creative": 2,
-        },
-        "pitch": "",
-        "intention": "",
-        "axes_artistiques": "",
-        "dynamique_globale": "",
-        "personnages": [],
-        "monde_epoque": "",
-        "esthetique": "",
-        "son": {
-            "ambiances": "",
-            "musique": "",
-            "sfx": "",
-            "dialogues": "",
-        },
-        "motifs": [],
-        "ancres_canon_continuite": [],
-        "sources": "",
-        "hypotheses": "",
-        "questions": "",
-    }
-    write_strata(project_id, "n1", n1_payload)
-    n2_payload = {
-        "meta": {
-            "status": "draft",
-            "version": "0.1",
-            "dependencies": {
-                "n0": "",
-                "n1": "",
-            },
-        },
-        "rappel_entrees": "",
-        "structure": {
-            "format": "",
-            "justification": "",
-        },
-        "granularite": {
-            "niveau": "",
-            "justification": "",
-        },
-        "units": [],
-        "contraintes_verifications": "",
-        "hypotheses": "",
-        "questions": "",
-        "references": [],
-        "cartographie_macro": {
-            "arc_principal": "",
-            "arcs_secondaires": [],
-            "motifs_variation": "",
-        },
-    }
-    write_strata(project_id, "n2", n2_payload)
-    timeline_payload = {
-        "meta": {
-            "status": "draft",
-            "version": "0.1",
-            "dependencies": {
-                "n2": "",
-                "n3": "",
-            },
-        },
-        "tracks": [
-            {"id": "V1", "type": "video", "label": "Video 1", "segments": []},
-            {"id": "A1", "type": "audio", "label": "Audio 1", "segments": []},
-            {"id": "A2", "type": "audio", "label": "Audio 2", "segments": []},
-            {"id": "A3", "type": "audio", "label": "Audio 3", "segments": []},
-        ],
-        "notes": "",
-    }
-    write_strata(project_id, "n4", timeline_payload)
-    write_strata(project_id, "n5", {})
+    for strata in STRATA_FILES:
+        payload = _load_state_template(strata)
+        write_strata(project_id, strata, payload)
 
 
 def _read_json(path: Path) -> Dict[str, Any]:

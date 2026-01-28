@@ -6,9 +6,9 @@
 
 ## Entree attendue
 - `state_01_abc.json` (brief valide).
-- `02_02_structure_bible.json` (N1 si disponible).
-- `02_01_structure_project.json` (N0 si disponible).
-- `02_03_structure_architecture.json` (schema N2).
+- `state_structure_n1.json` (N1 si disponible).
+- `state_structure_n0.json` (N0 si disponible).
+- `state_structure_n2.json` (schema N2).
 
 ## Sortie attendue
 - `narrationXXX_N2.json` conforme au schema N2.

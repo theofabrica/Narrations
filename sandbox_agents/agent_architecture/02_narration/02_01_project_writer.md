@@ -6,8 +6,9 @@
 
 ## Entree attendue
 - `state_01_abc.json` (brief valide).
-- `02_00_task_plan_structure.json` (si passage par planner).
-- `02_01_structure_project.json` (schema N0).
+- `02_00_task_plan_structure.json` (si plan de taches fourni).
+- `state_structure_n0.json` (schema N0).
+- `context_pack_structure.json` (interface writer).
 
 ## Sortie attendue
 - `narrationXXX_N0.json` conforme au schema N0.
@@ -16,3 +17,7 @@
 - Ne pas inventer de contraintes non presentes dans le brief.
 - Garder le format et les champs N0 existants.
 - Rester coherents avec le ton et les deliverables.
+- En creation de projet, l'orchestrateur planifie une tache par section N0
+  (ex: `production_summary`, `deliverables`, `art_direction`, `sound_direction`).
+- Chaque tache du writer ne produit que la section cible, le code merge dans N0.
+- Le writer ne recoit que le `context_pack` et ne retourne que `target_patch`.

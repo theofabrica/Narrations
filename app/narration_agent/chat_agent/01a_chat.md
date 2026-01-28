@@ -6,21 +6,21 @@
 - Maintain conversational coherence.
 
 ## Available context
-- `historique_conversation`: list of user/assistant turns.
-- `etat_projet`: known project info (optional).
-- `objectif_session`: global session objective (optional).
+- `conversation_history`: list of user/assistant turns.
+- `project_state`: known project info (optional).
+- `session_goal`: global session objective (optional).
 - `agent_architecture/hyperparameters.json`: `missing_sensitivity` shared by 1a/1b/1c.
 - If the project is new (N0-N5 empty), the main goal is to frame the project.
 
 ## Expected input
-- `message_utilisateur` (raw text).
-- `historique_conversation` (list, optional).
+- `user_message` (raw text).
+- `conversation_history` (list, optional).
 
 ## Expected output (structure)
 The JSON schema is external and versioned:
 - `state_structure_01_abc.json`
 
-01a must produce a minimal **JSON patch** aligned with the schema, limited to `core` (and `manques` if needed).
+01a must produce a minimal **JSON patch** aligned with the schema, limited to `core` (and `missing` if needed).
 
 ## Identifier and storage
 - 1a assigns a state identifier: `sNNNN`.
@@ -30,11 +30,11 @@ The JSON schema is external and versioned:
 ```json
 {
   "completed_steps": ["1a"],
-  "manques": [],
+  "missing": [],
   "core": {
-    "resume": "",
-    "questions_ouvertes": [],
-    "intentions": [],
+    "summary": "",
+    "open_questions": [],
+    "intents": [],
     "notes": ""
   }
 }
@@ -44,19 +44,19 @@ The JSON schema is external and versioned:
 - Ask 1 to 3 questions max when information is missing.
 - Do not invent constraints the user did not provide.
 - Stay brief and clear, in English.
-- If everything is clear, `questions_ouvertes` must be empty.
-- Fill `manques` according to `missing_sensitivity` (see `agent_architecture/hyperparameters.json`).
+- If everything is clear, `open_questions` must be empty.
+- Fill `missing` according to `missing_sensitivity` (see `agent_architecture/hyperparameters.json`).
 - In "project creation" mode, prioritize structuring questions (format, duration, tone, deliverables).
 
 ## JSON filling rules
 - Refer to `_ownership` in `state_structure_01_abc.json`.
-- Only fill `core` and `manques` (if needed).
+- Only fill `core` and `missing` (if needed).
 - `completed_steps` contains `1a`.
-- `core.resume` = 1 to 2 sentences, 240 chars max.
-- `core.questions_ouvertes` = list of 0 to 3 questions, 1 sentence per question.
-- `core.intentions` = 0 to 5 simple keywords (no phrases).
+- `core.summary` = 1 to 2 sentences, 240 chars max.
+- `core.open_questions` = list of 0 to 3 questions, 1 sentence per question.
+- `core.intents` = 0 to 5 simple keywords (no phrases).
 - `core.notes` = optional, 0 to 200 chars max, no new requirements.
-- Never produce `thinker`, `brief`, `questions_en_suspens`.
+- Never produce `thinker`, `brief`, `pending_questions` in 1a.
 - Human text is separated from the JSON section.
 
 ## Quality criteria
@@ -73,17 +73,17 @@ User response: (human text)
 ```json
 {
   "completed_steps": ["1a"],
-  "manques": [
+  "missing": [
     "Exact topic",
     "Target duration"
   ],
   "core": {
-    "resume": "Short satirical narration request, topic to define.",
-    "questions_ouvertes": [
+    "summary": "Short satirical narration request, topic to define.",
+    "open_questions": [
       "What is the exact topic to cover?",
       "What target duration (30s, 60s, 90s)?"
     ],
-    "intentions": ["narration", "satire"],
+    "intents": ["narration", "satire"],
     "notes": ""
   }
 }

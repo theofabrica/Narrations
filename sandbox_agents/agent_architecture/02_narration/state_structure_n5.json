@@ -1,0 +1,147 @@
+{
+  "project_id": "",
+  "strata": "n5",
+  "updated_at": "",
+  "data": {
+    "project_id": "",
+    "document_level": "N5",
+    "document_name": "",
+    "version": "",
+    "meta": {
+      "status": "",
+      "language": "",
+      "aspect_ratio": "",
+      "timebase": "",
+      "scope": {
+        "acts": [
+          {
+            "id": "",
+            "title": "",
+            "timecode_in": "",
+            "timecode_out": "",
+            "duration_s": 0
+          }
+        ],
+        "sequences": [
+          {
+            "id": "",
+            "title": "",
+            "timecode_in": "",
+            "timecode_out": "",
+            "duration_s": 0
+          }
+        ],
+        "scenes": [
+          {
+            "id": "",
+            "title": "",
+            "timecode_in": "",
+            "timecode_out": "",
+            "duration_s": 0
+          }
+        ]
+      }
+    },
+    "dependencies": {
+      "n0_updated_at": "",
+      "n1_version": "",
+      "n1_updated_at": "",
+      "n2_version": "",
+      "n2_updated_at": "",
+      "n3_version": "",
+      "n3_updated_at": "",
+      "n4_version": "",
+      "n4_updated_at": ""
+    },
+    "stack": {
+      "image_generation_primary": "",
+      "image_edit_optional": "",
+      "video_generation": "",
+      "sound_sfx": "",
+      "music": "",
+      "note": ""
+    },
+    "render_specs": {
+      "resolution_px": [
+        0,
+        0
+      ],
+      "fps": 0,
+      "color_space": "",
+      "audio_spec": {
+        "sample_rate_hz": 0,
+        "deliver_stems": [],
+        "loudness_target_lufs": 0
+      }
+    },
+    "safety_and_branding": {
+      "satire_context": "",
+      "identity_note": "",
+      "text_note": ""
+    },
+    "global_prompt_tokens": {
+      "visual_base": "",
+      "overlay_style": "",
+      "character_style": "",
+      "negative_universal": ""
+    },
+    "assets": {
+      "visual_props": [
+        {
+          "id": "",
+          "type": "",
+          "introduced_in": "",
+          "role": "",
+          "design_notes": {}
+        }
+      ],
+      "audio_assets": [
+        {
+          "id": "",
+          "tool": "",
+          "settings": {},
+          "prompt": ""
+        }
+      ],
+      "music_assets": [
+        {
+          "id": "",
+          "note": ""
+        }
+      ]
+    },
+    "plans_index": [
+      {
+        "id": "",
+        "title": "",
+        "timecode_in": "",
+        "timecode_out": "",
+        "scope": {
+          "act_id": "",
+          "sequence_id": "",
+          "scene_id": ""
+        }
+      }
+    ],
+    "plans": [
+      {
+        "id": "",
+        "title": "",
+        "scope": {
+          "act_id": "",
+          "sequence_id": "",
+          "scene_id": ""
+        },
+        "timecode_in": "",
+        "timecode_out": "",
+        "duration_s": 0,
+        "n3_beats": [],
+        "intent": "",
+        "shot": {},
+        "prompts": {},
+        "dialogue": {},
+        "audio": {}
+      }
+    ]
+  }
+}

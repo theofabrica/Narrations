@@ -12,10 +12,11 @@
 - `strategy_card_structure.json`
 
 ## Entree attendue
-- `state_01_abc.json` complet (au moins 1a/1b/1c)
+- `context_pack.json` conforme a `context_pack_structure.json`
 
 ## Sortie attendue (structure)
-- Meme `state_01_abc.json`, avec uniquement les champs tagues redaction mis a jour.
+- `target_patch` : contenu de la section cible uniquement.
+- `open_questions` : questions restantes si blocage (optionnel).
 
 ## Regles
 - Traiter les champs **un par un**, dans l'ordre fourni par `_redaction`.
@@ -23,6 +24,7 @@
 - Respecter `min_chars` / `max_chars` pour chaque champ.
 - Ne pas ajouter d'informations non presentes dans le state.
 - Conserver l'intention et le ton de l'utilisateur.
+- N'ecrire que la section cible (`target_path`) fournie par le context pack.
 
 ## Sous-agents
 - `10_context_builder.md` : construit `context_pack.json`.
@@ -33,8 +35,8 @@
 2) pour chaque champ cible:
    - Context Builder -> `context_pack.json`
    - Strategy Finder -> `strategy_card.json`
-   - Rediger le champ
-3) rendre le state mis a jour
+   - Rediger uniquement la section cible
+3) rendre `target_patch`
 
 ## Exemple (sequence)
 1) lire `_redaction` et `_redaction_constraints`

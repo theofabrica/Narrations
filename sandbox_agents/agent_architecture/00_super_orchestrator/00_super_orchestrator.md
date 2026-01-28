@@ -4,12 +4,14 @@
 - Orchestrer le flux global (conversation, clarification, redaction, orchestration metier).
 - Decider quand lancer 1a/1b/1c, le writer, puis l'orchestrateur narration.
 - Gerer la file de taches (`task_queue.json`) et deleguer l'execution au runner.
+- Gerer le cas "creation de projet" (N0-N5 vides) en declenchant un chat de cadrage.
 
 ## Entrees principales
 - Message utilisateur + historique de conversation.
 - `state_01_abc.json` (etat courant).
 - `agent_architecture/hyperparameters.json`.
 - `super_orchestrator_input_schema.json`.
+- Etat de projet courant (presence ou absence des states N0-N5).
 
 ## Sorties principales
 - State mis a jour.
@@ -24,6 +26,11 @@
 3) Si `_redaction` actif, lancer 10_writer_agent
 4) Passer le brief a la couche 2 (orchestrateur narration)
 5) Lancer l'execution des taches
+
+## Cas creation de projet
+- Si N0-N5 sont vides ou inexistants, ouvrir un chat de cadrage.
+- Le chat alimente la couche 1, puis la couche 2 remplit progressivement N0-N5.
+- Tant que des manques bloquent N0-N5, maintenir la boucle de clarification.
 
 ## Regles
 - Ne pas forcer l'etape suivante si `manques` n'est pas vide.
