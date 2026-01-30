@@ -15,6 +15,7 @@
   --radius: 18px;
   --radius-sm: 12px;
   --shadow: 0 24px 60px rgba(5, 10, 22, 0.55);
+  --app-bg-image: none;
 }
 
 body {
@@ -26,9 +27,13 @@ body {
   padding: 120px clamp(20px, 4vw, 64px) 64px;
   color: var(--ink);
   background:
+    var(--app-bg-image),
     radial-gradient(circle at 10% 10%, rgba(120, 167, 255, 0.18), transparent 40%),
     radial-gradient(circle at 85% 5%, rgba(75, 102, 160, 0.35), transparent 45%),
     linear-gradient(145deg, #0c111e, #0a0f1c 60%, #10182d);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif;
 }
 
@@ -178,6 +183,18 @@ body {
   color: var(--danger);
 }
 
+.status-pill.warning {
+  background: rgba(255, 199, 92, 0.16);
+  color: #ffc75c;
+}
+
+.hint-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .hero-metrics {
   display: grid;
   gap: 14px;
@@ -299,10 +316,21 @@ body {
 .project-title {
   font-size: clamp(2.6rem, 4.6vw, 3.6rem);
   text-align: center;
-  width: 100%;
+  width: auto;
+  flex: 1;
   font-family: 'Cormorant Garamond', 'Times New Roman', serif;
   font-weight: 600;
   letter-spacing: 0.02em;
+}
+
+.project-head-fields {
+  display: grid;
+  gap: 8px;
+  align-items: start;
+}
+
+.project-head-fields .project-input {
+  min-width: 220px;
 }
 
 .panel-actions {
@@ -445,44 +473,6 @@ body {
   font-size: 1rem;
 }
 
-.n0-import {
-  display: grid;
-  gap: 10px;
-}
-
-.n0-import-inline {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.n0-import-inline input {
-  flex: 1;
-  border: 1px solid rgba(80, 98, 150, 0.7);
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 0.9rem;
-  font-family: 'Space Grotesk', 'Fira Code', monospace;
-  background: rgba(10, 16, 30, 0.9);
-  color: var(--ink);
-}
-
-.n0-import-inline button {
-  border: 1px solid rgba(80, 98, 150, 0.7);
-  background: rgba(10, 16, 30, 0.85);
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: 0.2s ease;
-  color: var(--ink-soft);
-  white-space: nowrap;
-}
-
-.n0-import-inline button:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
 
 .script-layout {
   display: grid;
@@ -693,39 +683,6 @@ body {
   color: var(--ink-soft);
 }
 
-.n0-import textarea {
-  border: 1px solid rgba(80, 98, 150, 0.7);
-  border-radius: 12px;
-  padding: 12px;
-  font-size: 0.85rem;
-  font-family: 'Space Grotesk', 'Fira Code', monospace;
-  background: rgba(10, 16, 30, 0.9);
-  color: var(--ink);
-  min-height: 140px;
-  resize: vertical;
-}
-
-.n0-import-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.n0-import-actions button {
-  border: 1px solid rgba(80, 98, 150, 0.7);
-  background: rgba(10, 16, 30, 0.85);
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: 0.2s ease;
-  color: var(--ink-soft);
-}
-
-.n0-import-actions button:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
 
 .section-head {
   display: flex;
@@ -1626,7 +1583,6 @@ body {
   background: rgba(10, 16, 30, 0.9);
   color: var(--ink);
   min-height: 120px;
-  resize: vertical;
   width: 100%;
 }
 
@@ -1672,7 +1628,11 @@ body {
   background: rgba(10, 16, 30, 0.9);
   color: var(--ink);
   min-height: 110px;
-  resize: vertical;
+}
+
+.auto-resize {
+  overflow-y: hidden;
+  resize: none;
 }
 
 .form-grid label.checkbox {

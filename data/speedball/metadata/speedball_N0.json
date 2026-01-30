@@ -1,0 +1,36 @@
+{
+  "project_id": "speedball",
+  "strata": "n0",
+  "updated_at": "2026-01-30T10:46:05.878711Z",
+  "data": {
+    "production_summary": {
+      "summary": "In a futuristic arena, rollerblade athletes engage in a thrilling 90-second ball sport, where agility and speed are paramount. The scene is set to a dramatic blend of hip hop and classical music, enhancing the intensity and elegance of the sport. The athletes, clad in sleek, modern gear, maneuver with precision, their movements a dance of athleticism and strategy. The atmosphere is charged with excitement, as the crowd watches in awe, captivated by the spectacle of this innovative and dynamic sport.",
+      "production_type": "clip",
+      "primary_output_format": "",
+      "target_duration": "",
+      "aspect_ratio": "16:9",
+      "visual_style": "futuristic",
+      "tone": "dramatic",
+      "era": ""
+    },
+    "deliverables": {
+      "visuals": {
+        "images_enabled": true,
+        "videos_enabled": true
+      },
+      "audio_stems": {
+        "dialogue": true,
+        "sfx": true,
+        "music": true
+      }
+    },
+    "art_direction": {
+      "description": "The art direction for the 90-second clip on a futuristic ball sport with rollerblade athletes is characterized by a sleek and modern aesthetic that emphasizes speed and agility. The visual style incorporates metallic and neon elements, reflecting the advanced technology and dynamic nature of the sport. The athletes' costumes are designed with aerodynamic lines and vibrant colors that stand out against the urban backdrop, enhancing the sense of motion and energy. The setting is a futuristic cityscape with towering skyscrapers and expansive arenas, creating a dramatic and immersive environment. This distinctive style is further accentuated by the use of dynamic camera angles and fast-paced editing, capturing the intensity and excitement of the sport. The overall look is both cutting-edge and visually striking, making it instantly recognizable and memorable.",
+      "references": ""
+    },
+    "sound_direction": {
+      "description": "The sonic landscape of the video is a compelling fusion of hip hop and classical music, creating a dramatic and unique auditory experience. The rhythmic beats and bass lines of hip hop provide an energetic and modern edge, while the orchestral elements of classical music add depth and grandeur. This blend not only enhances the futuristic theme of the sport but also underscores the intensity and dynamism of the rollerblade athletes in action. The music's dramatic tone is further accentuated by the use of powerful crescendos and intricate melodies, making it both distinctive and memorable.",
+      "references": ""
+    }
+  }
+}

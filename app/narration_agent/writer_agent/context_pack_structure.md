@@ -1,0 +1,35 @@
+# context_pack_structure.md - Field clarification
+
+The `context_pack_structure.json` file is a context container with no new information.
+Each field comes from the state, N schemas, or knowledge sources (strategy).
+
+## Fields
+- `target_path`: path of the target field to write (e.g. `data.production_summary`).
+- `target_section_name`: short name of the section (e.g. `production_summary`).
+- `writing_typology`: writing task type used to guide strategy selection.
+- `target_current`: current content of the target section.
+- `target_schema`: schema excerpt for the target section.
+- `source_state_id`: source state identifier (e.g. `s0001`).
+- `project_id`: project identifier (if known).
+- `core_summary`: short summary from the state (if available).
+- `core_detailed_summary`: detailed summary from the state (if available).
+- `intents`: short tags to guide writing.
+- `thinker_constraints`: constraints from the `thinker` section.
+- `brief_constraints`: constraints from the `brief` section.
+- `brief_primary_objective`: primary objective (brief).
+- `brief_secondary_objectives`: secondary objectives (brief).
+- `brief_priorities`: priorities (brief).
+- `missing`: list of missing elements detected.
+- `pending_questions`: questions to ask the user.
+- `dependencies`: references to N0-N5 states if available, plus optional inline data.
+  - `n0_ref`..`n5_ref`: file references
+  - `n0`..`n5`: inline state data when loaded
+- `style_constraints`: language, tone, format.
+- `strategy_card`: strategy card provided by the Strategy Finder.
+- `redaction_constraints`: length bounds for the target field.
+- `do_not_invent`: safety boolean (true = do not invent).
+
+## Rules
+- No field should contain new information.
+- The pack only structures what is already known.
+- The writer must produce only `target_path`.

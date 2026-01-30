@@ -10,7 +10,7 @@
 - `agent_architecture/hyperparameters.json`: `missing_sensitivity` shared by 1a/1b/1c.
 
 ## Expected input
-- `output_1b` (full 1b structure)
+- `output_1b` (full 1b structure) or a `state_snapshot` (when using memory).
 
 ## Expected output (structure)
 The JSON schema is external and versioned:
@@ -28,7 +28,9 @@ The JSON schema is external and versioned:
     "constraints": [],
     "hypotheses": [],
     "target_level": "",
-    "priorities": []
+    "priorities": [],
+    "target_strata": [],
+    "target_paths": []
   },
   "pending_questions": []
 }
@@ -41,6 +43,9 @@ The JSON schema is external and versioned:
 - Stay concise and factual.
 - Refer to `_ownership` in `state_structure_01_abc.json`.
 - Never produce `core` or `thinker`.
+- Fill `brief.target_strata` with the strata impacted by the request (e.g. `["n1"]`).
+- Fill `brief.target_paths` with specific sections/paths (e.g. `n1.characters`, `n0.production_summary`).
+- If no clear scope is provided, leave `target_strata`/`target_paths` empty.
 
 ## Example
 **Input**: output_1b
@@ -59,7 +64,9 @@ The JSON schema is external and versioned:
     "constraints": ["Duration to define", "Topic to define"],
     "hypotheses": [],
     "target_level": "n1",
-    "priorities": ["Clarify topic and duration"]
+    "priorities": ["Clarify topic and duration"],
+    "target_strata": ["n0", "n1"],
+    "target_paths": ["n0.production_summary", "n1.pitch"]
   },
   "pending_questions": ["Exact topic", "Target duration"]
 }

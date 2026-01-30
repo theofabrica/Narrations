@@ -5,7 +5,7 @@ import argparse
 from .agent_factory import AgentFactory
 from .context_builder import ContextBuilder
 from .llm_client import LLMClient
-from .orchestrator import NarrationOrchestrator
+from .narrator_orchestrator import NarratorOrchestrator
 from .task_runner import TaskRunner
 
 
@@ -13,7 +13,7 @@ def build_runtime(model: str) -> dict:
     llm_client = LLMClient(default_model=model)
     agent_factory = AgentFactory(default_model=model)
     context_builder = ContextBuilder()
-    orchestrator = NarrationOrchestrator()
+    orchestrator = NarratorOrchestrator()
     runner = TaskRunner()
     return {
         "llm_client": llm_client,

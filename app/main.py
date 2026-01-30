@@ -12,6 +12,7 @@ from app.utils.logging import setup_logger
 from app.utils.storage import get_storage_path
 from app.utils.project_storage import (
     read_strata,
+    read_ui_strata,
     write_strata,
     list_projects,
     delete_project,
@@ -35,7 +36,9 @@ from app.utils.errors import to_mcp_error, ProviderError
 from app.utils.normalize import normalize_request
 from app.tools.registry import list_actions
 from app.tools.higgsfield.client import get_client as get_higgsfield_client
+from app.narration_agent.llm_client import LLMClient
 from app.narration_agent.service import handle_narration_message
+from app.narration_agent.ui_translator import UITranslator
 from datetime import datetime, timezone
 import asyncio
 import json
@@ -273,6 +276,57 @@ def get_project_strata(project_id: str, strata: str) -> Dict[str, Any]:
     except Exception as e:
         logger.error(
             "Error reading strata project=%s strata=%s: %s",
+            project_id,
+            strata,
+            e,
+            exc_info=True,
+        )
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.get("/projects/{project_id}/{strata}/ui")
+def get_project_strata_ui(project_id: str, strata: str) -> Dict[str, Any]:
+    if strata not in STRATA_FILES:
+        raise HTTPException(status_code=400, detail="Unknown strata")
+    try:
+        return read_ui_strata(project_id, strata)
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="UI strata not found")
+    except Exception as e:
+        logger.error(
+            "Error reading ui strata project=%s strata=%s: %s",
+            project_id,
+            strata,
+            e,
+            exc_info=True,
+        )
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.post("/projects/{project_id}/{strata}/ui")
+def post_project_strata_ui(
+    project_id: str,
+    strata: str,
+    body: Dict[str, Any],
+) -> Dict[str, Any]:
+    if strata not in STRATA_FILES:
+        raise HTTPException(status_code=400, detail="Unknown strata")
+    try:
+        translator = UITranslator(LLMClient())
+        updated = translator.update_source_from_ui(
+            project_id=project_id,
+            strata=strata,
+            ui_payload=body,
+            source_language="fr",
+        )
+        if not updated:
+            raise HTTPException(status_code=404, detail="Strata not found")
+        return updated
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(
+            "Error writing ui strata project=%s strata=%s: %s",
             project_id,
             strata,
             e,

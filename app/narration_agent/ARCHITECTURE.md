@@ -8,7 +8,7 @@ avec des appels LLM, des plans de taches, et une gestion des states N0-N5.
 - `llm_client.py` : wrapper LLM unique (model selection, execution).
 - `agent_factory.py` : resolution des agents par role + prompts.
 - `context_builder.py` : construction des `context_pack` (cible + contexte).
-- `orchestrator.py` : generation du `task_plan` pour N0-N5.
+- `narrator_orchestrator.py` : generation du `task_plan` pour N0-N5.
 - `task_runner.py` : execution des taches (sequentiel/parallele).
 
 ## Dependances applicatives
@@ -53,7 +53,7 @@ flowchart TD
   API --> NA["NarrationAgent_Runtime"]
   NA --> SO["SuperOrchestrator"]
   SO --> Chat["ChatAgents_1a1b1c"]
-  SO --> NOrch["NarrationOrchestrator_02_00"]
+  SO --> NOrch["NarratorOrchestrator_02_00"]
   NOrch --> Plan["TaskPlan"]
   Plan --> Runner["Runner_00"]
   Runner --> Ctx["ContextBuilder"]

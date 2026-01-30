@@ -1,0 +1,246 @@
+{
+  "project_id": "speedball",
+  "session_id": "sess_914c2bc9d4d343e3940605343423f60c",
+  "label": "narration_plan",
+  "logged_at": "2026-01-30T10:45:45.799628Z",
+  "task_plan": {
+    "plan_id": "plan_ba2919efd846",
+    "created_at": "2026-01-30T10:45:45.797349Z",
+    "source_state_id": "sess_914c2bc9d4d343e3940605343423f60c",
+    "tasks": [
+      {
+        "id": "task_n0_production_summary",
+        "agent": "writer_n0",
+        "input_ref": "state_01_abc",
+        "output_ref": "n0.production_summary",
+        "depends_on": []
+      },
+      {
+        "id": "task_n0_art_direction",
+        "agent": "writer_n0",
+        "input_ref": "state_01_abc",
+        "output_ref": "n0.art_direction",
+        "depends_on": [
+          "task_n0_production_summary"
+        ]
+      },
+      {
+        "id": "task_n0_sound_direction",
+        "agent": "writer_n0",
+        "input_ref": "state_01_abc",
+        "output_ref": "n0.sound_direction",
+        "depends_on": [
+          "task_n0_art_direction"
+        ]
+      }
+    ]
+  },
+  "task_context": {
+    "task_n0_production_summary": {
+      "source_state_payload": {
+        "state_id": "",
+        "state_version": "1abc_v1",
+        "completed_steps": [
+          "1a",
+          "1b",
+          "1c"
+        ],
+        "missing": [],
+        "core": {
+          "summary": "90-second clip on futuristic ball sport with rollerblade athletes, dramatic hip hop/classical music.",
+          "detailed_summary": "",
+          "open_questions": [],
+          "intents": [
+            "clip",
+            "futuristic",
+            "sport",
+            "dramatic",
+            "music"
+          ]
+        },
+        "thinker": {
+          "objectives": [
+            "Create a 90-second video clip featuring a futuristic ball sport with rollerblade athletes."
+          ],
+          "constraints": [
+            "The clip should have a dramatic tone.",
+            "Music should be a blend of hip hop and classical genres."
+          ],
+          "hypotheses": [],
+          "missing": [],
+          "clarifications": [],
+          "target_level": "n1"
+        },
+        "brief": {
+          "primary_objective": "Create a 90-second video clip featuring a futuristic ball sport with rollerblade athletes.",
+          "secondary_objectives": [],
+          "constraints": [
+            "The clip should have a dramatic tone.",
+            "Music should be a blend of hip hop and classical genres."
+          ],
+          "hypotheses": [],
+          "target_level": "n1",
+          "priorities": [],
+          "target_strata": [
+            "n1"
+          ],
+          "target_paths": [
+            "n1.video_clip"
+          ]
+        },
+        "pending_questions": []
+      },
+      "target_path": "n0.production_summary"
+    },
+    "task_n0_art_direction": {
+      "source_state_payload": {
+        "state_id": "",
+        "state_version": "1abc_v1",
+        "completed_steps": [
+          "1a",
+          "1b",
+          "1c"
+        ],
+        "missing": [],
+        "core": {
+          "summary": "90-second clip on futuristic ball sport with rollerblade athletes, dramatic hip hop/classical music.",
+          "detailed_summary": "",
+          "open_questions": [],
+          "intents": [
+            "clip",
+            "futuristic",
+            "sport",
+            "dramatic",
+            "music"
+          ]
+        },
+        "thinker": {
+          "objectives": [
+            "Create a 90-second video clip featuring a futuristic ball sport with rollerblade athletes."
+          ],
+          "constraints": [
+            "The clip should have a dramatic tone.",
+            "Music should be a blend of hip hop and classical genres."
+          ],
+          "hypotheses": [],
+          "missing": [],
+          "clarifications": [],
+          "target_level": "n1"
+        },
+        "brief": {
+          "primary_objective": "Create a 90-second video clip featuring a futuristic ball sport with rollerblade athletes.",
+          "secondary_objectives": [],
+          "constraints": [
+            "The clip should have a dramatic tone.",
+            "Music should be a blend of hip hop and classical genres."
+          ],
+          "hypotheses": [],
+          "target_level": "n1",
+          "priorities": [],
+          "target_strata": [
+            "n1"
+          ],
+          "target_paths": [
+            "n1.video_clip"
+          ]
+        },
+        "pending_questions": []
+      },
+      "target_path": "n0.art_direction"
+    },
+    "task_n0_sound_direction": {
+      "source_state_payload": {
+        "state_id": "",
+        "state_version": "1abc_v1",
+        "completed_steps": [
+          "1a",
+          "1b",
+          "1c"
+        ],
+        "missing": [],
+        "core": {
+          "summary": "90-second clip on futuristic ball sport with rollerblade athletes, dramatic hip hop/classical music.",
+          "detailed_summary": "",
+          "open_questions": [],
+          "intents": [
+            "clip",
+            "futuristic",
+            "sport",
+            "dramatic",
+            "music"
+          ]
+        },
+        "thinker": {
+          "objectives": [
+            "Create a 90-second video clip featuring a futuristic ball sport with rollerblade athletes."
+          ],
+          "constraints": [
+            "The clip should have a dramatic tone.",
+            "Music should be a blend of hip hop and classical genres."
+          ],
+          "hypotheses": [],
+          "missing": [],
+          "clarifications": [],
+          "target_level": "n1"
+        },
+        "brief": {
+          "primary_objective": "Create a 90-second video clip featuring a futuristic ball sport with rollerblade athletes.",
+          "secondary_objectives": [],
+          "constraints": [
+            "The clip should have a dramatic tone.",
+            "Music should be a blend of hip hop and classical genres."
+          ],
+          "hypotheses": [],
+          "target_level": "n1",
+          "priorities": [],
+          "target_strata": [
+            "n1"
+          ],
+          "target_paths": [
+            "n1.video_clip"
+          ]
+        },
+        "pending_questions": []
+      },
+      "target_path": "n0.sound_direction"
+    }
+  },
+  "runner_input": {
+    "plan_id": "plan_ba2919efd846",
+    "task_plan_ref": "",
+    "task_plan_payload": {
+      "plan_id": "plan_ba2919efd846",
+      "created_at": "2026-01-30T10:45:45.797349Z",
+      "source_state_id": "sess_914c2bc9d4d343e3940605343423f60c",
+      "tasks": [
+        {
+          "id": "task_n0_production_summary",
+          "agent": "writer_n0",
+          "input_ref": "state_01_abc",
+          "output_ref": "n0.production_summary",
+          "depends_on": []
+        },
+        {
+          "id": "task_n0_art_direction",
+          "agent": "writer_n0",
+          "input_ref": "state_01_abc",
+          "output_ref": "n0.art_direction",
+          "depends_on": [
+            "task_n0_production_summary"
+          ]
+        },
+        {
+          "id": "task_n0_sound_direction",
+          "agent": "writer_n0",
+          "input_ref": "state_01_abc",
+          "output_ref": "n0.sound_direction",
+          "depends_on": [
+            "task_n0_art_direction"
+          ]
+        }
+      ]
+    },
+    "execution_mode": "sequential",
+    "started_at": "2026-01-30T10:45:45.797383Z"
+  }
+}

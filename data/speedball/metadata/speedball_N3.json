@@ -1,0 +1,125 @@
+{
+  "project_id": "speedball",
+  "strata": "n3",
+  "updated_at": "2026-01-30T10:45:09.434348Z",
+  "data": {
+    "project_id": "",
+    "document_level": "N3",
+    "document_name": "",
+    "version": "",
+    "meta": {
+      "status": "",
+      "language": "",
+      "target_duration_s": 0,
+      "aspect_ratio": "",
+      "granularity": "",
+      "dependencies": {
+        "n0_updated_at": "",
+        "n1_version": "",
+        "n1_updated_at": "",
+        "n2_version": "",
+        "n2_updated_at": ""
+      },
+      "canon": {
+        "tone": [],
+        "visual_style": "",
+        "sound_style": "",
+        "casting_rule": "",
+        "ending_rule": ""
+      },
+      "constraints": {}
+    },
+    "units_index": [
+      {
+        "id": "",
+        "type": "",
+        "title": "",
+        "status": "",
+        "version": ""
+      }
+    ],
+    "units": [
+      {
+        "meta": {
+          "niveau": 3,
+          "document": "N3_UNITS__sequences_scenes",
+          "version": "",
+          "statut": "",
+          "granularity": "",
+          "dependencies": {
+            "n0": "",
+            "n1": "",
+            "n2": ""
+          }
+        },
+        "identity": {
+          "id": "",
+          "type": "",
+          "title_short": "",
+          "duration_s": 0,
+          "timecode_in": "",
+          "timecode_out": "",
+          "location": [],
+          "time": "",
+          "characters_present": [],
+          "intensity": {
+            "visual_overlay_density_0to5": 0,
+            "audio_density_0to5": 0,
+            "music_intensity_0to5": 0
+          }
+        },
+        "n2_recall": {
+          "function_narrative": "",
+          "stakes": [],
+          "exit_change": ""
+        },
+        "vibration": {
+          "enjeu_humain_actif": "",
+          "ancre_sensorielle": "",
+          "motif_mobilise_variation": ""
+        },
+        "situation_initiale": {
+          "qui_est_present": "",
+          "ou_quand": "",
+          "pourquoi_ici_maintenant": "",
+          "etat": {
+            "monde": "",
+            "tension": ""
+          }
+        },
+        "objectifs_obstacles": {
+          "objectif_principal": "",
+          "objectif_secondaire": "",
+          "obstacle_principal": "",
+          "obstacles_secondaires": [],
+          "nature_de_la_difficulte": []
+        },
+        "deroule_detaille": [],
+        "beats": [
+          {
+            "id": "",
+            "description": ""
+          }
+        ],
+        "dynamiques_personnages": {
+          "forces_en_presence": "",
+          "conflit_alliance_ambivalence": ""
+        },
+        "dialogues": [],
+        "decor_visuel": {
+          "ambiance_visuelle": "",
+          "elements_visibles_cles": [],
+          "personnages_etat": [],
+          "notes_promptables_sans_prompt": []
+        },
+        "audio": {
+          "ambiance": "",
+          "music": "",
+          "sfx": "",
+          "dialogues_traitement": "",
+          "silence": ""
+        }
+      }
+    ]
+  }
+}

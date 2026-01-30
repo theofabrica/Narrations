@@ -1,0 +1,44 @@
+{
+  "target_path": "",
+  "target_section_name": "",
+  "writing_typology": "",
+  "target_current": {},
+  "target_schema": {},
+  "source_state_id": "",
+  "project_id": "",
+  "core_summary": "",
+  "core_detailed_summary": "",
+  "intents": [],
+  "thinker_constraints": [],
+  "brief_constraints": [],
+  "brief_primary_objective": "",
+  "brief_secondary_objectives": [],
+  "brief_priorities": [],
+  "missing": [],
+  "pending_questions": [],
+  "dependencies": {
+    "n0_ref": "",
+    "n0": {},
+    "n1_ref": "",
+    "n1": {},
+    "n2_ref": "",
+    "n2": {},
+    "n3_ref": "",
+    "n3": {},
+    "n4_ref": "",
+    "n4": {},
+    "n5_ref": "",
+    "n5": {}
+  },
+  "style_constraints": {
+    "language": "",
+    "tone": "",
+    "format": ""
+  },
+  "strategy_card": {},
+  "redaction_constraints": {
+    "min_chars": 0,
+    "max_chars": 0
+  },
+  "do_not_invent": true
+}

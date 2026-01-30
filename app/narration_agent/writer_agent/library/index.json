@@ -1,0 +1,77 @@
+{
+  "version": "v1",
+  "typologies": [
+    "narratology"
+  ],
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "writing_typologies": [
+    "summary",
+    "pitch",
+    "structure",
+    "character",
+    "scene",
+    "theme",
+    "style",
+    "prompting"
+  ],
+  "items": [
+    {
+      "id": "aristote_poetique",
+      "title": "Poetique",
+      "author": "Aristote",
+      "typology": "narratology",
+      "language": "fr",
+      "writing_typologies": [
+        "structure",
+        "theme"
+      ],
+      "filename": "SRC_NARRATOLOGY__aristote_poetics.txt",
+      "source_path": "writer_agent/library/SRC_NARRATOLOGY__aristote_poetics.txt"
+    },
+    {
+      "id": "lavandier_construire_un_recit",
+      "title": "Construire un recit",
+      "author": "Yves Lavandier",
+      "typology": "narratology",
+      "language": "fr",
+      "writing_typologies": [
+        "structure",
+        "pitch",
+        "character"
+      ],
+      "filename": "SRC_NARRATOLOGY__lavandier_dramaturgy.txt",
+      "source_path": "writer_agent/library/SRC_NARRATOLOGY__lavandier_dramaturgy.txt"
+    },
+    {
+      "id": "mckee_story",
+      "title": "Story",
+      "author": "Robert McKee",
+      "typology": "narratology",
+      "language": "en",
+      "writing_typologies": [
+        "structure",
+        "scene",
+        "character"
+      ],
+      "filename": "SRC_NARRATOLOGY__mckee_story.txt",
+      "source_path": "writer_agent/library/SRC_NARRATOLOGY__mckee_story.txt"
+    },
+    {
+      "id": "truby_anatomy_of_story",
+      "title": "Anatomy of Story",
+      "author": "John Truby",
+      "typology": "narratology",
+      "language": "fr",
+      "writing_typologies": [
+        "structure",
+        "character",
+        "theme"
+      ],
+      "filename": "SRC_NARRATOLOGY__truby_anatomy_of_story.txt",
+      "source_path": "writer_agent/library/SRC_NARRATOLOGY__truby_anatomy_of_story.txt"
+    }
+  ]
+}

@@ -21,6 +21,9 @@ The JSON schema is external and versioned:
 
 1b must produce a minimal **JSON patch** limited to the `thinker` section.
 
+Additionally, prepend a routing line before the JSON (exact format):
+- `##TRIGGER: clarify##` | `##TRIGGER: chat##` | `##TRIGGER: build_brief##` | `##TRIGGER: use_memory##`
+
 ```json
 {
   "completed_steps": ["1a", "1b"],
@@ -44,6 +47,11 @@ The JSON schema is external and versioned:
 - Stay factual, no invention.
 - Refer to `_ownership` in `state_structure_01_abc.json`.
 - Never produce `core`, `brief`, or `pending_questions`.
+- Trigger selection:
+  - `clarify`: when critical info is missing to proceed.
+  - `chat`: when the message is conversational or non-actionable.
+  - `build_brief`: when the message is ready for orchestration.
+  - `use_memory`: when the user explicitly wants to reuse prior context.
 
 ## Example
 **Input**:

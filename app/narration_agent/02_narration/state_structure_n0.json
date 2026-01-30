@@ -1,0 +1,35 @@
+{
+  "project_id": "",
+  "strata": "n0",
+  "updated_at": "",
+  "data": {
+    "production_summary": {
+      "summary": "",
+      "production_type": "",
+      "target_duration": "",
+      "aspect_ratio": "",
+      "visual_style": "",
+      "tone": "",
+      "era": ""
+    },
+    "deliverables": {
+      "visuals": {
+        "images_enabled": true,
+        "videos_enabled": true
+      },
+      "audio_stems": {
+        "dialogue": true,
+        "sfx": true,
+        "music": true
+      }
+    },
+    "art_direction": {
+      "description": "",
+      "references": ""
+    },
+    "sound_direction": {
+      "description": "",
+      "references": ""
+    }
+  }
+}

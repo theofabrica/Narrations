@@ -16,6 +16,8 @@
     "brief.hypotheses": ["1c"],
     "brief.target_level": ["1c"],
     "brief.priorities": ["1c"],
+    "brief.target_strata": ["1c"],
+    "brief.target_paths": ["1c"],
     "pending_questions": ["1c"],
     "missing": ["1a", "1b", "1c"]
   },
@@ -57,6 +59,8 @@
     "brief.hypotheses": "Hypotheses for the brief.",
     "brief.target_level": "Target narrative level for the brief.",
     "brief.priorities": "Priority items for the brief.",
+    "brief.target_strata": "Target strata for narration scope (e.g. n0, n1).",
+    "brief.target_paths": "Target paths/sections impacted by the request.",
     "pending_questions": "Consolidated unanswered questions."
   },
   "state_id": "",
@@ -83,7 +87,9 @@
     "constraints": [],
     "hypotheses": [],
     "target_level": "",
-    "priorities": []
+      "priorities": [],
+      "target_strata": [],
+      "target_paths": []
   },
   "pending_questions": []
 }

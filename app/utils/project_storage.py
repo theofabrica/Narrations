@@ -137,6 +137,37 @@ def write_strata(project_id: str, strata: str, data: Dict[str, Any]) -> Dict[str
     return payload
 
 
+def get_ui_strata_path(project_id: str, strata: str) -> Path:
+    safe_project_id = _safe_project_id(project_id)
+    return get_project_dir(project_id) / f"{safe_project_id}_{strata.upper()}_UI.json"
+
+
+def read_ui_strata(project_id: str, strata: str) -> Dict[str, Any]:
+    path = get_ui_strata_path(project_id, strata)
+    if not path.exists():
+        raise FileNotFoundError(str(path))
+    return _read_json(path)
+
+
+def write_ui_strata(
+    project_id: str,
+    strata: str,
+    data: Dict[str, Any],
+    source_updated_at: str = "",
+) -> Dict[str, Any]:
+    path = get_ui_strata_path(project_id, strata)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "project_id": project_id,
+        "strata": f"{strata}_ui",
+        "updated_at": generate_timestamp(),
+        "source_updated_at": source_updated_at,
+        "data": data,
+    }
+    _write_json(path, payload)
+    return payload
+
+
 def create_project(project_id: str) -> None:
     project_dir = get_project_dir(project_id)
     if project_dir.exists() and any(project_dir.iterdir()):

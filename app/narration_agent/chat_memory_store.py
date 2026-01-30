@@ -40,6 +40,11 @@ class ChatMemoryStore:
         safe_session = _safe_session_id(session_id)
         return root / "chat_states" / f"{safe_session}.json"
 
+    def get_state_path(self, project_id: str, session_id: str) -> Path:
+        root = get_project_root(project_id)
+        safe_session = _safe_session_id(session_id)
+        return root / "chat_states" / f"{safe_session}_state.json"
+
     def load_messages(self, project_id: str, session_id: str) -> List[Dict[str, str]]:
         current_path = self.get_session_path(project_id, session_id)
         payload = _read_json(current_path)
@@ -62,10 +67,44 @@ class ChatMemoryStore:
     def save_messages(
         self, project_id: str, session_id: str, messages: List[Dict[str, str]]
     ) -> None:
+        existing = _read_json(self.get_session_path(project_id, session_id))
         payload = {
             "project_id": project_id,
             "session_id": session_id,
             "updated_at": generate_timestamp(),
             "messages": messages,
+            "meta": existing.get("meta", {}) if isinstance(existing, dict) else {},
+        }
+        _write_json(self.get_session_path(project_id, session_id), payload)
+
+    def save_state_snapshot(
+        self, project_id: str, session_id: str, state_snapshot: Dict[str, Any]
+    ) -> None:
+        payload = {
+            "project_id": project_id,
+            "session_id": session_id,
+            "updated_at": generate_timestamp(),
+            "state_snapshot": state_snapshot,
+        }
+        _write_json(self.get_state_path(project_id, session_id), payload)
+
+    def load_state_snapshot(self, project_id: str, session_id: str) -> Dict[str, Any]:
+        payload = _read_json(self.get_state_path(project_id, session_id))
+        snapshot = payload.get("state_snapshot") if isinstance(payload, dict) else None
+        return snapshot if isinstance(snapshot, dict) else {}
+
+    def load_meta(self, project_id: str, session_id: str) -> Dict[str, Any]:
+        payload = _read_json(self.get_session_path(project_id, session_id))
+        meta = payload.get("meta") if isinstance(payload, dict) else None
+        return meta if isinstance(meta, dict) else {}
+
+    def save_meta(self, project_id: str, session_id: str, meta: Dict[str, Any]) -> None:
+        existing = _read_json(self.get_session_path(project_id, session_id))
+        payload = {
+            "project_id": project_id,
+            "session_id": session_id,
+            "updated_at": generate_timestamp(),
+            "messages": existing.get("messages", []) if isinstance(existing, dict) else [],
+            "meta": meta,
         }
         _write_json(self.get_session_path(project_id, session_id), payload)

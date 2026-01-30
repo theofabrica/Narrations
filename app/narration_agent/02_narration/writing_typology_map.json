@@ -1,0 +1,33 @@
+{
+  "defaults": {
+    "n0": "summary",
+    "n1": "character",
+    "n2": "structure",
+    "n3": "scene",
+    "n4": "structure",
+    "n5": "prompting"
+  },
+  "sections": {
+    "n0": {
+      "production_summary": "summary",
+      "deliverables": "structure",
+      "art_direction": "style",
+      "sound_direction": "style"
+    },
+    "n1": {
+      "pitch": "pitch",
+      "intention": "theme",
+      "artistic_axes": "theme",
+      "overall_dynamics": "structure",
+      "characters": "character",
+      "world_era": "theme",
+      "aesthetics": "style",
+      "sound": "style",
+      "motifs": "theme",
+      "canon_continuity_anchors": "theme",
+      "sources": "theme",
+      "hypotheses": "structure",
+      "questions": "structure"
+    }
+  }
+}

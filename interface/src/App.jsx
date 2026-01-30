@@ -99,6 +99,7 @@ function App() {
   const [selectedProject, setSelectedProject] = useState('')
   const [newProjectId, setNewProjectId] = useState('')
   const [createModalOpen, setCreateModalOpen] = useState(false)
+  const [canCloseCreateModal, setCanCloseCreateModal] = useState(false)
   const [createProjectName, setCreateProjectName] = useState('')
   const [createProjectStatus, setCreateProjectStatus] = useState('idle')
   const [createProjectError, setCreateProjectError] = useState('')
@@ -108,6 +109,7 @@ function App() {
   const [chatStatus, setChatStatus] = useState('idle')
   const [chatError, setChatError] = useState('')
   const [chatSessionId, setChatSessionId] = useState('')
+  const [hasPendingQuestions, setHasPendingQuestions] = useState(false)
   const [logOverlayOpen, setLogOverlayOpen] = useState(false)
   const [logApiText, setLogApiText] = useState('')
   const [logUiText, setLogUiText] = useState('')
@@ -116,11 +118,10 @@ function App() {
   const [logError, setLogError] = useState('')
   const [activePage, setActivePage] = useState('home')
   const [n0Data, setN0Data] = useState(null)
+  const [n0FromUi, setN0FromUi] = useState(false)
   const [n0Status, setN0Status] = useState('idle')
   const [n0Error, setN0Error] = useState('')
   const [n0UpdatedAt, setN0UpdatedAt] = useState('')
-  const [n0PasteText, setN0PasteText] = useState('')
-  const [n0PasteError, setN0PasteError] = useState('')
   const [editorOpen, setEditorOpen] = useState(false)
   const [editorValue, setEditorValue] = useState('')
   const [editorOriginal, setEditorOriginal] = useState('')
@@ -157,12 +158,10 @@ function App() {
   const [n5UpdatedAt, setN5UpdatedAt] = useState('')
   const [n5PasteText, setN5PasteText] = useState('')
   const [n5PasteError, setN5PasteError] = useState('')
-  const [isN0EsthetiqueOpen, setIsN0EsthetiqueOpen] = useState(true)
   const [mediaModalOpen, setMediaModalOpen] = useState(false)
   const [mediaModalKind, setMediaModalKind] = useState('')
   const [mediaModalUrl, setMediaModalUrl] = useState('')
   const [mediaModalFiles, setMediaModalFiles] = useState([])
-  const [isMediaOpen, setIsMediaOpen] = useState(true)
   const [artImageFiles, setArtImageFiles] = useState([])
   const [artAudioFiles, setArtAudioFiles] = useState([])
   const [artImageUrl, setArtImageUrl] = useState('')
@@ -178,19 +177,42 @@ function App() {
   const pageLabel = {
     home: 'projets',
     project: selectedProject || 'projet',
+    old: 'old',
     bible: 'bible',
     architecture: 'architecture',
     sequences: 'sequences',
     timeline: 'timeline',
+    script: 'script',
     media: 'media',
     prompts: 'prompts',
     console: 'console'
   }
+  const oldPages = [
+    { id: 'bible', label: 'Bible (N1)' },
+    { id: 'architecture', label: 'Architecture (N2)' },
+    { id: 'sequences', label: 'Sequences (N3)' },
+    { id: 'timeline', label: 'Timeline (N4)' },
+    { id: 'script', label: 'Script' },
+    { id: 'media', label: 'Media (N5)' },
+    { id: 'prompts', label: 'Prompts (N5)' },
+    { id: 'console', label: 'Console' }
+  ]
+  const isOldPage = oldPages.some((page) => page.id === activePage)
   const resolvedChatProjectId = createModalOpen
     ? createdProjectId
     : selectedProject
   const canSendChat = Boolean(chatInput.trim() && resolvedChatProjectId)
   const chatDisabled = createModalOpen && !createdProjectId
+  const resizeTextarea = (element) => {
+    if (!element) {
+      return
+    }
+    element.style.height = 'auto'
+    element.style.height = `${element.scrollHeight}px`
+  }
+  const handleAutoResize = (event) => {
+    resizeTextarea(event.target)
+  }
 
   const normalizeJsonInput = (raw) => {
     let cleaned = raw.replace(/^\uFEFF/, '')
@@ -501,6 +523,8 @@ function App() {
     setChatMessages([])
     setChatSessionId('')
     setChatError('')
+    setN0FromUi(false)
+    setHasPendingQuestions(false)
   }, [selectedProject])
 
   useEffect(() => {
@@ -516,6 +540,15 @@ function App() {
     setCreateProjectStatus('idle')
   }, [createModalOpen])
 
+  useEffect(() => {
+    if (activePage !== 'project' || !n0Data) {
+      return
+    }
+    document.querySelectorAll('.auto-resize').forEach((element) => {
+      resizeTextarea(element)
+    })
+  }, [activePage, n0Data])
+
   const sanitizeN0 = (payload) => {
     const root = payload && typeof payload === 'object' ? payload : {}
     const data =
@@ -526,9 +559,8 @@ function App() {
       production_summary: {
         summary: data.production_summary?.summary || '',
         production_type: data.production_summary?.production_type || '',
-        primary_output_format: data.production_summary?.primary_output_format || '',
         target_duration: data.production_summary?.target_duration || '',
-        aspect_ratio: data.production_summary?.aspect_ratio || '',
+        aspect_ratio: data.production_summary?.aspect_ratio || '16:9',
         visual_style: data.production_summary?.visual_style || '',
         tone: data.production_summary?.tone || '',
         era: data.production_summary?.era || ''
@@ -551,6 +583,24 @@ function App() {
       sound_direction: {
         description: data.sound_direction?.description || '',
         references: data.sound_direction?.references || ''
+      }
+    }
+  }
+
+  const buildN0UiPayload = (payload) => {
+    const data = payload && typeof payload === 'object' ? payload : {}
+    return {
+      production_summary: {
+        summary: data.production_summary?.summary || '',
+        production_type: data.production_summary?.production_type || '',
+        target_duration: data.production_summary?.target_duration || '',
+        aspect_ratio: data.production_summary?.aspect_ratio || ''
+      },
+      art_direction: {
+        description: data.art_direction?.description || ''
+      },
+      sound_direction: {
+        description: data.sound_direction?.description || ''
       }
     }
   }
@@ -1143,12 +1193,25 @@ function App() {
     setN0Status('loading')
     setN0Error('')
     try {
-      const resp = await fetch(getProjectStrataUrl(projectId, 'n0'))
-      const data = await resp.json()
-      if (!resp.ok) {
-        throw new Error(`HTTP ${resp.status}`)
+      let data = null
+      let fromUi = false
+      const uiResp = await fetch(`${getProjectStrataUrl(projectId, 'n0')}/ui`)
+      if (uiResp.ok) {
+        data = await uiResp.json()
+        fromUi = true
+      } else if (uiResp.status !== 404) {
+        throw new Error(`HTTP ${uiResp.status}`)
+      }
+      if (!data) {
+        const resp = await fetch(getProjectStrataUrl(projectId, 'n0'))
+        data = await resp.json()
+        if (!resp.ok) {
+          throw new Error(`HTTP ${resp.status}`)
+        }
+        fromUi = false
       }
       setN0Data(sanitizeN0(data?.data || null))
+      setN0FromUi(fromUi)
       setN0UpdatedAt(data?.updated_at || '')
       setN0Status('done')
     } catch (err) {
@@ -1978,30 +2041,6 @@ function App() {
     })
   }
 
-  const applyN0FromJson = async () => {
-    if (!n0PasteText.trim()) {
-      setN0PasteError('Colle un JSON avant de remplacer.')
-      return
-    }
-    try {
-      const cleaned = normalizeJsonInput(n0PasteText)
-      const parsed = JSON.parse(cleaned)
-      const payload = parsed && typeof parsed === 'object' && 'data' in parsed
-        ? parsed.data
-        : parsed
-      if (!payload || typeof payload !== 'object') {
-        throw new Error('JSON invalide')
-      }
-      const normalized = sanitizeN0(payload)
-      setN0Data(normalized)
-      setN0PasteError('')
-      if (selectedProject) {
-        await handleN0Save(normalized)
-      }
-    } catch (err) {
-      setN0PasteError('JSON invalide ou incomplet.')
-    }
-  }
 
   const applyN1FromJson = async () => {
     if (!n1PasteText.trim()) {
@@ -2133,16 +2172,27 @@ function App() {
     if (!selectedProject || !payload) {
       return false
     }
-    payload = sanitizeN0(payload)
     setN0Status('saving')
     setN0Error('')
     try {
-      const body = JSON.stringify(payload)
-      const resp = await fetch(getProjectStrataUrl(selectedProject, 'n0'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body
-      })
+      let resp = null
+      if (n0FromUi) {
+        const uiPayload = buildN0UiPayload(payload)
+        const body = JSON.stringify(uiPayload)
+        resp = await fetch(`${getProjectStrataUrl(selectedProject, 'n0')}/ui`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body
+        })
+      } else {
+        payload = sanitizeN0(payload)
+        const body = JSON.stringify(payload)
+        resp = await fetch(getProjectStrataUrl(selectedProject, 'n0'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body
+        })
+      }
       const data = await resp.json()
       if (!resp.ok) {
         throw new Error(`HTTP ${resp.status}`)
@@ -2444,11 +2494,13 @@ function App() {
 
   const openCreateModal = () => {
     setCreateProjectName('')
+    setCanCloseCreateModal(false)
     setCreateModalOpen(true)
   }
 
   const closeCreateModal = () => {
     setCreateModalOpen(false)
+    setCanCloseCreateModal(false)
   }
 
   const handleCreateProject = async () => {
@@ -2516,9 +2568,27 @@ function App() {
             .trim()
         : 'Reponse vide.'
       setChatMessages((prev) => [...prev, { role: 'assistant', content: replyText }])
+      setHasPendingQuestions(Boolean(data?.has_pending_questions))
+      const narrationResults = Array.isArray(data?.narration_run_result?.results)
+        ? data.narration_run_result.results
+        : []
+      const n0Written = narrationResults.some((result) => {
+        const outputRef = result?.output_ref || ''
+        const outputStatus = result?.output?.status || ''
+        return (
+          typeof outputRef === 'string' &&
+          outputRef.startsWith('n0.') &&
+          outputStatus === 'done'
+        )
+      })
       if (!selectedProject) {
         setSelectedProject(projectId)
         await fetchProjects()
+      }
+      if (n0Written) {
+        await fetchN0(projectId)
+        setActivePage('project')
+        closeCreateModal()
       }
     } catch (err) {
       setChatError(err.message)
@@ -2876,62 +2946,13 @@ function App() {
                 </button>
                 <button
                   type="button"
-                  className={activePage === 'bible' ? 'active' : ''}
-                  onClick={() => setActivePage('bible')}
+                  className={activePage === 'old' || isOldPage ? 'active' : ''}
+                  onClick={() => setActivePage('old')}
                 >
-                  Bible (N1)
-                </button>
-                <button
-                  type="button"
-                  className={activePage === 'architecture' ? 'active' : ''}
-                  onClick={() => setActivePage('architecture')}
-                >
-                  Architecture (N2)
-                </button>
-                <button
-                  type="button"
-                  className={activePage === 'sequences' ? 'active' : ''}
-                  onClick={() => setActivePage('sequences')}
-                >
-                  Sequences (N3)
-                </button>
-                <button
-                  type="button"
-                  className={activePage === 'timeline' ? 'active' : ''}
-                  onClick={() => setActivePage('timeline')}
-                >
-                  Timeline (N4)
-                </button>
-                <button
-                  type="button"
-                  className={activePage === 'script' ? 'active' : ''}
-                  onClick={() => setActivePage('script')}
-                >
-                  Script
-                </button>
-                <button
-                  type="button"
-                  className={activePage === 'media' ? 'active' : ''}
-                  onClick={() => setActivePage('media')}
-                >
-                  Media (N5)
-                </button>
-                <button
-                  type="button"
-                  className={activePage === 'prompts' ? 'active' : ''}
-                  onClick={() => setActivePage('prompts')}
-                >
-                  Prompts (N5)
+                  Old
                 </button>
               </>
             ) : null}
-            <button
-              type="button"
-              className={activePage === 'console' ? 'active' : ''}
-              onClick={() => setActivePage('console')}
-            >
-              Console
-            </button>
           </nav>
         </div>
         <div className="top-nav-right">
@@ -3041,29 +3062,48 @@ function App() {
           <div className="panel">
             <div className="panel-head">
               <h2 className="project-title">{selectedProject || 'Projet'}</h2>
-              <div className="panel-actions">
-                <button
-                  type="button"
-                  onClick={closeProject}
-                  disabled={!selectedProject}
-                >
-                  Fermer le projet
-                </button>
-                <button
-                  type="button"
-                  onClick={() => selectedProject && fetchN0(selectedProject)}
-                  disabled={!selectedProject}
-                >
-                  Rafraichir
-                </button>
-                <button
-                  type="button"
-                  className="primary"
-                  onClick={handleN0Save}
+              <div className="project-head-fields">
+                <input
+                  type="text"
+                  className="project-input"
+                  placeholder="type de production"
+                  aria-label="Type de production"
+                  value={n0Data?.production_summary?.production_type || ''}
                   disabled={!selectedProject || !n0Data}
-                >
-                  Enregistrer
-                </button>
+                  onChange={(event) =>
+                    handleN0FieldChange(
+                      ['production_summary', 'production_type'],
+                      event.target.value
+                    )
+                  }
+                />
+                <input
+                  type="text"
+                  className="project-input"
+                  placeholder="00h00m00s"
+                  aria-label="Duree cible"
+                  value={n0Data?.production_summary?.target_duration || ''}
+                  disabled={!selectedProject || !n0Data}
+                  onChange={(event) =>
+                    handleN0FieldChange(
+                      ['production_summary', 'target_duration'],
+                      event.target.value
+                    )
+                  }
+                />
+                <input
+                  type="text"
+                  className="project-input"
+                  aria-label="Ratio"
+                  value={n0Data?.production_summary?.aspect_ratio || '16:9'}
+                  disabled={!selectedProject || !n0Data}
+                  onChange={(event) =>
+                    handleN0FieldChange(
+                      ['production_summary', 'aspect_ratio'],
+                      event.target.value
+                    )
+                  }
+                />
               </div>
             </div>
             {!selectedProject ? (
@@ -3076,28 +3116,15 @@ function App() {
                 {n0Data ? (
                   <div className="project-form">
                   <section>
-                    <h3>Coller N0.json</h3>
-                    <div className="n0-import n0-import-inline">
-                      <input
-                        type="text"
-                        placeholder="Colle ici le JSON N0 fourni par ChatGPT"
-                        value={n0PasteText}
-                        onChange={(event) => setN0PasteText(event.target.value)}
-                      />
-                      <button type="button" onClick={applyN0FromJson}>
-                        Remplacer
-                      </button>
-                    </div>
-                    {n0PasteError ? <span className="hint error">{n0PasteError}</span> : null}
-                  </section>
-                  <section>
                     <h3>Resume</h3>
                     <div className="resume-summary">
                       <label>
                         Resume (paragraphe)
                         <textarea
+                          className="auto-resize"
                           value={n0Data.production_summary?.summary || ''}
                           data-orchestrate="n0-summary"
+                          onInput={handleAutoResize}
                           onChange={(event) =>
                             handleN0FieldChange(
                               ['production_summary', 'summary'],
@@ -3107,214 +3134,18 @@ function App() {
                         />
                       </label>
                     </div>
-                    <div className="resume-grid">
-                      <div className="resume-col main">
-                        <label>
-                          Type de production
-                          <span className="field-note">(ex: court-metrage, docu, pub, clip)</span>
-                          <input
-                            type="text"
-                            value={n0Data.production_summary?.production_type || ''}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['production_summary', 'production_type'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </label>
-                        <label>
-                          Format
-                          <span className="field-note">(ex: film, serie, capsule, reel)</span>
-                          <input
-                            type="text"
-                            value={n0Data.production_summary?.primary_output_format || ''}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['production_summary', 'primary_output_format'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </label>
-                      </div>
-                      <div className="resume-col side">
-                        <label>
-                          Duree cible
-                          <input
-                            type="text"
-                            value={n0Data.production_summary?.target_duration || ''}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['production_summary', 'target_duration'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </label>
-                        <label>
-                          Ratio
-                          <input
-                            type="text"
-                            value={n0Data.production_summary?.aspect_ratio || ''}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['production_summary', 'aspect_ratio'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </label>
-                      </div>
-                    </div>
                   </section>
 
-                  <section>
-                    <div className="section-head">
-                      <h3>Esthetique</h3>
-                      <button
-                        type="button"
-                        className="section-toggle"
-                        onClick={() => setIsN0EsthetiqueOpen((prev) => !prev)}
-                      >
-                        {isN0EsthetiqueOpen ? 'Replier' : 'Deplier'}
-                      </button>
-                    </div>
-                    {isN0EsthetiqueOpen ? (
-                      <div className="form-grid form-stack">
-                        <label>
-                          Style visuel
-                          <input
-                            type="text"
-                            value={n0Data.production_summary?.visual_style || ''}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['production_summary', 'visual_style'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </label>
-                        <label>
-                          Ton
-                          <input
-                            type="text"
-                            value={n0Data.production_summary?.tone || ''}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['production_summary', 'tone'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </label>
-                        <label>
-                          Epoque
-                          <input
-                            type="text"
-                            value={n0Data.production_summary?.era || ''}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['production_summary', 'era'],
-                                event.target.value
-                              )
-                            }
-                          />
-                        </label>
-                      </div>
-                    ) : null}
-                  </section>
-
-                  <section>
-                    <div className="section-head">
-                      <h3>Medias</h3>
-                      <button
-                        type="button"
-                        className="section-toggle"
-                        onClick={() => setIsMediaOpen((prev) => !prev)}
-                      >
-                        {isMediaOpen ? 'Replier' : 'Deplier'}
-                      </button>
-                    </div>
-                    {isMediaOpen ? (
-                      <div className="form-grid media-grid">
-                        <label className="checkbox">
-                          <input
-                            type="checkbox"
-                            checked={n0Data.deliverables?.visuals?.images_enabled ?? true}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['deliverables', 'visuals', 'images_enabled'],
-                                event.target.checked
-                              )
-                            }
-                          />
-                          Images
-                        </label>
-                        <label className="checkbox">
-                          <input
-                            type="checkbox"
-                            checked={n0Data.deliverables?.visuals?.videos_enabled ?? true}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['deliverables', 'visuals', 'videos_enabled'],
-                                event.target.checked
-                              )
-                            }
-                          />
-                          Video
-                        </label>
-                        <label className="checkbox">
-                          <input
-                            type="checkbox"
-                            checked={n0Data.deliverables?.audio_stems?.dialogue ?? true}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['deliverables', 'audio_stems', 'dialogue'],
-                                event.target.checked
-                              )
-                            }
-                          />
-                          Dialogue
-                        </label>
-                        <label className="checkbox">
-                          <input
-                            type="checkbox"
-                            checked={n0Data.deliverables?.audio_stems?.sfx ?? true}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['deliverables', 'audio_stems', 'sfx'],
-                                event.target.checked
-                              )
-                            }
-                          />
-                          SoundFX
-                        </label>
-                        <label className="checkbox">
-                          <input
-                            type="checkbox"
-                            checked={n0Data.deliverables?.audio_stems?.music ?? true}
-                            onChange={(event) =>
-                              handleN0FieldChange(
-                                ['deliverables', 'audio_stems', 'music'],
-                                event.target.checked
-                              )
-                            }
-                          />
-                          Music
-                        </label>
-                      </div>
-                    ) : null}
-                  </section>
-
-
+                  
                   <section>
                     <h3>Direction Artistique Image</h3>
                     <div className="form-grid form-stack">
                       <label>
                         Description (paragraphe)
                         <textarea
+                          className="auto-resize"
                           value={n0Data.art_direction?.description || ''}
+                          onInput={handleAutoResize}
                           onChange={(event) =>
                             handleN0FieldChange(
                               ['art_direction', 'description'],
@@ -3364,7 +3195,9 @@ function App() {
                       <label>
                         Description
                         <textarea
+                          className="auto-resize"
                           value={n0Data.sound_direction?.description || ''}
+                          onInput={handleAutoResize}
                           onChange={(event) =>
                             handleN0FieldChange(
                               ['sound_direction', 'description'],
@@ -3413,6 +3246,36 @@ function App() {
           )}
         </div>
       </section>
+      ) : null}
+
+      {activePage === 'old' ? (
+        <section className="project-page">
+          <div className="panel">
+            <div className="panel-head">
+              <h2>Old</h2>
+            </div>
+            {!selectedProject ? (
+              <p className="hint">Selectionne un projet dans l’accueil.</p>
+            ) : (
+              <div className="project-detail">
+                <p className="hint">
+                  Anciennes pages de travail (temporaires).
+                </p>
+                <div className="project-actions">
+                  {oldPages.map((page) => (
+                    <button
+                      key={page.id}
+                      type="button"
+                      onClick={() => setActivePage(page.id)}
+                    >
+                      {page.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
       ) : null}
 
       {activePage === 'bible' ? (
@@ -4860,7 +4723,12 @@ function App() {
               >
                 {createProjectStatus === 'loading' ? 'Creation...' : 'Creer'}
               </button>
-              <p className="hint">Decrivez votre projet</p>
+              <div className="hint-row">
+                <p className="hint">Decrivez votre projet</p>
+                {hasPendingQuestions ? (
+                  <span className="status-pill warning">En attente de reponses</span>
+                ) : null}
+              </div>
               <div className={`chat-box ${chatDisabled ? 'disabled' : ''}`}>
                 <textarea
                   className="chat-log"
@@ -4888,11 +4756,6 @@ function App() {
                   </button>
                 </div>
               </div>
-            </div>
-            <div className="modal-actions">
-              <button type="button" onClick={closeCreateModal}>
-                Fermer
-              </button>
             </div>
           </div>
         </div>
