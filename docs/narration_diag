@@ -1,0 +1,72 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0 Herring/90.1.1356.4" version="29.3.6">
+  <diagram name="Page-1" id="3huqjEq1vwuFXW_sLJ-p">
+    <mxGraphModel grid="1" page="1" gridSize="13" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="81l03F5-P4Bvd6tktEyl-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#B3B3B3);" value="USER / UI" vertex="1">
+          <mxGeometry height="104" width="312" x="-78" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-1" parent="81l03F5-P4Bvd6tktEyl-1" style="whiteSpace=wrap;html=1;strokeColor=default;fontColor=light-dark(#000000,#000000);fillColor=light-dark(#FFFFFF,#908761);" value="message utilisateur + session" vertex="1">
+          <mxGeometry height="60" width="312" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-23" edge="1" parent="1" source="5FkaRzCNtncQNjxvd8Rx-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0.979;exitY=0.207;exitDx=0;exitDy=0;exitPerimeter=0;" target="5FkaRzCNtncQNjxvd8Rx-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="806" y="189" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-4" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFC600);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="Service API" vertex="1">
+          <mxGeometry height="221" width="312" x="325" y="299" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-5" parent="5FkaRzCNtncQNjxvd8Rx-4" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFBD0E);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="&lt;div&gt;&lt;b&gt;&lt;u&gt;Description:&lt;/u&gt;&lt;/b&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;handle_narration_message()&lt;/div&gt;&lt;div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt;prend un message utilisateur,&lt;/strong&gt;&lt;/div&gt;&lt;div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt;&lt;/strong&gt;&lt;/div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt; prépare/charge l’état de projet, orchestre et exécute les tâches chat &lt;br&gt;(1a/1b/1c) puis, si le brief est prêt, déclenche l’orchestration N0–N5 &lt;br&gt;via le TaskRunner et renvoie un résumé complet de l’exécution&lt;/strong&gt;" vertex="1">
+          <mxGeometry height="135" width="312" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-6" parent="5FkaRzCNtncQNjxvd8Rx-4" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFC30C);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Code&amp;nbsp; : &lt;/b&gt;service.py&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Fonction :&lt;/b&gt; handle_narration_message()&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="60" width="312" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-9" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FF00D1);fontColor=light-dark(#000000,#000000);" value="SUPER ORCHESTRATOR" vertex="1">
+          <mxGeometry height="650" width="338" x="702" y="247" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-16" parent="5FkaRzCNtncQNjxvd8Rx-9" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);fontColor=light-dark(#000000,#000000);" value="SUPER ORCHESTRATOR (LLM)" vertex="1">
+          <mxGeometry height="416" width="338" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-25" parent="5FkaRzCNtncQNjxvd8Rx-16" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;b&gt;Décisions :&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- inclure chat_1c ou non&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- next_action (chat_clarification / edit_mode)&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- logique selon contexte + pending rounds&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="169" width="338" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-26" parent="5FkaRzCNtncQNjxvd8Rx-16" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF80FF);align=left;" value="&lt;div align=&quot;left&quot;&gt;&lt;blockquote&gt;&lt;blockquote&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;b&gt;Sortie LLM (JSON strict) :&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&amp;nbsp;- tasks: [chat_1a, chat_1b, (chat_1c?)]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- next_action&lt;/span&gt;&lt;/div&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="221" width="338" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-17" parent="5FkaRzCNtncQNjxvd8Rx-9" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFC600);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="FALLBACK DÉTERMINISTE" vertex="1">
+          <mxGeometry height="156" width="338" y="481" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-18" parent="5FkaRzCNtncQNjxvd8Rx-17" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFBD0E);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;Si LLM invalide / JSON incorrect :&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;- plan chat_1a → chat_1b (option 1c)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;- next_action par règle simple&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="135" width="338" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-28" edge="1" parent="5FkaRzCNtncQNjxvd8Rx-9" source="5FkaRzCNtncQNjxvd8Rx-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.343;exitY=1.017;exitDx=0;exitDy=0;entryX=0.339;entryY=0.003;entryDx=0;entryDy=0;exitPerimeter=0;entryPerimeter=0;" target="5FkaRzCNtncQNjxvd8Rx-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-30" edge="1" parent="5FkaRzCNtncQNjxvd8Rx-9" source="5FkaRzCNtncQNjxvd8Rx-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="5FkaRzCNtncQNjxvd8Rx-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-15" edge="1" parent="1" source="81l03F5-P4Bvd6tktEyl-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.038;entryY=0.907;entryDx=0;entryDy=0;entryPerimeter=0;" target="5FkaRzCNtncQNjxvd8Rx-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-33" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);fontColor=light-dark(#000000,#000000);" value="WRITER AGENTS (LLM)" vertex="1">
+          <mxGeometry height="390" width="338" x="1118" y="286" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-34" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;writer_n0&amp;nbsp;&lt;br&gt;production_summary / art / sound&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="91" width="338" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-36" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;writer_n1 → writer_n5&lt;br&gt;strates N1…N5&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="91" width="338" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-37" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;Inputs&lt;br&gt;brief + state_snapshot target_path&lt;/span&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="91" width="338" y="208" as="geometry" />
+        </mxCell>
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-38" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;Outputs&lt;br&gt;target_patch JSON&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="91" width="338" y="299" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
