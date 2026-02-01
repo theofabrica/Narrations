@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Dict, List
 
-from app.narration_agent.library_rag import LibraryRAG
+from app.narration_agent.narration.library_rag import LibraryRAG
 from app.narration_agent.spec_loader import load_json
 
 

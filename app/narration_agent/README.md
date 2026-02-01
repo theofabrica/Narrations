@@ -24,5 +24,4 @@ python -m app.narration_agent --model gpt-4o
 - Le flux complet est documente dans `ARCHITECTURE.md`.
 - La memoire de chat est stockee dans `data/{project_id}/chat_states/`.
 - Specs locales :
-  - `super_orchestrator/`
-  - `chat_agent/`
+  - `chat/`

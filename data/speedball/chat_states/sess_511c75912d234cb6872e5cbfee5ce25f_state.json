@@ -1,0 +1,63 @@
+{
+  "project_id": "speedball",
+  "session_id": "sess_511c75912d234cb6872e5cbfee5ce25f",
+  "updated_at": "2026-02-01T19:59:58.919131Z",
+  "state_snapshot": {
+    "state_id": "",
+    "state_version": "1abc_v1",
+    "completed_steps": [
+      "1a",
+      "1b",
+      "1c"
+    ],
+    "missing": [],
+    "core": {
+      "summary": "90-second clip on a futuristic ball sport with dramatic hip hop-classical music.",
+      "detailed_summary": "",
+      "open_questions": [],
+      "intents": [
+        "clip",
+        "futuristic",
+        "sport",
+        "dramatic",
+        "music"
+      ],
+      "notes": "Men in rollerblades with helmets and spiked gloves."
+    },
+    "thinker": {
+      "objectives": [
+        "Create a 90-second clip featuring a futuristic ball sport"
+      ],
+      "constraints": [
+        "Incorporate dramatic hip hop-classical music",
+        "Include men in rollerblades with helmets and spiked gloves"
+      ],
+      "hypotheses": [
+        "The sport takes place in a futuristic setting"
+      ],
+      "missing": [],
+      "clarifications": [],
+      "target_level": "n1"
+    },
+    "brief": {
+      "primary_objective": "Create a 90-second clip featuring a futuristic ball sport",
+      "secondary_objectives": [],
+      "constraints": [
+        "Incorporate dramatic hip hop-classical music",
+        "Include men in rollerblades with helmets and spiked gloves"
+      ],
+      "hypotheses": [
+        "The sport takes place in a futuristic setting"
+      ],
+      "target_level": "n1",
+      "priorities": [],
+      "target_strata": [
+        "n1"
+      ],
+      "target_paths": [
+        "n1.pitch"
+      ]
+    },
+    "pending_questions": []
+  }
+}

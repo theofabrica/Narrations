@@ -103,10 +103,10 @@ def get_strata_path(project_id: str, strata: str) -> Path:
 
 def _load_state_template(strata: str) -> Dict[str, Any]:
     template_root = (
-        Path(__file__).resolve().parent.parent.parent
-        / "sandbox_agents"
-        / "agent_architecture"
-        / "02_narration"
+        Path(__file__).resolve().parent.parent
+        / "narration_agent"
+        / "narration"
+        / "specs"
     )
     template_path = template_root / f"state_structure_{strata}.json"
     if not template_path.exists():

@@ -1,18 +1,18 @@
 {
   "project_id": "speedball",
   "strata": "n1",
-  "updated_at": "2026-01-30T10:45:09.432449Z",
+  "updated_at": "2026-02-01T19:59:25.907887Z",
   "data": {
     "meta": {
       "status": "",
       "version": "",
-      "temperature_creative": 0
+      "creative_temperature": 0
     },
     "pitch": "",
     "intention": "",
-    "axes_artistiques": "",
-    "dynamique_globale": "",
-    "personnages": [
+    "artistic_axes": "",
+    "overall_dynamics": "",
+    "characters": [
       {
         "name": "",
         "role": "",
@@ -29,13 +29,13 @@
         ]
       }
     ],
-    "monde_epoque": "",
-    "esthetique": "",
-    "son": {
-      "ambiances": "",
-      "musique": "",
+    "world_era": "",
+    "aesthetics": "",
+    "sound": {
+      "ambiences": "",
+      "music": "",
       "sfx": "",
-      "dialogues": ""
+      "dialogue": ""
     },
     "motifs": [
       {
@@ -44,7 +44,7 @@
         "audio": []
       }
     ],
-    "ancres_canon_continuite": [],
+    "canon_continuity_anchors": [],
     "sources": "",
     "hypotheses": "",
     "questions": ""

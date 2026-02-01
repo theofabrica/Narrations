@@ -38,7 +38,7 @@ from app.tools.registry import list_actions
 from app.tools.higgsfield.client import get_client as get_higgsfield_client
 from app.narration_agent.llm_client import LLMClient
 from app.narration_agent.service import handle_narration_message
-from app.narration_agent.ui_translator import UITranslator
+from app.narration_agent.chat.ui_translator import UITranslator
 from datetime import datetime, timezone
 import asyncio
 import json

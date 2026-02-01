@@ -7,22 +7,21 @@ avec des appels LLM, des plans de taches, et une gestion des states N0-N5.
 ## Modules applicatifs (app/narration_agent)
 - `llm_client.py` : wrapper LLM unique (model selection, execution).
 - `agent_factory.py` : resolution des agents par role + prompts.
-- `context_builder.py` : construction des `context_pack` (cible + contexte).
-- `narrator_orchestrator.py` : generation du `task_plan` pour N0-N5.
+- `narration/context_builder.py` : construction des `context_pack` (cible + contexte).
+- `narration/narrator_orchestrator.py` : generation du `task_plan` pour N0-N5.
 - `task_runner.py` : execution des taches (sequentiel/parallele).
 
 ## Dependances applicatives
 - `app/utils/project_storage.py` : lecture/ecriture des states N0-N5.
 - `sandbox_agents/agent_architecture/*` : specs et schemas (source de verite).
 - `sandbox_agents/agent_architecture/10_writer_agent/context_pack_structure.json`.
-- `sandbox_agents/agent_architecture/02_narration/02_00_task_plan_structure.json`.
-- `app/narration_agent/super_orchestrator/*` : specs couche 0.
-- `app/narration_agent/chat_agent/*` : specs couche 1 (1a/1b/1c).
+- `app/narration_agent/narration/specs/02_00_task_plan_structure.json`.
+- `app/narration_agent/chat/*` : specs couche 1 (1a/1b/1c) + chat orchestrator.
 
 ## Flux principal (creation projet vide)
 1) L'utilisateur cree un projet (dossier `data/{project_id}/metadata`).
 2) L'app initialise N0-N5 vides (copies des `state_structure_n*`).
-3) Le super-orchestrateur lance 1a -> 1b -> 1c tant que `missing` non vides.
+3) Le service lance 1a -> 1b -> 1c tant que `missing` non vides.
 4) L'orchestrateur narration produit un `task_plan`:
    - tache initiale d'identification du projet
    - N0 par sections (production_summary, deliverables, art_direction, sound_direction)
@@ -39,7 +38,7 @@ avec des appels LLM, des plans de taches, et une gestion des states N0-N5.
 
 ## Memoire de chat
 - Stockee sur disque dans `data/{project_id}/chat_states/{session_id}.json`.
-- Utilisee par le service `app/narration_agent/chat_memory_store.py`.
+- Utilisee par le service `app/narration_agent/chat/chat_memory_store.py`.
 - Les sessions existantes dans `chat_memory/` sont migrees automatiquement et supprimees.
 
 ## Mapping task_plan -> runner
@@ -51,9 +50,8 @@ avec des appels LLM, des plans de taches, et une gestion des states N0-N5.
 flowchart TD
   UI["Interface Web"] --> API["API FastAPI"]
   API --> NA["NarrationAgent_Runtime"]
-  NA --> SO["SuperOrchestrator"]
-  SO --> Chat["ChatAgents_1a1b1c"]
-  SO --> NOrch["NarratorOrchestrator_02_00"]
+  NA --> Chat["ChatAgents_1a1b1c"]
+  NA --> NOrch["NarratorOrchestrator_02_00"]
   NOrch --> Plan["TaskPlan"]
   Plan --> Runner["Runner_00"]
   Runner --> Ctx["ContextBuilder"]

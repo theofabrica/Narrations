@@ -1,4 +1,4 @@
-"""Super orchestrator (layer 0) for narration runtime."""
+"""Chat orchestrator (layer 0) for chat agent planning."""
 
 from __future__ import annotations
 
@@ -7,26 +7,23 @@ import uuid
 from dataclasses import dataclass
 from typing import Any, Dict
 
-from app.narration_agent.narrator_orchestrator import NarratorOrchestrator
 from app.narration_agent.llm_client import LLMClient, LLMRequest
-from app.narration_agent.spec_loader import load_json, load_text
+from app.narration_agent.spec_loader import load_text
 from app.utils.ids import generate_timestamp
 
 
 @dataclass
-class SuperOrchestratorResult:
+class ChatOrchestratorResult:
     task_plan: Dict[str, Any]
     task_context: Dict[str, Any]
     next_action: str
 
 
-class SuperOrchestrator:
-    """Build task plans and decide next action."""
+class ChatOrchestrator:
+    """Build chat task plans (1a/1b/1c)."""
 
     def __init__(self) -> None:
-        self.input_schema = load_json("super_orchestrator/super_orchestrator_input_schema.json")
-        self.output_schema = load_json("super_orchestrator/super_orchestrator_output_schema.json")
-        self.base_prompt = load_text("super_orchestrator/00_super_orchestrator.md").strip()
+        self.base_prompt = load_text("chat/00_chat_orchestrator.md").strip()
 
     def build_task_plan(
         self,
@@ -38,7 +35,7 @@ class SuperOrchestrator:
         pending_rounds: int = 0,
         include_1c: bool = True,
         chat_mode: str = "auto",
-    ) -> SuperOrchestratorResult:
+    ) -> ChatOrchestratorResult:
         if not isinstance(pending_questions, list):
             pending_questions = []
         plan_id = f"plan_{uuid.uuid4().hex[:12]}"
@@ -88,7 +85,7 @@ class SuperOrchestrator:
         if include_1c:
             task_context[task_id_1c] = {}
         next_action = "chat_clarification" if project_empty else "edit_mode"
-        return SuperOrchestratorResult(
+        return ChatOrchestratorResult(
             task_plan=task_plan,
             task_context=task_context,
             next_action=next_action,
@@ -98,9 +95,9 @@ class SuperOrchestrator:
         self,
         llm_client: LLMClient,
         input_payload: Dict[str, Any],
-        fallback: SuperOrchestratorResult,
-    ) -> tuple[SuperOrchestratorResult, Dict[str, Any]]:
-        prompt = self.base_prompt or "You are the super orchestrator."
+        fallback: ChatOrchestratorResult,
+    ) -> tuple[ChatOrchestratorResult, Dict[str, Any]]:
+        prompt = self.base_prompt or "You are the chat orchestrator."
         format_prompt = (
             "Return ONLY valid JSON with this structure:\n"
             "{\n"
@@ -153,7 +150,7 @@ class SuperOrchestrator:
             agents=normalized,
         )
         next_action = parsed.get("next_action") or fallback.next_action
-        return SuperOrchestratorResult(
+        return ChatOrchestratorResult(
             task_plan=task_plan,
             task_context=task_context,
             next_action=next_action,
@@ -218,7 +215,7 @@ class SuperOrchestrator:
 
     def _build_chat_task_context(
         self,
-        fallback: SuperOrchestratorResult,
+        fallback: ChatOrchestratorResult,
         agents: list[str],
     ) -> Dict[str, Any]:
         task_context: Dict[str, Any] = {}
@@ -258,29 +255,4 @@ class SuperOrchestrator:
             "task_context": {
                 task_id: {},
             },
-        }
-
-    def build_narration_task_plan(self, narration_input: Dict[str, Any]) -> Dict[str, Any]:
-        narrator = NarratorOrchestrator()
-        task_plan = narrator.build_plan(narration_input)
-        source_state = narration_input.get("source_state_payload") or {}
-        task_context = {}
-        for task in task_plan.get("tasks", []):
-            task_id = task.get("id")
-            if not task_id:
-                continue
-            task_context[task_id] = {
-                "source_state_payload": source_state,
-                "target_path": task.get("output_ref", ""),
-            }
-        return {
-            "task_plan": task_plan,
-            "runner_input": {
-                "plan_id": task_plan.get("plan_id", ""),
-                "task_plan_ref": "",
-                "task_plan_payload": task_plan,
-                "execution_mode": "sequential",
-                "started_at": generate_timestamp(),
-            },
-            "task_context": task_context,
         }

@@ -87,9 +87,9 @@
     "constraints": [],
     "hypotheses": [],
     "target_level": "",
-      "priorities": [],
-      "target_strata": [],
-      "target_paths": []
+    "priorities": [],
+    "target_strata": [],
+    "target_paths": []
   },
   "pending_questions": []
 }

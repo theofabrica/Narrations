@@ -34,7 +34,7 @@ class ContextBuilder:
         if not isinstance(target_data, dict):
             target_data = {}
 
-        schema = load_json(f"02_narration/state_structure_{strata}.json") or {}
+        schema = load_json(f"narration/specs/state_structure_{strata}.json") or {}
         schema_data = schema.get("data") if isinstance(schema, dict) else {}
         if not isinstance(schema_data, dict):
             schema_data = {}
@@ -177,7 +177,7 @@ def _load_neighbor_dependencies(project_id: str, strata: str) -> Dict[str, Any]:
 
 
 def _infer_writing_typology(target_path: str) -> str:
-    mapping = load_json("02_narration/writing_typology_map.json") or {}
+    mapping = load_json("narration/specs/writing_typology_map.json") or {}
     defaults = mapping.get("defaults", {}) if isinstance(mapping, dict) else {}
     sections_map = mapping.get("sections", {}) if isinstance(mapping, dict) else {}
 

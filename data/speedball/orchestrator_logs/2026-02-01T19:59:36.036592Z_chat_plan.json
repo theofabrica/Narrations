@@ -1,12 +1,12 @@
 {
   "project_id": "speedball",
-  "session_id": "sess_914c2bc9d4d343e3940605343423f60c",
+  "session_id": "sess_511c75912d234cb6872e5cbfee5ce25f",
   "label": "chat_plan",
-  "logged_at": "2026-01-30T10:45:38.239013Z",
+  "logged_at": "2026-02-01T19:59:36.036629Z",
   "task_plan": {
-    "plan_id": "plan_fa4b88fff7dd",
-    "created_at": "2026-01-30T10:45:38.234415Z",
-    "source_state_id": "sess_914c2bc9d4d343e3940605343423f60c",
+    "plan_id": "plan_5f2b03c02a4b",
+    "created_at": "2026-02-01T19:59:36.033636Z",
+    "source_state_id": "sess_511c75912d234cb6872e5cbfee5ce25f",
     "tasks": [
       {
         "id": "task_chat_1a",
@@ -28,7 +28,7 @@
   },
   "task_context": {
     "task_chat_1a": {
-      "message": "je veux 90 secondes et une musique hip hop avec du classique dedans et une ambiance dramatique",
+      "message": "C'est un clip sur un sport de balle futuriste avec des hommes en rollerblade casqu\u00e9 et arm\u00e9s de gants \u00e0 clous.",
       "project_empty": true,
       "empty_strata": {
         "n0": true,
@@ -40,7 +40,7 @@
       },
       "pending_questions": [],
       "pending_rounds": 0,
-      "chat_mode": "clarify"
+      "chat_mode": "auto"
     },
     "task_chat_1b": {}
   },

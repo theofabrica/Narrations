@@ -3,9 +3,9 @@
 import argparse
 
 from .agent_factory import AgentFactory
-from .context_builder import ContextBuilder
 from .llm_client import LLMClient
-from .narrator_orchestrator import NarratorOrchestrator
+from .narration.context_builder import ContextBuilder
+from .narration.narrator_orchestrator import NarratorOrchestrator
 from .task_runner import TaskRunner
 
 

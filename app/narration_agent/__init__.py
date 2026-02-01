@@ -1,12 +1,11 @@
 """Narration agent runtime (application layer)."""
 
 from .agent_factory import AgentFactory
-from .context_builder import ContextBuilder
-from .library_rag import LibraryRAG
 from .llm_client import LLMClient
-from .narrator_orchestrator import NarratorOrchestrator
-from .strategy_finder import StrategyFinder
-from .super_orchestrator import SuperOrchestrator
+from .narration.context_builder import ContextBuilder
+from .narration.library_rag import LibraryRAG
+from .narration.narrator_orchestrator import NarratorOrchestrator
+from .narration.strategy_finder import StrategyFinder
 from .task_runner import TaskRunner
 
 __all__ = [
@@ -16,6 +15,5 @@ __all__ = [
     "LLMClient",
     "NarratorOrchestrator",
     "StrategyFinder",
-    "SuperOrchestrator",
     "TaskRunner",
 ]

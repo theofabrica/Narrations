@@ -1,7 +1,7 @@
 {
   "project_id": "speedball",
   "strata": "n3",
-  "updated_at": "2026-01-30T10:45:09.434348Z",
+  "updated_at": "2026-02-01T19:59:25.909733Z",
   "data": {
     "project_id": "",
     "document_level": "N3",
@@ -41,10 +41,10 @@
     "units": [
       {
         "meta": {
-          "niveau": 3,
+          "level": 3,
           "document": "N3_UNITS__sequences_scenes",
           "version": "",
-          "statut": "",
+          "status": "",
           "granularity": "",
           "dependencies": {
             "n0": "",
@@ -74,49 +74,49 @@
           "exit_change": ""
         },
         "vibration": {
-          "enjeu_humain_actif": "",
-          "ancre_sensorielle": "",
-          "motif_mobilise_variation": ""
+          "active_human_stake": "",
+          "sensory_anchor": "",
+          "motif_variation_used": ""
         },
-        "situation_initiale": {
-          "qui_est_present": "",
-          "ou_quand": "",
-          "pourquoi_ici_maintenant": "",
-          "etat": {
-            "monde": "",
+        "initial_situation": {
+          "who_is_present": "",
+          "where_when": "",
+          "why_here_now": "",
+          "state": {
+            "world": "",
             "tension": ""
           }
         },
-        "objectifs_obstacles": {
-          "objectif_principal": "",
-          "objectif_secondaire": "",
-          "obstacle_principal": "",
-          "obstacles_secondaires": [],
-          "nature_de_la_difficulte": []
+        "objectives_obstacles": {
+          "primary_objective": "",
+          "secondary_objective": "",
+          "primary_obstacle": "",
+          "secondary_obstacles": [],
+          "difficulty_nature": []
         },
-        "deroule_detaille": [],
+        "detailed_flow": [],
         "beats": [
           {
             "id": "",
             "description": ""
           }
         ],
-        "dynamiques_personnages": {
-          "forces_en_presence": "",
-          "conflit_alliance_ambivalence": ""
+        "character_dynamics": {
+          "forces_in_presence": "",
+          "conflict_alliance_ambivalence": ""
         },
-        "dialogues": [],
-        "decor_visuel": {
-          "ambiance_visuelle": "",
-          "elements_visibles_cles": [],
-          "personnages_etat": [],
-          "notes_promptables_sans_prompt": []
+        "dialogue_lines": [],
+        "visual_set": {
+          "visual_ambience": "",
+          "key_visible_elements": [],
+          "character_states": [],
+          "promptable_notes_no_prompt": []
         },
         "audio": {
-          "ambiance": "",
+          "ambience": "",
           "music": "",
           "sfx": "",
-          "dialogues_traitement": "",
+          "dialogue_treatment": "",
           "silence": ""
         }
       }

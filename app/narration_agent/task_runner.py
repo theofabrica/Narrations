@@ -5,13 +5,13 @@ import re
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-from app.narration_agent.chat_memory_store import ChatMemoryStore
-from app.narration_agent.context_builder import ContextBuilder
+from app.narration_agent.chat.chat_memory_store import ChatMemoryStore
+from app.narration_agent.narration.context_builder import ContextBuilder
 from app.narration_agent.llm_client import LLMClient, LLMRequest
 from app.narration_agent.spec_loader import load_json, load_text
-from app.narration_agent.state_merger import merge_target_patch
-from app.narration_agent.strategy_finder import StrategyFinder
-from app.narration_agent.ui_translator import UITranslator
+from app.narration_agent.narration.state_merger import merge_target_patch
+from app.narration_agent.narration.strategy_finder import StrategyFinder
+from app.narration_agent.chat.ui_translator import UITranslator
 from app.utils.ids import generate_timestamp
 from app.utils.logging import setup_logger
 from app.utils.project_storage import get_project_root, read_strata
@@ -113,7 +113,7 @@ class TaskRunner:
         }
 
     def _initialize_state(self) -> Dict[str, Any]:
-        template = load_json("chat_agent/state_structure_01_abc.json") or {}
+        template = load_json("chat/state_structure_01_abc.json") or {}
         return {key: value for key, value in template.items() if not key.startswith("_")}
 
     def _parse_json_patch(self, payload: str) -> Dict[str, Any]:
@@ -163,7 +163,7 @@ class TaskRunner:
             if pending_questions
             else "none"
         )
-        base_prompt = load_text("chat_agent/01a_chat.md").strip()
+        base_prompt = load_text("chat/01a_chat.md").strip()
         runtime_prompt = (
             "Runtime context:\n"
             f"- Project empty: {'yes' if project_empty else 'no'}\n"
@@ -199,7 +199,7 @@ class TaskRunner:
         return f"{base_prompt}\n\n{runtime_prompt}\n{format_prompt}"
 
     def _build_thinker_prompt(self) -> str:
-        base_prompt = load_text("chat_agent/01b_thinker.md").strip()
+        base_prompt = load_text("chat/01b_thinker.md").strip()
         if not base_prompt:
             base_prompt = (
                 "You are agent 1b (thinker). Reframe the request and extract "
@@ -208,7 +208,7 @@ class TaskRunner:
         return base_prompt
 
     def _build_translator_prompt(self) -> str:
-        base_prompt = load_text("chat_agent/01c_orchestrator_translator.md").strip()
+        base_prompt = load_text("chat/01c_orchestrator_translator.md").strip()
         if not base_prompt:
             base_prompt = (
                 "You are agent 1c (translator). Transform 1b output into a "
@@ -682,7 +682,7 @@ class TaskRunner:
         base_prompt = load_text("writer_agent/10_writer.md").strip()
         strata_prompt = ""
         if target_path.startswith("n0"):
-            strata_prompt = load_text("02_narration/02_01_project_writer.md").strip()
+            strata_prompt = load_text("narration/specs/02_01_project_writer.md").strip()
         if not base_prompt:
             base_prompt = (
                 "You are a writer agent. Produce a patch for the target section only."
