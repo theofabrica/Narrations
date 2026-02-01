@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0 Herring/90.1.1356.4" version="29.3.6">
   <diagram name="Page-1" id="3huqjEq1vwuFXW_sLJ-p">
-    <mxGraphModel grid="1" page="1" gridSize="13" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="13" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1500" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -15,31 +15,31 @@
             <mxPoint x="806" y="189" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-4" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFC600);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="Service API" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-4" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#D9E9FF,#A9D2FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="Service API" vertex="1">
           <mxGeometry height="221" width="312" x="325" y="299" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-5" parent="5FkaRzCNtncQNjxvd8Rx-4" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFBD0E);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="&lt;div&gt;&lt;b&gt;&lt;u&gt;Description:&lt;/u&gt;&lt;/b&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;handle_narration_message()&lt;/div&gt;&lt;div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt;prend un message utilisateur,&lt;/strong&gt;&lt;/div&gt;&lt;div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt;&lt;/strong&gt;&lt;/div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt; prépare/charge l’état de projet, orchestre et exécute les tâches chat &lt;br&gt;(1a/1b/1c) puis, si le brief est prêt, déclenche l’orchestration N0–N5 &lt;br&gt;via le TaskRunner et renvoie un résumé complet de l’exécution&lt;/strong&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-5" parent="5FkaRzCNtncQNjxvd8Rx-4" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="&lt;div&gt;&lt;b&gt;&lt;u&gt;Description:&lt;/u&gt;&lt;/b&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;handle_narration_message()&lt;/div&gt;&lt;div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt;prend un message utilisateur,&lt;/strong&gt;&lt;/div&gt;&lt;div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt;&lt;/strong&gt;&lt;/div&gt;&lt;strong data-start=&quot;5&quot; data-end=&quot;241&quot;&gt; prépare/charge l’état de projet, orchestre et exécute les tâches chat &lt;br&gt;(1a/1b/1c) puis, si le brief est prêt, déclenche l’orchestration N0–N5 &lt;br&gt;via le TaskRunner et renvoie un résumé complet de l’exécution&lt;/strong&gt;" vertex="1">
           <mxGeometry height="135" width="312" y="86" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-6" parent="5FkaRzCNtncQNjxvd8Rx-4" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFC30C);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Code&amp;nbsp; : &lt;/b&gt;service.py&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Fonction :&lt;/b&gt; handle_narration_message()&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-6" parent="5FkaRzCNtncQNjxvd8Rx-4" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Code&amp;nbsp; : &lt;/b&gt;service.py&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Fonction :&lt;/b&gt; handle_narration_message()&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="60" width="312" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-9" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FF00D1);fontColor=light-dark(#000000,#000000);" value="SUPER ORCHESTRATOR" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-9" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFE6F4,#FF00D1);fontColor=light-dark(#000000,#000000);" value="SUPER ORCHESTRATOR" vertex="1">
           <mxGeometry height="650" width="338" x="702" y="247" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-16" parent="5FkaRzCNtncQNjxvd8Rx-9" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);fontColor=light-dark(#000000,#000000);" value="SUPER ORCHESTRATOR (LLM)" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-16" parent="5FkaRzCNtncQNjxvd8Rx-9" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FF99FF);fontColor=light-dark(#000000,#000000);" value="SUPER ORCHESTRATOR (LLM)" vertex="1">
           <mxGeometry height="416" width="338" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-25" parent="5FkaRzCNtncQNjxvd8Rx-16" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;b&gt;Décisions :&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- inclure chat_1c ou non&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- next_action (chat_clarification / edit_mode)&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- logique selon contexte + pending rounds&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-25" parent="5FkaRzCNtncQNjxvd8Rx-16" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;b&gt;Décisions :&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- inclure chat_1c ou non&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- next_action (chat_clarification / edit_mode)&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- logique selon contexte + pending rounds&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="169" width="338" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-26" parent="5FkaRzCNtncQNjxvd8Rx-16" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF80FF);align=left;" value="&lt;div align=&quot;left&quot;&gt;&lt;blockquote&gt;&lt;blockquote&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;b&gt;Sortie LLM (JSON strict) :&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&amp;nbsp;- tasks: [chat_1a, chat_1b, (chat_1c?)]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- next_action&lt;/span&gt;&lt;/div&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-26" parent="5FkaRzCNtncQNjxvd8Rx-16" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFC7EF,#FF80FF);align=left;" value="&lt;div align=&quot;left&quot;&gt;&lt;blockquote&gt;&lt;blockquote&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;b&gt;Sortie LLM (JSON strict) :&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&amp;nbsp;- tasks: [chat_1a, chat_1b, (chat_1c?)]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;- next_action&lt;/span&gt;&lt;/div&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="221" width="338" y="195" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-17" parent="5FkaRzCNtncQNjxvd8Rx-9" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFC600);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="FALLBACK DÉTERMINISTE" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-17" parent="5FkaRzCNtncQNjxvd8Rx-9" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#D9E9FF,#A9D2FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="FALLBACK DÉTERMINISTE" vertex="1">
           <mxGeometry height="156" width="338" y="481" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-18" parent="5FkaRzCNtncQNjxvd8Rx-17" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFBD0E);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;Si LLM invalide / JSON incorrect :&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;- plan chat_1a → chat_1b (option 1c)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;- next_action par règle simple&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-18" parent="5FkaRzCNtncQNjxvd8Rx-17" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;Si LLM invalide / JSON incorrect :&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;- plan chat_1a → chat_1b (option 1c)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;- next_action par règle simple&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="135" width="338" y="26" as="geometry" />
         </mxCell>
         <mxCell id="5FkaRzCNtncQNjxvd8Rx-28" edge="1" parent="5FkaRzCNtncQNjxvd8Rx-9" source="5FkaRzCNtncQNjxvd8Rx-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.343;exitY=1.017;exitDx=0;exitDy=0;entryX=0.339;entryY=0.003;entryDx=0;entryDy=0;exitPerimeter=0;entryPerimeter=0;" target="5FkaRzCNtncQNjxvd8Rx-17">
@@ -51,67 +51,82 @@
         <mxCell id="5FkaRzCNtncQNjxvd8Rx-15" edge="1" parent="1" source="81l03F5-P4Bvd6tktEyl-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.038;entryY=0.907;entryDx=0;entryDy=0;entryPerimeter=0;" target="5FkaRzCNtncQNjxvd8Rx-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-33" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);fontColor=light-dark(#000000,#000000);" value="WRITER AGENTS (LLM)" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-33" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FF99FF);fontColor=light-dark(#000000,#000000);" value="WRITER AGENTS (LLM)" vertex="1">
           <mxGeometry height="390" width="338" x="1118" y="286" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-34" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;writer_n0&amp;nbsp;&lt;br&gt;production_summary / art / sound&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-34" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;writer_n0&amp;nbsp;&lt;br&gt;production_summary / art / sound&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="91" width="338" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-36" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;writer_n1 → writer_n5&lt;br&gt;strates N1…N5&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-36" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;writer_n1 → writer_n5&lt;br&gt;strates N1…N5&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="91" width="338" y="117" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-37" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;Inputs&lt;br&gt;brief + state_snapshot target_path&lt;/span&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-37" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;Inputs&lt;br&gt;brief + state_snapshot target_path&lt;/span&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="91" width="338" y="208" as="geometry" />
         </mxCell>
-        <mxCell id="5FkaRzCNtncQNjxvd8Rx-38" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#000000,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;Outputs&lt;br&gt;target_patch JSON&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="5FkaRzCNtncQNjxvd8Rx-38" parent="5FkaRzCNtncQNjxvd8Rx-33" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FF99FF);align=left;" value="&lt;blockquote&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;Outputs&lt;br&gt;target_patch JSON&lt;/span&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="91" width="338" y="299" as="geometry" />
         </mxCell>
-        <mxCell id="NA_NARRATOR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#BEE8FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;NarratorOrchestrator&lt;/b&gt; (02_00)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;narrator_orchestrator.py / build_plan()&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
-          <mxGeometry height="40" width="312" x="325" y="520" as="geometry" />
+        <mxCell id="NA_CHAT_SWIM" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FF99FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="CHAT AGENT (1a/1b/1c)" vertex="1">
+          <mxGeometry height="240" width="338" x="702" y="930" as="geometry" />
         </mxCell>
-        <mxCell id="NA_LLM" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#BFDFFF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;LLM Client&lt;/b&gt; (OpenAI API)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;llm_client.py&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_CHAT_1A" parent="NA_CHAT_SWIM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FFB3E6);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;chat_1a&lt;/b&gt; (dialogue)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="50" width="338" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_CHAT_1B" parent="NA_CHAT_SWIM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FFB3E6);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;chat_1b&lt;/b&gt; (analyse)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="50" width="338" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_CHAT_1C" parent="NA_CHAT_SWIM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FFB3E6);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;chat_1c&lt;/b&gt; (orchestrateur)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="50" width="338" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_STATE_01ABC" parent="NA_CHAT_SWIM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFF0FA,#FFD6F5);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;state_01_abc&lt;/b&gt; (JSON)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="40" width="338" y="194" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_NARRATOR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FFB3E6);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Orchestrateur narration&lt;/b&gt; (LLM) 02_00&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;génère le task_plan pour N0–N5&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+          <mxGeometry height="60" width="338" x="702" y="1185" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_LLM" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFD6F5,#FFB3E6);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;LLM Client&lt;/b&gt; (OpenAI API)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;llm_client.py&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="78" width="338" x="1118" y="140" as="geometry" />
         </mxCell>
-        <mxCell id="NA_TR_SWIM" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#A9D2FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="TASK RUNNER / EXECUTION" vertex="1">
+        <mxCell id="NA_TR_SWIM" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#D9E9FF,#A9D2FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="TASK RUNNER / EXECUTION" vertex="1">
           <mxGeometry height="338" width="312" x="325" y="560" as="geometry" />
         </mxCell>
-        <mxCell id="NA_TR_DESC" parent="NA_TR_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Code :&lt;/b&gt; task_runner.py&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Fonction :&lt;/b&gt; TaskRunner.run_task_plan()&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;exécute les tâches, maintient state_snapshot&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_TR_DESC" parent="NA_TR_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Code :&lt;/b&gt; task_runner.py&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Fonction :&lt;/b&gt; TaskRunner.run_task_plan()&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;exécute les tâches, maintient state_snapshot&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="78" width="312" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="NA_TR_CHAT" parent="NA_TR_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#C3DDFF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Chat agents :&lt;/b&gt; chat_1a / chat_1b / chat_1c&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;LLM + ChatMemoryStore&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_TR_CHAT" parent="NA_TR_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#C3DDFF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Chat agents :&lt;/b&gt; chat_1a / chat_1b / chat_1c&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;LLM + ChatMemoryStore&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="70" width="312" y="112" as="geometry" />
         </mxCell>
-        <mxCell id="NA_TR_WRITER" parent="NA_TR_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#B6D4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Writer runtime :&lt;/b&gt; writer_n0..n5&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;ContextBuilder + StrategyFinder + LLM&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_TR_WRITER" parent="NA_TR_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#B6D4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Writer runtime :&lt;/b&gt; writer_n0..n5&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;ContextBuilder + StrategyFinder + LLM&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="70" width="312" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="NA_TR_MERGE" parent="NA_TR_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#A9CBFF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Merge &amp;amp; logs :&lt;/b&gt; StateMerger + writer_logs&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;UITranslator (N0 UI)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_TR_MERGE" parent="NA_TR_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#A9CBFF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Merge &amp;amp; logs :&lt;/b&gt; StateMerger + writer_logs&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;UITranslator (N0 UI)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="70" width="312" y="268" as="geometry" />
         </mxCell>
-        <mxCell id="NA_CTX_SWIM" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#BFE8D2);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="CONTEXT + STRATEGY" vertex="1">
-          <mxGeometry height="260" width="338" x="702" y="930" as="geometry" />
+        <mxCell id="NA_CTX_SWIM" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#D9E9FF,#A9D2FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="CONTEXT + STRATEGY" vertex="1">
+          <mxGeometry height="260" width="338" x="325" y="930" as="geometry" />
         </mxCell>
-        <mxCell id="NA_CTX_BUILDER" parent="NA_CTX_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#D2F0E0);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;ContextBuilder&lt;/b&gt; (context_pack)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;lit N0-N5 + schemas + dépendances&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_CTX_BUILDER" parent="NA_CTX_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;ContextBuilder&lt;/b&gt; (context_pack)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;lit N0-N5 + schemas + dépendances&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="78" width="338" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="NA_CTX_STRATEGY" parent="NA_CTX_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#C3EAD5);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;StrategyFinder&lt;/b&gt; + LibraryRAG&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;library index + R2R (optionnel)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_CTX_STRATEGY" parent="NA_CTX_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;StrategyFinder&lt;/b&gt; + LibraryRAG&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;library index + R2R (optionnel)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="78" width="338" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="NA_CTX_SPECS" parent="NA_CTX_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#B6E2CB);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;SpecLoader&lt;/b&gt; (prompts + schémas)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;chat_agent / writer_agent / 02_narration&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_CTX_SPECS" parent="NA_CTX_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;SpecLoader&lt;/b&gt; (prompts + schémas)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;chat_agent / writer_agent / 02_narration&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="60" width="338" y="194" as="geometry" />
         </mxCell>
-        <mxCell id="NA_DATA_SWIM" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#D0D0D0);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="DATA / STORAGE" vertex="1">
+        <mxCell id="NA_DATA_SWIM" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#D9E9FF,#A9D2FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);" value="DATA / STORAGE" vertex="1">
           <mxGeometry height="360" width="338" x="1118" y="700" as="geometry" />
         </mxCell>
-        <mxCell id="NA_DATA_PROJECT" parent="NA_DATA_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#E0E0E0);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Project storage&lt;/b&gt; data/{project}/metadata&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;N0-N5 JSON (project_storage.py)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_DATA_PROJECT" parent="NA_DATA_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Project storage&lt;/b&gt; data/{project}/metadata&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;N0-N5 JSON (project_storage.py)&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="80" width="338" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="NA_DATA_CHAT" parent="NA_DATA_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#DADADA);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;ChatMemoryStore&lt;/b&gt; chat_states&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;messages + snapshots + meta&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_DATA_CHAT" parent="NA_DATA_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;ChatMemoryStore&lt;/b&gt; chat_states&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;messages + snapshots + meta&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="80" width="338" y="116" as="geometry" />
         </mxCell>
-        <mxCell id="NA_DATA_LOGS" parent="NA_DATA_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#D3D3D3);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Logs&lt;/b&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;writer_logs / orchestrator_logs&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_DATA_LOGS" parent="NA_DATA_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Logs&lt;/b&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;writer_logs / orchestrator_logs&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="60" width="338" y="206" as="geometry" />
         </mxCell>
-        <mxCell id="NA_DATA_UI" parent="NA_DATA_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#CDCDCD);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;UI strata&lt;/b&gt; (N0_UI)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;traductions pour l'interface&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
+        <mxCell id="NA_DATA_UI" parent="NA_DATA_SWIM" style="whiteSpace=wrap;html=1;fillColor=light-dark(#EEF5FF,#CFE4FF);fontColor=light-dark(#000000,#000000);strokeColor=light-dark(#000000,#000000);align=left;" value="&lt;blockquote&gt;&lt;div align=&quot;left&quot;&gt;&lt;b&gt;UI strata&lt;/b&gt; (N0_UI)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;traductions pour l'interface&lt;/div&gt;&lt;/blockquote&gt;" vertex="1">
           <mxGeometry height="60" width="338" y="276" as="geometry" />
         </mxCell>
         <mxCell id="NA_EDGE_SERVICE_TR" edge="1" parent="1" source="5FkaRzCNtncQNjxvd8Rx-5" target="NA_TR_SWIM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
@@ -132,7 +147,19 @@
         <mxCell id="NA_EDGE_TR_PROJECT" edge="1" parent="1" source="NA_TR_SWIM" target="NA_DATA_PROJECT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NA_EDGE_SO_NARRATOR" edge="1" parent="1" source="5FkaRzCNtncQNjxvd8Rx-9" target="NA_NARRATOR" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+        <mxCell id="NA_EDGE_SO_CHAT" edge="1" parent="1" source="5FkaRzCNtncQNjxvd8Rx-26" target="NA_CHAT_1A" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_EDGE_CHAT_1A_1B" edge="1" parent="1" source="NA_CHAT_1A" target="NA_CHAT_1B" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_EDGE_CHAT_1B_1C" edge="1" parent="1" source="NA_CHAT_1B" target="NA_CHAT_1C" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_EDGE_CHAT_1C_STATE" edge="1" parent="1" source="NA_CHAT_1C" target="NA_STATE_01ABC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NA_EDGE_STATE_NARRATOR" edge="1" parent="1" source="NA_STATE_01ABC" target="NA_NARRATOR" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="NA_EDGE_NARRATOR_TR" edge="1" parent="1" source="NA_NARRATOR" target="NA_TR_SWIM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
