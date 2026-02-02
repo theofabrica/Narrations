@@ -1,12 +1,12 @@
 {
   "project_id": "speedball",
-  "session_id": "sess_5d53e13d220d4f1b83d397963e6dfbc0",
+  "session_id": "sess_4bcf5e8444ce42a6802e6ac58fadc8b0",
   "label": "chat_plan",
-  "logged_at": "2026-02-02T07:59:28.435585Z",
+  "logged_at": "2026-02-02T10:15:16.339083Z",
   "task_plan": {
-    "plan_id": "plan_ab1ea95f7d8e",
-    "created_at": "2026-02-02T07:59:28.432304Z",
-    "source_state_id": "sess_5d53e13d220d4f1b83d397963e6dfbc0",
+    "plan_id": "plan_9936b3bc681b",
+    "created_at": "2026-02-02T10:15:16.336608Z",
+    "source_state_id": "sess_4bcf5e8444ce42a6802e6ac58fadc8b0",
     "tasks": [
       {
         "id": "task_chat_1a",

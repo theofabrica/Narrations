@@ -99,6 +99,34 @@ class WriterOrchestrator:
             strategy_card = self.strategy_finder.build_strategy(context_pack.payload)
         context_pack.payload["strategy_card"] = strategy_card
 
+        existing_fields: Dict[str, str] = {}
+        if plan.allowed_fields and isinstance(target_current, dict):
+            for field in plan.allowed_fields:
+                value = target_current.get(field)
+                if isinstance(value, str) and value.strip():
+                    existing_fields[field] = value.strip()
+        if not existing_fields and isinstance(target_current, str) and target_current.strip():
+            existing_fields["text"] = target_current.strip()
+
+        mode_hint = ""
+        existing_block = ""
+        if existing_fields:
+            mode_hint = (
+                "Editing mode:\n"
+                "- Update the existing text to satisfy the user request, context, and strategy.\n"
+                "- Do NOT rewrite from scratch. Preserve structure and key phrasing when possible.\n"
+                "- Only change what is necessary to satisfy constraints or requests.\n"
+            )
+            existing_block = (
+                "Existing content to revise (do not discard):\n"
+                f"{json.dumps(existing_fields, ensure_ascii=True, indent=2)}\n"
+            )
+        else:
+            mode_hint = (
+                "Creation mode:\n"
+                "- The target field is empty. Write the full text from scratch.\n"
+            )
+
         system_prompt = self._build_writer_prompt(target_path)
         allowed_hint = ""
         if plan.allowed_fields:
@@ -113,6 +141,8 @@ class WriterOrchestrator:
             f"- target_patch must contain ONLY the content for '{target_path}'.\n"
             f"{allowed_hint}"
             f"{plan.extra_rule}"
+            f"{mode_hint}"
+            f"{existing_block}"
             "- Respect redaction_constraints.min_chars / max_chars.\n"
             "- Do not invent new information.\n"
         )
