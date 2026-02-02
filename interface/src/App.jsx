@@ -110,6 +110,14 @@ function App() {
   const [chatError, setChatError] = useState('')
   const [chatSessionId, setChatSessionId] = useState('')
   const [hasPendingQuestions, setHasPendingQuestions] = useState(false)
+  const [progressActive, setProgressActive] = useState(false)
+  const [progressValue, setProgressValue] = useState(0)
+  const [progressEstimateMs, setProgressEstimateMs] = useState(() => {
+    const stored = window.localStorage.getItem('n0ProgressEstimateMs')
+    const parsed = stored ? Number(stored) : NaN
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : 28000
+  })
+  const progressStartRef = useRef(null)
   const [logOverlayOpen, setLogOverlayOpen] = useState(false)
   const [logApiText, setLogApiText] = useState('')
   const [logUiText, setLogUiText] = useState('')
@@ -2495,12 +2503,18 @@ function App() {
   const openCreateModal = () => {
     setCreateProjectName('')
     setCanCloseCreateModal(false)
+    setProgressActive(false)
+    setProgressValue(0)
+    progressStartRef.current = null
     setCreateModalOpen(true)
   }
 
   const closeCreateModal = () => {
     setCreateModalOpen(false)
     setCanCloseCreateModal(false)
+    setProgressActive(false)
+    setProgressValue(0)
+    progressStartRef.current = null
   }
 
   const handleCreateProject = async () => {
@@ -2536,6 +2550,11 @@ function App() {
     setChatError('')
     setChatMessages((prev) => [...prev, { role: 'user', content: message }])
     setChatInput('')
+    if (createModalOpen) {
+      setProgressActive(true)
+      setProgressValue(0)
+      progressStartRef.current = Date.now()
+    }
     try {
       const resp = await fetch(
         `${apiOrigin}${joinPath(apiBasePath, `/projects/${encodeURIComponent(projectId)}/narration/message`)}`,
@@ -2585,8 +2604,23 @@ function App() {
         setSelectedProject(projectId)
         await fetchProjects()
       }
+      if (data?.has_pending_questions && !n0Written) {
+        setProgressActive(false)
+        setProgressValue(0)
+        progressStartRef.current = null
+      }
       if (n0Written) {
         await fetchN0(projectId)
+        if (progressStartRef.current) {
+          const elapsedMs = Date.now() - progressStartRef.current
+          if (elapsedMs > 0) {
+            setProgressEstimateMs(elapsedMs)
+            window.localStorage.setItem('n0ProgressEstimateMs', String(elapsedMs))
+          }
+        }
+        setProgressActive(false)
+        setProgressValue(100)
+        progressStartRef.current = null
         setActivePage('project')
         closeCreateModal()
       }
@@ -2596,10 +2630,31 @@ function App() {
         ...prev,
         { role: 'assistant', content: `Erreur: ${err.message}` }
       ])
+      setProgressActive(false)
+      setProgressValue(0)
+      progressStartRef.current = null
     } finally {
       setChatStatus('idle')
     }
   }
+
+  useEffect(() => {
+    if (!progressActive) {
+      return undefined
+    }
+    if (!progressStartRef.current) {
+      progressStartRef.current = Date.now()
+    }
+    const tick = () => {
+      const elapsedMs = Date.now() - progressStartRef.current
+      const ratio = progressEstimateMs > 0 ? elapsedMs / progressEstimateMs : 0
+      const next = Math.min(100, Math.max(0, ratio * 100))
+      setProgressValue(next)
+    }
+    tick()
+    const timer = window.setInterval(tick, 200)
+    return () => window.clearInterval(timer)
+  }, [progressActive, progressEstimateMs])
 
   const openProject = (projectId) => {
     setSelectedProject(projectId)
@@ -4729,6 +4784,20 @@ function App() {
                   <span className="status-pill warning">En attente de reponses</span>
                 ) : null}
               </div>
+              {progressActive ? (
+                <div className="progress-wrap">
+                  <div className="progress-label">
+                    <span>Generation N0</span>
+                    <span>{Math.round(progressValue)}%</span>
+                  </div>
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${progressValue}%` }}
+                    />
+                  </div>
+                </div>
+              ) : null}
               <div className={`chat-box ${chatDisabled ? 'disabled' : ''}`}>
                 <textarea
                   className="chat-log"

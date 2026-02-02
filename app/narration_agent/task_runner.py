@@ -869,19 +869,97 @@ class TaskRunner:
     def _extract_duration(self, text: str) -> str:
         if not text:
             return ""
-        timecode_match = re.search(r"\b\d{1,2}:\d{2}\b", text)
+        tagged = self._extract_tagged_value(
+            text, ["duration", "durée", "duree", "temps", "time"]
+        )
+        candidate = tagged or text
+        duration = self._extract_duration_heuristic(candidate)
+        if duration:
+            return duration
+        return self._extract_duration_llm(text)
+
+    def _extract_duration_heuristic(self, text: str) -> str:
+        if not text:
+            return ""
+        timecode_match = re.search(r"\b(\d{1,2}):(\d{2})(?::(\d{2}))?\b", text)
         if timecode_match:
-            return timecode_match.group(0)
-        match = re.search(r"\b(\d+)\s*(hours|hour|heures|heure|h)\b", text, re.IGNORECASE)
+            hours = 0
+            minutes = int(timecode_match.group(1))
+            seconds = int(timecode_match.group(2))
+            if timecode_match.group(3) is not None:
+                hours = minutes
+                minutes = seconds
+                seconds = int(timecode_match.group(3))
+            total_seconds = hours * 3600 + minutes * 60 + seconds
+            return self._format_duration_seconds(total_seconds)
+
+        match = re.search(r"\b(\d{1,2})\s*h\s*(\d{1,2})\b", text, re.IGNORECASE)
         if match:
-            return f"{match.group(1)}h"
-        match = re.search(r"\b(\d+)\s*(minutes|minute|min|m)\b", text, re.IGNORECASE)
+            hours = int(match.group(1))
+            minutes = int(match.group(2))
+            return self._format_duration_seconds(hours * 3600 + minutes * 60)
+
+        match = re.search(r"\b(\d{1,2})\s*m(?:in)?\s*(\d{1,2})\s*s?\b", text, re.IGNORECASE)
         if match:
-            return f"{match.group(1)}m"
-        match = re.search(r"\b(\d+)\s*(seconds|secondes|sec|s)\b", text, re.IGNORECASE)
-        if match:
-            return f"{match.group(1)}s"
+            minutes = int(match.group(1))
+            seconds = int(match.group(2))
+            return self._format_duration_seconds(minutes * 60 + seconds)
+
+        total_seconds = 0.0
+        pattern = re.compile(
+            r"(\d+(?:[.,]\d+)?)\s*(h|hr|hour|hours|heure|heures|m|min|minute|minutes|s|sec|secs|second|seconds|seconde|secondes)",
+            re.IGNORECASE,
+        )
+        for value_str, unit in pattern.findall(text):
+            value = float(value_str.replace(",", "."))
+            unit = unit.lower()
+            if unit.startswith("h") or "heure" in unit:
+                total_seconds += value * 3600
+            elif unit.startswith("m"):
+                total_seconds += value * 60
+            else:
+                total_seconds += value
+
+        if total_seconds > 0:
+            return self._format_duration_seconds(int(round(total_seconds)))
+
         return ""
+
+    def _extract_duration_llm(self, text: str) -> str:
+        if not text:
+            return ""
+        system_prompt = (
+            "Extract a target duration from the text. "
+            "Return ONLY JSON: {\"duration\": \"HH:MM:SS\"} or {\"duration\": \"\"}. "
+            "If missing or ambiguous, return empty."
+        )
+        llm_response = self.llm_client.complete(
+            LLMRequest(
+                model=self.llm_client.default_model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": text},
+                ],
+                temperature=0,
+            )
+        )
+        raw_content = llm_response.content.strip()
+        json_block = self._extract_json_block(raw_content) or raw_content
+        parsed = self._parse_json_payload(json_block, raw_content)
+        if not isinstance(parsed, dict):
+            return ""
+        duration = parsed.get("duration", "")
+        if not isinstance(duration, str):
+            return ""
+        return self._extract_duration_heuristic(duration)
+
+    def _format_duration_seconds(self, total_seconds: int) -> str:
+        if total_seconds <= 0:
+            return ""
+        hours = total_seconds // 3600
+        minutes = (total_seconds % 3600) // 60
+        seconds = total_seconds % 60
+        return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
     def _extract_aspect_ratio(self, text: str) -> str:
         if not text:

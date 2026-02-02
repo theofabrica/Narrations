@@ -1,0 +1,27 @@
+{
+  "project_id": "speedball",
+  "session_id": "sess_5d53e13d220d4f1b83d397963e6dfbc0",
+  "updated_at": "2026-02-02T07:59:52.165984Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "C'est un clip sur un sport de balle futuriste avec des hommes en rollerblade casqu\u00e9 et arm\u00e9s de gants \u00e0 clous."
+    },
+    {
+      "role": "assistant",
+      "content": "Pour clarifier votre demande, j'ai besoin de quelques pr\u00e9cisions suppl\u00e9mentaires.\n\n1. Quel est le format souhait\u00e9 pour ce clip (par exemple, une bande-annonce, un court m\u00e9trage, etc.) ?\n2. Quelle est la dur\u00e9e cible du clip ?\n\nMerci de votre aide !"
+    },
+    {
+      "role": "user",
+      "content": "je veux 90 secondes et une musique hip hop avec du classique dedans et une ambiance dramatique"
+    },
+    {
+      "role": "assistant",
+      "content": "Merci pour ces pr\u00e9cisions ! Voici ce que j'ai compris :\n\n Vous souhaitez un clip de 90 secondes sur un sport de balle futuriste avec des hommes en rollerblade, casqu\u00e9s et arm\u00e9s de gants \u00e0 clous. Vous aimeriez que la musique soit un m\u00e9lange de hip hop et de classique, avec une ambiance dramatique.\n\nJSON for 1b:"
+    }
+  ],
+  "meta": {
+    "pending_rounds": 0,
+    "last_trigger": "build_brief"
+  }
+}

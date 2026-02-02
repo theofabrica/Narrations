@@ -1,0 +1,46 @@
+{
+  "project_id": "speedball",
+  "session_id": "sess_5d53e13d220d4f1b83d397963e6dfbc0",
+  "agent": "writer_n0",
+  "target_path": "n0.production_summary",
+  "status": "done",
+  "warning": "",
+  "error": "",
+  "target_patch": {
+    "production_type": "clip",
+    "target_duration": "00:01:30",
+    "aspect_ratio": "16:9",
+    "summary": "In a futuristic arena, a high-stakes ball sport unfolds, blending the intensity of competition with the elegance of a choreographed dance. The players, clad in sleek, advanced uniforms, maneuver with precision and agility, their movements synchronized to the dramatic fusion of hip hop and classical music. As the ball soars through the air, the tension builds, capturing the essence of a world where athletic prowess meets artistic expression. This 90-second clip immerses viewers in a captivating spectacle, where every pass and play is a testament to the sport's dynamic and innovative spirit."
+  },
+  "open_questions": [],
+  "strategy_card": {
+    "strategy_id": "summary_v1",
+    "target_path": "n0.production_summary",
+    "writing_typology": "summary",
+    "library_item_ids": [
+      "aristote_poetique",
+      "lavandier_construire_un_recit",
+      "mckee_story",
+      "truby_anatomy_of_story"
+    ],
+    "style_guidelines": [
+      "Concise",
+      "Objective",
+      "No new information"
+    ],
+    "structure_guidelines": [
+      "1-2 sentences",
+      "Lead with the core idea",
+      "Keep to target length"
+    ],
+    "source_refs": [
+      "Poetique - Aristote",
+      "Construire un recit - Yves Lavandier",
+      "Story - Robert McKee",
+      "Anatomy of Story - John Truby"
+    ],
+    "notes": "Auto-selected based on writing typology and language."
+  },
+  "raw_output": "```json\n{\n  \"target_patch\": {\n    \"summary\": \"In a futuristic arena, a high-stakes ball sport unfolds, blending the intensity of competition with the elegance of a choreographed dance. The players, clad in sleek, advanced uniforms, maneuver with precision and agility, their movements synchronized to the dramatic fusion of hip hop and classical music. As the ball soars through the air, the tension builds, capturing the essence of a world where athletic prowess meets artistic expression. This 90-second clip immerses viewers in a captivating spectacle, where every pass and play is a testament to the sport's dynamic and innovative spirit.\"\n  },\n  \"open_questions\": []\n}\n```",
+  "logged_at": "2026-02-02T07:59:57.246684Z"
+}

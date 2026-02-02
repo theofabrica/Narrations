@@ -1,12 +1,12 @@
 {
   "project_id": "speedball",
   "strata": "n0",
-  "updated_at": "2026-02-01T20:00:20.510127Z",
+  "updated_at": "2026-02-02T08:00:25.072813Z",
   "data": {
     "production_summary": {
-      "summary": "In a thrilling 90-second clip, viewers are transported to a futuristic arena where a high-octane ball sport unfolds. Men in rollerblades, equipped with helmets and spiked gloves, navigate the dynamic field with agility and precision. The atmosphere is charged with dramatic hip hop-classical music, enhancing the intensity and excitement of the game. This captivating visual story captures the essence of a sport that is both innovative and exhilarating, set against a backdrop of a vibrant, futuristic world.",
+      "summary": "In a futuristic arena, a high-stakes ball sport unfolds, blending the intensity of competition with the elegance of a choreographed dance. The players, clad in sleek, advanced uniforms, maneuver with precision and agility, their movements synchronized to the dramatic fusion of hip hop and classical music. As the ball soars through the air, the tension builds, capturing the essence of a world where athletic prowess meets artistic expression. This 90-second clip immerses viewers in a captivating spectacle, where every pass and play is a testament to the sport's dynamic and innovative spirit.",
       "production_type": "clip",
-      "target_duration": "",
+      "target_duration": "00:01:30",
       "aspect_ratio": "16:9",
       "visual_style": "futuristic",
       "tone": "dramatic",
@@ -24,11 +24,11 @@
       }
     },
     "art_direction": {
-      "description": "The art direction of this 90-second clip is a vibrant fusion of futuristic and athletic aesthetics. The setting is a sleek, high-tech arena where the sport unfolds with a dynamic energy. Men in rollerblades, equipped with helmets and spiked gloves, glide across the arena with precision and speed, embodying a sense of power and agility. The visual style is characterized by bold, metallic colors and sharp, angular designs that reflect the cutting-edge nature of the sport. This distinctive look is further enhanced by dramatic lighting that casts dynamic shadows, adding depth and intensity to the scenes. The overall aesthetic is both modern and edgy, capturing the essence of a futuristic sport that is as thrilling as it is visually striking.",
+      "description": "The art direction for this 90-second clip on a futuristic ball sport is characterized by a sleek, high-tech aesthetic that merges elements of urban street culture with advanced technology. The visual style is defined by bold, dynamic lines and a color palette dominated by metallic silvers and deep blues, accented with neon highlights that evoke a sense of speed and energy. The setting is a futuristic arena with holographic displays and interactive elements that enhance the viewer's immersion. This distinctive style is further emphasized by the integration of dramatic hip hop-classical music, which complements the visual intensity and adds a layer of sophistication and drama to the overall experience.",
       "references": ""
     },
     "sound_direction": {
-      "description": "The sound direction for this 90-second clip is a fusion of dramatic hip hop and classical music, creating a unique and compelling auditory experience. The music is designed to enhance the futuristic and energetic atmosphere of the sport, with powerful beats and orchestral elements that underscore the intensity of the gameplay. The hip hop influences bring a modern, urban edge, while the classical components add a layer of sophistication and depth. This combination not only complements the visual spectacle of men in rollerblades with helmets and spiked gloves but also elevates the overall dramatic tension, making the soundscape both distinctive and memorable.",
+      "description": "The sound direction for this 90-second clip is a dynamic fusion of hip hop and classical music, creating a dramatic and futuristic atmosphere. The music is characterized by powerful orchestral strings intertwined with rhythmic hip hop beats, providing an intense backdrop that enhances the excitement of the futuristic ball sport. The sonic landscape is further enriched by electronic elements that add a modern edge, making the sound both distinctive and memorable. This unique blend of genres not only complements the visual intensity but also elevates the overall dramatic tone of the clip.",
       "references": ""
     }
   }
