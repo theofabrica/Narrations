@@ -2,11 +2,11 @@
 
 from .agent_factory import AgentFactory
 from .llm_client import LLMClient
-from .narration.context_builder import ContextBuilder
-from .narration.library_rag import LibraryRAG
 from .narration.narrator_orchestrator import NarratorOrchestrator
-from .narration.strategy_finder import StrategyFinder
 from .task_runner import TaskRunner
+from .writer_agent.context_builder.context_builder import ContextBuilder
+from .writer_agent.strategy_finder.library_rag import LibraryRAG
+from .writer_agent.strategy_finder.strategy_finder import StrategyFinder
 
 __all__ = [
     "AgentFactory",

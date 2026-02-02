@@ -56,15 +56,35 @@ def run_narration_flow(
                 "config": {"create_if_missing": True},
             }
             narrator = NarratorOrchestrator()
-            narration_task_plan = narrator.build_plan(narration_input)
+            fallback_plan = narrator.build_plan(narration_input)
+            narration_task_plan = fallback_plan
+            llm_meta: Dict[str, Any] = {}
+            narration_task_plan, _, llm_meta = narrator.build_plan_llm(
+                llm_client=runner.llm_client,
+                narration_input=narration_input,
+                fallback_plan=fallback_plan,
+            )
+            write_plan_log(
+                project_id=project_id,
+                session_id=session_id,
+                label="narration_orchestrator_llm",
+                payload={
+                    "used_llm": llm_meta.get("used_llm"),
+                    "reason": llm_meta.get("reason"),
+                    "raw_output": llm_meta.get("raw_output", "")[:8000],
+                },
+            )
             narration_task_context = {}
             for task in narration_task_plan.get("tasks", []):
                 task_id = task.get("id")
                 if not task_id:
                     continue
-                narration_task_context[task_id] = {
+                base_context = {
                     "source_state_payload": narration_input.get("source_state_payload") or {},
                     "target_path": task.get("output_ref", ""),
+                }
+                narration_task_context[task_id] = {
+                    **base_context,
                 }
             narration_runner_input = {
                 "plan_id": narration_task_plan.get("plan_id", ""),

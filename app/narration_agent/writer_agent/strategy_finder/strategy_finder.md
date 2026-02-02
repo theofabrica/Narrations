@@ -1,4 +1,4 @@
-# 10_strategy_finder.md - "Strategy Finder" sub-agent (RAG)
+# strategy_finder.md - "Strategy Finder" sub-agent (RAG)
 
 ## Role
 - Choose a writing strategy from a text library.
@@ -6,11 +6,11 @@
 
 ## Expected input
 - `context_pack.json`
-- Library index (e.g. `writer_agent/library/index.json`)
+- Library index (e.g. `writer_agent/strategy_finder/library/index.json`)
 - Library passages retrieved via the R2R agentic RAG helper
 
 ## Expected output
-- `strategy_card.json` compliant with `strategy_card_structure.json`
+- `strategy_card.json` compliant with `strategy_finder/strategy_card_structure.json`
 
 ## Rules
 - The Strategy Finder decides which library typologies are ingested into R2R.

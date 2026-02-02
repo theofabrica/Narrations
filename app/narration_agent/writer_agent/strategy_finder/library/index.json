@@ -29,7 +29,7 @@
         "theme"
       ],
       "filename": "SRC_NARRATOLOGY__aristote_poetics.txt",
-      "source_path": "writer_agent/library/SRC_NARRATOLOGY__aristote_poetics.txt"
+      "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__aristote_poetics.txt"
     },
     {
       "id": "lavandier_construire_un_recit",
@@ -43,7 +43,7 @@
         "character"
       ],
       "filename": "SRC_NARRATOLOGY__lavandier_dramaturgy.txt",
-      "source_path": "writer_agent/library/SRC_NARRATOLOGY__lavandier_dramaturgy.txt"
+      "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__lavandier_dramaturgy.txt"
     },
     {
       "id": "mckee_story",
@@ -57,7 +57,7 @@
         "character"
       ],
       "filename": "SRC_NARRATOLOGY__mckee_story.txt",
-      "source_path": "writer_agent/library/SRC_NARRATOLOGY__mckee_story.txt"
+      "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.txt"
     },
     {
       "id": "truby_anatomy_of_story",
@@ -71,7 +71,7 @@
         "theme"
       ],
       "filename": "SRC_NARRATOLOGY__truby_anatomy_of_story.txt",
-      "source_path": "writer_agent/library/SRC_NARRATOLOGY__truby_anatomy_of_story.txt"
+      "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.txt"
     }
   ]
 }

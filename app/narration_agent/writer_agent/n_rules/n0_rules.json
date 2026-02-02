@@ -1,0 +1,26 @@
+{
+  "n0.production_summary": {
+    "allowed_fields": ["summary"],
+    "redaction_constraints": { "min_chars": 120, "max_chars": 320 },
+    "use_strategy": true,
+    "skip_llm": false,
+    "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate a beautiful scene."
+  },
+  "n0.art_direction": {
+    "allowed_fields": ["description"],
+    "redaction_constraints": { "min_chars": 180, "max_chars": 600 },
+    "use_strategy": false,
+    "skip_llm": false,
+    "extra_rule": "Writing rule (English): Describe the aesthetic style of the video precisely, highlighting what makes it distinctive and recognizable."
+  },
+  "n0.sound_direction": {
+    "allowed_fields": ["description"],
+    "redaction_constraints": { "min_chars": 180, "max_chars": 600 },
+    "use_strategy": false,
+    "skip_llm": false,
+    "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable."
+  },
+  "n0.deliverables": {
+    "skip_llm": true
+  }
+}

@@ -6,15 +6,13 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
 from app.narration_agent.chat.chat_memory_store import ChatMemoryStore
-from app.narration_agent.narration.context_builder import ContextBuilder
 from app.narration_agent.llm_client import LLMClient, LLMRequest
 from app.narration_agent.spec_loader import load_json, load_text
-from app.narration_agent.narration.state_merger import merge_target_patch
-from app.narration_agent.narration.strategy_finder import StrategyFinder
 from app.narration_agent.chat.ui_translator import UITranslator
+from app.narration_agent.writer_agent.writer_orchestrator import WriterOrchestrator
 from app.utils.ids import generate_timestamp
 from app.utils.logging import setup_logger
-from app.utils.project_storage import get_project_root, read_strata
+from app.utils.project_storage import get_project_root
 
 
 @dataclass
@@ -453,209 +451,62 @@ class TaskRunner:
         if not source_state:
             return {"status": "error", "error": "missing_source_state"}
 
-        context_builder = ContextBuilder()
-        context_pack = context_builder.build(project_id, source_state, target_path)
-        target_current = context_pack.payload.get("target_current")
-        if not isinstance(target_current, dict):
-            target_current = {}
+        writer_orchestrator = WriterOrchestrator(self.llm_client)
+        result = writer_orchestrator.run(
+            project_id=project_id,
+            target_path=target_path,
+            source_state=source_state,
+        )
+        if result.raw_output:
+            self.logger.info(
+                "writer_output",
+                extra={
+                    "agent": agent_name,
+                    "project_id": project_id,
+                    "target_path": target_path,
+                    "content": result.raw_output[:4000],
+                },
+            )
 
-        base_patch: Dict[str, Any] = {}
-        allowed_fields: Optional[List[str]] = None
-        skip_llm = False
-        use_strategy = True
-        extra_rule = ""
-        if target_path.startswith("n0."):
-            if target_path == "n0.production_summary":
-                base_patch = self._infer_n0_production_summary(source_state, target_current)
-                allowed_fields = ["summary"]
-                context_pack.payload["redaction_constraints"] = {
-                    "min_chars": 120,
-                    "max_chars": 320,
-                }
-                extra_rule = (
-                    "Writing rule (English): "
-                    "Tell the summary as a visual story, like a storyteller who takes time "
-                    "to narrate a beautiful scene.\n"
-                )
-                if base_patch:
-                    merge_target_patch(project_id, target_path, base_patch)
-                    target_current = self._merge_patch(target_current, base_patch)
-                    context_pack.payload["target_current"] = target_current
-            elif target_path == "n0.deliverables":
-                base_patch = self._infer_n0_deliverables(source_state, target_current)
-                skip_llm = True
-            elif target_path == "n0.art_direction":
-                allowed_fields = ["description"]
-                context_pack.payload["redaction_constraints"] = {
-                    "min_chars": 180,
-                    "max_chars": 600,
-                }
-                use_strategy = False
-                extra_rule = (
-                    "Writing rule (English): "
-                    "Describe the aesthetic style of the video precisely, highlighting what "
-                    "makes it distinctive and recognizable.\n"
-                )
-            elif target_path == "n0.sound_direction":
-                allowed_fields = ["description"]
-                context_pack.payload["redaction_constraints"] = {
-                    "min_chars": 180,
-                    "max_chars": 600,
-                }
-                use_strategy = False
-                extra_rule = (
-                    "Writing rule (English): "
-                    "Describe the sonic and musical style of the video precisely, highlighting "
-                    "what makes it distinctive and recognizable.\n"
-                )
-
-        if skip_llm:
-            if base_patch:
-                merge_target_patch(project_id, target_path, base_patch)
+        if result.status == "error":
             self._write_writer_log(
                 project_id=project_id,
                 session_id=session_id,
                 target_path=target_path,
                 agent_name=agent_name,
-                status="done",
-                target_patch=base_patch,
+                status="error",
+                target_patch=result.target_patch,
                 open_questions=[],
-                raw_output="",
-                strategy_card={},
+                raw_output=result.raw_output,
+                strategy_card=result.strategy_card,
+                error=result.error,
             )
-            self._update_ui_translation(project_id, target_path)
-            return {
-                "status": "done",
-                "target_path": target_path,
-                "target_patch": base_patch,
-                "open_questions": [],
-                "context_pack": context_pack.payload,
-                "strategy_card": {},
-            }
+            return {"status": "error", "error": result.error, "target_patch": result.target_patch}
 
-        if use_strategy:
-            strategy_finder = StrategyFinder()
-            strategy_card = strategy_finder.build_strategy(context_pack.payload)
-        else:
-            strategy_card = {}
-        context_pack.payload["strategy_card"] = strategy_card
-
-        allowed_hint = ""
-        if allowed_fields:
-            allowed_hint = (
-                f"- Only write these fields inside the target section: {', '.join(allowed_fields)}.\n"
-            )
-
-        system_prompt = self._build_writer_prompt(agent_name, target_path)
-        user_prompt = (
-            "Context pack (JSON):\n"
-            f"{json.dumps(context_pack.payload, ensure_ascii=True, indent=2)}\n\n"
-            "Return ONLY valid JSON with this structure:\n"
-            '{ "target_patch": <object>, "open_questions": [] }\n'
-            f"- target_patch must contain ONLY the content for '{target_path}'.\n"
-            f"{allowed_hint}"
-            f"{extra_rule}"
-            "- Respect redaction_constraints.min_chars / max_chars.\n"
-            "- Do not invent new information.\n"
-        )
-        llm_response = self.llm_client.complete(
-            LLMRequest(
-                model=self.llm_client.default_model,
-                system_prompt=system_prompt,
-                user_prompt=user_prompt,
-                temperature=0.2,
-            )
-        )
-        raw_content = llm_response.content.strip()
-        self.logger.info(
-            "writer_output",
-            extra={
-                "agent": agent_name,
-                "project_id": project_id,
-                "target_path": target_path,
-                "content": raw_content[:4000],
-            },
-        )
-        json_block = self._extract_json_block(raw_content) or raw_content
-        parsed = self._parse_json_payload(json_block, raw_content)
-        if not isinstance(parsed, dict):
-            merged_patch = base_patch
-            if merged_patch:
-                try:
-                    merge_target_patch(project_id, target_path, merged_patch)
-                except Exception as exc:
-                    self._write_writer_log(
-                        project_id=project_id,
-                        session_id=session_id,
-                        target_path=target_path,
-                        agent_name=agent_name,
-                        status="error",
-                        target_patch=merged_patch,
-                        open_questions=[],
-                        raw_output=raw_content,
-                        strategy_card=strategy_card,
-                        error=str(exc),
-                    )
-                    return {"status": "error", "error": str(exc), "target_patch": merged_patch}
+        if result.status == "partial":
             self._write_writer_log(
                 project_id=project_id,
                 session_id=session_id,
                 target_path=target_path,
                 agent_name=agent_name,
                 status="partial",
-                target_patch=merged_patch,
+                target_patch=result.target_patch,
                 open_questions=[],
-                raw_output=raw_content,
-                strategy_card=strategy_card,
-                warning="invalid_json",
+                raw_output=result.raw_output,
+                strategy_card=result.strategy_card,
+                warning=result.warning or "invalid_json",
             )
             self._update_ui_translation(project_id, target_path)
             return {
                 "status": "partial",
                 "target_path": target_path,
-                "target_patch": merged_patch,
+                "target_patch": result.target_patch,
                 "open_questions": [],
-                "context_pack": context_pack.payload,
-                "strategy_card": strategy_card,
-                "warning": "invalid_json",
-                "raw": raw_content,
+                "context_pack": result.context_pack,
+                "strategy_card": result.strategy_card,
+                "warning": result.warning or "invalid_json",
+                "raw": result.raw_output,
             }
-
-        target_patch = parsed.get("target_patch") if isinstance(parsed, dict) else None
-        open_questions = parsed.get("open_questions") if isinstance(parsed, dict) else []
-        filtered_patch: Dict[str, Any] = {}
-        if isinstance(target_patch, dict):
-            filtered_patch = (
-                self._filter_allowed_fields(target_patch, allowed_fields)
-                if allowed_fields
-                else target_patch
-            )
-        merged_patch = self._merge_patch(base_patch, filtered_patch)
-        if merged_patch:
-            try:
-                merge_target_patch(project_id, target_path, merged_patch)
-            except Exception as exc:
-                self._write_writer_log(
-                    project_id=project_id,
-                    session_id=session_id,
-                    target_path=target_path,
-                    agent_name=agent_name,
-                    status="error",
-                    target_patch=merged_patch,
-                    open_questions=open_questions if isinstance(open_questions, list) else [],
-                    raw_output=raw_content,
-                    strategy_card=strategy_card,
-                    error=str(exc),
-                )
-                return {"status": "error", "error": str(exc), "target_patch": merged_patch}
-
-        if target_path == "n0.sound_direction":
-            extra_patch = self._infer_n0_visual_style_tone(source_state, project_id)
-            if extra_patch:
-                try:
-                    merge_target_patch(project_id, "n0.production_summary", extra_patch)
-                except Exception:
-                    pass
 
         self._write_writer_log(
             project_id=project_id,
@@ -663,350 +514,18 @@ class TaskRunner:
             target_path=target_path,
             agent_name=agent_name,
             status="done",
-            target_patch=merged_patch,
-            open_questions=open_questions if isinstance(open_questions, list) else [],
-            raw_output=raw_content,
-            strategy_card=strategy_card,
+            target_patch=result.target_patch,
+            open_questions=result.open_questions,
+            raw_output=result.raw_output,
+            strategy_card=result.strategy_card,
         )
         self._update_ui_translation(project_id, target_path)
         return {
             "status": "done",
             "target_path": target_path,
-            "target_patch": merged_patch,
-            "open_questions": open_questions if isinstance(open_questions, list) else [],
-            "context_pack": context_pack.payload,
-            "strategy_card": strategy_card,
+            "target_patch": result.target_patch,
+            "open_questions": result.open_questions,
+            "context_pack": result.context_pack,
+            "strategy_card": result.strategy_card,
         }
 
-    def _build_writer_prompt(self, agent_name: str, target_path: str) -> str:
-        base_prompt = load_text("writer_agent/10_writer.md").strip()
-        strata_prompt = ""
-        if target_path.startswith("n0"):
-            strata_prompt = load_text("narration/specs/02_01_project_writer.md").strip()
-        if not base_prompt:
-            base_prompt = (
-                "You are a writer agent. Produce a patch for the target section only."
-            )
-        return "\n\n".join([chunk for chunk in [base_prompt, strata_prompt] if chunk])
-
-    def _merge_patch(self, base: Dict[str, Any], patch: Dict[str, Any]) -> Dict[str, Any]:
-        if not base and not patch:
-            return {}
-        merged = {**base}
-        for key, value in patch.items():
-            if isinstance(value, dict) and isinstance(merged.get(key), dict):
-                merged[key] = self._merge_patch(merged.get(key, {}), value)
-            else:
-                merged[key] = value
-        return merged
-
-    def _filter_allowed_fields(
-        self, patch: Dict[str, Any], allowed_fields: Optional[List[str]]
-    ) -> Dict[str, Any]:
-        if not allowed_fields:
-            return patch
-        return {key: value for key, value in patch.items() if key in allowed_fields}
-
-    def _infer_n0_production_summary(
-        self, source_state: Dict[str, Any], target_current: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        combined_text = self._collect_brief_text(source_state)
-        intents = _get_list(source_state, ["core", "intents"])
-        production_type = self._pick_from_keywords(
-            combined_text,
-            intents,
-            [
-                (["clip", "music video"], "clip"),
-                (["advertisement", "ad", "commercial", "pub"], "advertisement"),
-                (["documentary", "docu"], "documentary"),
-                (["short film", "court-metrage", "short"], "short film"),
-                (["feature film", "long metrage", "feature"], "feature film"),
-                (["series", "serie"], "series"),
-            ],
-        )
-        target_duration = self._extract_duration(combined_text)
-        aspect_ratio = self._extract_aspect_ratio(combined_text)
-        if not aspect_ratio:
-            aspect_ratio = "16:9"
-
-        patch: Dict[str, Any] = {}
-        patch.update(self._apply_if_empty(target_current, "production_type", production_type))
-        patch.update(self._apply_if_empty(target_current, "target_duration", target_duration))
-        patch.update(self._apply_if_empty(target_current, "aspect_ratio", aspect_ratio))
-        return patch
-
-    def _infer_n0_visual_style_tone(
-        self, source_state: Dict[str, Any], project_id: str
-    ) -> Dict[str, Any]:
-        try:
-            n0_state = read_strata(project_id, "n0")
-        except Exception:
-            n0_state = {}
-        n0_data = n0_state.get("data") if isinstance(n0_state, dict) else {}
-        if not isinstance(n0_data, dict):
-            n0_data = {}
-        production_summary = n0_data.get("production_summary", {})
-        art_desc = (n0_data.get("art_direction", {}) or {}).get("description", "")
-        sound_desc = (n0_data.get("sound_direction", {}) or {}).get("description", "")
-        combined_text = " | ".join(
-            [
-                self._collect_brief_text(source_state),
-                production_summary.get("summary", "") if isinstance(production_summary, dict) else "",
-                art_desc if isinstance(art_desc, str) else "",
-                sound_desc if isinstance(sound_desc, str) else "",
-            ]
-        )
-        visual_style = self._pick_from_keywords(
-            combined_text,
-            [],
-            [
-                (["futuristic", "futuriste", "cyberpunk"], "futuristic"),
-                (["retro", "vintage"], "retro"),
-                (["noir", "film noir"], "noir"),
-                (["surreal", "surréaliste", "surrealiste"], "surreal"),
-                (["minimal", "minimalist", "minimaliste"], "minimal"),
-                (["neon", "néon", "neon-lit"], "neon"),
-                (["classical", "classique"], "classical"),
-                (["documentary", "docu", "documentaire"], "documentary"),
-            ],
-        )
-        tone = self._pick_from_keywords(
-            combined_text,
-            [],
-            [
-                (["dramatic", "dramatique"], "dramatic"),
-                (["epic", "epique", "épique"], "epic"),
-                (["poetic", "poetique", "poétique"], "poetic"),
-                (["dark", "sombre"], "dark"),
-                (["melancholic", "melancolique", "mélancolique"], "melancholic"),
-                (["romantic", "romantique"], "romantic"),
-                (["comedic", "comedy", "comedie", "comédie"], "comedic"),
-                (["satirical", "satire", "satirique"], "satirical"),
-            ],
-        )
-        patch: Dict[str, Any] = {}
-        if isinstance(production_summary, dict):
-            patch.update(self._apply_if_empty(production_summary, "visual_style", visual_style))
-            patch.update(self._apply_if_empty(production_summary, "tone", tone))
-        return patch
-
-    def _infer_n0_deliverables(
-        self, source_state: Dict[str, Any], target_current: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        combined_text = self._collect_brief_text(source_state)
-        defaults = {
-            "visuals": {"images_enabled": True, "videos_enabled": True},
-            "audio_stems": {"dialogue": True, "sfx": True, "music": True},
-        }
-        current_visuals = target_current.get("visuals") if isinstance(target_current, dict) else {}
-        current_audio = target_current.get("audio_stems") if isinstance(target_current, dict) else {}
-        visuals = {**defaults["visuals"], **(current_visuals or {})}
-        audio = {**defaults["audio_stems"], **(current_audio or {})}
-
-        if self._has_negative(combined_text, ["no video", "sans video", "pas de video"]):
-            visuals["videos_enabled"] = False
-        if self._has_negative(combined_text, ["no image", "no images", "sans image", "sans images"]):
-            visuals["images_enabled"] = False
-        if self._has_negative(combined_text, ["no audio", "sans audio"]):
-            audio["dialogue"] = False
-            audio["sfx"] = False
-            audio["music"] = False
-        if self._has_negative(combined_text, ["no dialogue", "sans dialogue", "no voice", "sans voix"]):
-            audio["dialogue"] = False
-        if self._has_negative(combined_text, ["no music", "sans musique"]):
-            audio["music"] = False
-        if self._has_negative(combined_text, ["no sfx", "sans sfx", "sans bruitage"]):
-            audio["sfx"] = False
-
-        if self._has_positive(combined_text, ["image", "photo", "illustration", "affiche"]):
-            visuals["images_enabled"] = True
-        if self._has_positive(combined_text, ["video", "clip", "film", "animation"]):
-            visuals["videos_enabled"] = True
-        if self._has_positive(combined_text, ["dialogue", "voice", "voix", "narration"]):
-            audio["dialogue"] = True
-        if self._has_positive(combined_text, ["music", "musique", "soundtrack"]):
-            audio["music"] = True
-        if self._has_positive(combined_text, ["sfx", "bruitage", "sound design"]):
-            audio["sfx"] = True
-
-        return {"visuals": visuals, "audio_stems": audio}
-
-    def _collect_brief_text(self, source_state: Dict[str, Any]) -> str:
-        parts: List[str] = []
-        parts.extend(_get_list(source_state, ["core", "intents"]))
-        parts.append(_get_str(source_state, ["core", "summary"]))
-        parts.append(_get_str(source_state, ["core", "detailed_summary"]))
-        parts.append(_get_str(source_state, ["brief", "primary_objective"]))
-        parts.extend(_get_list(source_state, ["brief", "secondary_objectives"]))
-        parts.extend(_get_list(source_state, ["brief", "constraints"]))
-        parts.extend(_get_list(source_state, ["thinker", "constraints"]))
-        parts.extend(_get_list(source_state, ["thinker", "hypotheses"]))
-        return " | ".join([part for part in parts if part])
-
-    def _pick_from_keywords(
-        self,
-        text: str,
-        intents: List[str],
-        mapping: List[tuple[list[str], str]],
-    ) -> str:
-        haystack = " ".join([text, " ".join(intents)]).lower()
-        for keywords, value in mapping:
-            for keyword in keywords:
-                if keyword in haystack:
-                    return value
-        return ""
-
-    def _extract_tagged_value(self, text: str, tags: List[str]) -> str:
-        if not text:
-            return ""
-        for tag in tags:
-            pattern = re.compile(rf"{re.escape(tag)}\s*[:=-]\s*([^\n|]+)", re.IGNORECASE)
-            match = pattern.search(text)
-            if match:
-                return match.group(1).strip()
-        return ""
-
-    def _extract_duration(self, text: str) -> str:
-        if not text:
-            return ""
-        tagged = self._extract_tagged_value(
-            text, ["duration", "durée", "duree", "temps", "time"]
-        )
-        candidate = tagged or text
-        duration = self._extract_duration_heuristic(candidate)
-        if duration:
-            return duration
-        return self._extract_duration_llm(text)
-
-    def _extract_duration_heuristic(self, text: str) -> str:
-        if not text:
-            return ""
-        timecode_match = re.search(r"\b(\d{1,2}):(\d{2})(?::(\d{2}))?\b", text)
-        if timecode_match:
-            hours = 0
-            minutes = int(timecode_match.group(1))
-            seconds = int(timecode_match.group(2))
-            if timecode_match.group(3) is not None:
-                hours = minutes
-                minutes = seconds
-                seconds = int(timecode_match.group(3))
-            total_seconds = hours * 3600 + minutes * 60 + seconds
-            return self._format_duration_seconds(total_seconds)
-
-        match = re.search(r"\b(\d{1,2})\s*h\s*(\d{1,2})\b", text, re.IGNORECASE)
-        if match:
-            hours = int(match.group(1))
-            minutes = int(match.group(2))
-            return self._format_duration_seconds(hours * 3600 + minutes * 60)
-
-        match = re.search(r"\b(\d{1,2})\s*m(?:in)?\s*(\d{1,2})\s*s?\b", text, re.IGNORECASE)
-        if match:
-            minutes = int(match.group(1))
-            seconds = int(match.group(2))
-            return self._format_duration_seconds(minutes * 60 + seconds)
-
-        total_seconds = 0.0
-        pattern = re.compile(
-            r"(\d+(?:[.,]\d+)?)\s*(h|hr|hour|hours|heure|heures|m|min|minute|minutes|s|sec|secs|second|seconds|seconde|secondes)",
-            re.IGNORECASE,
-        )
-        for value_str, unit in pattern.findall(text):
-            value = float(value_str.replace(",", "."))
-            unit = unit.lower()
-            if unit.startswith("h") or "heure" in unit:
-                total_seconds += value * 3600
-            elif unit.startswith("m"):
-                total_seconds += value * 60
-            else:
-                total_seconds += value
-
-        if total_seconds > 0:
-            return self._format_duration_seconds(int(round(total_seconds)))
-
-        return ""
-
-    def _extract_duration_llm(self, text: str) -> str:
-        if not text:
-            return ""
-        system_prompt = (
-            "Extract a target duration from the text. "
-            "Return ONLY JSON: {\"duration\": \"HH:MM:SS\"} or {\"duration\": \"\"}. "
-            "If missing or ambiguous, return empty."
-        )
-        llm_response = self.llm_client.complete(
-            LLMRequest(
-                model=self.llm_client.default_model,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": text},
-                ],
-                temperature=0,
-            )
-        )
-        raw_content = llm_response.content.strip()
-        json_block = self._extract_json_block(raw_content) or raw_content
-        parsed = self._parse_json_payload(json_block, raw_content)
-        if not isinstance(parsed, dict):
-            return ""
-        duration = parsed.get("duration", "")
-        if not isinstance(duration, str):
-            return ""
-        return self._extract_duration_heuristic(duration)
-
-    def _format_duration_seconds(self, total_seconds: int) -> str:
-        if total_seconds <= 0:
-            return ""
-        hours = total_seconds // 3600
-        minutes = (total_seconds % 3600) // 60
-        seconds = total_seconds % 60
-        return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
-
-    def _extract_aspect_ratio(self, text: str) -> str:
-        if not text:
-            return ""
-        match = re.search(r"\b(\d{1,2})\s*:\s*(\d{1,2})\b", text)
-        if match:
-            return f"{match.group(1)}:{match.group(2)}"
-        if "vertical" in text.lower() or "portrait" in text.lower():
-            return "9:16"
-        if "square" in text.lower() or "carré" in text.lower():
-            return "1:1"
-        return ""
-
-    def _apply_if_empty(self, current: Dict[str, Any], field: str, value: str) -> Dict[str, Any]:
-        if not value:
-            return {}
-        existing = current.get(field)
-        if isinstance(existing, str) and existing.strip():
-            return {}
-        if existing not in (None, "", 0):
-            return {}
-        return {field: value}
-
-    def _has_negative(self, text: str, patterns: List[str]) -> bool:
-        lowered = text.lower()
-        return any(pattern in lowered for pattern in patterns)
-
-    def _has_positive(self, text: str, patterns: List[str]) -> bool:
-        lowered = text.lower()
-        return any(pattern in lowered for pattern in patterns)
-
-
-def _get_str(source_state: Dict[str, Any], path: List[str]) -> str:
-    current: Any = source_state
-    for key in path:
-        if not isinstance(current, dict):
-            return ""
-        current = current.get(key)
-    return current.strip() if isinstance(current, str) else ""
-
-
-def _get_list(source_state: Dict[str, Any], path: List[str]) -> List[str]:
-    current: Any = source_state
-    for key in path:
-        if not isinstance(current, dict):
-            return []
-        current = current.get(key)
-    if isinstance(current, list):
-        return [str(item).strip() for item in current if str(item).strip()]
-    return []

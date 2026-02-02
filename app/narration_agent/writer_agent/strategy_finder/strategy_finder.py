@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Dict, List
 
-from app.narration_agent.narration.library_rag import LibraryRAG
 from app.narration_agent.spec_loader import load_json
+from app.narration_agent.writer_agent.strategy_finder.library_rag import LibraryRAG
 
 
 @dataclass
@@ -25,7 +25,7 @@ class StrategyFinder:
     """Select a strategy card based on context pack and library index."""
 
     def __init__(self) -> None:
-        self._library_index = load_json("writer_agent/library/index.json") or {}
+        self._library_index = load_json("writer_agent/strategy_finder/library/index.json") or {}
         self._rag = LibraryRAG()
 
     def build_strategy(self, context_pack: Dict[str, Any]) -> Dict[str, Any]:

@@ -8,7 +8,7 @@
 - `state_01_abc.json` (valid brief).
 - `02_00_task_plan_structure.json` (if a task plan is provided).
 - `state_structure_n0.json` (N0 schema).
-- `context_pack_structure.json` (writer interface).
+- `context_builder/context_pack_structure.json` (writer interface).
 
 ## Expected output
 - `narrationXXX_N0.json` compliant with the N0 schema.
@@ -21,6 +21,7 @@
   (e.g. `production_summary`, `art_direction`, `sound_direction`).
 - Each writer task outputs only the target section; the code merges into N0.
 - The writer receives only the `context_pack` and returns only `target_patch`.
+- Declarative N0 rules live in `writer_agent/n_rules/n0_rules.json`.
 - Order of operations for N0:
   1) Auto-fill (no LLM) from `state_01_abc`:
      - `production_summary.production_type`

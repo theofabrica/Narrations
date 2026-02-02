@@ -1,6 +1,6 @@
 # context_pack_structure.md - Field clarification
 
-The `context_pack_structure.json` file is a context container with no new information.
+The `context_builder/context_pack_structure.json` file is a context container with no new information.
 Each field comes from the state, N schemas, or knowledge sources (strategy).
 
 ## Fields
@@ -32,4 +32,4 @@ Each field comes from the state, N schemas, or knowledge sources (strategy).
 ## Rules
 - No field should contain new information.
 - The pack only structures what is already known.
-- The writer must produce only `target_path`.
+- The redactor must produce only `target_path`.

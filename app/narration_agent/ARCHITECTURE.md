@@ -7,7 +7,10 @@ avec des appels LLM, des plans de taches, et une gestion des states N0-N5.
 ## Modules applicatifs (app/narration_agent)
 - `llm_client.py` : wrapper LLM unique (model selection, execution).
 - `agent_factory.py` : resolution des agents par role + prompts.
-- `narration/context_builder.py` : construction des `context_pack` (cible + contexte).
+- `writer_agent/writer_orchestrator.py` : orchestration writer (context, strategie, redaction).
+- `writer_agent/context_builder/context_builder.py` : construction des `context_pack`.
+- `writer_agent/strategy_finder/strategy_finder.py` : selection de strategie (RAG).
+- `writer_agent/redactor/redactor.py` : redaction LLM.
 - `narration/narrator_orchestrator.py` : generation du `task_plan` pour N0-N5.
 - `task_runner.py` : execution des taches (sequentiel/parallele).
 
@@ -27,8 +30,8 @@ avec des appels LLM, des plans de taches, et une gestion des states N0-N5.
    - N0 par sections (production_summary, deliverables, art_direction, sound_direction)
    - puis N1, N2, N3, N4, N5
 5) Le runner execute les taches:
-   - Context Builder -> `context_pack`
-   - Writer -> `target_patch`
+   - Writer Orchestrator -> `context_pack` + `strategy_card`
+   - Redactor -> `target_patch`
    - Merge applicatif -> mise a jour du state
 
 ## Interface writer (context_pack)
@@ -54,8 +57,10 @@ flowchart TD
   NA --> NOrch["NarratorOrchestrator_02_00"]
   NOrch --> Plan["TaskPlan"]
   Plan --> Runner["Runner_00"]
-  Runner --> Ctx["ContextBuilder"]
-  Ctx --> Writer["WriterAgent_10"]
-  Writer --> Merge["MergeService"]
+  Runner --> WOrch["WriterOrchestrator"]
+  WOrch --> Ctx["ContextBuilder"]
+  WOrch --> Strat["StrategyFinder"]
+  WOrch --> Redactor["Redactor"]
+  Redactor --> Merge["MergeService"]
   Merge --> Store["ProjectStorage_data"]
 ```

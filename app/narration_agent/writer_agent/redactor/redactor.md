@@ -1,18 +1,17 @@
-# 10_writer.md - Writer agent (writing layer)
+# redactor.md - Redactor (writing sub-agent)
 
 ## Role
 - Rewrite state fields tagged in `_redaction`.
 - Apply length constraints from `_redaction_constraints`.
-- Orchestrate the "Context Builder" and "Strategy Finder" sub-agents.
 
 ## Available context
 - `state_structure_01_abc.json` (ownership + redaction + constraints)
 - `state_01_abc.json` (state to enrich)
-- `context_pack_structure.json`
-- `strategy_card_structure.json`
+- `context_builder/context_pack_structure.json`
+- `strategy_finder/strategy_card_structure.json`
 
 ## Expected input
-- `context_pack.json` compliant with `context_pack_structure.json`
+- `context_pack.json` compliant with `context_builder/context_pack_structure.json`
 
 ## Expected output (structure)
 - `target_patch`: content of the target section only.
@@ -27,15 +26,11 @@
 - Only write the target section (`target_path`) provided by the context pack.
 
 ## Sub-agents
-- `10_context_builder.md`: builds `context_pack.json`.
-- `10_strategy_finder.md`: selects a strategy via RAG.
+- None (the writer orchestrator prepares the context and strategy).
 
 ## Logical flow
 1) read `_redaction` and `_redaction_constraints`
-2) for each target field:
-   - Context Builder -> `context_pack.json`
-   - Strategy Finder -> `strategy_card.json`
-   - Write only the target section
+2) write only the target section using the provided context + strategy
 3) return `target_patch`
 
 ## Example (sequence)

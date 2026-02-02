@@ -1,4 +1,4 @@
-# 10_context_builder.md - "Context Builder" sub-agent
+# context_builder.md - "Context Builder" sub-agent
 
 ## Role
 - Build a context pack for a target state field.
@@ -12,7 +12,7 @@
 - `target_path` (ex: `core.resume`)
 
 ## Expected output
-- `context_pack.json` compliant with `context_pack_structure.json`
+- `context_pack.json` compliant with `context_builder/context_pack_structure.json`
 
 ## Rules
 - Only include elements present in the state or knowledge.

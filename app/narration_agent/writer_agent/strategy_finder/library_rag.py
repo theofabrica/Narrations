@@ -35,7 +35,7 @@ class LibraryRAG:
     """Retrieve relevant library snippets using R2R agentic RAG."""
 
     def __init__(self) -> None:
-        self._library_index = load_json("writer_agent/library/index.json") or {}
+        self._library_index = load_json("writer_agent/strategy_finder/library/index.json") or {}
         self._text_cache: Dict[str, str] = {}
         self._client = None
         self._base_url = os.environ.get("R2R_API_BASE", DEFAULT_R2R_BASE)
@@ -48,7 +48,7 @@ class LibraryRAG:
         else:
             self._client = R2RClient(self._base_url)
         self._filename_map = _build_filename_map(self._library_index)
-        self._base_dir = Path(__file__).resolve().parent
+        self._base_dir = Path(__file__).resolve().parents[2]
 
     def retrieve(self, context_pack: Dict[str, Any], limit: int = 3) -> List[Dict[str, Any]]:
         if not isinstance(context_pack, dict):
@@ -529,7 +529,7 @@ def _count_term_hits(text: str, terms: List[str]) -> int:
     return sum(1 for term in terms if term in text)
 
 
-def _find_excerpt(text: str, terms: List[str]) -> tuple[str, float]:
+def _find_excerpt(text: str, terms: List[str]) -> Tuple[str, float]:
     if not text:
         return "", 0.0
     lowered = text.lower()
