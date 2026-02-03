@@ -7,6 +7,7 @@ Each field comes from the state, N schemas, or knowledge sources (strategy).
 - `target_path`: path of the target field to write (e.g. `data.production_summary`).
 - `target_section_name`: short name of the section (e.g. `production_summary`).
 - `writing_typology`: writing task type used to guide strategy selection.
+- `strategy_question`: explicit question to orient the strategy finder.
 - `target_current`: current content of the target section.
 - `target_schema`: schema excerpt for the target section.
 - `source_state_id`: source state identifier (e.g. `s0001`).
@@ -27,6 +28,12 @@ Each field comes from the state, N schemas, or knowledge sources (strategy).
 - `style_constraints`: language, tone, format.
 - `strategy_card`: strategy card provided by the Strategy Finder.
 - `redaction_constraints`: length bounds for the target field.
+- `rules`: declarative rules for the target segment.
+  - `strategy_role`: role label used to frame strategy questions.
+  - `strategy_hints`: hints to orient strategy generation.
+  - `redaction_rules`: concrete writing rules for the target segment.
+  - `quality_criteria`: criteria used to evaluate the draft.
+  - `extra_rule`: legacy single-line rule for prompts.
 - `do_not_invent`: safety boolean (true = do not invent).
 
 ## Rules

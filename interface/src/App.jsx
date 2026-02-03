@@ -47,6 +47,10 @@ const templates = {
   }
 }
 
+const N0_PROGRESS_DEFAULT_MS = 90000
+const N0_PROGRESS_MIN_MS = 60000
+const N0_PROGRESS_PADDING = 1.35
+
 const defaultTemplate = JSON.stringify(templates.pipeline_audio_stack, null, 2)
 
 const getBasePath = (pathname) => {
@@ -115,7 +119,10 @@ function App() {
   const [progressEstimateMs, setProgressEstimateMs] = useState(() => {
     const stored = window.localStorage.getItem('n0ProgressEstimateMs')
     const parsed = stored ? Number(stored) : NaN
-    return Number.isFinite(parsed) && parsed > 0 ? parsed : 28000
+    if (Number.isFinite(parsed) && parsed > 0) {
+      return Math.max(parsed, N0_PROGRESS_MIN_MS)
+    }
+    return N0_PROGRESS_DEFAULT_MS
   })
   const progressStartRef = useRef(null)
   const [logOverlayOpen, setLogOverlayOpen] = useState(false)
@@ -124,6 +131,8 @@ function App() {
   const [logAgentText, setLogAgentText] = useState('')
   const [logStatus, setLogStatus] = useState('idle')
   const [logError, setLogError] = useState('')
+  const [ragStopStatus, setRagStopStatus] = useState('idle')
+  const [ragStopError, setRagStopError] = useState('')
   const [activePage, setActivePage] = useState('home')
   const [n0Data, setN0Data] = useState(null)
   const [n0FromUi, setN0FromUi] = useState(false)
@@ -217,6 +226,36 @@ function App() {
     }
     element.style.height = 'auto'
     element.style.height = `${element.scrollHeight}px`
+  }
+
+  const handleStopRag = async () => {
+    const confirmStop = window.confirm(
+      'Arreter les services RAG locaux (R2R + Postgres) ?'
+    )
+    if (!confirmStop) {
+      return
+    }
+    setRagStopStatus('loading')
+    setRagStopError('')
+    try {
+      const resp = await fetch(
+        `${apiOrigin}${joinPath(apiBasePath, '/system/rag/stop')}`,
+        { method: 'POST' }
+      )
+      let payload = {}
+      try {
+        payload = await resp.json()
+      } catch (err) {
+        payload = {}
+      }
+      if (!resp.ok) {
+        throw new Error(payload?.error || `HTTP ${resp.status}`)
+      }
+      setRagStopStatus('done')
+    } catch (err) {
+      setRagStopStatus('error')
+      setRagStopError(err.message)
+    }
   }
   const handleAutoResize = (event) => {
     resizeTextarea(event.target)
@@ -2614,8 +2653,10 @@ function App() {
         if (progressStartRef.current) {
           const elapsedMs = Date.now() - progressStartRef.current
           if (elapsedMs > 0) {
-            setProgressEstimateMs(elapsedMs)
-            window.localStorage.setItem('n0ProgressEstimateMs', String(elapsedMs))
+            const padded = Math.round(elapsedMs * N0_PROGRESS_PADDING)
+            const nextEstimate = Math.max(padded, N0_PROGRESS_MIN_MS)
+            setProgressEstimateMs(nextEstimate)
+            window.localStorage.setItem('n0ProgressEstimateMs', String(nextEstimate))
           }
         }
         setProgressActive(false)
@@ -3014,6 +3055,22 @@ function App() {
           <span className="status-pill small">
             {pageLabel[activePage] || activePage}
           </span>
+          <button
+            type="button"
+            className="danger"
+            onClick={handleStopRag}
+            disabled={ragStopStatus === 'loading'}
+            title={
+              ragStopError ||
+              'Arrete les services RAG locaux (R2R + Postgres).'
+            }
+          >
+            {ragStopStatus === 'loading'
+              ? 'Arret...'
+              : ragStopStatus === 'done'
+                ? 'Arrete'
+                : 'Quitter'}
+          </button>
           <button
             type="button"
             className={logOverlayOpen ? 'active' : ''}

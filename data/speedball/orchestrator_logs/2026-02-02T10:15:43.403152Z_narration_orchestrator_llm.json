@@ -1,9 +1,0 @@
-{
-  "project_id": "speedball",
-  "session_id": "sess_4bcf5e8444ce42a6802e6ac58fadc8b0",
-  "label": "narration_orchestrator_llm",
-  "logged_at": "2026-02-02T10:15:43.403172Z",
-  "used_llm": true,
-  "reason": "ok",
-  "raw_output": "```json\n{\n  \"tasks\": [\n    {\n      \"output_ref\": \"n0.production_summary\",\n      \"agent\": \"writer_n0\"\n    },\n    {\n      \"output_ref\": \"n0.art_direction\",\n      \"agent\": \"writer_n1\"\n    },\n    {\n      \"output_ref\": \"n0.sound_direction\",\n      \"agent\": \"writer_n2\"\n    }\n  ],\n  \"plan_notes\": \"The project requires a comprehensive approach to cover production, art, and sound aspects for the futuristic ball sport clip. Tasks are assigned to address these areas within the allowed paths.\"\n}\n```"
-}

@@ -1,7 +1,8 @@
 # strategy_finder.md - "Strategy Finder" sub-agent (RAG)
 
 ## Role
-- Choose a writing strategy from a text library.
+- Retrieve relevant sources from the library (RAG).
+- Synthesize an editorial writing strategy for the target field.
 - Produce a strategy card applicable to the target field.
 
 ## Expected input
@@ -16,6 +17,7 @@
 - The Strategy Finder decides which library typologies are ingested into R2R.
 - Filter library items by `language` and `writing_typology` when possible.
 - Reference the sources used (title + short excerpt when available).
+- The strategy text must be a synthesis (not a context dump).
 - Do not invent styles not covered by the library.
 - Adapt the strategy to the target field and constraints.
 - If no matches are found, fall back to all library items.

@@ -52,6 +52,7 @@ class ContextBuilder:
             "target_path": target_path,
             "target_section_name": segments[0] if segments else "",
             "writing_typology": _infer_writing_typology(target_path),
+            "strategy_question": "",
             "target_current": target_current or {},
             "target_schema": target_schema or {},
             "source_state_id": source_state.get("state_id", ""),
@@ -67,9 +68,16 @@ class ContextBuilder:
             "missing": source_state.get("missing", []),
             "pending_questions": source_state.get("pending_questions", []),
             "dependencies": dependencies,
-            "style_constraints": {"language": "", "tone": "", "format": ""},
+            "style_constraints": {"language": "en", "tone": "", "format": ""},
             "strategy_card": {},
             "redaction_constraints": {"min_chars": 0, "max_chars": 0},
+            "rules": {
+                "strategy_role": "",
+                "strategy_hints": [],
+                "redaction_rules": [],
+                "quality_criteria": [],
+                "extra_rule": "",
+            },
             "do_not_invent": True,
         }
 

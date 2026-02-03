@@ -8,9 +8,13 @@ for N0 writing. The executable logic (auto-fill, heuristics) remains in
 `n_rules/n0_rules.json` contains the declarative configuration:
 - `allowed_fields`
 - `redaction_constraints` (min/max chars)
+- `redaction_rules` (per-field writing rules)
+- `quality_criteria` (evaluation criteria for drafts)
+- `strategy_hints` (guidance for strategy selection)
 - `use_strategy`
 - `skip_llm`
 - `extra_rule`
+- `strategy_role` (role description to build strategy questions)
 
 ## Notes
 - N0 auto-fill (production_type, target_duration, aspect_ratio) stays in Python.

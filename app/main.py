@@ -39,10 +39,15 @@ from app.tools.higgsfield.client import get_client as get_higgsfield_client
 from app.narration_agent.llm_client import LLMClient
 from app.narration_agent.service import handle_narration_message
 from app.narration_agent.chat.ui_translator import UITranslator
+from app.narration_agent.writer_agent.strategy_finder.rag_bootstrap import (
+    ensure_rag_ready,
+    shutdown_rag_services,
+)
 from datetime import datetime, timezone
 import asyncio
 import json
 import uuid
+import os
 from typing import Dict, Any
 from pydantic import BaseModel
 
@@ -65,6 +70,11 @@ async def lifespan(app: FastAPI):
     logger.info(f"Starting MCP Narrations Server (env={settings.APP_ENV})")
     logger.info(f"Log level: {settings.LOG_LEVEL}")
     logger.info(f"Registered actions: {len(list_actions())}")
+    try:
+        loop = asyncio.get_running_loop()
+        loop.run_in_executor(None, ensure_rag_ready)
+    except RuntimeError:
+        ensure_rag_ready()
     yield
     # Shutdown (if needed in the future)
     logger.info("Shutting down MCP Narrations Server")
@@ -196,6 +206,18 @@ def health_check():
         "version": "0.1.0",
         "time": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     }
+
+
+def _env_truthy(key: str) -> bool:
+    value = os.environ.get(key, "")
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+@app.post("/system/rag/stop")
+def stop_rag_services():
+    if settings.APP_ENV != "development" and not _env_truthy("R2R_ALLOW_SHUTDOWN"):
+        return JSONResponse(status_code=403, content={"error": "forbidden"})
+    return shutdown_rag_services()
 
 
 @app.get("/logs/{log_name}")

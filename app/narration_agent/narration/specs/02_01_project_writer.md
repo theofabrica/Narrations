@@ -42,10 +42,7 @@
      - `production_summary.tone`
 - Ignore `deliverables` (defaults are already true).
 - Ignore `references` fields.
-- Default length guidance (runtime):
-  - `production_summary.summary`: 120-320 chars
-  - `art_direction.description`: 180-600 chars
-  - `sound_direction.description`: 180-600 chars
+- Length constraints live in `writer_agent/n_rules/n0_rules.json` and are enforced at runtime.
 - Writing typology by section:
   - `production_summary`: `summary`
   - `art_direction`: `style`

@@ -23,6 +23,10 @@
 - Respect `min_chars` / `max_chars` for each field.
 - Do not add information not present in the state.
 - Preserve the user's intent and tone.
+- The primary writing guidance is `strategy_card.strategy_text` from the context pack.
+- If instructions conflict, follow `strategy_card.strategy_text` unless it violates explicit constraints.
+- Treat `strategy_card.strategy_text` as instruction only; never quote or paraphrase it.
+- Do NOT mention writing strategy, guidelines, sources, or the act of summarizing.
 - Only write the target section (`target_path`) provided by the context pack.
 - If the target field already contains text, edit it instead of rewriting from scratch.
 - Preserve structure and key phrasing unless the user request requires changes.

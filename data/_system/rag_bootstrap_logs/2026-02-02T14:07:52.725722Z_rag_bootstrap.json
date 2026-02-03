@@ -1,0 +1,18 @@
+{
+  "status": "start_timeout",
+  "rag_base": "http://localhost:7272",
+  "auto_start": true,
+  "auto_ingest": true,
+  "docker_auto_start": true,
+  "server_started": true,
+  "server_ready": false,
+  "server_ready_ms": 0,
+  "ingest_items": 0,
+  "ingest_ms": 0,
+  "postgres_status": "compose_missing",
+  "postgres_ready": false,
+  "postgres_ready_ms": 0,
+  "docker_compose": "",
+  "logged_at": "2026-02-02T14:07:32.466677Z",
+  "duration_ms": 20258
+}

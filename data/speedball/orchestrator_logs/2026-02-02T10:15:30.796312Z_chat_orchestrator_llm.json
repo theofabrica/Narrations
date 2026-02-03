@@ -1,9 +1,0 @@
-{
-  "project_id": "speedball",
-  "session_id": "sess_4bcf5e8444ce42a6802e6ac58fadc8b0",
-  "label": "chat_orchestrator_llm",
-  "logged_at": "2026-02-02T10:15:30.796340Z",
-  "used_llm": true,
-  "reason": "ok",
-  "raw_output": "```json\n{\n  \"tasks\": [\n    {\"agent\": \"chat_1a\"},\n    {\"agent\": \"chat_1b\"},\n    {\"agent\": \"chat_1c\"}\n  ],\n  \"next_action\": \"edit_mode\"\n}\n```"
-}

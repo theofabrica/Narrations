@@ -26,6 +26,27 @@ UI_PASSTHROUGH_FIELDS = {
     ]
 }
 
+CHAT_TRANSLATE_FIELDS = [
+    "core.summary",
+    "core.detailed_summary",
+    "core.open_questions",
+    "core.intents",
+    "core.notes",
+    "thinker.objectives",
+    "thinker.constraints",
+    "thinker.hypotheses",
+    "thinker.missing",
+    "thinker.clarifications",
+    "thinker.notes",
+    "brief.primary_objective",
+    "brief.secondary_objectives",
+    "brief.constraints",
+    "brief.hypotheses",
+    "brief.priorities",
+    "missing",
+    "pending_questions",
+]
+
 
 class UITranslator:
     """Translate strata content for UI display."""
@@ -83,6 +104,20 @@ class UITranslator:
         updated = write_strata(project_id, strata, _deep_merge(deepcopy(data), merged_fields))
         self.update_ui_translation(project_id, strata, language=source_language)
         return updated
+
+    def translate_chat_patch(
+        self,
+        patch: Dict[str, Any],
+        source_language: str = "auto",
+        target_language: str = "en",
+    ) -> Dict[str, Any]:
+        if not isinstance(patch, dict):
+            return patch
+        translate_fields = self._select_fields(patch, CHAT_TRANSLATE_FIELDS)
+        translated = self._translate_payload(
+            translate_fields, source_language=source_language, target_language=target_language
+        )
+        return _deep_merge(patch, translated)
 
     def _translate_payload(
         self, payload: Dict[str, Any], source_language: str, target_language: str

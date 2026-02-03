@@ -10,6 +10,7 @@ after searching the library.
 - `library_item_ids`: ids of library items used as sources.
 - `style_guidelines`: style guidelines (short list).
 - `structure_guidelines`: structure guidelines (order, rhythm, length).
+- `strategy_text`: strategy paragraph (~4500 characters).
 - `source_refs`: references to source texts (title + short excerpt).
 - `notes`: useful notes (optional).
 

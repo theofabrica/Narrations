@@ -2,6 +2,7 @@
   "target_path": "",
   "target_section_name": "",
   "writing_typology": "",
+  "strategy_question": "",
   "target_current": {},
   "target_schema": {},
   "source_state_id": "",
@@ -39,6 +40,13 @@
   "redaction_constraints": {
     "min_chars": 0,
     "max_chars": 0
+  },
+  "rules": {
+    "strategy_role": "",
+    "strategy_hints": [],
+    "redaction_rules": [],
+    "quality_criteria": [],
+    "extra_rule": ""
   },
   "do_not_invent": true
 }

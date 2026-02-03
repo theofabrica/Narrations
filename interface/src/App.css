@@ -94,6 +94,16 @@ body {
   cursor: not-allowed;
 }
 
+.top-nav-right button.danger {
+  border-color: rgba(239, 106, 106, 0.5);
+  color: var(--danger);
+}
+
+.top-nav-right button.danger:hover {
+  border-color: var(--danger);
+  box-shadow: 0 8px 18px rgba(239, 106, 106, 0.25);
+}
+
 .top-nav-right .status-pill.small {
   padding: 4px 10px;
   font-size: 0.75rem;

@@ -1,26 +1,79 @@
 {
   "n0.production_summary": {
+    "strategy_role": "a production summary for the project",
+    "strategy_hints": [
+      "Focus on narrative function: a production summary for stakeholders.",
+      "Use only facts from the provided context and constraints.",
+      "Signal tone through neutral diction, not evaluation.",
+      "Respect the length target and single-paragraph format."
+    ],
     "allowed_fields": ["summary"],
-    "redaction_constraints": { "min_chars": 120, "max_chars": 320 },
+    "redaction_constraints": { "min_chars": 1500, "max_chars": 3000 },
+    "redaction_rules": [
+      "Single paragraph, 8-12 sentences.",
+      "No meta-writing language or references to strategy or sources.",
+      "Keep statements grounded in the project brief only.",
+      "Maintain a sober, factual tone."
+    ],
+    "quality_criteria": [
+      "Summary length stays within min/max chars.",
+      "No meta references (strategy, summary-as-object, sources).",
+      "All statements are traceable to provided context.",
+      "Tone remains neutral and factual."
+    ],
     "use_strategy": true,
     "skip_llm": false,
     "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate a beautiful scene."
   },
   "n0.art_direction": {
+    "strategy_role": "an art direction description for the project",
+    "strategy_hints": [
+      "Describe concrete visual style elements (palette, textures, lighting).",
+      "Avoid story beats; focus on aesthetic direction only."
+    ],
     "allowed_fields": ["description"],
-    "redaction_constraints": { "min_chars": 180, "max_chars": 600 },
+    "redaction_constraints": { "min_chars": 180, "max_chars": 500 },
+    "redaction_rules": [
+      "One paragraph with concrete visual descriptors.",
+      "No plot or story elements.",
+      "No meta-writing language or references to strategy."
+    ],
+    "quality_criteria": [
+      "Length within min/max chars.",
+      "Descriptors are concrete and visual.",
+      "No narrative or plot content."
+    ],
     "use_strategy": false,
     "skip_llm": false,
     "extra_rule": "Writing rule (English): Describe the aesthetic style of the video precisely, highlighting what makes it distinctive and recognizable."
   },
   "n0.sound_direction": {
+    "strategy_role": "a sound direction description for the project",
+    "strategy_hints": [
+      "Describe concrete sonic elements (timbre, rhythm, texture).",
+      "Avoid story beats; focus on sonic direction only."
+    ],
     "allowed_fields": ["description"],
-    "redaction_constraints": { "min_chars": 180, "max_chars": 600 },
+    "redaction_constraints": { "min_chars": 180, "max_chars": 500 },
+    "redaction_rules": [
+      "One paragraph with concrete sonic descriptors.",
+      "No plot or story elements.",
+      "No meta-writing language or references to strategy."
+    ],
+    "quality_criteria": [
+      "Length within min/max chars.",
+      "Descriptors are concrete and sonic.",
+      "No narrative or plot content."
+    ],
     "use_strategy": false,
     "skip_llm": false,
     "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable."
   },
   "n0.deliverables": {
+    "strategy_role": "a deliverables configuration for the project",
+    "strategy_hints": [],
+    "redaction_rules": [],
+    "quality_criteria": [],
     "skip_llm": true
   }
 }

@@ -80,6 +80,8 @@ class TaskRunner:
             if result.get("assistant_state_json"):
                 patch = self._parse_json_patch(result.get("assistant_state_json", ""))
                 if patch:
+                    if agent in {"chat_1a", "chat_1b", "chat_1c"}:
+                        patch = self.ui_translator.translate_chat_patch(patch)
                     state_snapshot = self._merge_state(state_snapshot, patch)
             if agent == "chat_1a":
                 self._mark_completed_step(state_snapshot, "1a")
@@ -301,6 +303,7 @@ class TaskRunner:
         open_questions: List[str],
         raw_output: str,
         strategy_card: Dict[str, Any],
+        agentic_trace: Optional[List[Dict[str, Any]]] = None,
         warning: Optional[str] = None,
         error: Optional[str] = None,
     ) -> None:
@@ -322,6 +325,7 @@ class TaskRunner:
                 "target_patch": target_patch or {},
                 "open_questions": open_questions or [],
                 "strategy_card": strategy_card or {},
+                "agentic_trace": agentic_trace or [],
                 "raw_output": raw_output[:8000],
                 "logged_at": generate_timestamp(),
             }
@@ -479,6 +483,7 @@ class TaskRunner:
                 open_questions=[],
                 raw_output=result.raw_output,
                 strategy_card=result.strategy_card,
+                agentic_trace=result.agentic_trace,
                 error=result.error,
             )
             return {"status": "error", "error": result.error, "target_patch": result.target_patch}
@@ -494,6 +499,7 @@ class TaskRunner:
                 open_questions=[],
                 raw_output=result.raw_output,
                 strategy_card=result.strategy_card,
+                agentic_trace=result.agentic_trace,
                 warning=result.warning or "invalid_json",
             )
             self._update_ui_translation(project_id, target_path)
@@ -518,6 +524,7 @@ class TaskRunner:
             open_questions=result.open_questions,
             raw_output=result.raw_output,
             strategy_card=result.strategy_card,
+            agentic_trace=result.agentic_trace,
         )
         self._update_ui_translation(project_id, target_path)
         return {
