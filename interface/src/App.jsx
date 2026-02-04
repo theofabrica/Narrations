@@ -293,6 +293,10 @@ function App() {
       .join('\n\n')
   }, [chatMessages])
 
+  const hasAssistantReply = chatMessages.some((entry) => entry.role === 'assistant')
+  const showChatHistory = Boolean(createdProjectId && hasAssistantReply)
+  const showChatInput = Boolean(createdProjectId)
+
   const fetchLogText = async (name, setter) => {
     try {
       const resp = await fetch(
@@ -651,6 +655,15 @@ function App() {
       }
     }
   }
+
+  const hasText = (value) => typeof value === 'string' && value.trim().length > 0
+  const isN0Complete = (payload) =>
+    Boolean(
+      payload &&
+        hasText(payload.production_summary?.summary) &&
+        hasText(payload.art_direction?.description) &&
+        hasText(payload.sound_direction?.description)
+    )
 
   const sanitizeN1 = (payload) => {
     const root = payload && typeof payload === 'object' ? payload : {}
@@ -1257,15 +1270,18 @@ function App() {
         }
         fromUi = false
       }
-      setN0Data(sanitizeN0(data?.data || null))
+      const sanitized = sanitizeN0(data?.data || null)
+      setN0Data(sanitized)
       setN0FromUi(fromUi)
       setN0UpdatedAt(data?.updated_at || '')
       setN0Status('done')
+      return sanitized
     } catch (err) {
       setN0Status('error')
       setN0Error(err.message)
       setN0Data(null)
       setN0UpdatedAt('')
+      return null
     }
   }
 
@@ -2589,7 +2605,7 @@ function App() {
     setChatError('')
     setChatMessages((prev) => [...prev, { role: 'user', content: message }])
     setChatInput('')
-    if (createModalOpen) {
+    if (createModalOpen && !progressActive) {
       setProgressActive(true)
       setProgressValue(0)
       progressStartRef.current = Date.now()
@@ -2649,7 +2665,8 @@ function App() {
         progressStartRef.current = null
       }
       if (n0Written) {
-        await fetchN0(projectId)
+        const latestN0 = await fetchN0(projectId)
+        const n0Complete = isN0Complete(latestN0)
         if (progressStartRef.current) {
           const elapsedMs = Date.now() - progressStartRef.current
           if (elapsedMs > 0) {
@@ -2662,8 +2679,10 @@ function App() {
         setProgressActive(false)
         setProgressValue(100)
         progressStartRef.current = null
-        setActivePage('project')
-        closeCreateModal()
+        if (n0Complete) {
+          setActivePage('project')
+          closeCreateModal()
+        }
       }
     } catch (err) {
       setChatError(err.message)
@@ -3170,11 +3189,12 @@ function App() {
       ) : null}
 
       {activePage === 'project' ? (
-        <section className="project-page">
-          <div className="panel">
-            <div className="panel-head">
-              <h2 className="project-title">{selectedProject || 'Projet'}</h2>
-              <div className="project-head-fields">
+        <>
+          <section className="project-page">
+            <div className="panel">
+              <div className="panel-head">
+                <h2 className="project-title">{selectedProject || 'Projet'}</h2>
+                <div className="project-head-fields">
                 <input
                   type="text"
                   className="project-input"
@@ -3358,6 +3378,18 @@ function App() {
           )}
         </div>
       </section>
+      {isN0Complete(n0Data) ? (
+        <button
+          type="button"
+          className="n0-next-arrow"
+          aria-label="Passer a la suite"
+          title="Bientot disponible"
+          onClick={() => {}}
+        >
+          →
+        </button>
+      ) : null}
+        </>
       ) : null}
 
       {activePage === 'old' ? (
@@ -4855,33 +4887,37 @@ function App() {
                   </div>
                 </div>
               ) : null}
-              <div className={`chat-box ${chatDisabled ? 'disabled' : ''}`}>
-                <textarea
-                  className="chat-log"
-                  readOnly
-                  value={chatLogText}
-                  placeholder="Historique du chat."
-                />
-                {chatError ? <p className="hint error">Erreur: {chatError}</p> : null}
-                <div className="chat-input">
-                  <textarea
-                    value={chatInput}
-                    onChange={(event) => setChatInput(event.target.value)}
-                    placeholder="Ecris un message pour cadrer le projet."
-                    disabled={chatDisabled}
-                  />
-                  <button
-                    type="button"
-                    className="primary"
-                    onClick={handleNarrationChatSend}
-                    disabled={chatDisabled || !canSendChat || chatStatus === 'sending'}
-                    aria-label="Envoyer le message"
-                    title="Envoyer"
-                  >
-                    {chatStatus === 'sending' ? '...' : '→'}
-                  </button>
+              {showChatInput ? (
+                <div className={`chat-box ${chatDisabled ? 'disabled' : ''}`}>
+                  {showChatHistory ? (
+                    <textarea
+                      className="chat-log"
+                      readOnly
+                      value={chatLogText}
+                      placeholder="Historique du chat."
+                    />
+                  ) : null}
+                  {chatError ? <p className="hint error">Erreur: {chatError}</p> : null}
+                  <div className="chat-input">
+                    <textarea
+                      value={chatInput}
+                      onChange={(event) => setChatInput(event.target.value)}
+                      placeholder="Ecris un message pour cadrer le projet."
+                      disabled={chatDisabled}
+                    />
+                    <button
+                      type="button"
+                      className="primary"
+                      onClick={handleNarrationChatSend}
+                      disabled={chatDisabled || !canSendChat || chatStatus === 'sending'}
+                      aria-label="Envoyer le message"
+                      title="Envoyer"
+                    >
+                      {chatStatus === 'sending' ? '...' : '→'}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
         </div>

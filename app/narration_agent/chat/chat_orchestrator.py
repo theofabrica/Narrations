@@ -80,7 +80,10 @@ class ChatOrchestrator:
                 "pending_rounds": pending_rounds,
                 "chat_mode": chat_mode,
             },
-            task_id_1b: {},
+            task_id_1b: {
+                "pending_questions": pending_questions,
+                "pending_rounds": pending_rounds,
+            },
         }
         if include_1c:
             task_context[task_id_1c] = {}
@@ -223,6 +226,8 @@ class ChatOrchestrator:
             task_id = f"task_{agent}"
             if agent == "chat_1a":
                 task_context[task_id] = fallback.task_context.get("task_chat_1a", {})
+            elif agent == "chat_1b":
+                task_context[task_id] = fallback.task_context.get("task_chat_1b", {})
             else:
                 task_context[task_id] = {}
         return task_context

@@ -1,79 +1,463 @@
 {
   "n0.production_summary": {
-    "strategy_role": "a production summary for the project",
-    "strategy_hints": [
-      "Focus on narrative function: a production summary for stakeholders.",
-      "Use only facts from the provided context and constraints.",
-      "Signal tone through neutral diction, not evaluation.",
-      "Respect the length target and single-paragraph format."
-    ],
     "allowed_fields": ["summary"],
-    "redaction_constraints": { "min_chars": 1500, "max_chars": 3000 },
-    "redaction_rules": [
-      "Single paragraph, 8-12 sentences.",
-      "No meta-writing language or references to strategy or sources.",
-      "Keep statements grounded in the project brief only.",
-      "Maintain a sober, factual tone."
-    ],
-    "quality_criteria": [
-      "Summary length stays within min/max chars.",
-      "No meta references (strategy, summary-as-object, sources).",
-      "All statements are traceable to provided context.",
-      "Tone remains neutral and factual."
-    ],
-    "use_strategy": true,
-    "skip_llm": false,
-    "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate a beautiful scene."
+    "_comments": {
+      "allowed_fields": "Liste blanche des champs que le writer peut écrire dans target_patch pour ce target_path. Sert aussi à déterminer quel(s) champ(s) texte regarder pour décider du mode création vs édition.",
+      "modes": "Règles spécifiques au mode. Le writer choisit create si le(s) champ(s) texte cible(s) est/sont vide(s) (\"\"), sinon edit si l’utilisateur a explicitement demandé une modification sur ce champ ; sinon propagate si ce mode existe (réécriture car contexte amont a changé).",
+      "modes.*.writer_self_question": "Question interne (en anglais) pour aider le redactor à se focaliser sur la bonne intention. Jamais affichée à l'utilisateur.",
+      "modes.*.context_aggregation": "Groupes de contexte pondérés. Chaque groupe influence la rédaction ; les poids sont des flottants dans [0,1].",
+      "modes.*.strategy_finder": "Contrôle le StrategyFinder : comment interroger la bibliothèque et quelles sources chercher (via des préfixes de noms de fichiers).",
+      "modes.*.strategy_role": "Libellé court (rôle) utilisé pour construire une requête de stratégie par défaut (fallback si modes.*.strategy_finder.question est absent).",
+      "modes.*.strategy_hints": "Indications pour le StrategyFinder (pas le texte final). Aide à choisir des principes et points de vigilance.",
+      "modes.*.redaction_constraints": "Bornes strictes de longueur, imposées via retries + évaluation. Clés : min_chars / max_chars.",
+      "modes.*.redaction_rules": "Règles d’écriture concrètes (format + interdits) injectées dans le prompt du redactor et utilisées pour l’évaluation.",
+      "modes.*.quality_criteria": "Critères d’évaluation utilisés par l’évaluateur en mode agentique.",
+      "modes.*.use_strategy": "Si true, exécute StrategyFinder (RAG + synthèse de stratégie). Si false, saute StrategyFinder.",
+      "modes.*.skip_llm": "Si true, saute l’étape LLM de rédaction et ne renvoie que base_patch (remplissage déterministe).",
+      "modes.*.extra_rule": "Consigne d’écriture additionnelle injectée dans le prompt du redactor (en anglais)."
+    },
+    "modes": {
+      "create": {
+        "writer_self_question": "How can I best write a clear and usable production summary for stakeholders?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "neighbours",
+              "weight": 1.0,
+              "description": "Chat state (1abc) + N1 (if present).",
+              "sources": ["chat_state_1abc", "n1"]
+            }
+          ]
+        },
+        "strategy_role": "Tell the summary as a visual story, like a storyteller who takes time to narrate.",
+        "strategy_hints": [
+          "Focus on narrative function: a production summary for stakeholders.",
+          "Use only facts from the provided context and constraints.",
+          "Signal tone through neutral diction, not evaluation.",
+          "Respect the length target and format."
+        ],
+        "redaction_constraints": { "min_chars": 1500, "max_chars": 2500 },
+        "redaction_rules": [
+          "No meta-writing language or references to strategy or sources.",
+          "Keep statements grounded in the project brief only.",
+          "Maintain a sober, factual tone."
+        ],
+        "quality_criteria": [
+          "Summary length stays within min/max chars.",
+          "No meta references (strategy, summary-as-object, sources).",
+          "All statements are traceable to provided context."
+        ],
+        "use_strategy": true,
+        "skip_llm": false,
+        "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate.",
+        "strategy_finder": {
+          "question": "Find in the documents rules and guidance to write a clear, factual production summary for stakeholders."
+        }
+      },
+      "edit": {
+        "_comment": "Mode édition : modifier le texte existant selon les indications utilisateur ; si aucune indication n'est fournie, réécrire en s'appuyant sur le contexte.",
+        "writer_self_question": "How will I modify this production summary based on the user's change requests?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "actual_text",
+              "weight": 1.0,
+              "description": "Current version of the target text (the summary as it exists now).",
+              "sources": ["actual_text"]
+            },
+            {
+              "name": "chat_indications",
+              "weight": 1.0,
+              "description": "User change requests extracted from the chat agent (1abc brief/constraints/priorities).",
+              "sources": ["chat_indications"]
+            },
+            {
+              "name": "family",
+              "weight": 0.5,
+              "description": "Other N0 production constraints and already known project parameters (excluding the current target).",
+              "sources": ["n0.* (except the current target)"]
+            },
+            {
+              "name": "neighbours",
+              "weight": 0.5,
+              "description": "Neighbours for edit mode: N1 only.",
+              "sources": ["n1"]
+            }
+          ]
+        },
+        "strategy_role": "Tell the summary as a visual story, like a storyteller who takes time to narrate.",
+        "strategy_hints": [
+          "Focus on narrative function: a production summary for stakeholders.",
+          "Use only facts from the provided context and constraints.",
+          "Signal tone through neutral diction, not evaluation.",
+          "Respect the length target and format."
+        ],
+        "redaction_constraints": { "min_chars": 1500, "max_chars": 2500 },
+        "redaction_rules": [
+          "No meta-writing language or references to strategy or sources.",
+          "Keep statements grounded in the project brief only.",
+          "Maintain a sober, factual tone."
+        ],
+        "quality_criteria": [
+          "Summary length stays within min/max chars.",
+          "No meta references (strategy, summary-as-object, sources).",
+          "All statements are traceable to provided context.",
+          "Tone remains neutral and factual."
+        ],
+        "use_strategy": true,
+        "skip_llm": false,
+        "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate a beautiful scene.",
+        "strategy_finder": {
+          "question": "Find in the documents rules and guidance to revise a production summary based on user change requests."
+        }
+      },
+      "propagate": {
+        "_comment": "Mode propagate : comme edit, mais sans demande utilisateur. On réécrit car le contexte a changé en amont.",
+        "writer_self_question": "How can I rewrite this production summary to reflect the updated context ?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "actual_text",
+              "weight": 1.0,
+              "description": "Current version of the target text (the summary as it exists now).",
+              "sources": ["actual_text"]
+            },
+            {
+              "name": "family",
+              "weight": 0.75,
+              "description": "Other N0 production constraints and already known project parameters (excluding the current target).",
+              "sources": ["n0.* (except the current target)"]
+            },
+            {
+              "name": "neighbours",
+              "weight": 0.6,
+              "description": "Neighbours for propagate mode: N1 only.",
+              "sources": ["n1"]
+            }
+          ]
+        },
+        "strategy_role": "Tell the summary as a visual story, like a storyteller who takes time to narrate.",
+        "strategy_hints": [
+          "Focus on narrative function: a production summary for stakeholders.",
+          "Use only facts from the provided context and constraints.",
+          "Signal tone through neutral diction, not evaluation.",
+          "Respect the length target and format."
+        ],
+        "redaction_constraints": { "min_chars": 1500, "max_chars": 2500 },
+        "redaction_rules": [
+          "No meta-writing language or references to strategy or sources.",
+          "Keep statements grounded in the project brief only.",
+          "Maintain a sober, factual tone."
+        ],
+        "quality_criteria": [
+          "Summary length stays within min/max chars.",
+          "No meta references (strategy, summary-as-object, sources).",
+          "All statements are traceable to provided context.",
+          "Tone remains neutral and factual."
+        ],
+        "use_strategy": true,
+        "skip_llm": false,
+        "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate a beautiful scene.",
+        "strategy_finder": {
+          "question": "Find in the documents rules and guidance to rewrite a production summary to reflect updated context, without adding new facts."
+        }
+      }
+    }
   },
   "n0.art_direction": {
-    "strategy_role": "an art direction description for the project",
-    "strategy_hints": [
-      "Describe concrete visual style elements (palette, textures, lighting).",
-      "Avoid story beats; focus on aesthetic direction only."
-    ],
     "allowed_fields": ["description"],
-    "redaction_constraints": { "min_chars": 180, "max_chars": 500 },
-    "redaction_rules": [
-      "One paragraph with concrete visual descriptors.",
-      "No plot or story elements.",
-      "No meta-writing language or references to strategy."
-    ],
-    "quality_criteria": [
-      "Length within min/max chars.",
-      "Descriptors are concrete and visual.",
-      "No narrative or plot content."
-    ],
-    "use_strategy": false,
-    "skip_llm": false,
-    "extra_rule": "Writing rule (English): Describe the aesthetic style of the video precisely, highlighting what makes it distinctive and recognizable."
+    "_comments": {
+      "allowed_fields": "Liste blanche des champs que le writer peut écrire dans target_patch pour ce target_path. Sert aussi à déterminer quel(s) champ(s) texte regarder pour décider du mode création vs édition.",
+      "modes": "Règles spécifiques au mode. Le writer choisit create si le(s) champ(s) texte cible(s) est/sont vide(s) (\"\"), sinon edit.",
+      "modes.*.writer_self_question": "Question interne (en anglais) pour aider le redactor à se focaliser sur la bonne intention. Jamais affichée à l'utilisateur.",
+      "modes.*.context_aggregation": "Groupes de contexte pondérés. Chaque groupe influence la rédaction ; les poids sont des flottants dans [0,1].",
+      "modes.*.strategy_finder": "Contrôle le StrategyFinder : comment interroger la bibliothèque et quelles sources chercher (via des préfixes de noms de fichiers).",
+      "modes.*.strategy_role": "Libellé court (rôle) utilisé pour construire une requête de stratégie par défaut (fallback si modes.*.strategy_finder.question est absent).",
+      "modes.*.strategy_hints": "Indications pour le StrategyFinder (pas le texte final). Aide à choisir des principes et points de vigilance.",
+      "modes.*.redaction_constraints": "Bornes strictes de longueur, imposées via retries + évaluation. Clés : min_chars / max_chars.",
+      "modes.*.redaction_rules": "Règles d’écriture concrètes (format + interdits) injectées dans le prompt du redactor et utilisées pour l’évaluation.",
+      "modes.*.quality_criteria": "Critères d’évaluation utilisés par l’évaluateur en mode agentique.",
+      "modes.*.use_strategy": "Si true, exécute StrategyFinder (RAG + synthèse de stratégie). Si false, saute StrategyFinder.",
+      "modes.*.skip_llm": "Si true, saute l’étape LLM de rédaction et ne renvoie que base_patch (remplissage déterministe).",
+      "modes.*.extra_rule": "Consigne d’écriture additionnelle injectée dans le prompt du redactor (en anglais)."
+    },
+    "modes": {
+      "create": {
+        "writer_self_question": "How can I best write a clear and usable overview of the video's art direction?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 0.6,
+              "description": "Primary anchor: N0 production summary (already written).",
+              "sources": ["n0.production_summary.summary"]
+            },
+            {
+              "name": "family",
+              "weight": 0.25,
+              "description": "Other N0 production constraints and already known project parameters.",
+              "sources": ["n0.* (except n0.production_summary.summary and the current target)"]
+            },
+            {
+              "name": "neighbours",
+              "weight": 0.15,
+              "description": "Chat state (1abc) + N1 (if present).",
+              "sources": ["chat_state_1abc", "n1"]
+            }
+          ]
+        },
+        "strategy_role": "an art direction description for the project",
+        "strategy_hints": [
+          "Describe concrete visual style elements .",
+          "Avoid story beats; focus on aesthetic direction only."
+        ],
+        "redaction_constraints": { "min_chars": 500, "max_chars": 1000 },
+        "redaction_rules": [
+          "One paragraph with concrete descriptors.",
+          "No plot or story elements.",
+          "No meta-writing language or references to strategy."
+        ],
+        "quality_criteria": [
+          "Length within min/max chars.",
+          "Descriptors are concrete and visual.",
+          "No narrative or plot content."
+        ],
+        "use_strategy": true,
+        "skip_llm": false,
+        "extra_rule": "Writing rule: Describe the aesthetic style of the video precisely, highlighting what makes it distinctive and recognizable.",
+        "strategy_finder": {
+          "question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+          "library_filename_prefixes": ["SRC_DA"]
+        }
+      },
+      "edit": {
+        "_comment": "Mode édition : modifier le texte existant selon les indications utilisateur ; si aucune indication n'est fournie, réécrire en s'appuyant sur le contexte.",
+        "writer_self_question": "How will I modify this art direction overview based on the user's change requests?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "actual_text",
+              "weight": 1.0,
+              "description": "Current version of the target text (the description as it exists now).",
+              "sources": ["actual_text"]
+            },
+            {
+              "name": "chat_indications",
+              "weight": 1.0,
+              "description": "User change requests extracted from the chat agent (1abc brief/constraints/priorities).",
+              "sources": ["chat_indications"]
+            },
+            {
+              "name": "family",
+              "weight": 0.5,
+              "description": "Other N0 production constraints and already known project parameters (excluding the current target).",
+              "sources": ["n0.* (except the current target)"]
+            },
+            {
+              "name": "neighbours",
+              "weight": 0.5,
+              "description": "Neighbours for edit mode: N1 only.",
+              "sources": ["n1"]
+            }
+          ]
+        },
+        "strategy_role": "an art direction description for the project",
+        "strategy_hints": [
+          "Describe concrete visual style elements (palette, textures, lighting).",
+          "Avoid story beats; focus on aesthetic direction only."
+        ],
+        "redaction_constraints": { "min_chars": 180, "max_chars": 1000 },
+        "redaction_rules": [
+          "One paragraph with concrete visual descriptors.",
+          "No plot or story elements.",
+          "No meta-writing language or references to strategy."
+        ],
+        "quality_criteria": [
+          "Length within min/max chars.",
+          "Descriptors are concrete and visual.",
+          "No narrative or plot content."
+        ],
+        "use_strategy": true,
+        "skip_llm": false,
+        "extra_rule": "Writing rule (English): Describe the aesthetic style of the video precisely, highlighting what makes it distinctive and recognizable.",
+        "strategy_finder": {
+          "question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+          "library_filename_prefixes": ["SRC_DA"]
+        }
+      },
+      "propagate": {
+        "_comment": "Mode propagate : comme edit, mais sans demande utilisateur. On réécrit car le contexte a changé en amont.",
+        "writer_self_question": "How can I modify this art direction overview to reflect the updated context ?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "actual_text",
+              "weight": 1.0,
+              "description": "Current version of the target text (the description as it exists now).",
+              "sources": ["actual_text"]
+            },
+            {
+              "name": "family",
+              "weight": 0.75,
+              "description": "Other N0 production constraints and already known project parameters (excluding the current target).",
+              "sources": ["n0.* (except the current target)"]
+            },
+            {
+              "name": "neighbours",
+              "weight": 0.6,
+              "description": "Neighbours for propagate mode: N1 only.",
+              "sources": ["n1"]
+            }
+          ]
+        },
+        "strategy_role": "an art direction description for the project",
+        "strategy_hints": [
+          "Describe concrete visual style elements.",
+          "Avoid story beats; focus on aesthetic direction only."
+        ],
+        "redaction_constraints": { "min_chars": 500, "max_chars": 1000 },
+        "redaction_rules": [
+          "One text with concrete descriptors.",
+          "No plot or story elements.",
+          "No meta-writing language or references to strategy."
+        ],
+        "quality_criteria": [
+          "Length within min/max chars.",
+          "Descriptors are concrete and visual.",
+          "No narrative or plot content."
+        ],
+        "use_strategy": true,
+        "skip_llm": false,
+        "extra_rule": "Writing rule: Describe the aesthetic style of the video precisely, highlighting what makes it distinctive and recognizable.",
+        "strategy_finder": {
+          "question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+          "library_filename_prefixes": ["SRC_DA"]
+        }
+      }
+    }
   },
   "n0.sound_direction": {
-    "strategy_role": "a sound direction description for the project",
-    "strategy_hints": [
-      "Describe concrete sonic elements (timbre, rhythm, texture).",
-      "Avoid story beats; focus on sonic direction only."
-    ],
     "allowed_fields": ["description"],
-    "redaction_constraints": { "min_chars": 180, "max_chars": 500 },
-    "redaction_rules": [
-      "One paragraph with concrete sonic descriptors.",
-      "No plot or story elements.",
-      "No meta-writing language or references to strategy."
-    ],
-    "quality_criteria": [
-      "Length within min/max chars.",
-      "Descriptors are concrete and sonic.",
-      "No narrative or plot content."
-    ],
-    "use_strategy": false,
-    "skip_llm": false,
-    "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable."
+    "_comments": {
+      "allowed_fields": "Liste blanche des champs que le writer peut écrire dans target_patch pour ce target_path. Sert aussi à déterminer quel(s) champ(s) texte regarder pour décider du mode création vs édition.",
+      "modes": "Règles spécifiques au mode. Le writer choisit create si le(s) champ(s) texte cible(s) est/sont vide(s) (\"\"), sinon edit.",
+      "modes.*.writer_self_question": "Question interne (en anglais) pour aider le redactor à se focaliser sur la bonne intention. Jamais affichée à l'utilisateur.",
+      "modes.*.context_aggregation": "Groupes de contexte pondérés. Chaque groupe influence la rédaction ; les poids sont des flottants dans [0,1].",
+      "modes.*.strategy_finder": "Contrôle le StrategyFinder : comment interroger la bibliothèque et quelles sources chercher (via des préfixes de noms de fichiers).",
+      "modes.*.strategy_role": "Libellé court (rôle) utilisé pour construire une requête de stratégie par défaut (fallback si modes.*.strategy_finder.question est absent).",
+      "modes.*.strategy_hints": "Indications pour le StrategyFinder (pas le texte final). Aide à choisir des principes et points de vigilance.",
+      "modes.*.redaction_constraints": "Bornes strictes de longueur, imposées via retries + évaluation. Clés : min_chars / max_chars.",
+      "modes.*.redaction_rules": "Règles d’écriture concrètes (format + interdits) injectées dans le prompt du redactor et utilisées pour l’évaluation.",
+      "modes.*.quality_criteria": "Critères d’évaluation utilisés par l’évaluateur en mode agentique.",
+      "modes.*.use_strategy": "Si true, exécute StrategyFinder (RAG + synthèse de stratégie). Si false, saute StrategyFinder.",
+      "modes.*.skip_llm": "Si true, saute l’étape LLM de rédaction et ne renvoie que base_patch (remplissage déterministe).",
+      "modes.*.extra_rule": "Consigne d’écriture additionnelle injectée dans le prompt du redactor (en anglais)."
+    },
+    "modes": {
+      "create": {
+        "writer_self_question": "How can I best write a clear and usable overview of the video's sound direction?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 0.6,
+              "description": "Primary anchor: N0 production summary (already written).",
+              "sources": ["n0.production_summary.summary"]
+            },
+            {
+              "name": "family",
+              "weight": 0.25,
+              "description": "Other N0 production constraints and already known project parameters.",
+              "sources": ["n0.* (except n0.production_summary.summary and the current target)"]
+            },
+            {
+              "name": "neighbours",
+              "weight": 0.15,
+              "description": "Chat state (1abc) + N1 (if present).",
+              "sources": ["chat_state_1abc", "n1"]
+            }
+          ]
+        },
+        "strategy_role": "a sound direction description for the project",
+        "strategy_hints": [
+          "Describe concrete sonic elements (timbre, rhythm, texture).",
+          "Avoid story beats; focus on sonic direction only."
+        ],
+        "redaction_constraints": { "min_chars": 180, "max_chars": 1000 },
+        "redaction_rules": [
+          "One paragraph with concrete sonic descriptors.",
+          "No plot or story elements.",
+          "No meta-writing language or references to strategy."
+        ],
+        "quality_criteria": [
+          "Length within min/max chars.",
+          "Descriptors are concrete and sonic.",
+          "No narrative or plot content."
+        ],
+        "use_strategy": false,
+        "skip_llm": false,
+        "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable."
+      },
+      "edit": {
+        "_comment": "TEMP : mêmes règles que create tant qu'on n'a pas défini un comportement spécifique pour le mode édition.",
+        "writer_self_question": "How can I best revise the sound direction description while preserving what already works and staying within constraints?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 0.6,
+              "description": "Primary anchor: N0 production summary (already written).",
+              "sources": ["n0.production_summary.summary"]
+            },
+            {
+              "name": "family",
+              "weight": 0.25,
+              "description": "Other N0 production constraints and already known project parameters.",
+              "sources": ["n0.* (except n0.production_summary.summary and the current target)"]
+            },
+            {
+              "name": "neighbours",
+              "weight": 0.15,
+              "description": "Chat state (1abc) + N1 (if present).",
+              "sources": ["chat_state_1abc", "n1"]
+            }
+          ]
+        },
+        "strategy_role": "a sound direction description for the project",
+        "strategy_hints": [
+          "Describe concrete sonic elements (timbre, rhythm, texture).",
+          "Avoid story beats; focus on sonic direction only."
+        ],
+        "redaction_constraints": { "min_chars": 180, "max_chars": 1000 },
+        "redaction_rules": [
+          "One paragraph with concrete sonic descriptors.",
+          "No plot or story elements.",
+          "No meta-writing language or references to strategy."
+        ],
+        "quality_criteria": [
+          "Length within min/max chars.",
+          "Descriptors are concrete and sonic.",
+          "No narrative or plot content."
+        ],
+        "use_strategy": false,
+        "skip_llm": false,
+        "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable."
+      }
+    }
   },
   "n0.deliverables": {
-    "strategy_role": "a deliverables configuration for the project",
-    "strategy_hints": [],
-    "redaction_rules": [],
-    "quality_criteria": [],
-    "skip_llm": true
+    "allowed_fields": [],
+    "_comments": {
+      "allowed_fields": "Les deliverables sont déterministes : le writer ne produit pas de texte libre ici.",
+      "modes": "Règles spécifiques au mode. En create et en edit, on saute le redactor LLM pour les deliverables."
+    },
+    "modes": {
+      "create": {
+        "skip_llm": true
+      },
+      "edit": {
+        "skip_llm": true
+      }
+    }
   }
 }

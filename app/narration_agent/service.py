@@ -27,6 +27,10 @@ def _has_meaningful_value(value: Any) -> bool:
     return True
 
 
+def _has_text(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip())
+
+
 def _is_state_empty(state: Dict[str, Any]) -> bool:
     if not isinstance(state, dict):
         return True
@@ -34,13 +38,25 @@ def _is_state_empty(state: Dict[str, Any]) -> bool:
     if not isinstance(data, dict):
         return True
     production_summary = data.get("production_summary", {})
-    if not isinstance(production_summary, dict):
-        return True
-    summary = production_summary.get("summary", "")
-    # A project is considered empty only if N0 summary is blank.
-    if isinstance(summary, str):
-        return not summary.strip()
-    return not _has_meaningful_value(summary)
+    art_direction = data.get("art_direction", {})
+    sound_direction = data.get("sound_direction", {})
+    if any(
+        isinstance(section, dict)
+        for section in (production_summary, art_direction, sound_direction)
+    ):
+        summary = production_summary.get("summary", "") if isinstance(production_summary, dict) else ""
+        art_description = (
+            art_direction.get("description", "") if isinstance(art_direction, dict) else ""
+        )
+        sound_description = (
+            sound_direction.get("description", "") if isinstance(sound_direction, dict) else ""
+        )
+        return not (
+            _has_text(summary)
+            and _has_text(art_description)
+            and _has_text(sound_description)
+        )
+    return not _has_meaningful_value(data)
 
 
 def handle_chat_message(
@@ -95,7 +111,7 @@ def handle_chat_message(
     has_pending_questions = (
         narration_result.get("has_pending_questions", False)
         if isinstance(chat_result.get("final_state_snapshot"), dict)
-        and chat_result["pending_rounds"] < 2
+        and chat_result["pending_rounds"] < 1
         else False
     )
 

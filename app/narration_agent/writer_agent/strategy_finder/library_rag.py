@@ -123,14 +123,29 @@ class LibraryRAG:
             if isinstance(context_pack.get("style_constraints"), dict)
             else ""
         )
+        filename_prefixes = context_pack.get("library_filename_prefixes", [])
+        if not isinstance(filename_prefixes, list):
+            filename_prefixes = []
+        filename_prefixes = [
+            str(prefix).strip() for prefix in filename_prefixes if str(prefix).strip()
+        ]
+
         library_typologies = _infer_library_typologies(context_pack, self._library_index)
         ingest_items = _select_ingest_items(
             self._library_index, library_typologies, writing_typology, language
         )
+        if filename_prefixes:
+            ingest_items = _select_items_by_filename_prefixes(self._library_index, filename_prefixes)
         self._ensure_ingested(ingest_items)
         allowed_filenames = _select_filenames(
             self._library_index, writing_typology, language, library_typologies
         )
+        if filename_prefixes:
+            allowed_filenames = [
+                item.get("filename")
+                for item in ingest_items
+                if isinstance(item, dict) and item.get("filename")
+            ]
         search_settings = _build_search_settings(allowed_filenames, limit=12)
         use_system_context = _env_bool("R2R_USE_SYSTEM_CONTEXT", True)
         task_prompt = None if use_system_context else _build_task_prompt(context_pack, limit)
@@ -307,6 +322,12 @@ class LibraryRAG:
             if isinstance(context_pack.get("style_constraints"), dict)
             else ""
         )
+        filename_prefixes = context_pack.get("library_filename_prefixes", [])
+        if not isinstance(filename_prefixes, list):
+            filename_prefixes = []
+        filename_prefixes = [
+            str(prefix).strip() for prefix in filename_prefixes if str(prefix).strip()
+        ]
         query_terms = _build_query_terms(context_pack)
         items = self._library_index.get("items", [])
         if not isinstance(items, list):
@@ -316,6 +337,9 @@ class LibraryRAG:
             hits: List[LibraryHit] = []
             for item in items:
                 if not isinstance(item, dict):
+                    continue
+                filename = item.get("filename", "") or ""
+                if filename_prefixes and not any(filename.startswith(p) for p in filename_prefixes):
                     continue
                 item_id = item.get("id", "")
                 source_path = item.get("source_path", "")
@@ -508,6 +532,22 @@ def _infer_library_typologies(context_pack: Dict[str, Any], index: Dict[str, Any
         return ["narratology"]
     typologies = index.get("typologies") if isinstance(index, dict) else []
     return typologies if isinstance(typologies, list) else []
+
+
+def _select_items_by_filename_prefixes(
+    index: Dict[str, Any], prefixes: List[str]
+) -> List[Dict[str, Any]]:
+    items = index.get("items", []) if isinstance(index, dict) else []
+    if not isinstance(items, list) or not prefixes:
+        return []
+    selected: List[Dict[str, Any]] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        filename = item.get("filename", "") or ""
+        if filename and any(filename.startswith(prefix) for prefix in prefixes):
+            selected.append(item)
+    return selected
 
 
 def _select_ingest_items(

@@ -136,6 +136,7 @@ class NarratorOrchestrator:
             "Rules:\n"
             "- Allowed agents: writer_n0, writer_n1, writer_n2, writer_n3, writer_n4, writer_n5\n"
             f"- Allowed output_ref values: {', '.join(allowed_paths) if allowed_paths else '[]'}\n"
+            "- If you include N0 tasks, they must be ordered: n0.production_summary, then n0.art_direction, then n0.sound_direction.\n"
             "- Do NOT add extra keys.\n"
             "- If nothing should be written now, return an empty tasks list.\n"
         )
@@ -162,19 +163,24 @@ class NarratorOrchestrator:
             return fallback_plan, {}, {"raw_output": raw_content, "used_llm": False, "reason": "invalid_json"}
         raw_tasks = parsed.get("tasks")
         if isinstance(raw_tasks, list) and len(raw_tasks) == 0:
-            plan = self._build_plan_from_tasks(
-                source_state_id=fallback_plan.get("source_state_id", ""),
-                tasks=[],
-            )
-            return plan, {}, {"raw_output": raw_content, "used_llm": True, "reason": "empty_tasks"}
+            if not self._should_force_n0_sections(narration_input):
+                plan = self._build_plan_from_tasks(
+                    source_state_id=fallback_plan.get("source_state_id", ""),
+                    tasks=[],
+                )
+                return plan, {}, {"raw_output": raw_content, "used_llm": True, "reason": "empty_tasks"}
         tasks = self._normalize_tasks(raw_tasks, allowed_paths)
+        injected_n0 = False
+        if self._should_force_n0_sections(narration_input):
+            tasks, injected_n0 = self._ensure_n0_sections(tasks)
         if not tasks:
             return fallback_plan, {}, {"raw_output": raw_content, "used_llm": False, "reason": "missing_tasks"}
         plan = self._build_plan_from_tasks(
             source_state_id=fallback_plan.get("source_state_id", ""),
             tasks=tasks,
         )
-        return plan, {}, {"raw_output": raw_content, "used_llm": True, "reason": "ok"}
+        reason = "ok_with_n0_injected" if injected_n0 else "ok"
+        return plan, {}, {"raw_output": raw_content, "used_llm": True, "reason": reason}
 
     def _build_llm_payload(self, narration_input: Dict[str, Any]) -> Dict[str, Any]:
         source_state = narration_input.get("source_state_payload") or {}
@@ -198,6 +204,37 @@ class NarratorOrchestrator:
             if strata in target_strata:
                 allowed_paths.append(strata)
         return allowed_paths
+
+    def _should_force_n0_sections(self, narration_input: Dict[str, Any]) -> bool:
+        target_strata = narration_input.get("target_strata") or []
+        target_paths = narration_input.get("target_paths") or []
+        if not isinstance(target_strata, list) or not target_strata:
+            return False
+        if any(strata != "n0" for strata in target_strata):
+            return False
+        if isinstance(target_paths, list) and len(target_paths) > 0:
+            return False
+        return True
+
+    def _ensure_n0_sections(
+        self, tasks: List[Dict[str, Any]]
+    ) -> Tuple[List[Dict[str, Any]], bool]:
+        if not isinstance(tasks, list):
+            tasks = []
+        existing_outputs = {
+            task.get("output_ref")
+            for task in tasks
+            if isinstance(task, dict) and isinstance(task.get("output_ref"), str)
+        }
+        injected = False
+        for section in self._N0_SECTIONS:
+            output_ref = f"n0.{section}"
+            if output_ref in existing_outputs:
+                continue
+            tasks.append({"output_ref": output_ref, "agent": "writer_n0"})
+            existing_outputs.add(output_ref)
+            injected = True
+        return tasks, injected
 
     def _parse_json_payload(self, payload: str) -> Dict[str, Any]:
         if not payload:

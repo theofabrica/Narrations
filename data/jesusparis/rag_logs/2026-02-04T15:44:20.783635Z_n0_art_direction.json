@@ -1,0 +1,21 @@
+{
+  "project_id": "jesusparis",
+  "target_path": "n0.art_direction",
+  "writing_typology": "style",
+  "rag_mode": "agentic_search",
+  "rag_hits": 3,
+  "client_available": true,
+  "r2r_base": "http://localhost:7272",
+  "library_item_ids": [
+    "da_chatgpt",
+    "da_chatgpt",
+    "da_chatgpt"
+  ],
+  "source_refs": [
+    "Concevoir la direction artistique - ChatGPT (notes): \ufeffConcevoir la direction artistique (DA) d\u2019un film, ce n\u2019est pas \u201cfaire joli\u201d : c\u2019est traduire un sc\u00e9nario en syst\u00e8me visuel coh\u00e9rent, puis l\u2019implanter concr\u00e8tement sur le plateau et le pr\u00e9server jusqu\u2019\u00e0 la copie finale. On parle souvent de \u201cvision\u201d \u2014 en pratique, cette vision se construit comme un encha\u00eenement de d\u00e9cisions, chacune reli\u00e9e \u00e0 des contraintes (",
+    "Concevoir la direction artistique - ChatGPT (notes): 5.3 \u2014 La couleur comme \u00e9criture temporelle Un film n\u2019est pas une suite d\u2019images fixes. La couleur y est per\u00e7ue dans la dur\u00e9e. La direction artistique veille donc \u00e0 : \u2022 la progression ou la stabilit\u00e9 des dominantes, \u2022 les ruptures justifi\u00e9es (changement de lieu, de point de vue, de monde), \u2022 l\u2019\u00e9quilibre global entre sc\u00e8nes fortes et sc\u00e8nes de transition. Une",
+    "Concevoir la direction artistique - ChatGPT (notes): 2. La strate th\u00e9matique (ce que le film raconte vraiment) La direction artistique s\u2019int\u00e9resse tr\u00e8s t\u00f4t \u00e0 ce que le sc\u00e9nario dit sans le dire. Quelques exemples de questions centrales : \u2022 Le film parle-t-il de contr\u00f4le ou de d\u00e9sordre ? \u2022 D\u2019enfermement ou d\u2019\u00e9mancipation ? \u2022 D\u2019h\u00e9ritage ou de rupture ? \u2022 De d\u00e9sir ou de peur ? \u2022 D\u2019ascension sociale, de chute, de"
+  ],
+  "warning": "rag_mode=agentic_search",
+  "logged_at": "2026-02-04T15:44:20.783643Z"
+}

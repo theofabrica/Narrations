@@ -1,0 +1,21 @@
+{
+  "project_id": "jesusparis",
+  "target_path": "n0.production_summary",
+  "writing_typology": "summary",
+  "rag_mode": "agentic_search",
+  "rag_hits": 3,
+  "client_available": true,
+  "r2r_base": "http://localhost:7272",
+  "library_item_ids": [
+    "mckee_story",
+    "lavandier_construire_un_recit",
+    "lavandier_construire_un_recit"
+  ],
+  "source_refs": [
+    "Story - Robert McKee: Most directors' cameras drink up whatever is visually expres\u00ad sive in one location within two or three minutes. If a scene goes on longer, shots become redundant. The editor keeps coming back to the same establishing shot, same two-shot, close-up. When shots repeat, expressivity drains away; the film becomes visually dull and the eye loses interest and wande",
+    "Construire un recit - Yves Lavandier: Distinguons deux types de synopsis. Le synopsis en une demi-page, une page maximum, qui r\u00e9sume le premier acte assez copieusement puis donne une id\u00e9e, en quelques lignes, de ce que sera le deuxi\u00e8me acte. Il peut m\u00eame occulter la fin pour pr\u00e9server le suspense. Ce type de docu\u00ad ment est plut\u00f4t un pitch \u00e9toff\u00e9. Et puis il y a le vrai synopsis, en plusieurs pag",
+    "Construire un recit - Yves Lavandier: Avez-vous pr\u00e9sent\u00e9 le film par une phrase comme : 1 - \u00ab C'est l'histoire d'un pr\u00e9sentateur m\u00e9t\u00e9o \u00e9gocentr\u00e9 qui se bat pour \u00e9chapper \u00e0 la r\u00e9p\u00e9tition interminable d'un jour sinistre de sa vie\u00bb? Ou ainsi: 2 - \u00ab C'est l'his\u00ad toire d'un pr\u00e9sentateur m\u00e9t\u00e9o \u00e9gocentr\u00e9 qui apprend \u00e0 devenir humain et authentique\u00bb? Ou plut\u00f4t ainsi: 3 - \u00ab C'est l'histoire d'un pr\u00e9senta"
+  ],
+  "warning": "rag_mode=agentic_search",
+  "logged_at": "2026-02-04T15:41:57.215652Z"
+}

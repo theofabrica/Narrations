@@ -2,18 +2,50 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from app.narration_agent.logging_utils import write_plan_log
 from app.narration_agent.narration.narrator_orchestrator import NarratorOrchestrator
 from app.narration_agent.task_runner import TaskRunner
 from app.utils.ids import generate_timestamp
-from app.utils.project_storage import get_project_root
+from app.utils.project_storage import get_project_root, read_strata
 
 
 def has_pending_questions(state: Dict[str, Any]) -> bool:
     pending = state.get("pending_questions") if isinstance(state, dict) else None
     return isinstance(pending, list) and len(pending) > 0
+
+
+def _has_text(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip())
+
+
+def _get_n0_missing_paths(project_id: str) -> List[str]:
+    try:
+        state = read_strata(project_id, "n0")
+    except FileNotFoundError:
+        state = {}
+    data = state.get("data") if isinstance(state, dict) else {}
+    if not isinstance(data, dict):
+        data = {}
+    production_summary = data.get("production_summary", {})
+    art_direction = data.get("art_direction", {})
+    sound_direction = data.get("sound_direction", {})
+    summary = production_summary.get("summary", "") if isinstance(production_summary, dict) else ""
+    art_description = (
+        art_direction.get("description", "") if isinstance(art_direction, dict) else ""
+    )
+    sound_description = (
+        sound_direction.get("description", "") if isinstance(sound_direction, dict) else ""
+    )
+    missing = []
+    if not _has_text(summary):
+        missing.append("n0.production_summary")
+    if not _has_text(art_description):
+        missing.append("n0.art_direction")
+    if not _has_text(sound_description):
+        missing.append("n0.sound_direction")
+    return missing
 
 
 def run_narration_flow(
@@ -34,7 +66,7 @@ def run_narration_flow(
 
     if isinstance(final_state_snapshot, dict) and trigger in {"build_brief", "use_memory"}:
         pending_questions = has_pending_questions(final_state_snapshot)
-        allow_narration = not pending_questions or pending_rounds >= 2
+        allow_narration = not pending_questions or pending_rounds >= 1
         brief = final_state_snapshot.get("brief") if isinstance(final_state_snapshot, dict) else {}
         target_strata = brief.get("target_strata") if isinstance(brief, dict) else None
         target_paths = brief.get("target_paths") if isinstance(brief, dict) else None
@@ -42,9 +74,13 @@ def run_narration_flow(
             target_strata = []
         if not isinstance(target_paths, list):
             target_paths = []
+        creation_mode_active = False
         if creation_mode:
-            target_strata = ["n0"]
-            target_paths = []
+            missing_paths = _get_n0_missing_paths(project_id)
+            if missing_paths:
+                creation_mode_active = True
+                target_strata = ["n0"]
+                target_paths = list(missing_paths)
         if allow_narration:
             narration_input = {
                 "narration_id": session_id,
@@ -58,12 +94,13 @@ def run_narration_flow(
             narrator = NarratorOrchestrator()
             fallback_plan = narrator.build_plan(narration_input)
             narration_task_plan = fallback_plan
-            llm_meta: Dict[str, Any] = {}
-            narration_task_plan, _, llm_meta = narrator.build_plan_llm(
-                llm_client=runner.llm_client,
-                narration_input=narration_input,
-                fallback_plan=fallback_plan,
-            )
+            llm_meta: Dict[str, Any] = {"used_llm": False, "reason": "creation_mode"}
+            if not creation_mode_active:
+                narration_task_plan, _, llm_meta = narrator.build_plan_llm(
+                    llm_client=runner.llm_client,
+                    narration_input=narration_input,
+                    fallback_plan=fallback_plan,
+                )
             write_plan_log(
                 project_id=project_id,
                 session_id=session_id,

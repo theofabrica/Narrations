@@ -186,11 +186,11 @@ class TaskRunner:
             "- only `core` + `missing` (+ `completed_steps`).\n"
             "- do not include `thinker`, `brief`, `pending_questions`.\n"
             "Question rules for 1a:\n"
-            "- Ask at most 2 questions.\n"
-            "- If pending questions exist, ask them first and only them (verbatim, max 2).\n"
+            "- Ask at most 1 question.\n"
+            "- If pending questions exist, ask them first and only them (verbatim, max 1).\n"
             "- Do NOT add a project summary before the pending questions.\n"
             "- Do NOT ask for confirmations or say 'if correct'.\n"
-            "- If pending rounds used >= 2, ask 0 questions and proceed with best assumptions.\n"
+            "- If pending rounds used >= 1, ask 0 questions and proceed with best assumptions.\n"
             "Language rules for 1a:\n"
             "- Detect the user's language and respond in that language.\n"
             "- Always write JSON state values in English.\n"
@@ -303,6 +303,7 @@ class TaskRunner:
         open_questions: List[str],
         raw_output: str,
         strategy_card: Dict[str, Any],
+        context_pack: Optional[Dict[str, Any]] = None,
         agentic_trace: Optional[List[Dict[str, Any]]] = None,
         warning: Optional[str] = None,
         error: Optional[str] = None,
@@ -314,6 +315,19 @@ class TaskRunner:
             safe_target = re.sub(r"[^a-zA-Z0-9._-]+", "_", target_path)
             safe_time = re.sub(r"[^a-zA-Z0-9_-]+", "_", generate_timestamp())
             filename = f"{safe_time}_{safe_target}.json"
+            context_pack = context_pack if isinstance(context_pack, dict) else {}
+            context_groups = context_pack.get("context_groups") if isinstance(context_pack, dict) else []
+            if not isinstance(context_groups, list):
+                context_groups = []
+            context_groups_summary = [
+                {
+                    "name": g.get("name", ""),
+                    "weight": g.get("weight", 0),
+                    "description": g.get("description", ""),
+                }
+                for g in context_groups
+                if isinstance(g, dict)
+            ]
             payload = {
                 "project_id": project_id,
                 "session_id": session_id,
@@ -324,6 +338,18 @@ class TaskRunner:
                 "error": error or "",
                 "target_patch": target_patch or {},
                 "open_questions": open_questions or [],
+                "writer_debug": {
+                    "rule_mode": context_pack.get("rule_mode", ""),
+                    "writing_mode": context_pack.get("writing_mode", ""),
+                    "allowed_fields": context_pack.get("allowed_fields", []),
+                    "writing_typology": context_pack.get("writing_typology", ""),
+                    "redaction_constraints": context_pack.get("redaction_constraints", {}),
+                    "library_filename_prefixes": context_pack.get("library_filename_prefixes", []),
+                    "strategy_finder_question": context_pack.get("strategy_finder_question", ""),
+                    "writer_self_question": context_pack.get("writer_self_question", ""),
+                    "context_groups": context_groups_summary,
+                    "redaction_attempts": context_pack.get("redaction_attempts", []),
+                },
                 "strategy_card": strategy_card or {},
                 "agentic_trace": agentic_trace or [],
                 "raw_output": raw_output[:8000],
@@ -372,6 +398,18 @@ class TaskRunner:
             input_text = json.dumps(input_payload)
         else:
             input_text = input_payload
+        pending_rounds = payload.get("pending_rounds")
+        pending_questions = payload.get("pending_questions")
+        runtime_lines = []
+        if isinstance(pending_rounds, int):
+            runtime_lines.append(f"pending_rounds: {pending_rounds}")
+        if isinstance(pending_questions, list) and pending_questions:
+            runtime_lines.append(
+                "pending_questions: " + ", ".join([str(q) for q in pending_questions if str(q)])
+            )
+        if runtime_lines:
+            runtime_block = "Runtime context:\n" + "\n".join(runtime_lines)
+            input_text = f"{input_text}\n\n{runtime_block}"
         if not input_text:
             return {"status": "error", "error": "missing_input"}
         system_prompt = self._build_thinker_prompt()
@@ -483,6 +521,7 @@ class TaskRunner:
                 open_questions=[],
                 raw_output=result.raw_output,
                 strategy_card=result.strategy_card,
+                context_pack=result.context_pack,
                 agentic_trace=result.agentic_trace,
                 error=result.error,
             )
@@ -499,6 +538,7 @@ class TaskRunner:
                 open_questions=[],
                 raw_output=result.raw_output,
                 strategy_card=result.strategy_card,
+                context_pack=result.context_pack,
                 agentic_trace=result.agentic_trace,
                 warning=result.warning or "invalid_json",
             )
@@ -524,6 +564,7 @@ class TaskRunner:
             open_questions=result.open_questions,
             raw_output=result.raw_output,
             strategy_card=result.strategy_card,
+            context_pack=result.context_pack,
             agentic_trace=result.agentic_trace,
         )
         self._update_ui_translation(project_id, target_path)

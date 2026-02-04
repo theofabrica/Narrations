@@ -54,6 +54,7 @@ class ContextBuilder:
             "writing_typology": _infer_writing_typology(target_path),
             "strategy_question": "",
             "target_current": target_current or {},
+            "target_strata_data": target_data or {},
             "target_schema": target_schema or {},
             "source_state_id": source_state.get("state_id", ""),
             "project_id": project_id,

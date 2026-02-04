@@ -33,6 +33,11 @@ class WritingPlan:
     strategy_hints: List[str] = field(default_factory=list)
     redaction_rules: List[str] = field(default_factory=list)
     quality_criteria: List[str] = field(default_factory=list)
+    writer_self_question: str = ""
+    strategy_finder_question: str = ""
+    library_filename_prefixes: List[str] = field(default_factory=list)
+    context_group_specs: List[Dict[str, Any]] = field(default_factory=list)
+    rule_mode: str = ""
 
 
 @dataclass
@@ -61,6 +66,7 @@ class RedactionCycleResult:
     warning: str = ""
     meta_violations: List[Dict[str, Any]] = field(default_factory=list)
     length_violations: List[Dict[str, int]] = field(default_factory=list)
+    attempts: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -102,6 +108,18 @@ class WriterOrchestrator:
         if plan.redaction_constraints:
             context_pack.payload["redaction_constraints"] = plan.redaction_constraints
         context_pack.payload["rules"] = self._build_rules_payload(plan)
+        context_pack.payload["allowed_fields"] = plan.allowed_fields or []
+        context_pack.payload["writing_mode"] = (
+            "create" if self._is_target_text_empty(plan.allowed_fields, target_current) else "edit"
+        )
+        if plan.rule_mode:
+            context_pack.payload["rule_mode"] = plan.rule_mode
+        if plan.writer_self_question:
+            context_pack.payload["writer_self_question"] = plan.writer_self_question
+        if plan.strategy_finder_question:
+            context_pack.payload["strategy_finder_question"] = plan.strategy_finder_question
+        if plan.library_filename_prefixes:
+            context_pack.payload["library_filename_prefixes"] = plan.library_filename_prefixes
 
         if plan.base_patch:
             try:
@@ -150,6 +168,31 @@ class WriterOrchestrator:
             existing_fields=existing_fields,
         )
 
+    def _is_target_text_empty(
+        self, allowed_fields: Optional[List[str]], target_current: Any
+    ) -> bool:
+        """Decide creation vs edit based on the actual target text field(s).
+
+        Important: other pre-filled fields (e.g. aspect_ratio) must not force edit mode.
+        """
+        if not allowed_fields:
+            # Fallback: if the whole target section has meaningful text, treat as edit.
+            if isinstance(target_current, str):
+                return not bool(target_current.strip())
+            if isinstance(target_current, dict):
+                return not any(
+                    isinstance(value, str) and value.strip()
+                    for value in target_current.values()
+                )
+            return True
+        if not isinstance(target_current, dict):
+            return True
+        for field in allowed_fields:
+            value = target_current.get(field)
+            if isinstance(value, str) and value.strip():
+                return False
+        return True
+
     def _run_deterministic(
         self,
         project_id: str,
@@ -162,14 +205,23 @@ class WriterOrchestrator:
     ) -> WriterRunResult:
         strategy_card: Dict[str, Any] = {}
         if plan.use_strategy:
-            strategy_question = self._build_strategy_question(
-                target_path=target_path,
-                context_pack=context_pack,
-                rule=self._build_rules_payload(plan),
-                has_existing=bool(existing_fields),
+            strategy_question = (
+                plan.strategy_finder_question.strip()
+                if isinstance(plan.strategy_finder_question, str)
+                and plan.strategy_finder_question.strip()
+                else self._build_strategy_question(
+                    target_path=target_path,
+                    context_pack=context_pack,
+                    rule=self._build_rules_payload(plan),
+                    has_existing=bool(existing_fields),
+                )
             )
             if strategy_question:
                 context_pack["strategy_question"] = strategy_question
+            context_pack["context_groups"] = self._build_context_groups(
+                context_pack=context_pack,
+                plan=plan,
+            )
             strategy_card = self.strategy_finder.build_strategy(context_pack)
         context_pack["strategy_card"] = strategy_card
 
@@ -179,6 +231,7 @@ class WriterOrchestrator:
             plan=plan,
             existing_fields=existing_fields,
         )
+        context_pack["redaction_attempts"] = redaction_result.attempts
         if not redaction_result.parsed:
             return WriterRunResult(
                 status="partial",
@@ -293,14 +346,23 @@ class WriterOrchestrator:
                     context_pack["target_current"] = target_current
 
             if action == "build_strategy" and plan.use_strategy:
-                strategy_question = self._build_strategy_question(
-                    target_path=target_path,
-                    context_pack=context_pack,
-                    rule=self._build_rules_payload(plan),
-                    has_existing=bool(existing_fields),
+                strategy_question = (
+                    plan.strategy_finder_question.strip()
+                    if isinstance(plan.strategy_finder_question, str)
+                    and plan.strategy_finder_question.strip()
+                    else self._build_strategy_question(
+                        target_path=target_path,
+                        context_pack=context_pack,
+                        rule=self._build_rules_payload(plan),
+                        has_existing=bool(existing_fields),
+                    )
                 )
                 if strategy_question:
                     context_pack["strategy_question"] = strategy_question
+                context_pack["context_groups"] = self._build_context_groups(
+                    context_pack=context_pack,
+                    plan=plan,
+                )
                 strategy_card = self.strategy_finder.build_strategy(context_pack)
                 context_pack["strategy_card"] = strategy_card
 
@@ -311,6 +373,7 @@ class WriterOrchestrator:
                     plan=plan,
                     existing_fields=existing_fields,
                 )
+                context_pack["redaction_attempts"] = redaction_result.attempts
                 last_raw_output = redaction_result.raw_output
                 last_open_questions = redaction_result.open_questions
                 last_meta_violations = redaction_result.meta_violations
@@ -481,6 +544,7 @@ class WriterOrchestrator:
             f"{allowed_hint}"
             f"{redaction_rules_line}"
             f"{plan.extra_rule}"
+            f"{('Self-question (internal): ' + plan.writer_self_question + '\\n') if plan.writer_self_question else ''}"
             f"{mode_hint}"
             f"{existing_block}"
             "- Respect redaction_constraints.min_chars / max_chars.\n"
@@ -513,6 +577,14 @@ class WriterOrchestrator:
         length_violations = self._collect_length_violations(
             filtered_patch, plan.redaction_constraints, plan.allowed_fields
         )
+        attempts: List[Dict[str, Any]] = [
+            {
+                "phase": "initial",
+                "char_counts": self._compute_char_counts(filtered_patch, plan.allowed_fields),
+                "length_violations": length_violations,
+                "meta_violations": meta_violations,
+            }
+        ]
         if meta_violations or length_violations:
             retry_prompt = self._build_retry_prompt(
                 context_pack=context_pack,
@@ -540,6 +612,16 @@ class WriterOrchestrator:
                     length_violations = self._collect_length_violations(
                         filtered_patch, plan.redaction_constraints, plan.allowed_fields
                     )
+                    attempts.append(
+                        {
+                            "phase": "retry",
+                            "char_counts": self._compute_char_counts(
+                                filtered_patch, plan.allowed_fields
+                            ),
+                            "length_violations": length_violations,
+                            "meta_violations": meta_violations,
+                        }
+                    )
             if meta_violations or length_violations:
                 if meta_violations and length_violations:
                     warning_message = "length_and_meta_violation"
@@ -555,7 +637,22 @@ class WriterOrchestrator:
             warning=warning_message,
             meta_violations=meta_violations,
             length_violations=length_violations,
+            attempts=attempts,
         )
+
+    def _compute_char_counts(
+        self, patch: Dict[str, Any], allowed_fields: Optional[List[str]]
+    ) -> Dict[str, int]:
+        """Return char counts for relevant string fields in a patch."""
+        if not isinstance(patch, dict):
+            return {}
+        fields = allowed_fields or list(patch.keys())
+        counts: Dict[str, int] = {}
+        for field in fields:
+            value = patch.get(field)
+            if isinstance(value, str):
+                counts[field] = len(value.strip())
+        return counts
 
     def _agentic_decide_action(
         self,
@@ -831,7 +928,7 @@ class WriterOrchestrator:
             elif target_path == "n0.deliverables":
                 plan.base_patch = infer_n0_deliverables(source_state, target_current)
             rule = self.n0_rules.get(target_path, {})
-            self._apply_declarative_rules(plan, rule)
+            self._apply_declarative_rules(plan, rule, target_current, source_state)
 
         return plan
 
@@ -839,9 +936,30 @@ class WriterOrchestrator:
         rules = load_json("writer_agent/n_rules/n0_rules.json") or {}
         return rules if isinstance(rules, dict) else {}
 
-    def _apply_declarative_rules(self, plan: WritingPlan, rule: Any) -> None:
+    def _apply_declarative_rules(
+        self,
+        plan: WritingPlan,
+        rule: Any,
+        target_current: Dict[str, Any],
+        source_state: Dict[str, Any],
+    ) -> None:
         if not isinstance(rule, dict):
             return
+        # 1) Apply base allowed_fields first (needed to infer mode).
+        allowed_fields = rule.get("allowed_fields")
+        if isinstance(allowed_fields, list) and allowed_fields:
+            plan.allowed_fields = [str(item) for item in allowed_fields if str(item)]
+
+        # 2) Overlay mode-specific rules (create vs edit vs propagate) if present.
+        mode_rules = None
+        if isinstance(rule.get("modes"), dict):
+            inferred_mode = self._infer_rule_mode(plan, target_current, source_state, rule)
+            plan.rule_mode = inferred_mode
+            mode_rules = rule.get("modes", {}).get(inferred_mode)
+        if isinstance(mode_rules, dict):
+            rule = {**rule, **mode_rules}
+
+        # 3) Apply final rule fields.
         allowed_fields = rule.get("allowed_fields")
         if isinstance(allowed_fields, list) and allowed_fields:
             plan.allowed_fields = [str(item) for item in allowed_fields if str(item)]
@@ -866,6 +984,152 @@ class WriterOrchestrator:
             plan.redaction_rules = [str(item) for item in rule["redaction_rules"] if str(item)]
         if isinstance(rule.get("quality_criteria"), list):
             plan.quality_criteria = [str(item) for item in rule["quality_criteria"] if str(item)]
+        if isinstance(rule.get("writer_self_question"), str):
+            plan.writer_self_question = rule["writer_self_question"]
+        strategy_finder = rule.get("strategy_finder")
+        if isinstance(strategy_finder, dict):
+            question = strategy_finder.get("question")
+            if isinstance(question, str):
+                plan.strategy_finder_question = question
+            prefixes = strategy_finder.get("library_filename_prefixes")
+            if isinstance(prefixes, list):
+                plan.library_filename_prefixes = [str(p) for p in prefixes if str(p).strip()]
+        context_aggregation = rule.get("context_aggregation")
+        if isinstance(context_aggregation, dict):
+            groups = context_aggregation.get("groups")
+            if isinstance(groups, list):
+                plan.context_group_specs = [g for g in groups if isinstance(g, dict)]
+
+    def _infer_rule_mode(
+        self,
+        plan: WritingPlan,
+        target_current: Dict[str, Any],
+        source_state: Dict[str, Any],
+        rule: Dict[str, Any],
+    ) -> str:
+        """Infer the rule mode: create vs edit vs propagate.
+
+        - create: the actual target text field(s) are empty ("")
+        - edit: the user explicitly requested changes for this target_path (via brief.target_paths)
+        - propagate: edit-like rewrite without a user request (context changed upstream)
+        """
+        modes = rule.get("modes", {}) if isinstance(rule, dict) else {}
+        if self._is_target_text_empty(plan.allowed_fields, target_current):
+            return "create"
+        brief = source_state.get("brief") if isinstance(source_state, dict) else {}
+        target_paths = brief.get("target_paths") if isinstance(brief, dict) else []
+        requested = False
+        if isinstance(target_paths, list) and plan.target_path:
+            for entry in target_paths:
+                if not isinstance(entry, str):
+                    continue
+                path = entry.strip()
+                if not path:
+                    continue
+                if path == plan.target_path or path.startswith(plan.target_path + "."):
+                    requested = True
+                    break
+        if requested:
+            return "edit"
+        # If propagate mode exists, prefer it when the target wasn't explicitly requested.
+        if isinstance(modes, dict) and "propagate" in modes:
+            return "propagate"
+        return "edit"
+
+    def _build_context_groups(self, context_pack: Dict[str, Any], plan: WritingPlan) -> List[Dict[str, Any]]:
+        """Build weighted context groups for the LLM (rules-driven)."""
+        if not isinstance(context_pack, dict):
+            return []
+        target_path = context_pack.get("target_path", "")
+        target_data = context_pack.get("target_strata_data", {})
+        if not isinstance(target_data, dict):
+            target_data = {}
+        dependencies = context_pack.get("dependencies", {})
+        if not isinstance(dependencies, dict):
+            dependencies = {}
+
+        def get_n0_summary() -> str:
+            prod = target_data.get("production_summary", {})
+            if isinstance(prod, dict):
+                value = prod.get("summary", "")
+                return value.strip() if isinstance(value, str) else ""
+            return ""
+
+        def build_family_payload() -> Dict[str, Any]:
+            payload: Dict[str, Any] = {}
+            for key, value in target_data.items():
+                payload[key] = value
+            if target_path == "n0.art_direction":
+                payload.pop("art_direction", None)
+            if target_path == "n0.sound_direction":
+                payload.pop("sound_direction", None)
+            return payload
+
+        chat_indications_payload = {
+            "brief_primary_objective": context_pack.get("brief_primary_objective", ""),
+            "brief_constraints": context_pack.get("brief_constraints", []),
+            "brief_priorities": context_pack.get("brief_priorities", []),
+            "thinker_constraints": context_pack.get("thinker_constraints", []),
+            "intents": context_pack.get("intents", []),
+            "core_summary": context_pack.get("core_summary", ""),
+        }
+        neighbours_payload_full = {
+            "chat_state_1abc": chat_indications_payload,
+            "n1": (dependencies.get("n1") or {}),
+        }
+
+        groups = []
+        specs = plan.context_group_specs or []
+        if not specs:
+            return groups
+        for spec in specs:
+            name = str(spec.get("name") or "").strip()
+            weight = spec.get("weight", 0)
+            try:
+                weight_f = float(weight)
+            except Exception:
+                weight_f = 0.0
+            group_payload: Any = {}
+            sources = spec.get("sources", [])
+            if not isinstance(sources, list):
+                sources = []
+            sources = [str(s) for s in sources if str(s).strip()]
+
+            if name == "actual_text" or "actual_text" in sources:
+                # Only keep text fields (allowed_fields) when possible.
+                if plan.allowed_fields and isinstance(target_current, dict):
+                    group_payload = {
+                        key: value
+                        for key, value in target_current.items()
+                        if key in plan.allowed_fields and isinstance(value, str)
+                    }
+                else:
+                    group_payload = target_current
+            elif name == "chat_indications" or "chat_indications" in sources:
+                group_payload = chat_indications_payload
+            elif name == "father":
+                group_payload = {"n0.production_summary.summary": get_n0_summary()}
+            elif name == "family":
+                group_payload = build_family_payload()
+            elif name == "neighbours":
+                # Neighbours can be either full (chat + n1) or N1-only, depending on sources.
+                if sources == ["n1"] or (len(sources) == 1 and sources[0] == "n1"):
+                    group_payload = dependencies.get("n1") or {}
+                else:
+                    group_payload = neighbours_payload_full
+            else:
+                group_payload = {}
+            groups.append(
+                {
+                    "name": name,
+                    "weight": max(0.0, min(1.0, weight_f)),
+                    "description": str(spec.get("description") or ""),
+                    "payload": group_payload,
+                }
+            )
+        # Highest weight first for readability.
+        groups.sort(key=lambda g: float(g.get("weight") or 0), reverse=True)
+        return groups
 
     def _build_rules_payload(self, plan: WritingPlan) -> Dict[str, Any]:
         return {

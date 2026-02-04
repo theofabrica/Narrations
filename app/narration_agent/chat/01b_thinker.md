@@ -14,6 +14,8 @@
 - `summary_1a` (text)
 - `open_questions_1a` (list)
 - `user_message` (raw text, optional)
+- `pending_rounds` (int, optional)
+- `pending_questions` (list, optional)
 
 ## Expected output (structure)
 The JSON schema is external and versioned:
@@ -52,6 +54,7 @@ Additionally, prepend a routing line before the JSON (exact format):
   - `chat`: when the message is conversational or non-actionable.
   - `build_brief`: when the message is ready for orchestration.
   - `use_memory`: when the user explicitly wants to reuse prior context.
+- If `pending_rounds` >= 1, do NOT trigger `clarify`. Fill missing with best assumptions, keep `missing`/`clarifications` empty, and trigger `build_brief`.
 
 ## Example
 **Input**:

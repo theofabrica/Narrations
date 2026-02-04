@@ -220,8 +220,26 @@ class StrategyFinder:
         rag_hits: List[Dict[str, Any]],
     ) -> Dict[str, Any]:
         target_current = context_pack.get("target_current")
-        existing_excerpt = self._extract_existing_excerpt(target_current, limit=420)
-        mode = "edit" if existing_excerpt else "write"
+        allowed_fields = context_pack.get("allowed_fields", [])
+        writing_mode = context_pack.get("writing_mode", "")
+
+        filtered_current = target_current
+        if isinstance(target_current, dict) and isinstance(allowed_fields, list) and allowed_fields:
+            filtered_current = {
+                key: value for key, value in target_current.items() if key in allowed_fields
+            }
+
+        # Decide creation vs edit based on the actual target text field(s),
+        # not on other auto-filled fields (e.g. aspect_ratio).
+        if writing_mode == "create":
+            mode = "write"
+            existing_excerpt = ""
+        elif writing_mode == "edit":
+            existing_excerpt = self._extract_existing_excerpt(filtered_current, limit=420)
+            mode = "edit" if existing_excerpt else "write"
+        else:
+            existing_excerpt = self._extract_existing_excerpt(filtered_current, limit=420)
+            mode = "edit" if existing_excerpt else "write"
         sources = []
         for hit in rag_hits:
             if not isinstance(hit, dict):

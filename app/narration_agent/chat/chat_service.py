@@ -38,12 +38,42 @@ def run_chat_flow(
     )
     if not isinstance(pending_questions, list):
         pending_questions = []
+    core_open_questions = []
+    core_missing = []
+    thinker_missing = []
+    thinker_clarifications = []
+    if isinstance(prior_snapshot, dict):
+        core = prior_snapshot.get("core")
+        if isinstance(core, dict):
+            core_open_questions = core.get("open_questions") or []
+        core_missing = prior_snapshot.get("missing") or []
+        thinker = prior_snapshot.get("thinker")
+        if isinstance(thinker, dict):
+            thinker_missing = thinker.get("missing") or []
+            thinker_clarifications = thinker.get("clarifications") or []
+    if not isinstance(core_open_questions, list):
+        core_open_questions = []
+    if not isinstance(core_missing, list):
+        core_missing = []
+    if not isinstance(thinker_missing, list):
+        thinker_missing = []
+    if not isinstance(thinker_clarifications, list):
+        thinker_clarifications = []
     meta = _CHAT_MEMORY.load_meta(project_id, resolved_session_id)
     pending_rounds = meta.get("pending_rounds", 0) if isinstance(meta, dict) else 0
     if not isinstance(pending_rounds, int):
         pending_rounds = 0
     last_trigger = meta.get("last_trigger", "auto") if isinstance(meta, dict) else "auto"
-    if message.strip() and pending_questions:
+    awaiting_questions = any(
+        [
+            pending_questions,
+            core_open_questions,
+            core_missing,
+            thinker_missing,
+            thinker_clarifications,
+        ]
+    )
+    if message.strip() and awaiting_questions:
         pending_rounds += 1
     _CHAT_MEMORY.save_meta(
         project_id,
@@ -150,6 +180,8 @@ def run_chat_flow(
                 break
 
     if not trigger:
+        trigger = "build_brief"
+    if project_empty and pending_rounds >= 1:
         trigger = "build_brief"
     _CHAT_MEMORY.save_meta(
         project_id,

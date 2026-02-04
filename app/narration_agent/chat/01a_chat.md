@@ -43,11 +43,11 @@ The JSON schema is external and versioned:
 ```
 
 ## Rules
-- Ask 1 to 2 questions max when information is missing.
-- If there are pending questions, resolve them in 2 questions max.
+- Ask 1 question max when information is missing.
+- If there are pending questions, resolve them with 1 question max.
 - If pending questions exist, ask them verbatim and do not add a summary first.
 - Do not ask for confirmations (avoid "if correct" style).
-- If pending rounds used >= 2, ask 0 questions and proceed with best assumptions.
+- If pending rounds used >= 1, ask 0 questions and proceed with best assumptions.
 - Do not invent constraints the user did not provide.
 - Stay brief and clear, in the user's language.
 - If everything is clear, `open_questions` must be empty.
@@ -65,7 +65,7 @@ The JSON schema is external and versioned:
 - Only fill `core` and `missing` (if needed).
 - `completed_steps` contains `1a`.
 - `core.summary` = 1 to 2 sentences, 240 chars max.
-- `core.open_questions` = list of 0 to 3 questions, 1 sentence per question.
+- `core.open_questions` = list of 0 to 1 question, 1 sentence per question.
 - `core.intents` = 0 to 5 simple keywords (no phrases).
 - `core.notes` = optional, 0 to 200 chars max, no new requirements.
 - Never produce `thinker`, `brief`, `pending_questions` in 1a.
@@ -92,8 +92,7 @@ User response: (human text)
   "core": {
     "summary": "Short satirical narration request, topic to define.",
     "open_questions": [
-      "What is the exact topic to cover?",
-      "What target duration (30s, 60s, 90s)?"
+      "What exact topic and target duration (30s, 60s, 90s)?"
     ],
     "intents": ["narration", "satire"],
     "notes": ""

@@ -1,7 +1,8 @@
 {
   "version": "v1",
   "typologies": [
-    "narratology"
+    "narratology",
+    "da"
   ],
   "languages": [
     "fr",
@@ -72,6 +73,18 @@
       ],
       "filename": "SRC_NARRATOLOGY__truby_anatomy_of_story.txt",
       "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.txt"
+    },
+    {
+      "id": "da_chatgpt",
+      "title": "Concevoir la direction artistique",
+      "author": "ChatGPT (notes)",
+      "typology": "da",
+      "language": "fr",
+      "writing_typologies": [
+        "style"
+      ],
+      "filename": "SRC_DA__chatGPT.txt",
+      "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt"
     }
   ]
 }

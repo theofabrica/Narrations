@@ -236,6 +236,28 @@ body {
   transition: width 0.2s ease;
 }
 
+.n0-next-arrow {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: none;
+  background: #2f6bff;
+  color: #ffffff;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 24px rgba(26, 45, 94, 0.35);
+  cursor: pointer;
+}
+
+.n0-next-arrow:hover {
+  background: #1f56f0;
+}
+
 .hero-metrics {
   display: grid;
   gap: 14px;
