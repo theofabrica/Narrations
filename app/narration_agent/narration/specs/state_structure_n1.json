@@ -3,32 +3,17 @@
   "strata": "n1",
   "updated_at": "",
   "data": {
-    "meta": {
-      "status": "",
-      "version": "",
-      "creative_temperature": 0
-    },
-    "pitch": "",
-    "intention": "",
-    "artistic_axes": "",
-    "overall_dynamics": "",
-    "characters": [
-      {
-        "name": "",
-        "role": "",
-        "function": "",
-        "description": "",
-        "appearance": "",
-        "signature": "",
-        "images": [],
-        "costumes": [
-          {
-            "description": "",
-            "images": []
-          }
-        ]
+    "characters": {
+      "main_characters": {
+        "number": 0
+      },
+      "secondary_characters": {
+        "number": 0
+      },
+      "background_characters": {
+        "number": 0
       }
-    ],
+    },
     "world_era": "",
     "aesthetics": "",
     "sound": {

@@ -11,6 +11,7 @@ from app.narration_agent.llm_client import LLMClient, LLMRequest
 from app.narration_agent.narration.state_merger import merge_target_patch
 from app.narration_agent.spec_loader import load_json, load_text
 from app.narration_agent.writer_agent.context_builder.context_builder import ContextBuilder
+from app.narration_agent.writer_agent.prompt_compiler import RedactorPromptCompiler
 from app.narration_agent.writer_agent.strategy_finder.strategy_finder import StrategyFinder
 from app.narration_agent.writer_agent.n_rules.n0_rules import (
     infer_n0_deliverables,
@@ -84,6 +85,68 @@ class WriterRunResult:
 
 
 class WriterOrchestrator:
+    def _context_pack_for_redactor(self, context_pack: Dict[str, Any]) -> Dict[str, Any]:
+        """Remove debug-only keys that must never be fed back to the redactor."""
+        if not isinstance(context_pack, dict):
+            return {}
+        # Prevent "prompt-in-prompt" feedback loops:
+        # redaction_attempts contains previous prompts and debug logs.
+        cleaned = {**context_pack}
+        cleaned.pop("redaction_attempts", None)
+
+        # Reduce large state blobs for the redactor (keep sparse lists instead).
+        # ContextBuilder provides *_non_empty lists; fall back to removing heavy keys.
+        if "dependencies_non_empty" in cleaned:
+            cleaned["dependencies"] = cleaned.get("dependencies_non_empty", [])
+        cleaned.pop("dependencies_non_empty", None)
+
+        if "target_strata_non_empty" in cleaned:
+            cleaned["target_strata_data"] = cleaned.get("target_strata_non_empty", [])
+        cleaned.pop("target_strata_non_empty", None)
+
+        # Schema is rarely useful for text redaction and is often empty/noisy.
+        cleaned.pop("target_schema", None)
+
+        # Keep only non-empty values in target_current (but preserve existing text).
+        target_current = cleaned.get("target_current")
+        if isinstance(target_current, dict):
+            filtered_current = {}
+            for k, v in target_current.items():
+                if isinstance(v, str):
+                    if v.strip():
+                        filtered_current[k] = v
+                elif v is None:
+                    continue
+                elif isinstance(v, (list, dict)):
+                    if v:
+                        filtered_current[k] = v
+                else:
+                    filtered_current[k] = v
+            cleaned["target_current"] = filtered_current
+
+        # Prune N1 full blobs inside context_groups payload (keep only non-empty leaves).
+        groups = cleaned.get("context_groups")
+        if isinstance(groups, list):
+            new_groups = []
+            for g in groups:
+                if not isinstance(g, dict):
+                    continue
+                payload = g.get("payload")
+                if isinstance(payload, dict) and isinstance(payload.get("n1"), dict):
+                    try:
+                        from app.narration_agent.writer_agent.context_builder.context_builder import (
+                            _collect_non_empty_fields,
+                        )
+                    except Exception:
+                        _collect_non_empty_fields = None  # type: ignore
+                    if _collect_non_empty_fields:
+                        payload = {**payload}
+                        payload["n1"] = _collect_non_empty_fields(payload.get("n1"), base_path="n1")
+                        g = {**g, "payload": payload}
+                new_groups.append(g)
+            cleaned["context_groups"] = new_groups
+        return cleaned
+
     """Build a deterministic writing plan and run the redactor."""
 
     def __init__(self, llm_client: LLMClient) -> None:
@@ -92,6 +155,7 @@ class WriterOrchestrator:
         self.strategy_finder = StrategyFinder(llm_client)
         self.redactor = Redactor(llm_client)
         self.n0_rules = self._load_n0_rules()
+        self.n1_rules = self._load_n1_rules()
 
     def run(
         self,
@@ -532,23 +596,17 @@ class WriterOrchestrator:
             rules_text = "; ".join([str(item) for item in redaction_rules if str(item).strip()])
             if rules_text:
                 redaction_rules_line = f"- Redaction rules: {rules_text}.\n"
-        user_prompt = (
-            "Context pack (JSON):\n"
-            f"{json.dumps(context_pack, ensure_ascii=True, indent=2)}\n\n"
-            "Return ONLY valid JSON with this structure:\n"
-            '{ "target_patch": <object>, "open_questions": [] }\n'
-            f"- target_patch must contain ONLY the content for '{target_path}'.\n"
-            "- Primary guidance: use strategy_card.strategy_text from the context pack.\n"
-            "- Treat strategy_card.strategy_text as guidance only. Do NOT quote or paraphrase it.\n"
-            "- Do NOT mention writing strategy, guidelines, sources, or the act of summarizing.\n"
-            f"{allowed_hint}"
-            f"{redaction_rules_line}"
-            f"{plan.extra_rule}"
-            f"{('Self-question (internal): ' + plan.writer_self_question + '\\n') if plan.writer_self_question else ''}"
-            f"{mode_hint}"
-            f"{existing_block}"
-            "- Respect redaction_constraints.min_chars / max_chars.\n"
-            "- Do not invent new information.\n"
+        redactor_context_pack = self._context_pack_for_redactor(context_pack)
+        compiler = RedactorPromptCompiler()
+        user_prompt = compiler.build_initial_user_prompt(
+            target_path=target_path,
+            context_pack=redactor_context_pack,
+            allowed_fields=plan.allowed_fields,
+            redaction_rules=redaction_rules if isinstance(redaction_rules, list) else [],
+            extra_rule=str(plan.extra_rule or ""),
+            writer_self_question=str(plan.writer_self_question or ""),
+            writing_mode_hint=(mode_hint or "").strip(),
+            existing_fields=existing_fields if isinstance(existing_fields, dict) else {},
         )
 
         redaction = self.redactor.redact(system_prompt=system_prompt, user_prompt=user_prompt)
@@ -563,14 +621,17 @@ class WriterOrchestrator:
                 warning="invalid_json",
             )
 
-        target_patch = parsed.get("target_patch") if isinstance(parsed, dict) else None
+        target_patch = self._coerce_target_patch(parsed, plan.allowed_fields)
         open_questions = parsed.get("open_questions") if isinstance(parsed, dict) else []
         filtered_patch: Dict[str, Any] = {}
         if isinstance(target_patch, dict):
+            normalized_patch = self._normalize_target_patch_keys(
+                target_patch, plan.allowed_fields
+            )
             filtered_patch = (
-                self._filter_allowed_fields(target_patch, plan.allowed_fields)
+                self._filter_allowed_fields(normalized_patch, plan.allowed_fields)
                 if plan.allowed_fields
-                else target_patch
+                else normalized_patch
             )
         warning_message = ""
         meta_violations = self._collect_meta_violations(filtered_patch, plan.allowed_fields)
@@ -580,6 +641,15 @@ class WriterOrchestrator:
         attempts: List[Dict[str, Any]] = [
             {
                 "phase": "initial",
+                "prompt_debug": {
+                    "system_prompt_chars": len(system_prompt),
+                    "user_prompt_chars": len(user_prompt),
+                    "system_prompt": system_prompt,
+                    "user_prompt": user_prompt,
+                },
+                "context_groups_debug": self._summarize_context_groups_for_log(
+                    context_pack, per_group_preview_chars=900
+                ),
                 "char_counts": self._compute_char_counts(filtered_patch, plan.allowed_fields),
                 "length_violations": length_violations,
                 "meta_violations": meta_violations,
@@ -601,10 +671,13 @@ class WriterOrchestrator:
             if isinstance(retry_parsed, dict):
                 retry_patch = retry_parsed.get("target_patch")
                 if isinstance(retry_patch, dict):
+                    normalized_retry = self._normalize_target_patch_keys(
+                        retry_patch, plan.allowed_fields
+                    )
                     filtered_patch = (
-                        self._filter_allowed_fields(retry_patch, plan.allowed_fields)
+                        self._filter_allowed_fields(normalized_retry, plan.allowed_fields)
                         if plan.allowed_fields
-                        else retry_patch
+                        else normalized_retry
                     )
                     meta_violations = self._collect_meta_violations(
                         filtered_patch, plan.allowed_fields
@@ -615,6 +688,15 @@ class WriterOrchestrator:
                     attempts.append(
                         {
                             "phase": "retry",
+                            "prompt_debug": {
+                                "system_prompt_chars": len(system_prompt),
+                                "user_prompt_chars": len(retry_prompt),
+                                "system_prompt": system_prompt,
+                                "user_prompt": retry_prompt,
+                            },
+                            "context_groups_debug": self._summarize_context_groups_for_log(
+                                context_pack, per_group_preview_chars=900
+                            ),
                             "char_counts": self._compute_char_counts(
                                 filtered_patch, plan.allowed_fields
                             ),
@@ -639,6 +721,58 @@ class WriterOrchestrator:
             length_violations=length_violations,
             attempts=attempts,
         )
+
+    def _truncate_for_log(
+        self,
+        text: str,
+        max_chars: int,
+        *,
+        head: bool = True,
+        tail: bool = True,
+    ) -> str:
+        if not isinstance(text, str):
+            return ""
+        if max_chars <= 0:
+            return ""
+        if len(text) <= max_chars:
+            return text
+        if head and not tail:
+            return text[:max_chars] + "\n...<truncated>..."
+        if tail and not head:
+            return "...<truncated>...\n" + text[-max_chars:]
+        # head+tail
+        half = max_chars // 2
+        return text[:half] + "\n...<truncated>...\n" + text[-half:]
+
+    def _summarize_context_groups_for_log(
+        self, context_pack: Dict[str, Any], per_group_preview_chars: int = 600
+    ) -> List[Dict[str, Any]]:
+        """Log-friendly summary of context_groups payloads."""
+        groups = context_pack.get("context_groups") if isinstance(context_pack, dict) else None
+        if not isinstance(groups, list):
+            return []
+        out: List[Dict[str, Any]] = []
+        for group in groups:
+            if not isinstance(group, dict):
+                continue
+            payload = group.get("payload")
+            try:
+                payload_json = json.dumps(payload, ensure_ascii=True, indent=2)
+            except Exception:
+                payload_json = str(payload)
+            out.append(
+                {
+                    "name": group.get("name", ""),
+                    "weight": group.get("weight", None),
+                    "sources": group.get("sources", []),
+                    "payload_chars": len(payload_json) if isinstance(payload_json, str) else 0,
+                    "payload_preview": self._truncate_for_log(
+                        payload_json if isinstance(payload_json, str) else "",
+                        per_group_preview_chars,
+                    ),
+                }
+            )
+        return out
 
     def _compute_char_counts(
         self, patch: Dict[str, Any], allowed_fields: Optional[List[str]]
@@ -742,7 +876,6 @@ class WriterOrchestrator:
             "min_chars": min_chars,
             "max_chars": max_chars,
             "core_summary": context_pack.get("core_summary", ""),
-            "intents": context_pack.get("intents", []),
             "brief_constraints": context_pack.get("brief_constraints", []),
             "deterministic_meta_violations": meta_violations,
             "deterministic_length_violations": length_violations,
@@ -929,11 +1062,18 @@ class WriterOrchestrator:
                 plan.base_patch = infer_n0_deliverables(source_state, target_current)
             rule = self.n0_rules.get(target_path, {})
             self._apply_declarative_rules(plan, rule, target_current, source_state)
+        elif target_path == "n1" or target_path.startswith("n1."):
+            rule = self.n1_rules.get(target_path) or self.n1_rules.get("n1", {})
+            self._apply_declarative_rules(plan, rule, target_current, source_state)
 
         return plan
 
     def _load_n0_rules(self) -> Dict[str, Any]:
         rules = load_json("writer_agent/n_rules/n0_rules.json") or {}
+        return rules if isinstance(rules, dict) else {}
+
+    def _load_n1_rules(self) -> Dict[str, Any]:
+        rules = load_json("writer_agent/n_rules/n1_rules.json") or {}
         return rules if isinstance(rules, dict) else {}
 
     def _apply_declarative_rules(
@@ -1053,6 +1193,14 @@ class WriterOrchestrator:
             if isinstance(prod, dict):
                 value = prod.get("summary", "")
                 return value.strip() if isinstance(value, str) else ""
+            n0_state = dependencies.get("n0") if isinstance(dependencies, dict) else {}
+            if isinstance(n0_state, dict):
+                n0_data = n0_state.get("data") if isinstance(n0_state, dict) else {}
+                if isinstance(n0_data, dict):
+                    n0_prod = n0_data.get("production_summary", {})
+                    if isinstance(n0_prod, dict):
+                        value = n0_prod.get("summary", "")
+                        return value.strip() if isinstance(value, str) else ""
             return ""
 
         def build_family_payload() -> Dict[str, Any]:
@@ -1067,10 +1215,12 @@ class WriterOrchestrator:
 
         chat_indications_payload = {
             "brief_primary_objective": context_pack.get("brief_primary_objective", ""),
+            "brief_project_title": context_pack.get("brief_project_title", ""),
+            "brief_video_type": context_pack.get("brief_video_type", ""),
+            "brief_target_duration_s": context_pack.get("brief_target_duration_s", 0),
             "brief_constraints": context_pack.get("brief_constraints", []),
             "brief_priorities": context_pack.get("brief_priorities", []),
             "thinker_constraints": context_pack.get("thinker_constraints", []),
-            "intents": context_pack.get("intents", []),
             "core_summary": context_pack.get("core_summary", ""),
         }
         neighbours_payload_full = {
@@ -1160,7 +1310,6 @@ class WriterOrchestrator:
         writing_typology = context_pack.get("writing_typology", "")
         core_summary = context_pack.get("core_summary", "")
         brief_primary = context_pack.get("brief_primary_objective", "")
-        intents = context_pack.get("intents", [])
         constraints = context_pack.get("brief_constraints", [])
 
         lines = [
@@ -1172,10 +1321,6 @@ class WriterOrchestrator:
             lines.append(f"Project summary: {core_summary.strip()}.")
         elif isinstance(brief_primary, str) and brief_primary.strip():
             lines.append(f"Primary objective: {brief_primary.strip()}.")
-        if isinstance(intents, list) and intents:
-            intents_line = ", ".join([str(item) for item in intents if str(item).strip()])
-            if intents_line:
-                lines.append(f"Intents: {intents_line}.")
         if isinstance(constraints, list) and constraints:
             constraints_line = ", ".join([str(item) for item in constraints if str(item).strip()])
             if constraints_line:
@@ -1190,12 +1335,12 @@ class WriterOrchestrator:
 
     def _build_writer_prompt(self, target_path: str) -> str:
         base_prompt = load_text("writer_agent/redactor/redactor.md").strip()
-        strata_prompt = ""
-        if target_path.startswith("n0"):
-            strata_prompt = load_text("narration/specs/02_01_project_writer.md").strip()
         if not base_prompt:
             base_prompt = "You are a redactor. Produce a patch for the target section only."
-        return "\n\n".join([chunk for chunk in [base_prompt, strata_prompt] if chunk])
+        # IMPORTANT: keep the system prompt stable and "role-level".
+        # N0/N1-specific rules belong in the user prompt (context_pack + declarative rules),
+        # not appended here (to avoid outdated/contradictory instructions).
+        return base_prompt
 
     def _merge_patch(self, base: Dict[str, Any], patch: Dict[str, Any]) -> Dict[str, Any]:
         if not base and not patch:
@@ -1214,6 +1359,46 @@ class WriterOrchestrator:
         if not allowed_fields:
             return patch
         return {key: value for key, value in patch.items() if key in allowed_fields}
+
+    def _coerce_target_patch(
+        self, parsed: Dict[str, Any], allowed_fields: Optional[List[str]]
+    ) -> Dict[str, Any] | None:
+        if not isinstance(parsed, dict):
+            return None
+        target_patch = parsed.get("target_patch")
+        if isinstance(target_patch, dict):
+            return target_patch
+        if not allowed_fields or len(allowed_fields) != 1:
+            return None
+        expected_key = allowed_fields[0]
+        if expected_key in parsed and isinstance(parsed.get(expected_key), str):
+            return {expected_key: parsed.get(expected_key, "")}
+        for key in ("text", "content"):
+            value = parsed.get(key)
+            if isinstance(value, str) and value.strip():
+                return {expected_key: value}
+        string_fields = {k: v for k, v in parsed.items() if isinstance(v, str)}
+        if len(string_fields) == 1:
+            _, value = next(iter(string_fields.items()))
+            return {expected_key: value}
+        return None
+
+    def _normalize_target_patch_keys(
+        self, patch: Dict[str, Any], allowed_fields: Optional[List[str]]
+    ) -> Dict[str, Any]:
+        if not isinstance(patch, dict) or not patch:
+            return patch
+        if not allowed_fields or len(allowed_fields) != 1:
+            return patch
+        expected_key = allowed_fields[0]
+        if expected_key in patch:
+            return patch
+        # If the redactor returned a single text field, map it deterministically.
+        string_fields = {k: v for k, v in patch.items() if isinstance(v, str)}
+        if len(string_fields) == 1:
+            _, value = next(iter(string_fields.items()))
+            return {expected_key: value}
+        return patch
 
     def _collect_meta_violations(
         self, patch: Dict[str, Any], allowed_fields: Optional[List[str]]
@@ -1330,23 +1515,15 @@ class WriterOrchestrator:
                 "- Remove any meta-writing language or references to strategy, sources, or guidelines.\n"
                 "- Do NOT mention the summary as an object or the act of summarizing.\n"
             )
-        return (
-            "Context pack (JSON):\n"
-            f"{json.dumps(context_pack, ensure_ascii=True, indent=2)}\n\n"
-            "Return ONLY valid JSON with this structure:\n"
-            '{ "target_patch": <object>, "open_questions": [] }\n'
-            f"- target_patch must contain ONLY the content for '{target_path}'.\n"
-            "- Primary guidance: use strategy_card.strategy_text from the context pack.\n"
-            "- Treat strategy_card.strategy_text as guidance only. Do NOT quote or paraphrase it.\n"
-            "- Do NOT mention writing strategy, guidelines, sources, or the act of summarizing.\n"
-            f"{allowed_hint}"
-            f"{redaction_rules_line}"
-            f"{plan.extra_rule}"
-            f"{correction_mode}"
-            "- Preserve meaning and do not add new facts.\n"
-            f"{length_lines}\n"
-            f"{meta_lines}\n"
-            f"{existing_block}"
-            "- Respect redaction_constraints.min_chars / max_chars.\n"
-            "- Do not invent new information.\n"
+        redactor_context_pack = self._context_pack_for_redactor(context_pack)
+        compiler = RedactorPromptCompiler()
+        return compiler.build_retry_user_prompt(
+            target_path=target_path,
+            context_pack=redactor_context_pack,
+            allowed_fields=plan.allowed_fields,
+            redaction_rules=redaction_rules if isinstance(redaction_rules, list) else [],
+            extra_rule=str(plan.extra_rule or ""),
+            length_violations=length_violations,
+            meta_violations=meta_violations,
+            existing_patch=existing_patch,
         )

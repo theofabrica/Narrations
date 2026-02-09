@@ -38,6 +38,11 @@ class NarratorOrchestrator:
         "art_direction",
         "sound_direction",
     )
+    _N1_SECTIONS = (
+        "characters.main_characters.number",
+        "characters.secondary_characters.number",
+        "characters.background_characters.number",
+    )
 
     def build_plan(self, narration_input: Dict[str, Any]) -> Dict[str, Any]:
         source_state = narration_input.get("source_state_payload") or {}
@@ -84,7 +89,24 @@ class NarratorOrchestrator:
                 add_task(task_id, "writer_n0", f"n0.{section}", depends)
                 last_task_id = task_id
 
-        for strata in ("n1", "n2", "n3", "n4", "n5"):
+        if "n1" in target_strata:
+            requested_sections = {
+                path.split(".", 1)[1]
+                for path in target_paths
+                if isinstance(path, str) and path.startswith("n1.")
+            }
+            sections = [
+                section
+                for section in self._N1_SECTIONS
+                if not requested_sections or section in requested_sections
+            ]
+            for section in sections:
+                task_id = f"task_n1_{section.replace('.', '_')}"
+                depends = [last_task_id] if last_task_id else []
+                add_task(task_id, "writer_n1", f"n1.{section}", depends)
+                last_task_id = task_id
+
+        for strata in ("n2", "n3", "n4", "n5"):
             if strata not in target_strata:
                 continue
             task_id = f"task_{strata}"
@@ -137,6 +159,7 @@ class NarratorOrchestrator:
             "- Allowed agents: writer_n0, writer_n1, writer_n2, writer_n3, writer_n4, writer_n5\n"
             f"- Allowed output_ref values: {', '.join(allowed_paths) if allowed_paths else '[]'}\n"
             "- If you include N0 tasks, they must be ordered: n0.production_summary, then n0.art_direction, then n0.sound_direction.\n"
+            "- If you include N1 tasks, they must be ordered: n1.characters.main_characters.number, then n1.characters.secondary_characters.number, then n1.characters.background_characters.number.\n"
             "- Do NOT add extra keys.\n"
             "- If nothing should be written now, return an empty tasks list.\n"
         )
@@ -200,7 +223,9 @@ class NarratorOrchestrator:
         allowed_paths: List[str] = []
         if "n0" in target_strata:
             allowed_paths.extend([f"n0.{section}" for section in self._N0_SECTIONS])
-        for strata in ("n1", "n2", "n3", "n4", "n5"):
+        if "n1" in target_strata:
+            allowed_paths.extend([f"n1.{section}" for section in self._N1_SECTIONS])
+        for strata in ("n2", "n3", "n4", "n5"):
             if strata in target_strata:
                 allowed_paths.append(strata)
         return allowed_paths

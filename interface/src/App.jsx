@@ -143,6 +143,13 @@ function App() {
   const [editorValue, setEditorValue] = useState('')
   const [editorOriginal, setEditorOriginal] = useState('')
   const [editorLabel, setEditorLabel] = useState('')
+  const [editorTargetPath, setEditorTargetPath] = useState('')
+  const [editorChatMessages, setEditorChatMessages] = useState([])
+  const [editorChatInput, setEditorChatInput] = useState('')
+  const [editorChatStatus, setEditorChatStatus] = useState('idle')
+  const [editorChatError, setEditorChatError] = useState('')
+  const [editorChatSessionId, setEditorChatSessionId] = useState('')
+  const [editorChatSummary, setEditorChatSummary] = useState('')
   const editorTargetRef = useRef(null)
   const [n1Data, setN1Data] = useState(null)
   const [n1Status, setN1Status] = useState('idle')
@@ -671,76 +678,24 @@ function App() {
       root.data && typeof root.data === 'object'
         ? root.data
         : root
-    const sanitizeMotif = (entry) => {
-      const motif = entry && typeof entry === 'object' ? entry : {}
-      if (typeof entry === 'string') {
-        return { description: entry, images: [], audio: [] }
-      }
-      return {
-        description: motif.description || '',
-        images: Array.isArray(motif.images) ? motif.images : [],
-        audio: Array.isArray(motif.audio) ? motif.audio : []
-      }
+    const toNumber = (value) => {
+      const parsed = Number(value)
+      return Number.isFinite(parsed) ? parsed : 0
     }
-    const sanitizeCostume = (entry) => {
-      const costume = entry && typeof entry === 'object' ? entry : {}
-      return {
-        description: costume.description || '',
-        images: Array.isArray(costume.images) ? costume.images : []
-      }
-    }
-    const sanitizeCharacter = (entry) => {
-      const character = entry && typeof entry === 'object' ? entry : {}
-      const costumes = Array.isArray(character.costumes)
-        ? character.costumes.map(sanitizeCostume)
-        : []
-      return {
-        name: character.name || '',
-        role: character.role || '',
-        function: character.function || '',
-        description: character.description || '',
-        appearance: character.appearance || '',
-        signature: character.signature || '',
-        images: Array.isArray(character.images) ? character.images : [],
-        costumes
-      }
-    }
-    let personnages = []
-    if (Array.isArray(data.personnages)) {
-      personnages = data.personnages.map(sanitizeCharacter)
-    } else if (typeof data.personnages === 'string' && data.personnages.trim()) {
-      personnages = [sanitizeCharacter({ description: data.personnages })]
-    }
+    const characters =
+      data.characters && typeof data.characters === 'object' ? data.characters : {}
     return {
-      meta: {
-        status: data.meta?.status || 'draft',
-        version: data.meta?.version || '0.1',
-        temperature_creative: Number.isFinite(data.meta?.temperature_creative)
-          ? data.meta.temperature_creative
-          : 2
-      },
-      pitch: data.pitch || '',
-      intention: data.intention || '',
-      axes_artistiques: data.axes_artistiques || '',
-      dynamique_globale: data.dynamique_globale || '',
-      personnages,
-      monde_epoque: data.monde_epoque || '',
-      esthetique: data.esthetique || '',
-      son: {
-        ambiances: data.son?.ambiances || '',
-        musique: data.son?.musique || '',
-        sfx: data.son?.sfx || '',
-        dialogues: data.son?.dialogues || ''
-      },
-      motifs: Array.isArray(data.motifs)
-        ? data.motifs.map(sanitizeMotif)
-        : [],
-      ancres_canon_continuite: Array.isArray(data.ancres_canon_continuite)
-        ? data.ancres_canon_continuite
-        : [],
-      sources: data.sources || '',
-      hypotheses: data.hypotheses || '',
-      questions: data.questions || ''
+      characters: {
+        main_characters: {
+          number: toNumber(characters.main_characters?.number)
+        },
+        secondary_characters: {
+          number: toNumber(characters.secondary_characters?.number)
+        },
+        background_characters: {
+          number: toNumber(characters.background_characters?.number)
+        }
+      }
     }
   }
 
@@ -1452,7 +1407,9 @@ function App() {
         }
       }
       editorTargetRef.current = target
+      const targetPath = target.dataset?.editPath || ''
       openEditor(labelText || 'Edition', target.value || '')
+      setEditorTargetPath(targetPath)
     }
     document.addEventListener('dblclick', handleDoubleClick)
     return () => document.removeEventListener('dblclick', handleDoubleClick)
@@ -2274,6 +2231,13 @@ function App() {
     setEditorLabel(label)
     setEditorValue(value || '')
     setEditorOriginal(value || '')
+    setEditorTargetPath('')
+    setEditorChatMessages([])
+    setEditorChatInput('')
+    setEditorChatStatus('idle')
+    setEditorChatError('')
+    setEditorChatSessionId('')
+    setEditorChatSummary('')
     setEditorOpen(true)
   }
 
@@ -2282,6 +2246,13 @@ function App() {
     setEditorValue('')
     setEditorOriginal('')
     setEditorLabel('')
+    setEditorTargetPath('')
+    setEditorChatMessages([])
+    setEditorChatInput('')
+    setEditorChatStatus('idle')
+    setEditorChatError('')
+    setEditorChatSessionId('')
+    setEditorChatSummary('')
     editorTargetRef.current = null
   }
 
@@ -2295,14 +2266,86 @@ function App() {
       closeEditor()
       return
     }
-    const isSummary = target.dataset?.orchestrate === 'n0-summary'
-    if (isSummary && n0Data) {
-      const next = updateNestedValue(n0Data, ['production_summary', 'summary'], editorValue)
+    const targetPath = target.dataset?.editPath || ''
+    if (n0Data && targetPath.startsWith('n0.')) {
+      const parts = targetPath.split('.').slice(1)
+      const next = updateNestedValue(n0Data, parts, editorValue)
       setN0Data(next)
     }
     target.value = editorValue
     target.dispatchEvent(new Event('input', { bubbles: true }))
     closeEditor()
+  }
+
+  const handleEditorChatSend = async () => {
+    const projectId = selectedProject
+    const message = editorChatInput.trim()
+    if (!projectId) {
+      setEditorChatError('Selectionne un projet pour activer le chat.')
+      return
+    }
+    if (!editorTargetPath) {
+      setEditorChatError('Champ cible introuvable pour le mode edit.')
+      return
+    }
+    if (!message) {
+      setEditorChatError('Message requis.')
+      return
+    }
+    setEditorChatStatus('sending')
+    setEditorChatError('')
+    setEditorChatMessages((prev) => [...prev, { role: 'user', content: message }])
+    setEditorChatInput('')
+    try {
+      const resp = await fetch(
+        `${apiOrigin}${joinPath(apiBasePath, `/projects/${encodeURIComponent(projectId)}/narration/message`)}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message,
+            session_id: editorChatSessionId || null,
+            auto_create: false,
+            mode: 'edit',
+            target_path: editorTargetPath,
+            actual_text: editorOriginal,
+            edited_text: editorValue.trim() ? editorValue : editorOriginal,
+            edit_session_id: editorChatSessionId || null
+          })
+        }
+      )
+      const data = await resp.json()
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      const nextEditSessionId = data?.edit_session_id || editorChatSessionId || ''
+      if (nextEditSessionId) {
+        setEditorChatSessionId(nextEditSessionId)
+      }
+      const assistantMessage = data?.assistant_message
+        ? data.assistant_message
+        : null
+      const replyText = assistantMessage
+        ? assistantMessage
+            .split('\n')
+            .filter((line) => !line.trim().startsWith('JSON'))
+            .join('\n')
+            .trim()
+        : 'Reponse vide.'
+      setEditorChatMessages((prev) => [...prev, { role: 'assistant', content: replyText }])
+      const summary = data?.edit_summary
+        ? String(data.edit_summary).trim()
+        : replyText
+      setEditorChatSummary(summary)
+    } catch (err) {
+      setEditorChatError(err.message)
+      setEditorChatMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: `Erreur: ${err.message}` }
+      ])
+    } finally {
+      setEditorChatStatus('idle')
+    }
   }
 
   const handleN1Save = async (overrideData = null) => {
@@ -3061,6 +3104,18 @@ function App() {
                 </button>
                 <button
                   type="button"
+                  className={activePage === 'bible' ? 'active' : ''}
+                  onClick={() => {
+                    setActivePage('bible')
+                    if (selectedProject) {
+                      fetchN1(selectedProject)
+                    }
+                  }}
+                >
+                  N1
+                </button>
+                <button
+                  type="button"
                   className={activePage === 'old' || isOldPage ? 'active' : ''}
                   onClick={() => setActivePage('old')}
                 >
@@ -3256,6 +3311,7 @@ function App() {
                           className="auto-resize"
                           value={n0Data.production_summary?.summary || ''}
                           data-orchestrate="n0-summary"
+                          data-edit-path="n0.production_summary.summary"
                           onInput={handleAutoResize}
                           onChange={(event) =>
                             handleN0FieldChange(
@@ -3277,6 +3333,7 @@ function App() {
                         <textarea
                           className="auto-resize"
                           value={n0Data.art_direction?.description || ''}
+                          data-edit-path="n0.art_direction.description"
                           onInput={handleAutoResize}
                           onChange={(event) =>
                             handleN0FieldChange(
@@ -3329,6 +3386,7 @@ function App() {
                         <textarea
                           className="auto-resize"
                           value={n0Data.sound_direction?.description || ''}
+                          data-edit-path="n0.sound_direction.description"
                           onInput={handleAutoResize}
                           onChange={(event) =>
                             handleN0FieldChange(
@@ -3379,15 +3437,34 @@ function App() {
         </div>
       </section>
       {isN0Complete(n0Data) ? (
-        <button
-          type="button"
-          className="n0-next-arrow"
-          aria-label="Passer a la suite"
-          title="Bientot disponible"
-          onClick={() => {}}
-        >
-          →
-        </button>
+        <div className="n0-next-actions">
+          <button
+            type="button"
+            className="primary"
+            onClick={() => {
+              setActivePage('bible')
+              if (selectedProject) {
+                fetchN1(selectedProject)
+              }
+            }}
+          >
+            Ouvrir N1
+          </button>
+          <button
+            type="button"
+            className="n0-next-arrow"
+            aria-label="Passer a la suite"
+            title="Ouvrir N1"
+            onClick={() => {
+              setActivePage('bible')
+              if (selectedProject) {
+                fetchN1(selectedProject)
+              }
+            }}
+          >
+            →
+          </button>
+        </div>
       ) : null}
         </>
       ) : null}
@@ -3455,577 +3532,49 @@ function App() {
                 {n1Data ? (
                   <div className="project-form">
                     <section>
-                      <h3>Importer N1</h3>
-                      <div className="n0-import">
-                        <textarea
-                          placeholder="Colle ici le JSON N1 fourni par ChatGPT"
-                          value={n1PasteText}
-                          onChange={(event) => setN1PasteText(event.target.value)}
-                        />
-                        <div className="n0-import-actions">
-                          <button type="button" onClick={applyN1FromJson}>
-                            Remplacer le N1
-                          </button>
-                          {n1PasteError ? (
-                            <span className="hint error">{n1PasteError}</span>
-                          ) : null}
-                        </div>
-                      </div>
-                    </section>
-
-                    <section>
-                      <h3>Statut</h3>
+                      <h3>Personnages</h3>
                       <div className="form-grid">
                         <label>
-                          Version
+                          Personnages principaux (nombre)
                           <input
-                            type="text"
-                            value={n1Data.meta?.version || ''}
+                            type="number"
+                            value={n1Data.characters?.main_characters?.number ?? 0}
                             onChange={(event) =>
-                              handleN1FieldChange(['meta', 'version'], event.target.value)
-                            }
-                          />
-                        </label>
-                        <label>
-                          Statut
-                          <input
-                            type="text"
-                            value={n1Data.meta?.status || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['meta', 'status'], event.target.value)
-                            }
-                          />
-                        </label>
-                        <label>
-                          Temperature creative
-                          <input
-                            type="text"
-                            value={n1Data.meta?.temperature_creative ?? 2}
-                            onChange={(event) => {
-                              const parsed = Number(event.target.value)
                               handleN1FieldChange(
-                                ['meta', 'temperature_creative'],
-                                Number.isFinite(parsed) ? parsed : event.target.value
+                                ['characters', 'main_characters', 'number'],
+                                Number(event.target.value || 0)
                               )
-                            }}
-                          />
-                        </label>
-                      </div>
-                    </section>
-
-                    <section>
-                      <h3>Pitch & intention</h3>
-                      <div className="form-grid form-stack">
-                        <label>
-                          Pitch
-                          <textarea
-                            value={n1Data.pitch || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['pitch'], event.target.value)
                             }
                           />
                         </label>
                         <label>
-                          Intention
-                          <textarea
-                            value={n1Data.intention || ''}
+                          Personnages secondaires (nombre)
+                          <input
+                            type="number"
+                            value={n1Data.characters?.secondary_characters?.number ?? 0}
                             onChange={(event) =>
-                              handleN1FieldChange(['intention'], event.target.value)
-                            }
-                          />
-                        </label>
-                      </div>
-                    </section>
-
-                    <section>
-                      <h3>Axes artistiques & dynamique</h3>
-                      <div className="form-grid form-stack">
-                        <label>
-                          Axes artistiques
-                          <textarea
-                            value={n1Data.axes_artistiques || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['axes_artistiques'], event.target.value)
+                              handleN1FieldChange(
+                                ['characters', 'secondary_characters', 'number'],
+                                Number(event.target.value || 0)
+                              )
                             }
                           />
                         </label>
                         <label>
-                          Dynamique globale
-                          <textarea
-                            value={n1Data.dynamique_globale || ''}
+                          Personnages de fond (nombre)
+                          <input
+                            type="number"
+                            value={n1Data.characters?.background_characters?.number ?? 0}
                             onChange={(event) =>
-                              handleN1FieldChange(['dynamique_globale'], event.target.value)
+                              handleN1FieldChange(
+                                ['characters', 'background_characters', 'number'],
+                                Number(event.target.value || 0)
+                              )
                             }
                           />
                         </label>
                       </div>
                     </section>
-
-                    <section>
-                      <h3>Personnages</h3>
-                      <div className="character-actions">
-                        <button type="button" onClick={addCharacter}>
-                          Ajouter un personnage
-                        </button>
-                      </div>
-                      {n1Data.personnages && n1Data.personnages.length ? (
-                        <div className="character-grid">
-                          {n1Data.personnages.map((character, index) => (
-                            <div key={`character-${index}`} className="character-card">
-                              <div className="character-card-head">
-                                <strong>{character.name || `Personnage ${index + 1}`}</strong>
-                                <button
-                                  type="button"
-                                  className="danger"
-                                  onClick={() => removeCharacter(index)}
-                                >
-                                  Supprimer
-                                </button>
-                              </div>
-                              <div className="form-grid form-stack">
-                                <label>
-                                  Nom
-                                  <input
-                                    type="text"
-                                    value={character.name || ''}
-                                    onChange={(event) =>
-                                      updateCharacterField(index, 'name', event.target.value)
-                                    }
-                                  />
-                                </label>
-                                <label>
-                                  Role
-                                  <input
-                                    type="text"
-                                    value={character.role || ''}
-                                    onChange={(event) =>
-                                      updateCharacterField(index, 'role', event.target.value)
-                                    }
-                                  />
-                                </label>
-                                <label>
-                                  Fonction narrative
-                                  <input
-                                    type="text"
-                                    value={character.function || ''}
-                                    onChange={(event) =>
-                                      updateCharacterField(index, 'function', event.target.value)
-                                    }
-                                  />
-                                </label>
-                                <label>
-                                  Description
-                                  <textarea
-                                    value={character.description || ''}
-                                    onChange={(event) =>
-                                      updateCharacterField(
-                                        index,
-                                        'description',
-                                        event.target.value
-                                      )
-                                    }
-                                  />
-                                </label>
-                                <label>
-                                  Apparence
-                                  <textarea
-                                    value={character.appearance || ''}
-                                    onChange={(event) =>
-                                      updateCharacterField(
-                                        index,
-                                        'appearance',
-                                        event.target.value
-                                      )
-                                    }
-                                  />
-                                </label>
-                                <label>
-                                  Motivations et comportements
-                                  <textarea
-                                    value={character.signature || ''}
-                                    onChange={(event) =>
-                                      updateCharacterField(
-                                        index,
-                                        'signature',
-                                        event.target.value
-                                      )
-                                    }
-                                  />
-                                </label>
-                              </div>
-                              <div className="character-media">
-                                <label className="upload-label">
-                                  Images du personnage
-                                  <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={(event) => {
-                                      const files = Array.from(event.target.files || [])
-                                      files.forEach((file) =>
-                                        uploadN1CharacterImage(file, index + 1)
-                                      )
-                                    }}
-                                  />
-                                </label>
-                                {character.images && character.images.length ? (
-                                  <div className="character-media-grid">
-                                    {character.images.map((image, imageIndex) => (
-                                      <figure
-                                        key={`${image}-${imageIndex}`}
-                                        className="character-media-thumb"
-                                      >
-                                        <img
-                                          src={`${apiOrigin}${joinPath(apiBasePath, `/projects/${selectedProject}/mediapix/${image}`)}`}
-                                          alt={image}
-                                        />
-                                        <figcaption>
-                                          {image}
-                                          <button
-                                            type="button"
-                                            className="thumb-remove"
-                                            onClick={() =>
-                                              removeN1CharacterImage(
-                                                index + 1,
-                                                imageIndex,
-                                                image
-                                              )
-                                            }
-                                          >
-                                            Supprimer
-                                          </button>
-                                        </figcaption>
-                                      </figure>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <p className="hint">Aucune image associee.</p>
-                                )}
-                              </div>
-                              <div className="costume-block">
-                                <div className="costume-head">
-                                  <h4>Costumes</h4>
-                                  <button
-                                    type="button"
-                                    onClick={() => addCostume(index)}
-                                  >
-                                    Ajouter un costume
-                                  </button>
-                                </div>
-                                {character.costumes && character.costumes.length ? (
-                                  <div className="costume-grid">
-                                    {character.costumes.map((costume, costumeIndex) => (
-                                      <div
-                                        key={`costume-${costume.id ?? costumeIndex}`}
-                                        className="costume-card"
-                                      >
-                                        <div className="costume-card-head">
-                                          <strong>
-                                            {`Costume ${costumeIndex + 1}`}
-                                          </strong>
-                                          <button
-                                            type="button"
-                                            className="danger"
-                                            onClick={() => removeCostume(index, costumeIndex)}
-                                          >
-                                            Supprimer
-                                          </button>
-                                        </div>
-                                        <div className="form-grid form-stack">
-                                          <label>
-                                            Description
-                                            <textarea
-                                              value={costume.description || ''}
-                                              onChange={(event) =>
-                                                updateCostumeField(
-                                                  index,
-                                                  costumeIndex,
-                                                  'description',
-                                                  event.target.value
-                                                )
-                                              }
-                                            />
-                                          </label>
-                                        </div>
-                                        <div className="character-media">
-                                          <label className="upload-label">
-                                            Images du costume
-                                            <input
-                                              type="file"
-                                              accept="image/*"
-                                              multiple
-                                              onChange={(event) => {
-                                                const files = Array.from(event.target.files || [])
-                                                files.forEach((file) =>
-                                                  uploadN1CostumeImage(file, {
-                                                    characterIndex: index + 1,
-                                                    costumeIndex: costumeIndex + 1
-                                                  })
-                                                )
-                                              }}
-                                            />
-                                          </label>
-                                          {costume.images && costume.images.length ? (
-                                            <div className="character-media-grid">
-                                              {costume.images.map((image, imageIndex) => (
-                                                <figure
-                                                  key={`${image}-${imageIndex}`}
-                                                  className="character-media-thumb"
-                                                >
-                                                  <img
-                                                    src={`${apiOrigin}${joinPath(apiBasePath, `/projects/${selectedProject}/mediapix/${image}`)}`}
-                                                    alt={image}
-                                                  />
-                                                  <figcaption>
-                                                    {image}
-                                                    <button
-                                                      type="button"
-                                                      className="thumb-remove"
-                                                      onClick={() =>
-                                                        removeN1CostumeImage(
-                                                          {
-                                                            characterIndex: index + 1,
-                                                            costumeIndex: costumeIndex + 1
-                                                          },
-                                                          imageIndex,
-                                                          image
-                                                        )
-                                                      }
-                                                    >
-                                                      Supprimer
-                                                    </button>
-                                                  </figcaption>
-                                                </figure>
-                                              ))}
-                                            </div>
-                                          ) : (
-                                            <p className="hint">Aucune image associee.</p>
-                                          )}
-                                        </div>
-                                      </div>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <p className="hint">Aucun costume pour l’instant.</p>
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="hint">Aucun personnage pour l’instant.</p>
-                      )}
-                    </section>
-
-                    <section>
-                      <h3>Monde & epoque</h3>
-                      <div className="form-grid form-stack">
-                        <label>
-                          Monde & epoque
-                          <textarea
-                            value={n1Data.monde_epoque || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['monde_epoque'], event.target.value)
-                            }
-                          />
-                        </label>
-                      </div>
-                    </section>
-
-                    <section>
-                      <h3>Esthetique</h3>
-                      <div className="form-grid form-stack">
-                        <label>
-                          Direction artistique macro
-                          <textarea
-                            value={n1Data.esthetique || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['esthetique'], event.target.value)
-                            }
-                          />
-                        </label>
-                      </div>
-                    </section>
-
-                    <section>
-                      <h3>Son</h3>
-                      <div className="form-grid form-stack">
-                        <label>
-                          Ambiances
-                          <textarea
-                            value={n1Data.son?.ambiances || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['son', 'ambiances'], event.target.value)
-                            }
-                          />
-                        </label>
-                        <label>
-                          Musique
-                          <textarea
-                            value={n1Data.son?.musique || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['son', 'musique'], event.target.value)
-                            }
-                          />
-                        </label>
-                        <label>
-                          SFX signatures
-                          <textarea
-                            value={n1Data.son?.sfx || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['son', 'sfx'], event.target.value)
-                            }
-                          />
-                        </label>
-                        <label>
-                          Dialogues
-                          <textarea
-                            value={n1Data.son?.dialogues || ''}
-                            onChange={(event) =>
-                              handleN1FieldChange(['son', 'dialogues'], event.target.value)
-                            }
-                          />
-                        </label>
-                      </div>
-                    </section>
-
-                    <section>
-                      <h3>Motifs</h3>
-                      <div className="motif-head">
-                        <button type="button" onClick={addMotif}>
-                          Ajouter un motif
-                        </button>
-                      </div>
-                      {n1Data.motifs && n1Data.motifs.length ? (
-                        <div className="motif-grid">
-                          {n1Data.motifs.map((motif, motifIndex) => (
-                            <div key={`motif-${motifIndex}`} className="motif-card">
-                              <div className="motif-card-head">
-                                <strong>{`Motif ${motifIndex + 1}`}</strong>
-                                <button
-                                  type="button"
-                                  className="danger"
-                                  onClick={() => removeMotif(motifIndex)}
-                                >
-                                  Supprimer
-                                </button>
-                              </div>
-                              <div className="form-grid form-stack">
-                                <label>
-                                  Description
-                                  <textarea
-                                    value={motif.description || ''}
-                                    onChange={(event) =>
-                                      updateMotifField(
-                                        motifIndex,
-                                        'description',
-                                        event.target.value
-                                      )
-                                    }
-                                  />
-                                </label>
-                              </div>
-                              <div className="character-media">
-                                <label className="upload-label">
-                                  Images du motif
-                                  <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={(event) => {
-                                      const files = Array.from(event.target.files || [])
-                                      files.forEach((file) =>
-                                        uploadN1MotifImage(file, motifIndex + 1)
-                                      )
-                                    }}
-                                  />
-                                </label>
-                                {motif.images && motif.images.length ? (
-                                  <div className="character-media-grid">
-                                    {motif.images.map((image, imageIndex) => (
-                                      <figure
-                                        key={`${image}-${imageIndex}`}
-                                        className="character-media-thumb"
-                                      >
-                                        <img
-                                          src={`${apiOrigin}${joinPath(apiBasePath, `/projects/${selectedProject}/mediapix/${image}`)}`}
-                                          alt={image}
-                                        />
-                                        <figcaption>
-                                          {image}
-                                          <button
-                                            type="button"
-                                            className="thumb-remove"
-                                            onClick={() =>
-                                              removeN1MotifImage(
-                                                motifIndex + 1,
-                                                imageIndex,
-                                                image
-                                              )
-                                            }
-                                          >
-                                            Supprimer
-                                          </button>
-                                        </figcaption>
-                                      </figure>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <p className="hint">Aucune image associee.</p>
-                                )}
-                              </div>
-                              <div className="character-media">
-                                <label className="upload-label">
-                                  Sons du motif
-                                  <input
-                                    type="file"
-                                    accept="audio/*"
-                                    multiple
-                                    onChange={(event) => {
-                                      const files = Array.from(event.target.files || [])
-                                      files.forEach((file) =>
-                                        uploadN1MotifAudio(file, motifIndex + 1)
-                                      )
-                                    }}
-                                  />
-                                </label>
-                                {motif.audio && motif.audio.length ? (
-                                  <div className="audio-list">
-                                    {motif.audio.map((audio, audioIndex) => (
-                                      <div key={`${audio}-${audioIndex}`} className="audio-item">
-                                        <audio
-                                          controls
-                                          src={`${apiOrigin}${joinPath(apiBasePath, `/projects/${selectedProject}/mediapix/${audio}`)}`}
-                                        />
-                                        <span>{audio}</span>
-                                        <button
-                                          type="button"
-                                          className="danger"
-                                          onClick={() =>
-                                            removeN1MotifAudio(
-                                              motifIndex + 1,
-                                              audioIndex,
-                                              audio
-                                            )
-                                          }
-                                        >
-                                          Supprimer
-                                        </button>
-                                      </div>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <p className="hint">Aucun son associe.</p>
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="hint">Aucun motif pour l’instant.</p>
-                      )}
-                    </section>
-
                   </div>
                 ) : (
                   <p className="hint">Chargement de la bible...</p>
@@ -4422,14 +3971,12 @@ function App() {
                   <h3>N1 — Bible</h3>
                   {n1Data ? (
                     <div className="script-card">
-                      <strong>Pitch</strong>
-                      <p>{n1Data.pitch || '—'}</p>
-                      <strong>Intention</strong>
-                      <p>{n1Data.intention || '—'}</p>
-                      <strong>Dynamique</strong>
-                      <p>{n1Data.dynamique_globale || '—'}</p>
-                      <strong>Axes artistiques</strong>
-                      <p>{n1Data.axes_artistiques || '—'}</p>
+                      <strong>Personnages principaux</strong>
+                      <p>{n1Data.characters?.main_characters?.number ?? 0}</p>
+                      <strong>Personnages secondaires</strong>
+                      <p>{n1Data.characters?.secondary_characters?.number ?? 0}</p>
+                      <strong>Personnages de fond</strong>
+                      <p>{n1Data.characters?.background_characters?.number ?? 0}</p>
                     </div>
                   ) : (
                     <p className="hint">Charge ou colle un N1 pour afficher le résumé.</p>
@@ -4924,7 +4471,7 @@ function App() {
       ) : null}
       {editorOpen ? (
         <div className="modal-backdrop">
-          <div className="modal">
+          <div className="modal editor-modal">
             <div className="modal-head">
               <h3>{editorLabel || 'Editeur'}</h3>
             </div>
@@ -4932,6 +4479,58 @@ function App() {
               value={editorValue}
               onChange={(event) => setEditorValue(event.target.value)}
             />
+            <div className="editor-chat">
+              <div className="editor-chat-head">
+                <h4>Chat de modification</h4>
+                {editorTargetPath ? (
+                  <span className="hint">Cible: {editorTargetPath}</span>
+                ) : (
+                  <span className="hint warning">Aucune cible detectee</span>
+                )}
+              </div>
+              {editorChatSummary ? (
+                <div className="editor-chat-summary">
+                  <span className="label">Resume:</span>
+                  <p>{editorChatSummary}</p>
+                </div>
+              ) : null}
+              {editorChatError ? (
+                <p className="hint error">Erreur: {editorChatError}</p>
+              ) : null}
+              <div className="editor-chat-messages">
+                {editorChatMessages.length ? (
+                  editorChatMessages.map((entry, idx) => (
+                    <div
+                      key={`${entry.role}-${idx}`}
+                      className={`chat-bubble ${entry.role}`}
+                    >
+                      {entry.content}
+                    </div>
+                  ))
+                ) : (
+                  <p className="hint">Aucune conversation pour ce champ.</p>
+                )}
+              </div>
+              <div className="editor-chat-input">
+                <textarea
+                  value={editorChatInput}
+                  onChange={(event) => setEditorChatInput(event.target.value)}
+                  placeholder="Explique la modification souhaitee."
+                />
+                <button
+                  type="button"
+                  className="primary"
+                  onClick={handleEditorChatSend}
+                  disabled={
+                    editorChatStatus === 'sending' ||
+                    !editorChatInput.trim() ||
+                    !selectedProject
+                  }
+                >
+                  {editorChatStatus === 'sending' ? '...' : 'Envoyer'}
+                </button>
+              </div>
+            </div>
             <div className="modal-actions">
               <button type="button" onClick={closeEditor}>
                 Annuler

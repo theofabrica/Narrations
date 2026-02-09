@@ -1,0 +1,101 @@
+{
+  "n1": {
+    "allowed_fields": ["characters"],
+    "redaction_constraints": {},
+    "use_strategy": true,
+    "skip_llm": false,
+    "extra_rule": "",
+    "strategy_role": "",
+    "strategy_hints": [],
+    "redaction_rules": [],
+    "quality_criteria": [],
+    "writer_self_question": "",
+    "strategy_finder": {
+      "question": "",
+      "library_filename_prefixes": []
+    },
+    "context_aggregation": {
+      "groups": []
+    },
+    "modes": {
+      "create": {},
+      "edit": {},
+      "propagate": {}
+    }
+  },
+  "n1.characters.main_characters.number": {
+    "allowed_fields": ["number"],
+    "modes": {
+      "create": {
+        "writer_self_question": "How should I estimate the number of main characters from the project summary?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 1.0,
+              "description": "N0 production summary only.",
+              "sources": ["n0.production_summary.summary"]
+            }
+          ]
+        },
+        "use_strategy": true,
+        "strategy_finder": {
+          "question": "Je dois trouver dans la library narratology.  La méthode pour évaluer évaluer le nombre de personnages principaux dans le projet \"project_id\", un \"video_type\" de \"duration\" qui raconte \"summary\".",
+          "library_filename_prefixes": []
+        }
+      },
+      "edit": {},
+      "propagate": {}
+    }
+  },
+  "n1.characters.secondary_characters.number": {
+    "allowed_fields": ["number"],
+    "modes": {
+      "create": {
+        "writer_self_question": "How should I estimate the number of secondary characters from the project summary?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 1.0,
+              "description": "N0 production summary only.",
+              "sources": ["n0.production_summary.summary"]
+            }
+          ]
+        },
+        "use_strategy": true,
+        "strategy_finder": {
+          "question": "Je dois trouver dans la library narratology.  La méthode pour évaluer évaluer le nombre de personnages secondaires dans le projet \"project_id\", un \"video_type\" de \"duration\" qui raconte \"summary\".",
+          "library_filename_prefixes": []
+        }
+      },
+      "edit": {},
+      "propagate": {}
+    }
+  },
+  "n1.characters.background_characters.number": {
+    "allowed_fields": ["number"],
+    "modes": {
+      "create": {
+        "writer_self_question": "How should I estimate the number of background characters from the project summary?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 1.0,
+              "description": "N0 production summary only.",
+              "sources": ["n0.production_summary.summary"]
+            }
+          ]
+        },
+        "use_strategy": true,
+        "strategy_finder": {
+          "question": "Je dois trouver dans la library narratology.  La méthode pour évaluer évaluer le nombre de personnages de fond dans le projet \"project_id\", un \"video_type\" de \"duration\" qui raconte \"summary\".",
+          "library_filename_prefixes": []
+        }
+      },
+      "edit": {},
+      "propagate": {}
+    }
+  }
+}

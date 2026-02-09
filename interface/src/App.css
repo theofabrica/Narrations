@@ -236,10 +236,18 @@ body {
   transition: width 0.2s ease;
 }
 
-.n0-next-arrow {
+.n0-next-actions {
   position: fixed;
   right: 24px;
   bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+}
+
+.n0-next-arrow {
+  position: static;
   width: 48px;
   height: 48px;
   border-radius: 999px;
@@ -1558,6 +1566,73 @@ body {
   padding: 16px;
   display: grid;
   gap: 12px;
+}
+
+.editor-modal {
+  width: min(980px, 100%);
+}
+
+.editor-chat {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(80, 98, 150, 0.6);
+  background: rgba(12, 18, 32, 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.editor-chat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.editor-chat-head h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+}
+
+.editor-chat-summary {
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+}
+
+.editor-chat-summary .label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.editor-chat-summary p {
+  margin: 0;
+  color: var(--ink);
+}
+
+.editor-chat-messages {
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editor-chat-input {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.editor-chat-input textarea {
+  min-height: 70px;
 }
 
 .modal-grid {
