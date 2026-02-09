@@ -45,6 +45,16 @@ class ChatMemoryStore:
         safe_session = _safe_session_id(session_id)
         return root / "chat_states" / f"{safe_session}_state.json"
 
+    def get_output_state_path(self, project_id: str, session_id: str) -> Path:
+        root = get_project_root(project_id)
+        safe_session = _safe_session_id(session_id)
+        return root / "chat_states" / f"output_{safe_session}_state.json"
+
+    def get_edit_session_path(self, project_id: str, edit_session_id: str) -> Path:
+        root = get_project_root(project_id)
+        safe_session = _safe_session_id(edit_session_id)
+        return root / "chat_states" / f"edit_{safe_session}.json"
+
     def load_messages(self, project_id: str, session_id: str) -> List[Dict[str, str]]:
         current_path = self.get_session_path(project_id, session_id)
         payload = _read_json(current_path)
@@ -87,6 +97,40 @@ class ChatMemoryStore:
             "state_snapshot": state_snapshot,
         }
         _write_json(self.get_state_path(project_id, session_id), payload)
+
+    def save_output_state_snapshot(
+        self, project_id: str, session_id: str, state_snapshot: Dict[str, Any]
+    ) -> None:
+        payload = {
+            "project_id": project_id,
+            "session_id": session_id,
+            "updated_at": generate_timestamp(),
+            "state_snapshot": state_snapshot,
+        }
+        _write_json(self.get_output_state_path(project_id, session_id), payload)
+
+    def load_edit_messages(self, project_id: str, edit_session_id: str) -> List[Dict[str, str]]:
+        payload = _read_json(self.get_edit_session_path(project_id, edit_session_id))
+        messages = payload.get("messages")
+        if isinstance(messages, list) and messages:
+            return [m for m in messages if isinstance(m, dict)]
+        return []
+
+    def save_edit_messages(
+        self,
+        project_id: str,
+        edit_session_id: str,
+        messages: List[Dict[str, str]],
+        meta: Dict[str, Any] | None = None,
+    ) -> None:
+        payload = {
+            "project_id": project_id,
+            "edit_session_id": edit_session_id,
+            "updated_at": generate_timestamp(),
+            "messages": messages,
+            "meta": meta or {},
+        }
+        _write_json(self.get_edit_session_path(project_id, edit_session_id), payload)
 
     def load_state_snapshot(self, project_id: str, session_id: str) -> Dict[str, Any]:
         payload = _read_json(self.get_state_path(project_id, session_id))

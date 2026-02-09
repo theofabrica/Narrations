@@ -21,5 +21,5 @@
 
 ## Example (flow)
 1) read `target_path`
-2) extract summary / intents / relevant constraints
+2) extract summary / relevant constraints
 3) build `context_pack.json`

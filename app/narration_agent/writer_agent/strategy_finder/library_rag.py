@@ -501,14 +501,17 @@ def _build_query_text(context_pack: Dict[str, Any]) -> str:
         "target_path",
         "target_section_name",
         "core_summary",
-        "core_detailed_summary",
         "brief_primary_objective",
+        "brief_project_title",
+        "brief_video_type",
     ):
         value = context_pack.get(key)
         if isinstance(value, str) and value.strip():
             parts.append(value.strip())
+    duration_s = context_pack.get("brief_target_duration_s")
+    if isinstance(duration_s, (int, float)) and duration_s:
+        parts.append(f"duration_seconds={int(duration_s)}")
     for list_key in (
-        "intents",
         "brief_secondary_objectives",
         "brief_priorities",
         "thinker_constraints",
@@ -517,7 +520,32 @@ def _build_query_text(context_pack: Dict[str, Any]) -> str:
         values = context_pack.get(list_key, [])
         if isinstance(values, list):
             parts.extend([str(item) for item in values if str(item).strip()])
+    parts.extend(_extract_sparse_context(context_pack.get("target_strata_non_empty")))
+    parts.extend(_extract_sparse_context(context_pack.get("dependencies_non_empty")))
     return " | ".join(parts) if parts else "Narrative writing guidance."
+
+
+def _extract_sparse_context(items: Any, limit: int = 18) -> List[str]:
+    if not isinstance(items, list):
+        return []
+    out: List[str] = []
+    for entry in items:
+        if len(out) >= limit:
+            break
+        if not isinstance(entry, dict):
+            continue
+        value = entry.get("value")
+        if value is None:
+            continue
+        text = str(value).strip()
+        if not text:
+            continue
+        path = str(entry.get("path", "")).strip()
+        snippet = " ".join(text.split())
+        if len(snippet) > 80:
+            snippet = snippet[:80].rsplit(" ", 1)[0].strip() + "..."
+        out.append(f"{path}: {snippet}" if path else snippet)
+    return out
 
 
 def _build_query_terms(context_pack: Dict[str, Any]) -> List[str]:

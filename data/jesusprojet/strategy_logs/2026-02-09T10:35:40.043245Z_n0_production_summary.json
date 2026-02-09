@@ -1,0 +1,20 @@
+{
+  "project_id": "jesusprojet",
+  "target_path": "n0.production_summary",
+  "writing_typology": "summary",
+  "strategy_id": "summary_v1",
+  "strategy_question": "Find in the documents rules and guidance to write a clear, factual production summary for stakeholders.",
+  "strategy_text": "To craft a compelling narrative summary for the film, begin by establishing a clear and concise logline that encapsulates the essence of the story. Drawing inspiration from narrative construction techniques, start with a single sentence that introduces the protagonist, Jesus Christ, and his unique situation of arriving in modern-day Paris. This should highlight his disillusionment and the central conflict of the film, setting the stage for the narrative journey. Next, delve into the character arc by exploring Jesus's internal and external struggles as he navigates the complexities of contemporary society. Emphasize his powers and how they influence his interactions with the world around him, creating a dynamic tension that propels the story forward. In the third step, focus on the thematic elements by weaving in the nostalgic tone and the bittersweet humor that permeates the film. This involves illustrating how these themes are expressed through key plot points and character interactions, providing depth and resonance to the narrative. Subsequently, outline the stakes involved in the story, detailing what is at risk for Jesus and the impact of his actions on the world. This should include any moral or philosophical dilemmas he faces, enhancing the dramatic tension and emotional engagement. Finally, conclude the summary by sketching the narrative arc, showing the progression from Jesus's initial disillusionment to any resolution or transformation he undergoes. Ensure that the summary respects the 'show, don't tell' principle, inviting stakeholders to infer the deeper meanings and implications of the story without overt exposition, thus maintaining the audience's engagement and intellectual involvement.",
+  "library_item_ids": [
+    "lavandier_construire_un_recit",
+    "mckee_story",
+    "mckee_story"
+  ],
+  "source_refs": [
+    "Construire un recit - Yves Lavandier: Avez-vous pr\u00e9sent\u00e9 le film par une phrase comme : 1 - \u00ab C'est l'histoire d'un pr\u00e9sentateur m\u00e9t\u00e9o \u00e9gocentr\u00e9 qui se bat pour \u00e9chapper \u00e0 la r\u00e9p\u00e9tition interminable d'un jour sinistre de sa vie\u00bb? Ou ainsi: 2 - \u00ab C'est l'his\u00ad toire d'un pr\u00e9sentateur m\u00e9t\u00e9o \u00e9gocentr\u00e9 qui apprend \u00e0 devenir humain et authentique\u00bb? Ou plut\u00f4t ainsi: 3 - \u00ab C'est l'histoire d'un pr\u00e9senta",
+    "Story - Robert McKee: movement with Image B, and the effect is meanings C, D, and E, expressed without explanation. Recently, film after film slides a steady-cam through rooms and corridors, up and down streets, panning sets and cast while a narrator talks, talks, talks voice\u00ad over, telling us about a character's upbringing, or his dreams and fears, or explaining the politics of",
+    "Story - Robert McKee: More importantly, \"Show, don't tell\" means respect the intelli\u00ad gence and sensitivity of your audience. Invite them to bring their best selves to the ritual, to watch, think, feel, and draw their own conclusions. Do not put them on your knee as if they were children and \"explain\" life, for the misuse and overuse of narration is not only slack, it's patronizi"
+  ],
+  "notes": "Auto-selected based on writing typology and language. rag_mode=agentic_search, rag_hits=3.",
+  "logged_at": "2026-02-09T10:35:40.043277Z"
+}

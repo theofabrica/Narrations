@@ -36,7 +36,6 @@ The JSON schema is external and versioned:
   "core": {
     "summary": "",
     "open_questions": [],
-    "intents": [],
     "notes": ""
   }
 }
@@ -64,9 +63,10 @@ The JSON schema is external and versioned:
 - Refer to `_ownership` in `state_structure_01_abc.json`.
 - Only fill `core` and `missing` (if needed).
 - `completed_steps` contains `1a`.
-- `core.summary` = 1 to 2 sentences, 240 chars max.
+- `core.summary` = faithful English translation of all user-provided content in the current session (do NOT summarize).
+  - Preserve the user's style (tone, register, rhythm, punctuation).
+  - Preserve the quantity of text: aim for a similar length to the combined user messages (do not expand with new details).
 - `core.open_questions` = list of 0 to 1 question, 1 sentence per question.
-- `core.intents` = 0 to 5 simple keywords (no phrases).
 - `core.notes` = optional, 0 to 200 chars max, no new requirements.
 - Never produce `thinker`, `brief`, `pending_questions` in 1a.
 - Human text is separated from the JSON section.
@@ -94,7 +94,6 @@ User response: (human text)
     "open_questions": [
       "What exact topic and target duration (30s, 60s, 90s)?"
     ],
-    "intents": ["narration", "satire"],
     "notes": ""
   }
 }

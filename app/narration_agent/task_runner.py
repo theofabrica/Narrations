@@ -194,9 +194,185 @@ class TaskRunner:
             "Language rules for 1a:\n"
             "- Detect the user's language and respond in that language.\n"
             "- Always write JSON state values in English.\n"
-            "- If you mention state content to the user, translate it into the user's language."
+            "- If you mention state content to the user, translate it into the user's language.\n"
+            "Fidelity rules for 1a:\n"
+            "- `core.summary` MUST be a faithful English translation of all user messages in the session.\n"
+            "- Do NOT summarize, do NOT expand, do NOT add new details.\n"
+            "- Preserve the user's style and roughly the same amount of text."
         )
         return f"{base_prompt}\n\n{runtime_prompt}\n{format_prompt}"
+
+    def _translation_length_bounds(self, source_chars: int) -> tuple[int, int]:
+        """Heuristic bounds to preserve 'quantity' across translations."""
+        if source_chars <= 0:
+            return 0, 4000
+        # For short messages, be more tolerant.
+        if source_chars <= 60:
+            return max(15, int(source_chars * 0.6)), min(4000, int(source_chars * 1.8) + 20)
+        if source_chars <= 200:
+            return int(source_chars * 0.75), min(4000, int(source_chars * 1.35))
+        # For longer messages, keep closer.
+        return int(source_chars * 0.85), min(4000, int(source_chars * 1.2))
+
+    def _parse_duration_seconds(self, value: Any) -> int:
+        if isinstance(value, bool):
+            return 0
+        if isinstance(value, (int, float)):
+            return max(0, int(value))
+        if not isinstance(value, str):
+            return 0
+        text = value.strip().lower()
+        if not text:
+            return 0
+        if text.isdigit():
+            return max(0, int(text))
+
+        timecode_match = re.fullmatch(r"(\d{1,2}):(\d{2})(?::(\d{2}))?", text)
+        if timecode_match:
+            hours = 0
+            minutes = int(timecode_match.group(1))
+            seconds = int(timecode_match.group(2))
+            if timecode_match.group(3) is not None:
+                hours = minutes
+                minutes = seconds
+                seconds = int(timecode_match.group(3))
+            return hours * 3600 + minutes * 60 + seconds
+
+        # Patterns like "2h30" or "2h 30"
+        hm_match = re.search(r"(\d+)\s*h\s*(\d{1,2})?", text)
+        if hm_match:
+            hours = int(hm_match.group(1))
+            minutes = int(hm_match.group(2)) if hm_match.group(2) else 0
+            return hours * 3600 + minutes * 60
+
+        # Generic unit parsing
+        total_seconds = 0.0
+        for number, unit in re.findall(
+            r"(\d+(?:[.,]\d+)?)\s*(h|hr|hour|hours|heure|heures|m|min|minute|minutes|s|sec|secs|second|seconds|seconde|secondes)",
+            text,
+        ):
+            value_f = float(number.replace(",", "."))
+            if unit.startswith(("h", "hr", "hour", "heure")):
+                total_seconds += value_f * 3600
+            elif unit.startswith(("m", "min", "minute")):
+                total_seconds += value_f * 60
+            else:
+                total_seconds += value_f
+        return int(total_seconds) if total_seconds > 0 else 0
+
+    def _build_brief_inference_text(self, payload: Dict[str, Any]) -> str:
+        parts: List[str] = []
+        core = payload.get("core") if isinstance(payload, dict) else {}
+        thinker = payload.get("thinker") if isinstance(payload, dict) else {}
+        brief = payload.get("brief") if isinstance(payload, dict) else {}
+        for value in (
+            core.get("summary") if isinstance(core, dict) else "",
+            core.get("notes") if isinstance(core, dict) else "",
+            brief.get("primary_objective") if isinstance(brief, dict) else "",
+            brief.get("project_title") if isinstance(brief, dict) else "",
+            brief.get("video_type") if isinstance(brief, dict) else "",
+        ):
+            if isinstance(value, str) and value.strip():
+                parts.append(value.strip())
+        for list_value in (
+            brief.get("constraints") if isinstance(brief, dict) else [],
+            thinker.get("constraints") if isinstance(thinker, dict) else [],
+            thinker.get("hypotheses") if isinstance(thinker, dict) else [],
+        ):
+            if isinstance(list_value, list):
+                parts.extend([str(item) for item in list_value if str(item).strip()])
+        return " | ".join(parts)
+
+    def _infer_video_type(self, text: str) -> str:
+        if not isinstance(text, str):
+            return ""
+        lowered = text.lower()
+        mapping = [
+            (["advertisement", "ad", "commercial", "pub", "publicite", "publicité"], "ad"),
+            (["music video", "clip"], "clip"),
+            (["documentary", "docu", "documentaire"], "documentary"),
+            (["series", "série", "serie"], "series"),
+            (["short film", "court metrage", "court-metrage", "court métrage"], "short film"),
+            (["feature film", "long metrage", "long-metrage", "long métrage"], "feature film"),
+            (["film", "movie", "cinema", "cinéma"], "film"),
+        ]
+        for keywords, value in mapping:
+            if any(keyword in lowered for keyword in keywords):
+                return value
+        return ""
+
+    def _normalize_brief_patch(
+        self, patch: Dict[str, Any], input_payload: Optional[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        if not isinstance(patch, dict):
+            return patch
+        brief = patch.get("brief")
+        if not isinstance(brief, dict):
+            return patch
+        brief = {**brief}
+        duration_s = self._parse_duration_seconds(brief.get("target_duration_s"))
+        if not duration_s:
+            duration_s = self._parse_duration_seconds(brief.get("target_duration"))
+        brief["target_duration_s"] = duration_s
+        brief.pop("target_duration", None)
+        video_type = brief.get("video_type", "")
+        if not (isinstance(video_type, str) and video_type.strip()):
+            if isinstance(input_payload, dict):
+                inferred = self._infer_video_type(self._build_brief_inference_text(input_payload))
+                if inferred:
+                    brief["video_type"] = inferred
+        patch = {**patch, "brief": brief}
+        return patch
+
+    def _get_nested_str(self, data: Any, path: List[str]) -> str:
+        current = data
+        for key in path:
+            if not isinstance(current, dict):
+                return ""
+            current = current.get(key)
+        return current.strip() if isinstance(current, str) else ""
+
+    def _repair_chat_1a_patch_length(
+        self,
+        *,
+        user_message: str,
+        patch: Dict[str, Any],
+        min_chars: int,
+        max_chars: int,
+    ) -> Dict[str, Any]:
+        """Ask the model to adjust core.summary length only."""
+        system_prompt = (
+            "You are a JSON patch fixer.\n"
+            "Task: rewrite ONLY patch.core.summary.\n"
+            "Rules:\n"
+            "- core.summary must be a faithful English translation of the user's message.\n"
+            "- Preserve style and roughly the same amount of text.\n"
+            "- Length constraint: core.summary must be between min_chars and max_chars.\n"
+            "- Do NOT change any other key in the patch.\n"
+            "- Return ONLY valid JSON (no markdown, no commentary)."
+        )
+        user_prompt = json.dumps(
+            {
+                "user_message": user_message,
+                "min_chars": min_chars,
+                "max_chars": max_chars,
+                "current_patch": patch,
+            },
+            ensure_ascii=True,
+            indent=2,
+        )
+        llm_response = self.llm_client.complete(
+            LLMRequest(
+                model=self.llm_client.default_model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                temperature=0.1,
+            )
+        )
+        repaired = self._parse_json_payload(payload="", fallback=llm_response.content.strip())
+        return repaired or patch
 
     def _build_thinker_prompt(self) -> str:
         base_prompt = load_text("chat/01b_thinker.md").strip()
@@ -234,6 +410,13 @@ class TaskRunner:
 
         session_messages = self.memory_store.load_messages(project_id, session_id)
         session_messages.append({"role": "user", "content": message})
+        full_user_text = "\n\n".join(
+            [
+                msg.get("content", "")
+                for msg in session_messages
+                if isinstance(msg, dict) and msg.get("role") == "user"
+            ]
+        ).strip()
 
         system_prompt = self._build_system_prompt(
             project_empty, empty_strata, pending_questions, pending_rounds, chat_mode
@@ -246,6 +429,27 @@ class TaskRunner:
         )
         raw_content = llm_response.content.strip()
         user_text, json_payload = self._split_user_and_json(raw_content)
+
+        # Enforce the "quantity-preserving translation" requirement for core.summary.
+        if json_payload:
+            patch = self._parse_json_payload(payload=json_payload, fallback="") or {}
+            summary = self._get_nested_str(patch, ["core", "summary"])
+            if summary:
+                src_len = len(full_user_text or message.strip())
+                out_len = len(summary)
+                min_chars, max_chars = self._translation_length_bounds(src_len)
+                if src_len and (out_len < min_chars or out_len > max_chars):
+                    repaired = self._repair_chat_1a_patch_length(
+                        user_message=full_user_text or message,
+                        patch=patch,
+                        min_chars=min_chars,
+                        max_chars=max_chars,
+                    )
+                    repaired_summary = self._get_nested_str(repaired, ["core", "summary"])
+                    repaired_len = len(repaired_summary) if repaired_summary else 0
+                    if repaired_summary and (min_chars <= repaired_len <= max_chars):
+                        json_payload = json.dumps(repaired, ensure_ascii=True)
+
         session_messages.append({"role": "assistant", "content": user_text})
         self.memory_store.save_messages(project_id, session_id, session_messages)
 
@@ -349,6 +553,19 @@ class TaskRunner:
                     "writer_self_question": context_pack.get("writer_self_question", ""),
                     "context_groups": context_groups_summary,
                     "redaction_attempts": context_pack.get("redaction_attempts", []),
+                    # Minimal, directly readable subset of chat context (1abc)
+                    # that was provided to the redactor via context_pack.
+                    "chat_context": {
+                        "brief_primary_objective": context_pack.get("brief_primary_objective", ""),
+                        "brief_project_title": context_pack.get("brief_project_title", ""),
+                        "brief_video_type": context_pack.get("brief_video_type", ""),
+                        "brief_target_duration_s": context_pack.get("brief_target_duration_s", 0),
+                        "brief_constraints": context_pack.get("brief_constraints", []),
+                        "brief_priorities": context_pack.get("brief_priorities", []),
+                        "thinker_constraints": context_pack.get("thinker_constraints", []),
+                        "core_summary": context_pack.get("core_summary", ""),
+                        "pending_questions": context_pack.get("pending_questions", []),
+                    },
                 },
                 "strategy_card": strategy_card or {},
                 "agentic_trace": agentic_trace or [],
@@ -358,6 +575,30 @@ class TaskRunner:
             (log_dir / filename).write_text(
                 json.dumps(payload, indent=2, ensure_ascii=True), encoding="utf-8"
             )
+
+            # Also write full redactor prompts as plain-text files (no JSON escaping),
+            # so they are readable directly in the editor.
+            attempts = context_pack.get("redaction_attempts", [])
+            if isinstance(attempts, list) and attempts:
+                for attempt in attempts:
+                    if not isinstance(attempt, dict):
+                        continue
+                    phase = str(attempt.get("phase") or "").strip() or "unknown"
+                    prompt_debug = attempt.get("prompt_debug")
+                    if not isinstance(prompt_debug, dict):
+                        continue
+                    system_prompt = prompt_debug.get("system_prompt")
+                    user_prompt = prompt_debug.get("user_prompt")
+                    safe_phase = re.sub(r"[^a-zA-Z0-9._-]+", "_", phase)
+                    base = f"{safe_time}_{safe_target}_{safe_phase}"
+                    if isinstance(system_prompt, str) and system_prompt:
+                        (log_dir / f"{base}_system_prompt.txt").write_text(
+                            system_prompt, encoding="utf-8"
+                        )
+                    if isinstance(user_prompt, str) and user_prompt:
+                        (log_dir / f"{base}_user_prompt.txt").write_text(
+                            user_prompt, encoding="utf-8"
+                        )
         except Exception:
             return
 
@@ -444,6 +685,7 @@ class TaskRunner:
                 or payload.get("message")
                 or ""
             )
+        input_payload_dict = input_payload if isinstance(input_payload, dict) else None
         if isinstance(input_payload, dict):
             input_text = json.dumps(input_payload)
         else:
@@ -463,6 +705,12 @@ class TaskRunner:
         )
         raw_content = llm_response.content.strip()
         json_block = self._extract_json_block(raw_content)
+        if json_block:
+            parsed = self._parse_json_payload(json_block, raw_content)
+            if isinstance(parsed, dict):
+                normalized = self._normalize_brief_patch(parsed, input_payload_dict)
+                if normalized != parsed:
+                    json_block = json.dumps(normalized, ensure_ascii=True)
         return {
             "assistant_message": raw_content,
             "assistant_state_json": json_block or raw_content,

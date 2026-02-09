@@ -867,6 +867,8 @@ class WriterOrchestrator:
     ) -> AgenticEvaluation:
         min_chars = int(constraints.get("min_chars") or 0)
         max_chars = int(constraints.get("max_chars") or 0)
+        max_chars_tolerance = int(max_chars * 1.15) if max_chars > 0 else 0
+        max_chars_tolerance = int(max_chars * 1.15) if max_chars > 0 else 0
         rules = context_pack.get("rules") if isinstance(context_pack, dict) else {}
         quality_criteria = rules.get("quality_criteria") if isinstance(rules, dict) else []
         redaction_rules = rules.get("redaction_rules") if isinstance(rules, dict) else []
@@ -1371,8 +1373,15 @@ class WriterOrchestrator:
         if not allowed_fields or len(allowed_fields) != 1:
             return None
         expected_key = allowed_fields[0]
-        if expected_key in parsed and isinstance(parsed.get(expected_key), str):
-            return {expected_key: parsed.get(expected_key, "")}
+        if expected_key in parsed:
+            value = parsed.get(expected_key)
+            if isinstance(value, (int, float)):
+                return {expected_key: int(value)}
+            if isinstance(value, str):
+                trimmed = value.strip()
+                if trimmed.isdigit():
+                    return {expected_key: int(trimmed)}
+                return {expected_key: trimmed}
         for key in ("text", "content"):
             value = parsed.get(key)
             if isinstance(value, str) and value.strip():
@@ -1460,7 +1469,7 @@ class WriterOrchestrator:
                 violations.append(
                     {"field": field, "length": length, "min": min_chars, "max": max_chars}
                 )
-            elif max_chars and length > max_chars:
+            elif max_chars and length > max_chars_tolerance:
                 violations.append(
                     {"field": field, "length": length, "min": min_chars, "max": max_chars}
                 )

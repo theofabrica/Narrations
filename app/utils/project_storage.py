@@ -178,6 +178,13 @@ def create_project(project_id: str) -> None:
         write_strata(project_id, strata, payload)
 
 
+def reset_strata(project_id: str, strata: str) -> Dict[str, Any]:
+    if strata not in STRATA_FILES:
+        raise ValueError(f"Unknown strata: {strata}")
+    payload = _load_state_template(strata)
+    return write_strata(project_id, strata, payload)
+
+
 def _read_json(path: Path) -> Dict[str, Any]:
     import json
 

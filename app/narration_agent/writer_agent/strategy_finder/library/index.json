@@ -2,7 +2,8 @@
   "version": "v1",
   "typologies": [
     "narratology",
-    "da"
+    "da",
+    "ds"
   ],
   "languages": [
     "fr",
@@ -85,6 +86,18 @@
       ],
       "filename": "SRC_DA__chatGPT.txt",
       "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt"
+    },
+    {
+      "id": "ds_chatgpt",
+      "title": "Concevoir la direction sonore",
+      "author": "ChatGPT (notes)",
+      "typology": "ds",
+      "language": "fr",
+      "writing_typologies": [
+        "style"
+      ],
+      "filename": "SRC_DS_chatGPT.txt",
+      "source_path": "writer_agent/strategy_finder/library/SRC_DS_chatGPT.txt"
     }
   ]
 }

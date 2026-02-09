@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
+import re
+
 from app.narration_agent.chat.state_sanitizer import sanitize_for_narration
 from app.narration_agent.logging_utils import write_plan_log
 from app.narration_agent.narration.narrator_orchestrator import NarratorOrchestrator
@@ -60,6 +62,94 @@ def _get_n0_missing_paths(project_id: str) -> List[str]:
     if not _has_text(sound_description):
         missing.append("n0.sound_direction")
     return missing
+
+
+def _parse_duration_to_seconds(value: Any) -> int:
+    if isinstance(value, bool):
+        return 0
+    if isinstance(value, (int, float)):
+        return max(0, int(value))
+    if not isinstance(value, str):
+        return 0
+    trimmed = value.strip().lower()
+    if not trimmed:
+        return 0
+    if trimmed.isdigit():
+        return max(0, int(trimmed))
+    hours = re.search(r"(\d+)\s*h", trimmed)
+    minutes = re.search(r"(\d+)\s*m", trimmed)
+    seconds = re.search(r"(\d+)\s*s", trimmed)
+    total = 0
+    if hours:
+        total += int(hours.group(1)) * 3600
+    if minutes:
+        total += int(minutes.group(1)) * 60
+    if seconds:
+        total += int(seconds.group(1))
+    return total
+
+
+def run_n1_flow(
+    project_id: str,
+    session_id: str,
+    runner: TaskRunner,
+) -> Dict[str, Any]:
+    narration_input = {
+        "narration_id": session_id,
+        "source_state_ref": "",
+        "source_state_payload": {
+            "state_id": session_id,
+            "mode": "create",
+        },
+        "target_strata": ["n1"],
+        "target_paths": [],
+        "storage_root": str(get_project_root(project_id)),
+        "config": {"create_if_missing": True},
+    }
+    narrator = NarratorOrchestrator()
+    narration_task_plan = narrator.build_plan(narration_input)
+    narration_task_context: Dict[str, Any] = {}
+    for task in narration_task_plan.get("tasks", []):
+        task_id = task.get("id")
+        if not task_id:
+            continue
+        base_context = {
+            "source_state_payload": narration_input.get("source_state_payload") or {},
+            "target_path": task.get("output_ref", ""),
+        }
+        narration_task_context[task_id] = {
+            **base_context,
+        }
+    narration_runner_input = {
+        "plan_id": narration_task_plan.get("plan_id", ""),
+        "task_plan_ref": "",
+        "task_plan_payload": narration_task_plan,
+        "execution_mode": "sequential",
+        "started_at": generate_timestamp(),
+    }
+    write_plan_log(
+        project_id=project_id,
+        session_id=session_id,
+        label="narration_plan_n1_ui",
+        payload={
+            "task_plan": narration_task_plan,
+            "task_context": narration_task_context,
+            "runner_input": narration_runner_input,
+        },
+    )
+    narration_run_result = runner.run_task_plan(
+        task_plan=narration_task_plan,
+        project_id=project_id,
+        session_id=session_id,
+        task_context=narration_task_context or {},
+    )
+    return {
+        "narration_input": narration_input,
+        "narration_task_plan": narration_task_plan,
+        "narration_runner_input": narration_runner_input,
+        "narration_task_context": narration_task_context,
+        "narration_run_result": narration_run_result,
+    }
 
 
 def run_narration_flow(
@@ -125,8 +215,6 @@ def run_narration_flow(
                 creation_mode_active = True
                 target_strata = ["n0"]
                 target_paths = list(missing_paths)
-            elif not target_paths:
-                target_strata = ["n1"]
         if allow_narration:
             narration_input = {
                 "narration_id": session_id,

@@ -22,10 +22,10 @@
         "context_aggregation": {
           "groups": [
             {
-              "name": "neighbours",
+              "name": "chat_context",
               "weight": 1.0,
-              "description": "Chat state (1abc) + N1 (if present).",
-              "sources": ["chat_state_1abc", "n1"]
+              "description": "Create mode: only chat context (1abc) + task metadata (duration, title, video_type).",
+              "sources": ["chat_state_1abc"]
             }
           ]
         },
@@ -36,11 +36,13 @@
           "Signal tone through neutral diction, not evaluation.",
           "Respect the length target and format."
         ],
-        "redaction_constraints": { "min_chars": 1500, "max_chars": 2500 },
+        "redaction_constraints": { "min_chars": 2000, "max_chars": 3000 },
         "redaction_rules": [
           "No meta-writing language or references to strategy or sources.",
           "Keep statements grounded in the project brief only.",
-          "Maintain a sober, factual tone."
+          "Maintain a sober, factual tone.",
+          "Focus on narration only: plot, characters, stakes, themes, and arc.",
+          "Exclude production, direction, technical aspects, art direction, sound, duration, or audience reception."
         ],
         "quality_criteria": [
           "Summary length stays within min/max chars.",
@@ -49,9 +51,10 @@
         ],
         "use_strategy": true,
         "skip_llm": false,
-        "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate.",
+        "extra_rule": "Writing rule (English): Focus on narration only (plot, characters, stakes, themes, arc); exclude production, direction, technical aspects, art direction, sound, duration, and audience reception.",
         "strategy_finder": {
-          "question": "Find in the documents rules and guidance to write a clear, factual production summary for stakeholders."
+          "question": "Find in the documents rules and guidance to write a clear, factual production summary for stakeholders.",
+          "library_filename_prefixes": ["SRC_NARRATOLOGY"]
         }
       },
       "edit": {
@@ -66,12 +69,6 @@
               "sources": ["actual_text"]
             },
             {
-              "name": "chat_indications",
-              "weight": 1.0,
-              "description": "User change requests extracted from the chat agent (1abc brief/constraints/priorities).",
-              "sources": ["chat_indications"]
-            },
-            {
               "name": "family",
               "weight": 0.5,
               "description": "Other N0 production constraints and already known project parameters (excluding the current target).",
@@ -80,7 +77,7 @@
             {
               "name": "neighbours",
               "weight": 0.5,
-              "description": "Neighbours for edit mode: N1 only.",
+              "description": "Neighbours for edit mode: N1 only (no chat context).",
               "sources": ["n1"]
             }
           ]
@@ -92,11 +89,13 @@
           "Signal tone through neutral diction, not evaluation.",
           "Respect the length target and format."
         ],
-        "redaction_constraints": { "min_chars": 1500, "max_chars": 2500 },
+        "redaction_constraints": { "min_chars": 2000, "max_chars": 3000 },
         "redaction_rules": [
           "No meta-writing language or references to strategy or sources.",
           "Keep statements grounded in the project brief only.",
-          "Maintain a sober, factual tone."
+          "Maintain a sober, factual tone.",
+          "Focus on narration only: plot, characters, stakes, themes, and arc.",
+          "Exclude production, direction, technical aspects, art direction, sound, duration, or audience reception."
         ],
         "quality_criteria": [
           "Summary length stays within min/max chars.",
@@ -106,9 +105,10 @@
         ],
         "use_strategy": true,
         "skip_llm": false,
-        "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate a beautiful scene.",
+        "extra_rule": "Writing rule (English): Focus on narration only (plot, characters, stakes, themes, arc); exclude production, direction, technical aspects, art direction, sound, duration, and audience reception.",
         "strategy_finder": {
-          "question": "Find in the documents rules and guidance to revise a production summary based on user change requests."
+          "question": "Find in the documents rules and guidance to revise a production summary based on user change requests.",
+          "library_filename_prefixes": ["SRC_NARRATOLOGY"]
         }
       },
       "propagate": {
@@ -131,7 +131,7 @@
             {
               "name": "neighbours",
               "weight": 0.6,
-              "description": "Neighbours for propagate mode: N1 only.",
+              "description": "Neighbours for propagate mode: N1 only (no chat context).",
               "sources": ["n1"]
             }
           ]
@@ -143,11 +143,13 @@
           "Signal tone through neutral diction, not evaluation.",
           "Respect the length target and format."
         ],
-        "redaction_constraints": { "min_chars": 1500, "max_chars": 2500 },
+        "redaction_constraints": { "min_chars": 2000, "max_chars": 3000 },
         "redaction_rules": [
           "No meta-writing language or references to strategy or sources.",
           "Keep statements grounded in the project brief only.",
-          "Maintain a sober, factual tone."
+          "Maintain a sober, factual tone.",
+          "Focus on narration only: plot, characters, stakes, themes, and arc.",
+          "Exclude production, direction, technical aspects, art direction, sound, duration, or audience reception."
         ],
         "quality_criteria": [
           "Summary length stays within min/max chars.",
@@ -157,9 +159,10 @@
         ],
         "use_strategy": true,
         "skip_llm": false,
-        "extra_rule": "Writing rule (English): Tell the summary as a visual story, like a storyteller who takes time to narrate a beautiful scene.",
+        "extra_rule": "Writing rule (English): Focus on narration only (plot, characters, stakes, themes, arc); exclude production, direction, technical aspects, art direction, sound, duration, and audience reception.",
         "strategy_finder": {
-          "question": "Find in the documents rules and guidance to rewrite a production summary to reflect updated context, without adding new facts."
+          "question": "Find in the documents rules and guidance to rewrite a production summary to reflect updated context, without adding new facts.",
+          "library_filename_prefixes": ["SRC_NARRATOLOGY"]
         }
       }
     }
@@ -394,9 +397,13 @@
           "Descriptors are concrete and sonic.",
           "No narrative or plot content."
         ],
-        "use_strategy": false,
+        "use_strategy": true,
         "skip_llm": false,
-        "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable."
+        "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable.",
+        "strategy_finder": {
+          "question": "Find in the documents rules and guidance to write a general overview of this video's sound direction.",
+          "library_filename_prefixes": ["SRC_DS"]
+        }
       },
       "edit": {
         "_comment": "TEMP : mêmes règles que create tant qu'on n'a pas défini un comportement spécifique pour le mode édition.",
@@ -439,9 +446,13 @@
           "Descriptors are concrete and sonic.",
           "No narrative or plot content."
         ],
-        "use_strategy": false,
+        "use_strategy": true,
         "skip_llm": false,
-        "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable."
+        "extra_rule": "Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable.",
+        "strategy_finder": {
+          "question": "Find in the documents rules and guidance to revise a sound direction description based on the current context.",
+          "library_filename_prefixes": ["SRC_DS"]
+        }
       }
     }
   },

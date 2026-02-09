@@ -5,13 +5,13 @@
 - Extract objectives, constraints, hypotheses.
 
 ## Available context
-- `summary_1a` and `open_questions_1a`
+- `summary_1a` (= faithful English translation of the user's message) and `open_questions_1a`
 - `app_global_objectives` (optional)
 - `knowledge/app_scope.json`
 - `agent_architecture/hyperparameters.json`: `missing_sensitivity` shared by 1a/1b/1c.
 
 ## Expected input
-- `summary_1a` (text)
+- `summary_1a` (text, faithful translation — not a short summary)
 - `open_questions_1a` (list)
 - `user_message` (raw text, optional)
 - `pending_rounds` (int, optional)

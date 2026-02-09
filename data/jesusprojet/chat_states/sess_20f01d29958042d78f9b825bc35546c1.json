@@ -1,0 +1,27 @@
+{
+  "project_id": "jesusprojet",
+  "session_id": "sess_20f01d29958042d78f9b825bc35546c1",
+  "updated_at": "2026-02-09T10:33:33.697961Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "C'est un film qui raconte comment J\u00e9sus Christ d\u00e9barque \u00e0 Paris, dans la ville qu'est Paris aujourd'hui. Il t\u00e9moigne en spectateur d\u00e9sabus\u00e9 du monde contemporain. Mais avec son pouvoir... le film raconte ce qu'il va se passer."
+    },
+    {
+      "role": "assistant",
+      "content": "Cela semble \u00eatre une id\u00e9e de film fascinante et originale. Pour mieux comprendre votre vision, pourriez-vous pr\u00e9ciser la dur\u00e9e souhait\u00e9e pour ce film ?"
+    },
+    {
+      "role": "user",
+      "content": "C'est un film de deux heures assez nostalgique avec un humour amer et assez triste."
+    },
+    {
+      "role": "assistant",
+      "content": "Merci pour ces pr\u00e9cisions. Voici un r\u00e9sum\u00e9 de votre projet :\n\n Merci pour ces pr\u00e9cisions. Votre projet est un film de deux heures, qui raconte comment J\u00e9sus Christ d\u00e9barque \u00e0 Paris d'aujourd'hui. Il observe le monde contemporain avec un regard d\u00e9sabus\u00e9, et le film explore ce qui se passe gr\u00e2ce \u00e0 ses pouvoirs. Le ton est nostalgique, avec un humour amer et assez triste.\n\nJSON for 1b:"
+    }
+  ],
+  "meta": {
+    "pending_rounds": 1,
+    "last_trigger": "build_brief"
+  }
+}

@@ -13,11 +13,10 @@ Each field comes from the state, N schemas, or knowledge sources (strategy).
 - `source_state_id`: source state identifier (e.g. `s0001`).
 - `project_id`: project identifier (if known).
 - `core_summary`: short summary from the state (if available).
-- `core_detailed_summary`: detailed summary from the state (if available).
-- `intents`: short tags to guide writing.
 - `thinker_constraints`: constraints from the `thinker` section.
 - `brief_constraints`: constraints from the `brief` section.
 - `brief_primary_objective`: primary objective (brief).
+- `brief_target_duration_s`: target duration in seconds (numeric).
 - `brief_secondary_objectives`: secondary objectives (brief).
 - `brief_priorities`: priorities (brief).
 - `missing`: list of missing elements detected.

@@ -16,10 +16,8 @@ def infer_n0_production_summary(
     llm_client: Optional[LLMClient] = None,
 ) -> Dict[str, Any]:
     combined_text = collect_brief_text(source_state)
-    intents = get_list(source_state, ["core", "intents"])
     production_type = pick_from_keywords(
         combined_text,
-        intents,
         [
             (["clip", "music video"], "clip"),
             (["advertisement", "ad", "commercial", "pub"], "advertisement"),
@@ -62,7 +60,6 @@ def infer_n0_visual_style_tone(project_id: str, source_state: Dict[str, Any]) ->
     )
     visual_style = pick_from_keywords(
         combined_text,
-        [],
         [
             (["futuristic", "futuriste", "cyberpunk"], "futuristic"),
             (["retro", "vintage"], "retro"),
@@ -76,7 +73,6 @@ def infer_n0_visual_style_tone(project_id: str, source_state: Dict[str, Any]) ->
     )
     tone = pick_from_keywords(
         combined_text,
-        [],
         [
             (["dramatic", "dramatique"], "dramatic"),
             (["epic", "epique", "épique"], "epic"),
@@ -139,9 +135,9 @@ def infer_n0_deliverables(
 
 def collect_brief_text(source_state: Dict[str, Any]) -> str:
     parts: List[str] = []
-    parts.extend(get_list(source_state, ["core", "intents"]))
     parts.append(get_str(source_state, ["core", "summary"]))
-    parts.append(get_str(source_state, ["core", "detailed_summary"]))
+    if not parts[-1]:
+        parts.append(get_str(source_state, ["summary"]))
     parts.append(get_str(source_state, ["brief", "primary_objective"]))
     parts.extend(get_list(source_state, ["brief", "secondary_objectives"]))
     parts.extend(get_list(source_state, ["brief", "constraints"]))
@@ -152,10 +148,9 @@ def collect_brief_text(source_state: Dict[str, Any]) -> str:
 
 def pick_from_keywords(
     text: str,
-    intents: List[str],
     mapping: List[tuple[list[str], str]],
 ) -> str:
-    haystack = " ".join([text, " ".join(intents)]).lower()
+    haystack = text.lower()
     for keywords, value in mapping:
         for keyword in keywords:
             if keyword in haystack:

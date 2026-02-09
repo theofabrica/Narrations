@@ -88,24 +88,23 @@ class StrategyFinder:
             target_path=target_path,
             writing_typology=writing_typology,
             library_item_ids=library_item_ids,
-            style_guidelines=self._default_style_guidelines(writing_typology),
-            structure_guidelines=self._default_structure_guidelines(writing_typology),
+            style_guidelines=[],
+            structure_guidelines=[],
             strategy_text="",
             source_refs=[ref for ref in source_refs if ref.strip(" -")],
             notes=notes,
         )
         strategy_question = context_pack.get("strategy_question", "")
-        card.strategy_text = self._build_strategy_output(
+        strategy_text = self._build_strategy_output(
             context_pack, card, strategy_question, rag_hits
         )
+        card.strategy_text = strategy_text
         self._write_strategy_log(context_pack, card, strategy_question)
         return {
             "strategy_id": card.strategy_id,
             "target_path": card.target_path,
             "writing_typology": card.writing_typology,
             "library_item_ids": card.library_item_ids,
-            "style_guidelines": card.style_guidelines,
-            "structure_guidelines": card.structure_guidelines,
             "strategy_text": card.strategy_text,
             "source_refs": card.source_refs,
             "notes": card.notes,
@@ -170,7 +169,8 @@ class StrategyFinder:
         )
         if not llm_text:
             llm_text = self._build_strategy_text_fallback(context_pack, card)
-        return self._normalize_strategy_text(llm_text, min_len=4050, max_len=4950)
+        strategy_text = self._normalize_strategy_text(llm_text, min_len=1650, max_len=1950)
+        return strategy_text
 
     def _build_strategy_output_llm(
         self,
@@ -187,13 +187,16 @@ class StrategyFinder:
             "for a redactor based on the provided context and library sources.\n"
             "Return ONLY valid JSON with this schema:\n"
             '{ "strategy_text": "" }\n'
-            "- strategy_text must be ONE paragraph in English, 4050-4950 characters.\n"
-            "- Include principles, structure, and watchpoints.\n"
-            "- Use strategy_hints and redaction_rules if provided.\n"
+            "- strategy_text must be ONE paragraph in English, 1650-1950 characters.\n"
+            "- strategy_text must describe exactly 5 ordered steps (in prose, not bullets).\n"
+            "- Each step must be explicit and action-oriented.\n"
+            "- Focus strictly on the library sources and the provided context.\n"
+            "- Focus on narrative content only: plot, characters, stakes, themes, and arc.\n"
+            "- Exclude production, direction, technical aspects, art direction, sound, duration, and audience/market reception.\n"
+            "- Do NOT mention author names, book titles, or sources.\n"
             "- Do NOT restate the input context verbatim or list fields.\n"
             "- Do NOT quote or repeat the strategy question.\n"
             "- Use at least two concrete concepts drawn from the provided sources.\n"
-            "- You may mention source titles/authors, without quoting excerpts.\n"
             "- If information is missing, keep guidance generic.\n"
             "- Return JSON only (no markdown, no bullets)."
         )
@@ -255,7 +258,6 @@ class StrategyFinder:
                     else [],
                 }
             )
-        rules = context_pack.get("rules") if isinstance(context_pack, dict) else {}
         return {
             "target_path": card.target_path,
             "writing_typology": card.writing_typology,
@@ -265,15 +267,9 @@ class StrategyFinder:
             "primary_objective": self._trim_text(
                 str(context_pack.get("brief_primary_objective", "")), 200
             ),
-            "intents": context_pack.get("intents", []),
             "constraints": context_pack.get("brief_constraints", []),
             "redaction_constraints": context_pack.get("redaction_constraints", {}),
             "existing_excerpt": existing_excerpt,
-            "style_guidelines": card.style_guidelines,
-            "structure_guidelines": card.structure_guidelines,
-            "strategy_hints": rules.get("strategy_hints", []) if isinstance(rules, dict) else [],
-            "redaction_rules": rules.get("redaction_rules", []) if isinstance(rules, dict) else [],
-            "quality_criteria": rules.get("quality_criteria", []) if isinstance(rules, dict) else [],
             "sources": sources,
         }
 
@@ -360,25 +356,14 @@ class StrategyFinder:
             sentences.append(f"Project summary: {core_summary.strip()}.")
         elif isinstance(brief_primary, str) and brief_primary.strip():
             sentences.append(f"Primary objective: {brief_primary.strip()}.")
-        intents = context_pack.get("intents", [])
-        if isinstance(intents, list) and intents:
-            intents_line = ", ".join([str(item) for item in intents if str(item).strip()])
-            if intents_line:
-                sentences.append(f"Intents: {intents_line}.")
         constraints = context_pack.get("brief_constraints", [])
         if isinstance(constraints, list) and constraints:
             constraints_line = ", ".join([str(item) for item in constraints if str(item).strip()])
             if constraints_line:
                 sentences.append(f"Constraints: {constraints_line}.")
-        if card.style_guidelines:
-            sentences.append(f"Style guidelines: {', '.join(card.style_guidelines)}.")
-        if card.structure_guidelines:
-            sentences.append(
-                f"Structure guidelines: {', '.join(card.structure_guidelines)}."
-            )
         if card.source_refs:
             sentences.append(
-                f"Anchor sources: {', '.join(card.source_refs)}."
+                "Anchor sources are available but must remain implicit in the guidance."
             )
         sentences.append(
             "Prioritize factual specificity, continuity with the current state, and no invention."

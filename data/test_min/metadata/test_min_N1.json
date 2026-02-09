@@ -1,0 +1,52 @@
+{
+  "project_id": "test_min",
+  "strata": "n1",
+  "updated_at": "2026-02-08T11:00:11.083293Z",
+  "data": {
+    "meta": {
+      "status": "",
+      "version": "",
+      "creative_temperature": 0
+    },
+    "pitch": "",
+    "intention": "",
+    "artistic_axes": "",
+    "overall_dynamics": "",
+    "characters": [
+      {
+        "name": "",
+        "role": "",
+        "function": "",
+        "description": "",
+        "appearance": "",
+        "signature": "",
+        "images": [],
+        "costumes": [
+          {
+            "description": "",
+            "images": []
+          }
+        ]
+      }
+    ],
+    "world_era": "",
+    "aesthetics": "",
+    "sound": {
+      "ambiences": "",
+      "music": "",
+      "sfx": "",
+      "dialogue": ""
+    },
+    "motifs": [
+      {
+        "description": "",
+        "images": [],
+        "audio": []
+      }
+    ],
+    "canon_continuity_anchors": [],
+    "sources": "",
+    "hypotheses": "",
+    "questions": ""
+  }
+}

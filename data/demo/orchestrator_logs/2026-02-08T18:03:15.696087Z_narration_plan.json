@@ -1,0 +1,44 @@
+{
+  "project_id": "demo",
+  "session_id": "sess_demo",
+  "label": "narration_plan",
+  "logged_at": "2026-02-08T18:03:15.696095Z",
+  "task_plan": {
+    "plan_id": "plan_123",
+    "tasks": [
+      {
+        "id": "t1",
+        "output_ref": "n0.production_summary"
+      }
+    ]
+  },
+  "task_context": {
+    "t1": {
+      "source_state_payload": {
+        "pending_questions": [],
+        "brief": {
+          "target_strata": [
+            "n0"
+          ],
+          "target_paths": []
+        }
+      },
+      "target_path": "n0.production_summary"
+    }
+  },
+  "runner_input": {
+    "plan_id": "plan_123",
+    "task_plan_ref": "",
+    "task_plan_payload": {
+      "plan_id": "plan_123",
+      "tasks": [
+        {
+          "id": "t1",
+          "output_ref": "n0.production_summary"
+        }
+      ]
+    },
+    "execution_mode": "sequential",
+    "started_at": "2026-02-08T18:03:15.695302Z"
+  }
+}

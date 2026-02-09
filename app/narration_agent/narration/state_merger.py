@@ -94,7 +94,10 @@ def _apply_patch(data: dict, path: List[PathSegment], patch: Any) -> dict:
     if isinstance(last, str):
         if not isinstance(current, dict):
             current = _replace_container(parent, parent_key, {})
-        current[last] = _merge_value(current.get(last), patch)
+        if isinstance(patch, dict) and len(patch) == 1 and last in patch:
+            current[last] = _merge_value(current.get(last), patch.get(last))
+        else:
+            current[last] = _merge_value(current.get(last), patch)
     else:
         if not isinstance(current, list):
             current = _replace_container(parent, parent_key, [])

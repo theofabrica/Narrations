@@ -18,6 +18,8 @@ from app.utils.project_storage import (
     delete_project,
     STRATA_FILES,
     create_project,
+    get_project_root,
+    reset_strata,
 )
 from app.utils.project_media import (
     save_project_audio_url,
@@ -38,6 +40,9 @@ from app.tools.registry import list_actions
 from app.tools.higgsfield.client import get_client as get_higgsfield_client
 from app.narration_agent.llm_client import LLMClient
 from app.narration_agent.service import handle_narration_message
+from app.narration_agent.chat.chat_service import get_chat_memory
+from app.narration_agent.task_runner import TaskRunner
+from app.narration_agent.narration.narration_service import run_n1_flow
 from app.narration_agent.chat.ui_translator import UITranslator
 from app.narration_agent.writer_agent.strategy_finder.rag_bootstrap import (
     ensure_rag_ready,
@@ -378,6 +383,23 @@ def post_project_strata(
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
+@app.post("/projects/{project_id}/n1/reset")
+def reset_project_n1(project_id: str) -> Dict[str, Any]:
+    try:
+        payload = reset_strata(project_id, "n1")
+        deleted_logs = _delete_n1_logs(project_id)
+        return {
+            "status": "ok",
+            "deleted_logs": deleted_logs,
+            "n1": payload,
+        }
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Project not found")
+    except Exception as e:
+        logger.error("Error resetting n1 project=%s: %s", project_id, e, exc_info=True)
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
 class MediaUrlRequest(BaseModel):
     url: str
 
@@ -390,6 +412,44 @@ class NarrationMessageRequest(BaseModel):
     message: str
     session_id: str | None = None
     auto_create: bool = True
+    mode: str | None = None
+    target_path: str | None = None
+    actual_text: str | None = None
+    edited_text: str | None = None
+    edit_session_id: str | None = None
+
+
+class RunN1Response(BaseModel):
+    status: str
+    narration_task_plan: Dict[str, Any]
+    narration_run_result: Dict[str, Any]
+
+
+def _delete_n1_logs(project_id: str) -> int:
+    project_root = get_project_root(project_id)
+    if not project_root.exists():
+        return 0
+    log_dirs = [
+        project_root / "writer_logs",
+        project_root / "rag_logs",
+        project_root / "strategy_logs",
+        project_root / "orchestrator_logs",
+    ]
+    deleted = 0
+    for log_dir in log_dirs:
+        if not log_dir.exists() or not log_dir.is_dir():
+            continue
+        for entry in log_dir.iterdir():
+            if not entry.is_file():
+                continue
+            name = entry.name
+            if "n1." in name or "n1_" in name:
+                try:
+                    entry.unlink()
+                    deleted += 1
+                except Exception:
+                    logger.warning("Failed to delete log file %s", entry, exc_info=True)
+    return deleted
 
 
 @app.post("/projects/{project_id}/media/pix/upload")
@@ -706,6 +766,11 @@ def post_narration_message(
             message=body.message,
             session_id=body.session_id,
             auto_create=body.auto_create,
+            mode=body.mode,
+            target_path=body.target_path,
+            actual_text=body.actual_text,
+            edited_text=body.edited_text,
+            edit_session_id=body.edit_session_id,
         )
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Projet introuvable")
@@ -718,6 +783,26 @@ def post_narration_message(
             e,
             exc_info=True,
         )
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.post("/projects/{project_id}/n1/run", response_model=RunN1Response)
+def post_run_n1(project_id: str) -> Dict[str, Any]:
+    try:
+        llm_client = LLMClient()
+        memory_store = get_chat_memory()
+        runner = TaskRunner(llm_client=llm_client, memory_store=memory_store)
+        session_id = f"ui_{uuid.uuid4().hex}"
+        result = run_n1_flow(project_id=project_id, session_id=session_id, runner=runner)
+        return {
+            "status": "ok",
+            "narration_task_plan": result.get("narration_task_plan", {}),
+            "narration_run_result": result.get("narration_run_result", {}),
+        }
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Projet introuvable")
+    except Exception as e:
+        logger.error("Error running N1 project=%s: %s", project_id, e, exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
 

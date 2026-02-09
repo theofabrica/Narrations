@@ -6,6 +6,7 @@ import uuid
 from typing import Any, Dict, Optional
 
 from app.narration_agent.chat.chat_memory_store import ChatMemoryStore
+from app.narration_agent.chat.state_sanitizer import sanitize_for_narration
 from app.narration_agent.chat.chat_orchestrator import ChatOrchestrator
 from app.narration_agent.llm_client import LLMClient
 from app.narration_agent.logging_utils import write_plan_log
@@ -231,6 +232,11 @@ def run_chat_flow(
             project_id=project_id,
             session_id=resolved_session_id,
             state_snapshot=final_state_snapshot,
+        )
+        _CHAT_MEMORY.save_output_state_snapshot(
+            project_id=project_id,
+            session_id=resolved_session_id,
+            state_snapshot=sanitize_for_narration(final_state_snapshot, project_id=project_id),
         )
 
     return {

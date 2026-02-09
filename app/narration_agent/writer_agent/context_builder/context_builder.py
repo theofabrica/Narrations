@@ -43,10 +43,36 @@ class ContextBuilder:
         target_schema = _get_schema_value(schema_data, segments) if segments else schema_data
 
         dependencies = _load_neighbor_dependencies(project_id, strata)
+        # Sparse view for prompting: include only non-empty fields as (path, name, value).
+        target_strata_non_empty = _collect_non_empty_fields(
+            target_data, base_path=strata
+        )
+        dependencies_non_empty = _collect_non_empty_fields(
+            dependencies, base_path="dependencies"
+        )
 
         core = source_state.get("core", {}) if isinstance(source_state, dict) else {}
         thinker = source_state.get("thinker", {}) if isinstance(source_state, dict) else {}
         brief = source_state.get("brief", {}) if isinstance(source_state, dict) else {}
+        brief_duration_s = (
+            brief.get("target_duration_s") if isinstance(brief, dict) else None
+        )
+        if brief_duration_s in (None, "", 0):
+            brief_duration_s = source_state.get("target_duration_s") if isinstance(source_state, dict) else None
+        duration_s = _coerce_duration_seconds(brief_duration_s)
+
+        if strata == "n1":
+            n0_state = dependencies.get("n0") if isinstance(dependencies, dict) else {}
+            n0_data = n0_state.get("data") if isinstance(n0_state, dict) else {}
+            if isinstance(n0_data, dict):
+                prod = n0_data.get("production_summary", {})
+                if isinstance(prod, dict):
+                    if not isinstance(core, dict) or not core.get("summary"):
+                        core = {"summary": prod.get("summary", "")} if isinstance(prod.get("summary", ""), str) else core
+                    if isinstance(brief, dict) and not brief.get("video_type"):
+                        brief = {**brief, "video_type": prod.get("production_type", "")}
+                    if duration_s in (None, 0):
+                        duration_s = _coerce_duration_seconds(prod.get("target_duration", ""))
 
         payload = {
             "target_path": target_path,
@@ -55,20 +81,23 @@ class ContextBuilder:
             "strategy_question": "",
             "target_current": target_current or {},
             "target_strata_data": target_data or {},
+            "target_strata_non_empty": target_strata_non_empty,
             "target_schema": target_schema or {},
             "source_state_id": source_state.get("state_id", ""),
             "project_id": project_id,
-            "core_summary": core.get("summary", ""),
-            "core_detailed_summary": core.get("detailed_summary", ""),
-            "intents": core.get("intents", []),
+            "core_summary": core.get("summary", "") or source_state.get("summary", ""),
             "thinker_constraints": thinker.get("constraints", []),
             "brief_constraints": brief.get("constraints", []),
             "brief_primary_objective": brief.get("primary_objective", ""),
+            "brief_project_title": brief.get("project_title", ""),
+            "brief_video_type": brief.get("video_type", "") or source_state.get("video_type", ""),
+            "brief_target_duration_s": duration_s,
             "brief_secondary_objectives": brief.get("secondary_objectives", []),
             "brief_priorities": brief.get("priorities", []),
             "missing": source_state.get("missing", []),
             "pending_questions": source_state.get("pending_questions", []),
             "dependencies": dependencies,
+            "dependencies_non_empty": dependencies_non_empty,
             "style_constraints": {"language": "en", "tone": "", "format": ""},
             "strategy_card": {},
             "redaction_constraints": {"min_chars": 0, "max_chars": 0},
@@ -83,6 +112,59 @@ class ContextBuilder:
         }
 
         return ContextPack(target_path=target_path, payload=payload)
+
+
+def _is_empty_value(value: Any) -> bool:
+    if value is None:
+        return True
+    if isinstance(value, str):
+        return not value.strip()
+    if isinstance(value, (list, tuple, set, dict)):
+        return len(value) == 0
+    return False
+
+
+def _coerce_duration_seconds(value: Any) -> int:
+    if isinstance(value, bool):
+        return 0
+    if isinstance(value, (int, float)):
+        return max(0, int(value))
+    if isinstance(value, str):
+        trimmed = value.strip()
+        if trimmed.isdigit():
+            return max(0, int(trimmed))
+    return 0
+
+
+
+
+def _collect_non_empty_fields(data: Any, base_path: str = "") -> List[Dict[str, Any]]:
+    """
+    Collect only non-empty leaf fields from a nested structure.
+    Returns items like: { "path": "n1.data.pitch", "name": "pitch", "value": "..." }.
+    """
+    out: List[Dict[str, Any]] = []
+
+    def walk(obj: Any, path: str) -> None:
+        if _is_empty_value(obj):
+            return
+        if isinstance(obj, dict):
+            for key, val in obj.items():
+                key_str = str(key)
+                next_path = f"{path}.{key_str}" if path else key_str
+                walk(val, next_path)
+            return
+        if isinstance(obj, list):
+            for idx, val in enumerate(obj):
+                next_path = f"{path}[{idx}]" if path else f"[{idx}]"
+                walk(val, next_path)
+            return
+        # Leaf value
+        name = path.split(".")[-1] if path else ""
+        out.append({"path": path, "name": name, "value": obj})
+
+    walk(data, base_path.strip("."))
+    return out
 
 
 def _parse_target_path(target_path: str) -> Tuple[str, List[PathSegment]]:

@@ -1,9 +1,7 @@
 {
   "_ownership": {
     "core.summary": ["1a"],
-    "core.detailed_summary": ["1a"],
     "core.open_questions": ["1a"],
-    "core.intents": ["1a"],
     "thinker.objectives": ["1b"],
     "thinker.constraints": ["1b"],
     "thinker.hypotheses": ["1b"],
@@ -11,6 +9,9 @@
     "thinker.clarifications": ["1b"],
     "thinker.target_level": ["1b"],
     "brief.primary_objective": ["1c"],
+    "brief.project_title": ["1c"],
+    "brief.video_type": ["1c"],
+    "brief.target_duration_s": ["1c"],
     "brief.secondary_objectives": ["1c"],
     "brief.constraints": ["1c"],
     "brief.hypotheses": ["1c"],
@@ -22,31 +23,22 @@
     "missing": ["1a", "1b", "1c"]
   },
   "_redaction": {
-    "core.summary": true,
-    "core.detailed_summary": true
+    "core.summary": true
   },
   "_redaction_constraints": {
     "core.summary": {
-      "min_chars": 80,
-      "max_chars": 240
-    },
-    "core.detailed_summary": {
-      "min_chars": 300,
-      "max_chars": 800
+      "min_chars": 10,
+      "max_chars": 4000
     }
   },
-  "_constraints": {
-    "core.intents_max": 3
-  },
+  "_constraints": {},
   "_descriptions_en": {
     "state_id": "Unique state identifier (sNNNN).",
     "state_version": "Schema version for layer 1.",
     "completed_steps": "Completed agent steps (1a/1b/1c).",
     "missing": "Missing elements to collect.",
-    "core.summary": "Short summary of the user request.",
-    "core.detailed_summary": "Detailed summary of the user request.",
+    "core.summary": "Faithful English translation of the user's message (preserve style and length).",
     "core.open_questions": "Open questions to ask the user (1-3 max).",
-    "core.intents": "Intent keywords (short tags).",
     "thinker.objectives": "Objectives extracted by 1b.",
     "thinker.constraints": "Constraints extracted by 1b.",
     "thinker.hypotheses": "Hypotheses extracted by 1b.",
@@ -54,6 +46,9 @@
     "thinker.clarifications": "Clarifications needed for alignment.",
     "thinker.target_level": "Target narrative level for next steps.",
     "brief.primary_objective": "Primary objective of the brief.",
+    "brief.project_title": "Project title (short, human-friendly).",
+    "brief.video_type": "Video format/type (e.g. film, ad, clip, documentary, series).",
+    "brief.target_duration_s": "Target duration in seconds (integer).",
     "brief.secondary_objectives": "Secondary objectives of the brief.",
     "brief.constraints": "Constraints for the brief.",
     "brief.hypotheses": "Hypotheses for the brief.",
@@ -69,9 +64,7 @@
   "missing": [],
   "core": {
     "summary": "",
-    "detailed_summary": "",
-    "open_questions": [],
-    "intents": []
+    "open_questions": []
   },
   "thinker": {
     "objectives": [],
@@ -83,6 +76,9 @@
   },
   "brief": {
     "primary_objective": "",
+    "project_title": "",
+    "video_type": "",
+    "target_duration_s": 0,
     "secondary_objectives": [],
     "constraints": [],
     "hypotheses": [],

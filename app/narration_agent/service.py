@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
+import json
+import uuid
+from typing import Any, Dict, List, Optional
 
 from app.narration_agent.chat.chat_service import get_chat_memory, run_chat_flow
-from app.narration_agent.llm_client import LLMClient
+from app.narration_agent.llm_client import LLMClient, LLMRequest
 from app.narration_agent.narration.narration_service import run_narration_flow
+from app.narration_agent.spec_loader import load_text
 from app.narration_agent.task_runner import TaskRunner
 from app.utils.project_storage import STRATA_FILES, create_project, get_project_root, read_strata
 
@@ -64,6 +67,11 @@ def handle_chat_message(
     message: str,
     session_id: Optional[str] = None,
     auto_create: bool = True,
+    mode: Optional[str] = None,
+    target_path: Optional[str] = None,
+    actual_text: Optional[str] = None,
+    edited_text: Optional[str] = None,
+    edit_session_id: Optional[str] = None,
 ) -> Dict[str, Any]:
     if not project_id:
         raise ValueError("project_id is required")
@@ -99,6 +107,46 @@ def handle_chat_message(
         llm_client=llm_client,
         runner=runner,
     )
+    final_snapshot = chat_result.get("final_state_snapshot")
+    mode_value = mode.strip().lower() if isinstance(mode, str) else ""
+    edit_summary = ""
+    resolved_edit_session_id = ""
+    if isinstance(final_snapshot, dict) and isinstance(target_path, str) and target_path.strip():
+        enriched_snapshot = {**final_snapshot, "target_path": target_path.strip()}
+        if isinstance(actual_text, str) and actual_text.strip():
+            enriched_snapshot["actual_text"] = actual_text
+        if isinstance(edited_text, str) and edited_text.strip():
+            enriched_snapshot["edited_text"] = edited_text
+        if mode_value in {"edit", "propagate", "create"}:
+            enriched_snapshot["mode"] = mode_value
+        if mode_value == "edit":
+            resolved_edit_session_id = edit_session_id or f"edit_{uuid.uuid4().hex}"
+            prior_messages = memory_store.load_edit_messages(project_id, resolved_edit_session_id)
+            prior_messages.append({"role": "user", "content": message})
+            assistant_message = chat_result.get("assistant_message") or ""
+            if isinstance(assistant_message, str) and assistant_message.strip():
+                prior_messages.append(
+                    {"role": "assistant", "content": assistant_message.strip()}
+                )
+            edit_summary = _summarize_edit_chat(
+                llm_client=llm_client,
+                messages=prior_messages[-12:],
+                target_path=target_path.strip(),
+                actual_text=actual_text or "",
+                edited_text=edited_text or "",
+            )
+            memory_store.save_edit_messages(
+                project_id,
+                resolved_edit_session_id,
+                prior_messages,
+                meta={
+                    "target_path": target_path.strip(),
+                    "edit_summary": edit_summary,
+                },
+            )
+            if edit_summary:
+                enriched_snapshot["edit_instructions"] = edit_summary
+        chat_result["final_state_snapshot"] = enriched_snapshot
     narration_result = run_narration_flow(
         project_id=project_id,
         session_id=chat_result["session_id"],
@@ -118,6 +166,8 @@ def handle_chat_message(
     return {
         "project_id": project_id,
         "session_id": chat_result["session_id"],
+        "edit_session_id": resolved_edit_session_id,
+        "edit_summary": edit_summary,
         "message_echo": message,
         "project_empty": project_empty,
         "creation_mode": creation_mode,
@@ -142,6 +192,11 @@ def handle_narration_message(
     message: str,
     session_id: Optional[str] = None,
     auto_create: bool = True,
+    mode: Optional[str] = None,
+    target_path: Optional[str] = None,
+    actual_text: Optional[str] = None,
+    edited_text: Optional[str] = None,
+    edit_session_id: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Backward-compatible alias for handle_chat_message."""
     return handle_chat_message(
@@ -149,4 +204,59 @@ def handle_narration_message(
         message=message,
         session_id=session_id,
         auto_create=auto_create,
+        mode=mode,
+        target_path=target_path,
+        actual_text=actual_text,
+        edited_text=edited_text,
+        edit_session_id=edit_session_id,
     )
+
+
+def _summarize_edit_chat(
+    *,
+    llm_client: LLMClient,
+    messages: List[Dict[str, str]],
+    target_path: str,
+    actual_text: str,
+    edited_text: str,
+) -> str:
+    prompt = load_text("chat/01c_orchestrator_translator.md").strip()
+    if not prompt:
+        prompt = (
+            "You are agent 1c. Summarize the edit chat into precise edit instructions.\n"
+            "Return ONLY valid JSON: {\"edit_summary\": \"...\"}"
+        )
+    payload = {
+        "edit_summary_mode": True,
+        "target_path": target_path,
+        "actual_text": actual_text,
+        "edited_text": edited_text,
+        "messages": messages,
+    }
+    llm_response = llm_client.complete(
+        LLMRequest(
+            model=llm_client.default_model,
+            messages=[
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": json.dumps(payload, ensure_ascii=True, indent=2)},
+            ],
+            temperature=0.2,
+        )
+    )
+    raw_content = llm_response.content.strip()
+    try:
+        parsed = json.loads(raw_content)
+    except json.JSONDecodeError:
+        start = raw_content.find("{")
+        end = raw_content.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            try:
+                parsed = json.loads(raw_content[start : end + 1])
+            except json.JSONDecodeError:
+                return ""
+        else:
+            return ""
+    if isinstance(parsed, dict):
+        summary = parsed.get("edit_summary", "")
+        return summary.strip() if isinstance(summary, str) else ""
+    return ""

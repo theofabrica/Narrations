@@ -2568,6 +2568,51 @@ function App() {
     }
   }
 
+  const resetN1 = async (projectId) => {
+    const ok = window.confirm(
+      `Supprimer N1 et ses logs pour le projet "${projectId}" ?`
+    )
+    if (!ok) {
+      return
+    }
+    try {
+      const resp = await fetch(
+        `${apiOrigin}${joinPath(apiBasePath, `/projects/${projectId}/n1/reset`)}`,
+        { method: 'POST' }
+      )
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      if (selectedProject === projectId) {
+        fetchN1(projectId)
+      }
+    } catch (err) {
+      setN1Status('error')
+      setN1Error(err.message)
+    }
+  }
+
+  const runN1FromUi = async (projectId) => {
+    if (!projectId) {
+      return
+    }
+    setN1Status('loading')
+    setN1Error('')
+    try {
+      const resp = await fetch(
+        `${apiOrigin}${joinPath(apiBasePath, `/projects/${projectId}/n1/run`)}`,
+        { method: 'POST' }
+      )
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      await fetchN1(projectId)
+    } catch (err) {
+      setN1Status('error')
+      setN1Error(err.message)
+    }
+  }
+
   const createProject = async (projectId, options = {}) => {
     const { navigate = false } = options
     if (!projectId) {
@@ -3249,7 +3294,7 @@ function App() {
             <div className="panel">
               <div className="panel-head">
                 <h2 className="project-title">{selectedProject || 'Projet'}</h2>
-                <div className="project-head-fields">
+              <div className="project-head-fields">
                 <input
                   type="text"
                   className="project-input"
@@ -3291,6 +3336,16 @@ function App() {
                     )
                   }
                 />
+              </div>
+              <div className="panel-actions">
+                <button
+                  type="button"
+                  className="danger"
+                  onClick={() => selectedProject && resetN1(selectedProject)}
+                  disabled={!selectedProject}
+                >
+                  Supprimer N1
+                </button>
               </div>
             </div>
             {!selectedProject ? (
@@ -3444,7 +3499,7 @@ function App() {
             onClick={() => {
               setActivePage('bible')
               if (selectedProject) {
-                fetchN1(selectedProject)
+                runN1FromUi(selectedProject)
               }
             }}
           >
@@ -3458,7 +3513,7 @@ function App() {
             onClick={() => {
               setActivePage('bible')
               if (selectedProject) {
-                fetchN1(selectedProject)
+                runN1FromUi(selectedProject)
               }
             }}
           >

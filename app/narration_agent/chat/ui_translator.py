@@ -28,9 +28,7 @@ UI_PASSTHROUGH_FIELDS = {
 
 CHAT_TRANSLATE_FIELDS = [
     "core.summary",
-    "core.detailed_summary",
     "core.open_questions",
-    "core.intents",
     "core.notes",
     "thinker.objectives",
     "thinker.constraints",
@@ -39,6 +37,8 @@ CHAT_TRANSLATE_FIELDS = [
     "thinker.clarifications",
     "thinker.notes",
     "brief.primary_objective",
+    "brief.project_title",
+    "brief.video_type",
     "brief.secondary_objectives",
     "brief.constraints",
     "brief.hypotheses",
