@@ -10,6 +10,9 @@ from app.narration_agent.llm_client import LLMClient, LLMRequest
 from app.narration_agent.spec_loader import load_json, load_text
 from app.narration_agent.chat.ui_translator import UITranslator
 from app.narration_agent.writer_agent.writer_orchestrator import WriterOrchestrator
+from app.narration_agent.writer_agent.strategy_finder.rag_bootstrap import (
+    purge_rag_conversations_now,
+)
 from app.utils.ids import generate_timestamp
 from app.utils.logging import setup_logger
 from app.utils.project_storage import get_project_root
@@ -105,12 +108,48 @@ class TaskRunner:
                     "output": result_payload,
                 }
             )
+            self._purge_rag_conversations_after_n0_step(
+                project_id=project_id,
+                agent=agent,
+                output_ref=output_ref,
+                result=result,
+            )
         return {
             "plan_id": task_plan.get("plan_id"),
             "status": "completed",
             "results": results,
             "completed_at": generate_timestamp(),
         }
+
+    def _purge_rag_conversations_after_n0_step(
+        self,
+        *,
+        project_id: str,
+        agent: str,
+        output_ref: str,
+        result: Dict[str, Any],
+    ) -> None:
+        if agent != "writer_n0":
+            return
+        if not isinstance(output_ref, str) or not output_ref.startswith("n0."):
+            return
+        status = str(result.get("status", "")).strip().lower()
+        if status not in {"done", "partial"}:
+            return
+        try:
+            purge_info = purge_rag_conversations_now(project_id=project_id)
+        except Exception as exc:
+            self.logger.warning(
+                "Failed to purge R2R conversations after %s: %s",
+                output_ref,
+                exc,
+            )
+            return
+        self.logger.info(
+            "R2R conversations purged after %s: %s",
+            output_ref,
+            purge_info,
+        )
 
     def _initialize_state(self) -> Dict[str, Any]:
         template = load_json("chat/state_structure_01_abc.json") or {}
@@ -489,7 +528,7 @@ class TaskRunner:
 
     def _update_ui_translation(self, project_id: str, target_path: str) -> None:
         strata = target_path.split(".", 1)[0] if target_path else ""
-        if strata != "n0":
+        if strata not in {"n0", "n1"}:
             return
         try:
             self.ui_translator.update_ui_translation(project_id, strata, language="fr")
@@ -514,7 +553,10 @@ class TaskRunner:
     ) -> None:
         try:
             root = get_project_root(project_id)
-            log_dir = root / "writer_logs"
+            strata = target_path.split(".", 1)[0].strip().lower() if isinstance(target_path, str) else ""
+            if not re.fullmatch(r"n[0-9]+", strata or ""):
+                strata = "misc"
+            log_dir = root / "writer_logs" / strata
             log_dir.mkdir(parents=True, exist_ok=True)
             safe_target = re.sub(r"[^a-zA-Z0-9._-]+", "_", target_path)
             safe_time = re.sub(r"[^a-zA-Z0-9_-]+", "_", generate_timestamp())

@@ -1,0 +1,36 @@
+{
+  "project_id": "test_minimal_4824c08f",
+  "strata": "n0",
+  "updated_at": "2026-02-12T08:17:03.333316Z",
+  "data": {
+    "production_summary": {
+      "summary": "",
+      "production_type": "",
+      "target_duration": "",
+      "target_duration_text": "",
+      "aspect_ratio": "",
+      "visual_style": "",
+      "tone": "",
+      "era": ""
+    },
+    "deliverables": {
+      "visuals": {
+        "images_enabled": true,
+        "videos_enabled": true
+      },
+      "audio_stems": {
+        "dialogue": true,
+        "sfx": true,
+        "music": true
+      }
+    },
+    "art_direction": {
+      "description": "",
+      "references": ""
+    },
+    "sound_direction": {
+      "description": "",
+      "references": ""
+    }
+  }
+}

@@ -34,15 +34,28 @@ class NarratorOrchestrator:
         self.base_prompt = load_text("narration/00_narrator_orchestrator.md").strip()
 
     _N0_SECTIONS = (
-        "production_summary",
+        "narrative_presentation",
         "art_direction",
         "sound_direction",
     )
     _N1_SECTIONS = (
-        "characters.main_characters.number",
-        "characters.secondary_characters.number",
-        "characters.background_characters.number",
+        "characters.main_characters",
+        "characters.secondary_characters",
+        "characters.background_characters",
     )
+
+    @staticmethod
+    def _normalize_n0_section(section: str) -> str:
+        normalized = str(section or "").strip()
+        if normalized == "production_summary":
+            return "narrative_presentation"
+        return normalized
+
+    def _normalize_output_ref(self, output_ref: str) -> str:
+        value = str(output_ref or "").strip()
+        if value == "n0.production_summary":
+            return "n0.narrative_presentation"
+        return value
 
     def build_plan(self, narration_input: Dict[str, Any]) -> Dict[str, Any]:
         source_state = narration_input.get("source_state_payload") or {}
@@ -74,7 +87,7 @@ class NarratorOrchestrator:
 
         if "n0" in target_strata:
             requested_sections = {
-                path.split(".", 1)[1]
+                self._normalize_n0_section(path.split(".", 1)[1])
                 for path in target_paths
                 if isinstance(path, str) and path.startswith("n0.")
             }
@@ -149,7 +162,7 @@ class NarratorOrchestrator:
             "{\n"
             '  "tasks": [\n'
             "    {\n"
-            '      "output_ref": "n0.production_summary",\n'
+            '      "output_ref": "n0.narrative_presentation",\n'
             '      "agent": "writer_n0"\n'
             "    }\n"
             "  ],\n"
@@ -158,8 +171,8 @@ class NarratorOrchestrator:
             "Rules:\n"
             "- Allowed agents: writer_n0, writer_n1, writer_n2, writer_n3, writer_n4, writer_n5\n"
             f"- Allowed output_ref values: {', '.join(allowed_paths) if allowed_paths else '[]'}\n"
-            "- If you include N0 tasks, they must be ordered: n0.production_summary, then n0.art_direction, then n0.sound_direction.\n"
-            "- If you include N1 tasks, they must be ordered: n1.characters.main_characters.number, then n1.characters.secondary_characters.number, then n1.characters.background_characters.number.\n"
+            "- If you include N0 tasks, they must be ordered: n0.narrative_presentation, then n0.art_direction, then n0.sound_direction.\n"
+            "- If you include N1 tasks, they must be ordered: n1.characters.main_characters, then n1.characters.secondary_characters, then n1.characters.background_characters.\n"
             "- Do NOT add extra keys.\n"
             "- If nothing should be written now, return an empty tasks list.\n"
         )
@@ -293,7 +306,7 @@ class NarratorOrchestrator:
             output_ref = entry.get("output_ref")
             if not isinstance(output_ref, str):
                 continue
-            output_ref = output_ref.strip()
+            output_ref = self._normalize_output_ref(output_ref)
             if allowed_paths and output_ref not in allowed_paths:
                 continue
             agent = entry.get("agent")

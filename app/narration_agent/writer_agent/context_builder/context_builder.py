@@ -1,5 +1,6 @@
 """Context builder to assemble context packs for writers."""
 
+import re
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple, Union
 
@@ -57,20 +58,33 @@ class ContextBuilder:
         brief_duration_s = (
             brief.get("target_duration_s") if isinstance(brief, dict) else None
         )
+        brief_duration_text = (
+            brief.get("target_duration") if isinstance(brief, dict) else ""
+        )
         if brief_duration_s in (None, "", 0):
             brief_duration_s = source_state.get("target_duration_s") if isinstance(source_state, dict) else None
+        if (not isinstance(brief_duration_text, str)) or (not brief_duration_text.strip()):
+            brief_duration_text = source_state.get("target_duration") if isinstance(source_state, dict) else ""
         duration_s = _coerce_duration_seconds(brief_duration_s)
 
         if strata == "n1":
             n0_state = dependencies.get("n0") if isinstance(dependencies, dict) else {}
             n0_data = n0_state.get("data") if isinstance(n0_state, dict) else {}
             if isinstance(n0_data, dict):
-                prod = n0_data.get("production_summary", {})
+                prod = n0_data.get("narrative_presentation")
+                if not isinstance(prod, dict):
+                    prod = n0_data.get("production_summary", {})
                 if isinstance(prod, dict):
                     if not isinstance(core, dict) or not core.get("summary"):
                         core = {"summary": prod.get("summary", "")} if isinstance(prod.get("summary", ""), str) else core
                     if isinstance(brief, dict) and not brief.get("video_type"):
                         brief = {**brief, "video_type": prod.get("production_type", "")}
+                    if (not isinstance(brief_duration_text, str)) or (not brief_duration_text.strip()):
+                        duration_candidate = prod.get("target_duration_text", "")
+                        if (not isinstance(duration_candidate, str)) or (not duration_candidate.strip()):
+                            duration_candidate = prod.get("target_duration", "")
+                        if isinstance(duration_candidate, str):
+                            brief_duration_text = duration_candidate
                     if duration_s in (None, 0):
                         duration_s = _coerce_duration_seconds(prod.get("target_duration", ""))
 
@@ -92,6 +106,7 @@ class ContextBuilder:
             "brief_project_title": brief.get("project_title", ""),
             "brief_video_type": brief.get("video_type", "") or source_state.get("video_type", ""),
             "brief_target_duration_s": duration_s,
+            "brief_target_duration_text": brief_duration_text if isinstance(brief_duration_text, str) else "",
             "brief_secondary_objectives": brief.get("secondary_objectives", []),
             "brief_priorities": brief.get("priorities", []),
             "missing": source_state.get("missing", []),
@@ -133,6 +148,36 @@ def _coerce_duration_seconds(value: Any) -> int:
         trimmed = value.strip()
         if trimmed.isdigit():
             return max(0, int(trimmed))
+        lowered = trimmed.lower()
+        timecode_match = re.fullmatch(r"(\d{1,2}):(\d{2})(?::(\d{2}))?", lowered)
+        if timecode_match:
+            hours = 0
+            minutes = int(timecode_match.group(1))
+            seconds = int(timecode_match.group(2))
+            if timecode_match.group(3) is not None:
+                hours = minutes
+                minutes = seconds
+                seconds = int(timecode_match.group(3))
+            return max(0, hours * 3600 + minutes * 60 + seconds)
+        hm_match = re.search(r"(\d+)\s*h\s*(\d{1,2})?", lowered)
+        if hm_match:
+            hours = int(hm_match.group(1))
+            minutes = int(hm_match.group(2)) if hm_match.group(2) else 0
+            return max(0, hours * 3600 + minutes * 60)
+        total_seconds = 0.0
+        for number, unit in re.findall(
+            r"(\d+(?:[.,]\d+)?)\s*(h|hr|hour|hours|heure|heures|m|min|minute|minutes|s|sec|secs|second|seconds|seconde|secondes)",
+            lowered,
+        ):
+            value_f = float(number.replace(",", "."))
+            if unit.startswith(("h", "hr", "hour", "heure")):
+                total_seconds += value_f * 3600
+            elif unit.startswith(("m", "min", "minute")):
+                total_seconds += value_f * 60
+            else:
+                total_seconds += value_f
+        if total_seconds > 0:
+            return int(total_seconds)
     return 0
 
 
@@ -282,7 +327,7 @@ def _infer_writing_typology(target_path: str) -> str:
         return defaults[strata]
 
     path = target_path.lower()
-    if "production_summary" in path or ".summary" in path:
+    if "narrative_presentation" in path or "production_summary" in path or ".summary" in path:
         return "summary"
     if ".pitch" in path or ".intention" in path:
         return "pitch"

@@ -1,5 +1,5 @@
 {
-  "n0.production_summary": {
+  "n0.narrative_presentation": {
     "allowed_fields": ["summary"],
     "_comments": {
       "allowed_fields": "Liste blanche des champs que le writer peut écrire dans target_patch pour ce target_path. Sert aussi à déterminer quel(s) champ(s) texte regarder pour décider du mode création vs édition.",
@@ -18,7 +18,7 @@
     },
     "modes": {
       "create": {
-        "writer_self_question": "How can I best write a clear and usable production summary for stakeholders?",
+        "writer_self_question": "How can I best write a clear and usable narrative presentation for stakeholders?",
         "context_aggregation": {
           "groups": [
             {
@@ -29,37 +29,43 @@
             }
           ]
         },
-        "strategy_role": "Tell the summary as a visual story, like a storyteller who takes time to narrate.",
+        "strategy_role": "Tell the narrative presentation as a visual story, like a storyteller who takes time to narrate.",
         "strategy_hints": [
-          "Focus on narrative function: a production summary for stakeholders.",
+          "Focus on narrative function: a narrative presentation.",
           "Use only facts from the provided context and constraints.",
           "Signal tone through neutral diction, not evaluation.",
           "Respect the length target and format."
         ],
         "redaction_constraints": { "min_chars": 2000, "max_chars": 3000 },
         "redaction_rules": [
-          "No meta-writing language or references to strategy or sources.",
-          "Keep statements grounded in the project brief only.",
-          "Maintain a sober, factual tone.",
-          "Focus on narration only: plot, characters, stakes, themes, and arc.",
-          "Exclude production, direction, technical aspects, art direction, sound, duration, or audience reception."
+        "No meta-writing language or references to strategy, theory, or sources.",
+          "Do not refer to narrative theory or dramatic terminology (such as inciting incident, climax, act structure, dramatic question, pacing, transformation, or similar terms). Translate structural guidance into concrete narrative situations.",
+          "Expand the project brief coherently without contradicting it.",
+          "Maintain a controlled narrative tone. Avoid rhetorical commentary, moral judgment, persuasion, or promotional language.",
+          "Exclude production, direction, technical aspects, art direction, sound, duration, or audience reception.",
+          "Avoid abstract generalities and thematic declarations.",
+          "Do not summarize ideas, themes, or intentions.",
+          "Express themes only through character actions, situations, conflicts, and consequences.",
+          "Ground narrative developments in specific actions or situations rather than conceptual statements.",
+          "Conclude the narrative by describing a final concrete situation.",
+          "Do not end with thematic commentary, reflection, interpretation, or statements about meaning. The ending must depict an outcome, not explain it."
         ],
         "quality_criteria": [
-          "Summary length stays within min/max chars.",
-          "No meta references (strategy, summary-as-object, sources).",
+          "narrative presentation length stays within min/max chars.",
+          "No meta references (strategy, narrative-presentation-as-object, sources).",
           "All statements are traceable to provided context."
         ],
         "use_strategy": true,
         "skip_llm": false,
         "extra_rule": "Writing rule (English): Focus on narration only (plot, characters, stakes, themes, arc); exclude production, direction, technical aspects, art direction, sound, duration, and audience reception.",
         "strategy_finder": {
-          "question": "Find in the documents rules and guidance to write a clear, factual production summary for stakeholders.",
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation.",
           "library_filename_prefixes": ["SRC_NARRATOLOGY"]
         }
       },
       "edit": {
         "_comment": "Mode édition : modifier le texte existant selon les indications utilisateur ; si aucune indication n'est fournie, réécrire en s'appuyant sur le contexte.",
-        "writer_self_question": "How will I modify this production summary based on the user's change requests?",
+        "writer_self_question": "How will I modify this narrative presentation based on the user's change requests?",
         "context_aggregation": {
           "groups": [
             {
@@ -84,22 +90,28 @@
         },
         "strategy_role": "Tell the summary as a visual story, like a storyteller who takes time to narrate.",
         "strategy_hints": [
-          "Focus on narrative function: a production summary for stakeholders.",
+          "Focus on narrative function: a narrative presentation for stakeholders.",
           "Use only facts from the provided context and constraints.",
           "Signal tone through neutral diction, not evaluation.",
           "Respect the length target and format."
         ],
         "redaction_constraints": { "min_chars": 2000, "max_chars": 3000 },
         "redaction_rules": [
-          "No meta-writing language or references to strategy or sources.",
-          "Keep statements grounded in the project brief only.",
-          "Maintain a sober, factual tone.",
-          "Focus on narration only: plot, characters, stakes, themes, and arc.",
-          "Exclude production, direction, technical aspects, art direction, sound, duration, or audience reception."
+          "No meta-writing language or references to strategy, theory, or sources.",
+          "Do not refer to narrative theory or dramatic terminology (such as inciting incident, climax, act structure, dramatic question, pacing, transformation, or similar terms). Translate structural guidance into concrete narrative situations.",
+          "Expand the project brief coherently without contradicting it.",
+          "Maintain a controlled narrative tone. Avoid rhetorical commentary, moral judgment, persuasion, or promotional language.",
+          "Exclude production, direction, technical aspects, art direction, sound, duration, or audience reception.",
+          "Avoid abstract generalities and thematic declarations.",
+          "Do not summarize ideas, themes, or intentions.",
+          "Express themes only through character actions, situations, conflicts, and consequences.",
+          "Ground narrative developments in specific actions or situations rather than conceptual statements.",
+          "Conclude the narrative by describing a final concrete situation.",
+          "Do not end with thematic commentary, reflection, interpretation, or statements about meaning. The ending must depict an outcome, not explain it."
         ],
         "quality_criteria": [
           "Summary length stays within min/max chars.",
-          "No meta references (strategy, summary-as-object, sources).",
+          "No meta references (strategy, narrative-presentation-as-object, sources).",
           "All statements are traceable to provided context.",
           "Tone remains neutral and factual."
         ],
@@ -107,13 +119,13 @@
         "skip_llm": false,
         "extra_rule": "Writing rule (English): Focus on narration only (plot, characters, stakes, themes, arc); exclude production, direction, technical aspects, art direction, sound, duration, and audience reception.",
         "strategy_finder": {
-          "question": "Find in the documents rules and guidance to revise a production summary based on user change requests.",
+          "question": "Find in the documents rules and guidance to revise a narrative presentation based on user change requests.",
           "library_filename_prefixes": ["SRC_NARRATOLOGY"]
         }
       },
       "propagate": {
         "_comment": "Mode propagate : comme edit, mais sans demande utilisateur. On réécrit car le contexte a changé en amont.",
-        "writer_self_question": "How can I rewrite this production summary to reflect the updated context ?",
+        "writer_self_question": "How can I rewrite this narrative presentation to reflect the updated context ?",
         "context_aggregation": {
           "groups": [
             {
@@ -138,7 +150,7 @@
         },
         "strategy_role": "Tell the summary as a visual story, like a storyteller who takes time to narrate.",
         "strategy_hints": [
-          "Focus on narrative function: a production summary for stakeholders.",
+          "Focus on narrative function: a narrative presentation for stakeholders.",
           "Use only facts from the provided context and constraints.",
           "Signal tone through neutral diction, not evaluation.",
           "Respect the length target and format."
@@ -147,13 +159,13 @@
         "redaction_rules": [
           "No meta-writing language or references to strategy or sources.",
           "Keep statements grounded in the project brief only.",
-          "Maintain a sober, factual tone.",
+          "Maintain a sober tone.",
           "Focus on narration only: plot, characters, stakes, themes, and arc.",
           "Exclude production, direction, technical aspects, art direction, sound, duration, or audience reception."
         ],
         "quality_criteria": [
           "Summary length stays within min/max chars.",
-          "No meta references (strategy, summary-as-object, sources).",
+          "No meta references (strategy, narrative-presentation-as-object, sources).",
           "All statements are traceable to provided context.",
           "Tone remains neutral and factual."
         ],
@@ -161,7 +173,7 @@
         "skip_llm": false,
         "extra_rule": "Writing rule (English): Focus on narration only (plot, characters, stakes, themes, arc); exclude production, direction, technical aspects, art direction, sound, duration, and audience reception.",
         "strategy_finder": {
-          "question": "Find in the documents rules and guidance to rewrite a production summary to reflect updated context, without adding new facts.",
+          "question": "Find in the documents rules and guidance to rewrite a narrative presentation to reflect updated context, without adding new facts.",
           "library_filename_prefixes": ["SRC_NARRATOLOGY"]
         }
       }
@@ -192,14 +204,14 @@
             {
               "name": "father",
               "weight": 0.6,
-              "description": "Primary anchor: N0 production summary (already written).",
-              "sources": ["n0.production_summary.summary"]
+              "description": "Primary anchor: N0 narrative presentation (already written).",
+              "sources": ["n0.narrative_presentation.summary"]
             },
             {
               "name": "family",
               "weight": 0.25,
               "description": "Other N0 production constraints and already known project parameters.",
-              "sources": ["n0.* (except n0.production_summary.summary and the current target)"]
+              "sources": ["n0.* (except n0.narrative_presentation.summary and the current target)"]
             },
             {
               "name": "neighbours",
@@ -364,14 +376,14 @@
             {
               "name": "father",
               "weight": 0.6,
-              "description": "Primary anchor: N0 production summary (already written).",
-              "sources": ["n0.production_summary.summary"]
+              "description": "Primary anchor: N0 narrative presentation (already written).",
+              "sources": ["n0.narrative_presentation.summary"]
             },
             {
               "name": "family",
               "weight": 0.25,
               "description": "Other N0 production constraints and already known project parameters.",
-              "sources": ["n0.* (except n0.production_summary.summary and the current target)"]
+              "sources": ["n0.* (except n0.narrative_presentation.summary and the current target)"]
             },
             {
               "name": "neighbours",
@@ -413,14 +425,14 @@
             {
               "name": "father",
               "weight": 0.6,
-              "description": "Primary anchor: N0 production summary (already written).",
-              "sources": ["n0.production_summary.summary"]
+              "description": "Primary anchor: N0 narrative presentation (already written).",
+              "sources": ["n0.narrative_presentation.summary"]
             },
             {
               "name": "family",
               "weight": 0.25,
               "description": "Other N0 production constraints and already known project parameters.",
-              "sources": ["n0.* (except n0.production_summary.summary and the current target)"]
+              "sources": ["n0.* (except n0.narrative_presentation.summary and the current target)"]
             },
             {
               "name": "neighbours",

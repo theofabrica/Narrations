@@ -5,6 +5,7 @@ agentic/venv-r2r/
 
 # Environment variables
 .env
+.env.run
 
 # Python cache
 __pycache__/

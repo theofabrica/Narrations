@@ -1,0 +1,105 @@
+{
+  "project_id": "jesusparis",
+  "session_id": "sess_569dbdc06ebf4f138fa56e2f10e51093",
+  "label": "narration_plan",
+  "logged_at": "2026-02-14T13:41:24.889971Z",
+  "task_plan": {
+    "plan_id": "plan_7c5eb687518a",
+    "created_at": "2026-02-14T13:41:24.889159Z",
+    "source_state_id": "sess_569dbdc06ebf4f138fa56e2f10e51093",
+    "tasks": [
+      {
+        "id": "task_n0_narrative_presentation",
+        "agent": "writer_n0",
+        "input_ref": "state_01_abc",
+        "output_ref": "n0.narrative_presentation",
+        "depends_on": []
+      },
+      {
+        "id": "task_n0_art_direction",
+        "agent": "writer_n0",
+        "input_ref": "state_01_abc",
+        "output_ref": "n0.art_direction",
+        "depends_on": [
+          "task_n0_narrative_presentation"
+        ]
+      },
+      {
+        "id": "task_n0_sound_direction",
+        "agent": "writer_n0",
+        "input_ref": "state_01_abc",
+        "output_ref": "n0.sound_direction",
+        "depends_on": [
+          "task_n0_art_direction"
+        ]
+      }
+    ]
+  },
+  "task_context": {
+    "task_n0_narrative_presentation": {
+      "source_state_payload": {
+        "summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+        "video_type": "film",
+        "target_duration_s": 7200,
+        "mode": "create"
+      },
+      "target_path": "n0.narrative_presentation"
+    },
+    "task_n0_art_direction": {
+      "source_state_payload": {
+        "summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+        "video_type": "film",
+        "target_duration_s": 7200,
+        "mode": "create"
+      },
+      "target_path": "n0.art_direction"
+    },
+    "task_n0_sound_direction": {
+      "source_state_payload": {
+        "summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+        "video_type": "film",
+        "target_duration_s": 7200,
+        "mode": "create"
+      },
+      "target_path": "n0.sound_direction"
+    }
+  },
+  "runner_input": {
+    "plan_id": "plan_7c5eb687518a",
+    "task_plan_ref": "",
+    "task_plan_payload": {
+      "plan_id": "plan_7c5eb687518a",
+      "created_at": "2026-02-14T13:41:24.889159Z",
+      "source_state_id": "sess_569dbdc06ebf4f138fa56e2f10e51093",
+      "tasks": [
+        {
+          "id": "task_n0_narrative_presentation",
+          "agent": "writer_n0",
+          "input_ref": "state_01_abc",
+          "output_ref": "n0.narrative_presentation",
+          "depends_on": []
+        },
+        {
+          "id": "task_n0_art_direction",
+          "agent": "writer_n0",
+          "input_ref": "state_01_abc",
+          "output_ref": "n0.art_direction",
+          "depends_on": [
+            "task_n0_narrative_presentation"
+          ]
+        },
+        {
+          "id": "task_n0_sound_direction",
+          "agent": "writer_n0",
+          "input_ref": "state_01_abc",
+          "output_ref": "n0.sound_direction",
+          "depends_on": [
+            "task_n0_art_direction"
+          ]
+        }
+      ]
+    },
+    "execution_mode": "sequential",
+    "started_at": "2026-02-14T13:41:24.889370Z"
+  }
+}

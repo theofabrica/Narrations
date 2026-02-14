@@ -1,0 +1,51 @@
+{
+  "project_id": "jesusparis",
+  "session_id": "sess_569dbdc06ebf4f138fa56e2f10e51093",
+  "label": "chat_plan",
+  "logged_at": "2026-02-14T13:41:14.111891Z",
+  "task_plan": {
+    "plan_id": "plan_f1e7d9d26d90",
+    "created_at": "2026-02-14T13:41:14.111328Z",
+    "source_state_id": "sess_569dbdc06ebf4f138fa56e2f10e51093",
+    "tasks": [
+      {
+        "id": "task_chat_1a",
+        "agent": "chat_1a",
+        "input_ref": "chat_memory",
+        "output_ref": "chat_1a_output",
+        "depends_on": []
+      },
+      {
+        "id": "task_chat_1b",
+        "agent": "chat_1b",
+        "input_ref": "chat_1a_output",
+        "output_ref": "chat_1b_output",
+        "depends_on": [
+          "task_chat_1a"
+        ]
+      }
+    ]
+  },
+  "task_context": {
+    "task_chat_1a": {
+      "message": "C'est un film de deux heures assez nostalgique avec un humour amer et assez triste.",
+      "project_empty": true,
+      "empty_strata": {
+        "n0": true,
+        "n1": true,
+        "n2": true,
+        "n3": true,
+        "n4": true,
+        "n5": true
+      },
+      "pending_questions": [],
+      "pending_rounds": 1,
+      "chat_mode": "clarify"
+    },
+    "task_chat_1b": {
+      "pending_questions": [],
+      "pending_rounds": 1
+    }
+  },
+  "next_action": "chat_clarification"
+}

@@ -50,6 +50,7 @@ const templates = {
 const N0_PROGRESS_DEFAULT_MS = 90000
 const N0_PROGRESS_MIN_MS = 60000
 const N0_PROGRESS_PADDING = 1.35
+const PROJECTS_FETCH_TIMEOUT_MS = 8000
 
 const defaultTemplate = JSON.stringify(templates.pipeline_audio_stack, null, 2)
 
@@ -83,6 +84,32 @@ const getApiOrigin = () => {
   return `${protocol}//${hostname}`
 }
 
+const fetchWithTimeout = async (url, options = {}, timeoutMs = 10000) => {
+  const controller = new AbortController()
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs)
+  try {
+    return await fetch(url, { ...options, signal: controller.signal })
+  } finally {
+    window.clearTimeout(timer)
+  }
+}
+
+const getProjectsEndpointCandidates = (primaryEndpoint) => {
+  const out = []
+  const pushUnique = (value) => {
+    if (!value || out.includes(value)) {
+      return
+    }
+    out.push(value)
+  }
+  pushUnique(primaryEndpoint)
+  const fallbackOrigin = `${window.location.protocol}//${window.location.hostname}:3333`
+  pushUnique(`${fallbackOrigin}/projects`)
+  pushUnique('http://localhost:3333/projects')
+  pushUnique('http://127.0.0.1:3333/projects')
+  return out
+}
+
 function App() {
   const isCrossOrigin = getApiOrigin() !== window.location.origin
   const basePath = isCrossOrigin ? '' : getBasePath(window.location.pathname)
@@ -114,6 +141,8 @@ function App() {
   const [chatError, setChatError] = useState('')
   const [chatSessionId, setChatSessionId] = useState('')
   const [hasPendingQuestions, setHasPendingQuestions] = useState(false)
+  const [createDeleteStatus, setCreateDeleteStatus] = useState('idle')
+  const [createDeleteError, setCreateDeleteError] = useState('')
   const [progressActive, setProgressActive] = useState(false)
   const [progressValue, setProgressValue] = useState(0)
   const [progressEstimateMs, setProgressEstimateMs] = useState(() => {
@@ -125,6 +154,7 @@ function App() {
     return N0_PROGRESS_DEFAULT_MS
   })
   const progressStartRef = useRef(null)
+  const chatRequestAbortRef = useRef(null)
   const [logOverlayOpen, setLogOverlayOpen] = useState(false)
   const [logApiText, setLogApiText] = useState('')
   const [logUiText, setLogUiText] = useState('')
@@ -133,6 +163,8 @@ function App() {
   const [logError, setLogError] = useState('')
   const [ragStopStatus, setRagStopStatus] = useState('idle')
   const [ragStopError, setRagStopError] = useState('')
+  const [quitStatus, setQuitStatus] = useState('idle')
+  const [quitError, setQuitError] = useState('')
   const [activePage, setActivePage] = useState('home')
   const [n0Data, setN0Data] = useState(null)
   const [n0FromUi, setN0FromUi] = useState(false)
@@ -152,6 +184,7 @@ function App() {
   const [editorChatSummary, setEditorChatSummary] = useState('')
   const editorTargetRef = useRef(null)
   const [n1Data, setN1Data] = useState(null)
+  const [n1FromUi, setN1FromUi] = useState(false)
   const [n1Status, setN1Status] = useState('idle')
   const [n1Error, setN1Error] = useState('')
   const [n1UpdatedAt, setN1UpdatedAt] = useState('')
@@ -235,13 +268,7 @@ function App() {
     element.style.height = `${element.scrollHeight}px`
   }
 
-  const handleStopRag = async () => {
-    const confirmStop = window.confirm(
-      'Arreter les services RAG locaux (R2R + Postgres) ?'
-    )
-    if (!confirmStop) {
-      return
-    }
+  const stopRagServices = async () => {
     setRagStopStatus('loading')
     setRagStopError('')
     try {
@@ -259,10 +286,43 @@ function App() {
         throw new Error(payload?.error || `HTTP ${resp.status}`)
       }
       setRagStopStatus('done')
+      return true
     } catch (err) {
       setRagStopStatus('error')
       setRagStopError(err.message)
+      return false
     }
+  }
+
+  const handleStopRag = async () => {
+    const confirmStop = window.confirm(
+      'Arreter les services RAG locaux (R2R + Postgres) ?'
+    )
+    if (!confirmStop) {
+      return
+    }
+    await stopRagServices()
+  }
+
+  const handleQuitApp = async () => {
+    const confirmQuit = window.confirm(
+      "Quitter l'application et arreter proprement R2R ?"
+    )
+    if (!confirmQuit) {
+      return
+    }
+    setQuitStatus('loading')
+    setQuitError('')
+    const stopped = await stopRagServices()
+    if (!stopped) {
+      setQuitStatus('error')
+      setQuitError('Impossible d’arreter R2R avant fermeture.')
+      return
+    }
+    setQuitStatus('done')
+    // May be blocked unless tab/window opened by script.
+    window.close()
+    window.location.href = 'about:blank'
   }
   const handleAutoResize = (event) => {
     resizeTextarea(event.target)
@@ -556,20 +616,43 @@ function App() {
   const getProjectStrataUrl = (projectId, strata) =>
     `${apiOrigin}${joinPath(apiBasePath, `/projects/${projectId}/${strata}`)}`
 
-  const fetchProjects = async () => {
+  const fetchProjects = async ({ retryOnTimeout = true } = {}) => {
     setProjectsStatus('loading')
     setProjectsError('')
+    const candidates = getProjectsEndpointCandidates(projectsEndpoint)
+    let lastError = null
     try {
-      const resp = await fetch(projectsEndpoint)
-      const data = await resp.json()
-      if (!resp.ok) {
-        throw new Error(`HTTP ${resp.status}`)
+      for (const endpoint of candidates) {
+        try {
+          const resp = await fetchWithTimeout(
+            endpoint,
+            {},
+            PROJECTS_FETCH_TIMEOUT_MS
+          )
+          if (!resp.ok) {
+            throw new Error(`HTTP ${resp.status}`)
+          }
+          const data = await resp.json()
+          setProjects(Array.isArray(data.projects) ? data.projects : [])
+          setProjectsStatus('done')
+          return
+        } catch (err) {
+          lastError = err
+        }
       }
-      setProjects(Array.isArray(data.projects) ? data.projects : [])
-      setProjectsStatus('done')
+      throw lastError || new Error('Aucun endpoint /projects joignable')
     } catch (err) {
+      if (err?.name === 'AbortError' && retryOnTimeout) {
+        return fetchProjects({ retryOnTimeout: false })
+      }
       setProjectsStatus('error')
-      setProjectsError(err.message)
+      if (err?.name === 'AbortError') {
+        setProjectsError(
+          'Timeout API sur /projects. Verifie que le backend tourne puis clique "Rafraichir".'
+        )
+      } else {
+        setProjectsError(err.message)
+      }
     }
   }
 
@@ -596,6 +679,8 @@ function App() {
     setCreateProjectError('')
     setCreatedProjectId('')
     setCreateProjectStatus('idle')
+    setCreateDeleteStatus('idle')
+    setCreateDeleteError('')
   }, [createModalOpen])
 
   useEffect(() => {
@@ -613,15 +698,16 @@ function App() {
       root.data && typeof root.data === 'object'
         ? root.data
         : root
+    const narrativePresentation = data.narrative_presentation || data.production_summary || {}
     return {
-      production_summary: {
-        summary: data.production_summary?.summary || '',
-        production_type: data.production_summary?.production_type || '',
-        target_duration: data.production_summary?.target_duration || '',
-        aspect_ratio: data.production_summary?.aspect_ratio || '16:9',
-        visual_style: data.production_summary?.visual_style || '',
-        tone: data.production_summary?.tone || '',
-        era: data.production_summary?.era || ''
+      narrative_presentation: {
+        summary: narrativePresentation?.summary || '',
+        production_type: narrativePresentation?.production_type || '',
+        target_duration: narrativePresentation?.target_duration || '',
+        aspect_ratio: narrativePresentation?.aspect_ratio || '16:9',
+        visual_style: narrativePresentation?.visual_style || '',
+        tone: narrativePresentation?.tone || '',
+        era: narrativePresentation?.era || ''
       },
       deliverables: {
         visuals: {
@@ -647,12 +733,13 @@ function App() {
 
   const buildN0UiPayload = (payload) => {
     const data = payload && typeof payload === 'object' ? payload : {}
+    const narrativePresentation = data.narrative_presentation || data.production_summary || {}
     return {
-      production_summary: {
-        summary: data.production_summary?.summary || '',
-        production_type: data.production_summary?.production_type || '',
-        target_duration: data.production_summary?.target_duration || '',
-        aspect_ratio: data.production_summary?.aspect_ratio || ''
+      narrative_presentation: {
+        summary: narrativePresentation?.summary || '',
+        production_type: narrativePresentation?.production_type || '',
+        target_duration: narrativePresentation?.target_duration || '',
+        aspect_ratio: narrativePresentation?.aspect_ratio || ''
       },
       art_direction: {
         description: data.art_direction?.description || ''
@@ -663,11 +750,16 @@ function App() {
     }
   }
 
+  const buildN1UiPayload = (payload) => {
+    const data = payload && typeof payload === 'object' ? payload : {}
+    return sanitizeN1(data)
+  }
+
   const hasText = (value) => typeof value === 'string' && value.trim().length > 0
   const isN0Complete = (payload) =>
     Boolean(
       payload &&
-        hasText(payload.production_summary?.summary) &&
+        hasText(payload.narrative_presentation?.summary) &&
         hasText(payload.art_direction?.description) &&
         hasText(payload.sound_direction?.description)
     )
@@ -684,16 +776,66 @@ function App() {
     }
     const characters =
       data.characters && typeof data.characters === 'object' ? data.characters : {}
+    const toNames = (value) =>
+      Array.isArray(value)
+        ? value.map((entry) => String(entry || '').trim()).filter(Boolean)
+        : []
+    const toCharacterEntries = (value, fields) =>
+      Array.isArray(value)
+        ? value.map((entry) => {
+            const rawEntry = entry && typeof entry === 'object' ? entry : {}
+            const rawDescription =
+              rawEntry.character_description &&
+              typeof rawEntry.character_description === 'object'
+                ? rawEntry.character_description
+                : {}
+            const description = {}
+            fields.forEach((field) => {
+              description[field] =
+                rawDescription[field] === null || rawDescription[field] === undefined
+                  ? ''
+                  : String(rawDescription[field])
+            })
+            return { character_description: description }
+          })
+        : []
     return {
       characters: {
         main_characters: {
-          number: toNumber(characters.main_characters?.number)
+          number: toNumber(characters.main_characters?.number),
+          names: toNames(characters.main_characters?.names),
+          characters: toCharacterEntries(characters.main_characters?.characters, [
+            'name',
+            'narrativ_role',
+            'appearance',
+            'backstory',
+            'motivation',
+            'antagonist',
+            'image_path'
+          ])
         },
         secondary_characters: {
-          number: toNumber(characters.secondary_characters?.number)
+          number: toNumber(characters.secondary_characters?.number),
+          names: toNames(characters.secondary_characters?.names),
+          characters: toCharacterEntries(characters.secondary_characters?.characters, [
+            'name',
+            'narrativ_role',
+            'appearance',
+            'backstory',
+            'motivation',
+            'antagonist',
+            'image_path'
+          ])
         },
         background_characters: {
-          number: toNumber(characters.background_characters?.number)
+          number: toNumber(characters.background_characters?.number),
+          names: toNames(characters.background_characters?.names),
+          characters: toCharacterEntries(characters.background_characters?.characters, [
+            'name',
+            'narrativ_role',
+            'appearance',
+            'image_path'
+          ])
         }
       }
     }
@@ -1244,18 +1386,32 @@ function App() {
     setN1Status('loading')
     setN1Error('')
     try {
-      const resp = await fetch(getProjectStrataUrl(projectId, 'n1'))
-      const data = await resp.json()
-      if (!resp.ok) {
-        throw new Error(`HTTP ${resp.status}`)
+      let data = null
+      let fromUi = false
+      const uiResp = await fetch(`${getProjectStrataUrl(projectId, 'n1')}/ui`)
+      if (uiResp.ok) {
+        data = await uiResp.json()
+        fromUi = true
+      } else if (uiResp.status !== 404) {
+        throw new Error(`HTTP ${uiResp.status}`)
+      }
+      if (!data) {
+        const resp = await fetch(getProjectStrataUrl(projectId, 'n1'))
+        data = await resp.json()
+        if (!resp.ok) {
+          throw new Error(`HTTP ${resp.status}`)
+        }
+        fromUi = false
       }
       setN1Data(sanitizeN1(data?.data || null))
+      setN1FromUi(fromUi)
       setN1UpdatedAt(data?.updated_at || '')
       setN1Status('done')
     } catch (err) {
       setN1Status('error')
       setN1Error(err.message)
       setN1Data(null)
+      setN1FromUi(false)
       setN1UpdatedAt('')
     }
   }
@@ -1354,6 +1510,7 @@ function App() {
       setN0Status('idle')
       setN0Error('')
       setN1Data(null)
+      setN1FromUi(false)
       setN1UpdatedAt('')
       setN1Status('idle')
       setN1Error('')
@@ -1431,15 +1588,28 @@ function App() {
   }, [n3Data, selectedN3UnitId])
 
   const updateNestedValue = (data, path, value) => {
-    const next = { ...data }
-    let cursor = next
-    for (let i = 0; i < path.length - 1; i += 1) {
-      const key = path[i]
-      cursor[key] = { ...(cursor[key] || {}) }
-      cursor = cursor[key]
+    const setDeep = (node, segments) => {
+      if (!segments.length) {
+        return value
+      }
+      const [key, ...rest] = segments
+      const nextContainer = Array.isArray(node)
+        ? [...node]
+        : node && typeof node === 'object'
+        ? { ...node }
+        : typeof key === 'number'
+        ? []
+        : {}
+      const currentChild = nextContainer[key]
+      const defaultChild =
+        rest.length > 0 && typeof rest[0] === 'number' ? [] : {}
+      nextContainer[key] = setDeep(
+        currentChild === undefined ? defaultChild : currentChild,
+        rest
+      )
+      return nextContainer
     }
-    cursor[path[path.length - 1]] = value
-    return next
+    return setDeep(data, path)
   }
 
   const toArray = (value) =>
@@ -1450,6 +1620,155 @@ function App() {
 
   const fromArray = (value) =>
     Array.isArray(value) ? value.join(', ') : ''
+
+  const getN1CharacterFields = (groupKey) => {
+    if (groupKey === 'background_characters') {
+      return ['name', 'narrativ_role', 'appearance', 'image_path']
+    }
+    return [
+      'name',
+      'narrativ_role',
+      'appearance',
+      'backstory',
+      'motivation',
+      'antagonist',
+      'image_path'
+    ]
+  }
+
+  const renderN1CharactersGroup = (groupKey, label) => {
+    const group = n1Data?.characters?.[groupKey]
+    const items = Array.isArray(group?.characters) ? group.characters : []
+    const fields = getN1CharacterFields(groupKey)
+    return (
+      <details className="n1-group" key={groupKey}>
+        <summary>
+          {label} ({items.length})
+        </summary>
+        <div className="n1-group-list">
+          {items.length ? (
+            items.map((entry, index) => {
+              const description =
+                entry &&
+                typeof entry === 'object' &&
+                entry.character_description &&
+                typeof entry.character_description === 'object'
+                  ? entry.character_description
+                  : {}
+              const title = description.name || `Personnage ${index + 1}`
+              return (
+                <details className="n1-character-card" key={`${groupKey}-${index}-${title}`}>
+                  <summary>{title}</summary>
+                  <div className="n1-character-name">{title}</div>
+                  {'narrativ_role' in description ? (
+                    <label className="n1-role-editor">
+                      Role narratif
+                      <textarea
+                        value={description.narrativ_role || ''}
+                        onChange={(event) =>
+                          handleN1FieldChange(
+                            [
+                              'characters',
+                              groupKey,
+                              'characters',
+                              index,
+                              'character_description',
+                              'narrativ_role'
+                            ],
+                            event.target.value
+                          )
+                        }
+                      />
+                    </label>
+                  ) : null}
+                  {'appearance' in description ? (
+                    <label className="n1-role-editor">
+                      Apparence
+                      <textarea
+                        value={description.appearance || ''}
+                        onChange={(event) =>
+                          handleN1FieldChange(
+                            [
+                              'characters',
+                              groupKey,
+                              'characters',
+                              index,
+                              'character_description',
+                              'appearance'
+                            ],
+                            event.target.value
+                          )
+                        }
+                      />
+                    </label>
+                  ) : null}
+                  {'backstory' in description ? (
+                    <label className="n1-role-editor">
+                      Backstory
+                      <textarea
+                        value={description.backstory || ''}
+                        onChange={(event) =>
+                          handleN1FieldChange(
+                            [
+                              'characters',
+                              groupKey,
+                              'characters',
+                              index,
+                              'character_description',
+                              'backstory'
+                            ],
+                            event.target.value
+                          )
+                        }
+                      />
+                    </label>
+                  ) : null}
+                  {'motivation' in description ? (
+                    <label className="n1-role-editor">
+                      Motivation
+                      <textarea
+                        value={description.motivation || ''}
+                        onChange={(event) =>
+                          handleN1FieldChange(
+                            [
+                              'characters',
+                              groupKey,
+                              'characters',
+                              index,
+                              'character_description',
+                              'motivation'
+                            ],
+                            event.target.value
+                          )
+                        }
+                      />
+                    </label>
+                  ) : null}
+                  <div className="n1-character-grid">
+                    {fields
+                      .filter(
+                        (field) =>
+                          !['narrativ_role', 'appearance', 'backstory', 'motivation'].includes(
+                            field
+                          )
+                      )
+                      .map((field) => (
+                      <div className="n1-character-field" key={`${groupKey}-${index}-${field}`}>
+                        <span className="n1-character-key">{field}</span>
+                        <span className="n1-character-value">{description[field] || '—'}</span>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              )
+            })
+          ) : (
+            <p className="hint">Aucun personnage calcule pour cette section.</p>
+          )}
+        </div>
+      </details>
+    )
+  }
 
   const handleN0FieldChange = (path, value) => {
     setN0Data((prev) => (prev ? updateNestedValue(prev, path, value) : prev))
@@ -2353,16 +2672,27 @@ function App() {
     if (!selectedProject || !payload) {
       return false
     }
-    payload = sanitizeN1(payload)
     setN1Status('saving')
     setN1Error('')
     try {
-      const body = JSON.stringify(payload)
-      const resp = await fetch(getProjectStrataUrl(selectedProject, 'n1'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body
-      })
+      let resp = null
+      if (n1FromUi) {
+        const uiPayload = buildN1UiPayload(payload)
+        const body = JSON.stringify(uiPayload)
+        resp = await fetch(`${getProjectStrataUrl(selectedProject, 'n1')}/ui`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body
+        })
+      } else {
+        payload = sanitizeN1(payload)
+        const body = JSON.stringify(payload)
+        resp = await fetch(getProjectStrataUrl(selectedProject, 'n1'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body
+        })
+      }
       const data = await resp.json()
       if (!resp.ok) {
         throw new Error(`HTTP ${resp.status}`)
@@ -2646,6 +2976,8 @@ function App() {
   const openCreateModal = () => {
     setCreateProjectName('')
     setCanCloseCreateModal(false)
+    setCreateDeleteStatus('idle')
+    setCreateDeleteError('')
     setProgressActive(false)
     setProgressValue(0)
     progressStartRef.current = null
@@ -2653,11 +2985,64 @@ function App() {
   }
 
   const closeCreateModal = () => {
+    if (chatRequestAbortRef.current) {
+      chatRequestAbortRef.current.abort()
+      chatRequestAbortRef.current = null
+    }
     setCreateModalOpen(false)
     setCanCloseCreateModal(false)
+    setCreateDeleteStatus('idle')
+    setCreateDeleteError('')
     setProgressActive(false)
     setProgressValue(0)
     progressStartRef.current = null
+  }
+
+  const handleStopCreateProcess = () => {
+    if (chatRequestAbortRef.current) {
+      chatRequestAbortRef.current.abort()
+      chatRequestAbortRef.current = null
+    }
+    setChatStatus('idle')
+    setChatError('Processus arrete par l utilisateur.')
+    setProgressActive(false)
+    setProgressValue(0)
+    progressStartRef.current = null
+  }
+
+  const handleDeleteCreatedProjectFromModal = async () => {
+    const projectId = (createdProjectId || '').trim()
+    if (!projectId) {
+      setCreateDeleteError('Aucun projet cree a supprimer.')
+      return
+    }
+    const ok = window.confirm(`Supprimer le projet "${projectId}" ?`)
+    if (!ok) {
+      return
+    }
+    if (chatRequestAbortRef.current) {
+      chatRequestAbortRef.current.abort()
+      chatRequestAbortRef.current = null
+    }
+    setCreateDeleteStatus('loading')
+    setCreateDeleteError('')
+    try {
+      const resp = await fetch(`${projectsEndpoint}/${projectId}`, {
+        method: 'DELETE'
+      })
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`)
+      }
+      setSelectedProject((prev) => (prev === projectId ? '' : prev))
+      setCreatedProjectId('')
+      setActivePage('home')
+      await fetchProjects()
+      closeCreateModal()
+      setCreateDeleteStatus('idle')
+    } catch (err) {
+      setCreateDeleteStatus('error')
+      setCreateDeleteError(err.message)
+    }
   }
 
   const handleCreateProject = async () => {
@@ -2699,11 +3084,14 @@ function App() {
       progressStartRef.current = Date.now()
     }
     try {
+      const abortController = new AbortController()
+      chatRequestAbortRef.current = abortController
       const resp = await fetch(
         `${apiOrigin}${joinPath(apiBasePath, `/projects/${encodeURIComponent(projectId)}/narration/message`)}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          signal: abortController.signal,
           body: JSON.stringify({
             message,
             session_id: chatSessionId || null,
@@ -2773,6 +3161,13 @@ function App() {
         }
       }
     } catch (err) {
+      if (err?.name === 'AbortError') {
+        setChatError('Processus interrompu.')
+        setProgressActive(false)
+        setProgressValue(0)
+        progressStartRef.current = null
+        return
+      }
       setChatError(err.message)
       setChatMessages((prev) => [
         ...prev,
@@ -2782,6 +3177,7 @@ function App() {
       setProgressValue(0)
       progressStartRef.current = null
     } finally {
+      chatRequestAbortRef.current = null
       setChatStatus('idle')
     }
   }
@@ -3187,7 +3583,23 @@ function App() {
             {ragStopStatus === 'loading'
               ? 'Arret...'
               : ragStopStatus === 'done'
-                ? 'Arrete'
+                ? 'RAG arrete'
+                : 'Stop RAG'}
+          </button>
+          <button
+            type="button"
+            className="danger"
+            onClick={handleQuitApp}
+            disabled={quitStatus === 'loading'}
+            title={
+              quitError ||
+              "Arrete R2R puis ferme l'application (si autorise par le navigateur)."
+            }
+          >
+            {quitStatus === 'loading'
+              ? 'Fermeture...'
+              : quitStatus === 'done'
+                ? 'Ferme'
                 : 'Quitter'}
           </button>
           <button
@@ -3300,11 +3712,11 @@ function App() {
                   className="project-input"
                   placeholder="type de production"
                   aria-label="Type de production"
-                  value={n0Data?.production_summary?.production_type || ''}
+                  value={n0Data?.narrative_presentation?.production_type || ''}
                   disabled={!selectedProject || !n0Data}
                   onChange={(event) =>
                     handleN0FieldChange(
-                      ['production_summary', 'production_type'],
+                      ['narrative_presentation', 'production_type'],
                       event.target.value
                     )
                   }
@@ -3314,11 +3726,11 @@ function App() {
                   className="project-input"
                   placeholder="00h00m00s"
                   aria-label="Duree cible"
-                  value={n0Data?.production_summary?.target_duration || ''}
+                  value={n0Data?.narrative_presentation?.target_duration || ''}
                   disabled={!selectedProject || !n0Data}
                   onChange={(event) =>
                     handleN0FieldChange(
-                      ['production_summary', 'target_duration'],
+                      ['narrative_presentation', 'target_duration'],
                       event.target.value
                     )
                   }
@@ -3327,11 +3739,11 @@ function App() {
                   type="text"
                   className="project-input"
                   aria-label="Ratio"
-                  value={n0Data?.production_summary?.aspect_ratio || '16:9'}
+                  value={n0Data?.narrative_presentation?.aspect_ratio || '16:9'}
                   disabled={!selectedProject || !n0Data}
                   onChange={(event) =>
                     handleN0FieldChange(
-                      ['production_summary', 'aspect_ratio'],
+                      ['narrative_presentation', 'aspect_ratio'],
                       event.target.value
                     )
                   }
@@ -3364,13 +3776,13 @@ function App() {
                         Resume (paragraphe)
                         <textarea
                           className="auto-resize"
-                          value={n0Data.production_summary?.summary || ''}
+                          value={n0Data.narrative_presentation?.summary || ''}
                           data-orchestrate="n0-summary"
-                          data-edit-path="n0.production_summary.summary"
+                          data-edit-path="n0.narrative_presentation.summary"
                           onInput={handleAutoResize}
                           onChange={(event) =>
                             handleN0FieldChange(
-                              ['production_summary', 'summary'],
+                              ['narrative_presentation', 'summary'],
                               event.target.value
                             )
                           }
@@ -3601,6 +4013,12 @@ function App() {
                               )
                             }
                           />
+                          {Array.isArray(n1Data.characters?.main_characters?.names) &&
+                          n1Data.characters.main_characters.names.length ? (
+                            <div className="hint" style={{ marginTop: 8 }}>
+                              Noms: {n1Data.characters.main_characters.names.join(', ')}
+                            </div>
+                          ) : null}
                         </label>
                         <label>
                           Personnages secondaires (nombre)
@@ -3614,6 +4032,12 @@ function App() {
                               )
                             }
                           />
+                          {Array.isArray(n1Data.characters?.secondary_characters?.names) &&
+                          n1Data.characters.secondary_characters.names.length ? (
+                            <div className="hint" style={{ marginTop: 8 }}>
+                              Noms: {n1Data.characters.secondary_characters.names.join(', ')}
+                            </div>
+                          ) : null}
                         </label>
                         <label>
                           Personnages de fond (nombre)
@@ -3627,7 +4051,30 @@ function App() {
                               )
                             }
                           />
+                          {Array.isArray(n1Data.characters?.background_characters?.names) &&
+                          n1Data.characters.background_characters.names.length ? (
+                            <div className="hint" style={{ marginTop: 8 }}>
+                              Noms: {n1Data.characters.background_characters.names.join(', ')}
+                            </div>
+                          ) : null}
                         </label>
+                      </div>
+                    </section>
+                    <section>
+                      <h3>Personnages detailles</h3>
+                      <div className="n1-groups">
+                        {renderN1CharactersGroup(
+                          'main_characters',
+                          'Personnages principaux'
+                        )}
+                        {renderN1CharactersGroup(
+                          'secondary_characters',
+                          'Personnages secondaires'
+                        )}
+                        {renderN1CharactersGroup(
+                          'background_characters',
+                          'Personnages de fond'
+                        )}
                       </div>
                     </section>
                   </div>
@@ -4500,6 +4947,28 @@ function App() {
                     />
                   ) : null}
                   {chatError ? <p className="hint error">Erreur: {chatError}</p> : null}
+                  {createDeleteError ? (
+                    <p className="hint error">Erreur suppression: {createDeleteError}</p>
+                  ) : null}
+                  <div className="modal-actions">
+                    <button
+                      type="button"
+                      onClick={handleStopCreateProcess}
+                      disabled={chatStatus !== 'sending' && !progressActive}
+                    >
+                      Stop
+                    </button>
+                    <button
+                      type="button"
+                      className="danger"
+                      onClick={handleDeleteCreatedProjectFromModal}
+                      disabled={!createdProjectId || createDeleteStatus === 'loading'}
+                    >
+                      {createDeleteStatus === 'loading'
+                        ? 'Suppression...'
+                        : 'Supprimer le projet'}
+                    </button>
+                  </div>
                   <div className="chat-input">
                     <textarea
                       value={chatInput}

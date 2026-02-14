@@ -3,10 +3,11 @@
   "strata": "n0",
   "updated_at": "",
   "data": {
-    "production_summary": {
+    "narrative_presentation": {
       "summary": "",
       "production_type": "",
       "target_duration": "",
+      "target_duration_text": "",
       "aspect_ratio": "",
       "visual_style": "",
       "tone": "",

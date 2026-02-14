@@ -35,7 +35,10 @@ def test_run_narration_flow_skips_when_pending_questions(monkeypatch):
 def test_run_narration_flow_runs_when_allowed(monkeypatch, tmp_path):
     runner = DummyRunner()
     state = {"pending_questions": [], "brief": {"target_strata": ["n0"], "target_paths": []}}
-    plan = {"plan_id": "plan_123", "tasks": [{"id": "t1", "output_ref": "n0.production_summary"}]}
+    plan = {
+        "plan_id": "plan_123",
+        "tasks": [{"id": "t1", "output_ref": "n0.narrative_presentation"}],
+    }
 
     monkeypatch.setattr(
         narration_service, "get_project_root", lambda project_id: tmp_path / project_id

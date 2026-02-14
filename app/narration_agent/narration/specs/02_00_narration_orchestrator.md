@@ -29,7 +29,7 @@
 - `project_id` is filled by application code from the folder name.
 - If N0-N5 states are empty (new project), run a generation loop:
   - generate N0, then N1, then N2, then N3, then N4, then N5.
-  - for N0, create one task per section (e.g. `production_summary`, `deliverables`,
+  - for N0, create one task per section (e.g. `narrative_presentation`, `deliverables`,
     `art_direction`, `sound_direction`) and execute them via the writer.
   - stop if a level cannot be filled (missing data).
 - If states are not empty, switch to edit mode (detailed later).

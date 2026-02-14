@@ -1,0 +1,9 @@
+{
+  "project_id": "demo",
+  "session_id": "sess_demo",
+  "label": "narration_orchestrator_llm",
+  "logged_at": "2026-02-12T11:57:18.494959Z",
+  "used_llm": false,
+  "reason": "creation_mode",
+  "raw_output": ""
+}

@@ -1,0 +1,23 @@
+{
+  "total_requests": 225,
+  "modes": {
+    "fallback_error": 32,
+    "agentic_search": 79,
+    "fallback_local": 6,
+    "agentic_deep": 61,
+    "agentic": 47
+  },
+  "reasons": {
+    "agentic_exception:R2RException": 17,
+    "agentic_retry_without_conversation_success": 122,
+    "client_unavailable": 6,
+    "agentic_exception:RuntimeError": 14,
+    "deep_exploratory_failed_kept_focused": 6,
+    "agentic_success": 47,
+    "agentic_exception:R2RClientException": 1,
+    "agentic_empty_then_search": 12
+  },
+  "fallback_rate": 0.1689,
+  "updated_at": "2026-02-14T13:53:50.329297Z",
+  "signature": "08fef482e6072dcb"
+}

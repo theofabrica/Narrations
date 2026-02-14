@@ -1,0 +1,232 @@
+{
+  "project_id": "jesusparis",
+  "target_path": "n0.art_direction",
+  "writing_typology": "style",
+  "strategy_id": "style_v1",
+  "strategy_question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+  "strategy_context_payload": {
+    "target_path": "n0.art_direction",
+    "writing_typology": "style",
+    "mode": "write",
+    "strategy_question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+    "project_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with...",
+    "primary_objective": "",
+    "constraints": [],
+    "redaction_constraints": {
+      "min_chars": 500,
+      "max_chars": 1000
+    },
+    "existing_excerpt": "",
+    "expected_steps": 5,
+    "sources": [
+      {
+        "rank": 1,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "summary": "The art direction should focus on creating a coherent visual identity that translates the narrative into a structured visual system, emphasizing the importance of materials, textures, and their sociological coherence.",
+        "excerpt": "Un monde visuel n\u2019existe pas par ses formes seules, mais par ses surfaces. Le look development int\u00e8gre donc : \u2022 des mati\u00e8res dominantes (bois, m\u00e9tal, textile, b\u00e9ton, plastique), \u2022 leur \u00e9tat (neuf, us\u00e9, r\u00e9par\u00e9, d\u00e9grad\u00e9), \u2022 leur coh\u00e9rence sociologique.",
+        "key_concepts": [
+          "visual identity",
+          "materials",
+          "textures",
+          "sociological coherence"
+        ],
+        "score": 0.6979,
+        "evidence_role": "domain_context",
+        "evidence_relevance": 0.7,
+        "evidence_actionability": 0.6,
+        "evidence_specificity": 0.853
+      },
+      {
+        "rank": 2,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "summary": "A successful lookbook serves as a foundational document for art direction, outlining visual intentions and functional color palettes that guide the overall aesthetic without detailing every scene.",
+        "excerpt": "Le lookbook est le premier document structurant de la direction artistique. Contenu typique (mais jamais fig\u00e9) \u2022 intention g\u00e9n\u00e9rale (texte court, clair, non lyrique), \u2022 axes visuels majeurs, \u2022 palettes chromatiques (pas d\u00e9coratives, mais fonctionnelles).",
+        "key_concepts": [
+          "lookbook",
+          "visual intentions",
+          "functional palettes"
+        ],
+        "score": 0.2685,
+        "evidence_role": "domain_context",
+        "evidence_relevance": 0.1429,
+        "evidence_actionability": 0.25,
+        "evidence_specificity": 0.8016
+      },
+      {
+        "rank": 3,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "summary": "Art direction should consider the emotional reading of shots, influenced by the construction of sets, lighting, and the physical relationship between characters and their environments.",
+        "excerpt": "Ces d\u00e9cisions influencent directement : \u2022 la construction des d\u00e9cors, \u2022 la peinture, \u2022 la lumi\u00e8re, \u2022 la lecture \u00e9motionnelle des plans.",
+        "key_concepts": [
+          "emotional reading",
+          "set construction",
+          "lighting"
+        ],
+        "score": 0.241,
+        "evidence_role": "domain_context",
+        "evidence_relevance": 0.1429,
+        "evidence_actionability": 0.15,
+        "evidence_specificity": 0.785
+      },
+      {
+        "rank": 4,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "summary": "The relationship between characters and their environments is crucial; art direction must anticipate how spaces can amplify or diminish a character's presence within the frame.",
+        "excerpt": "Un m\u00eame d\u00e9cor peut : \u2022 \u00e9craser un personnage, \u2022 le magnifier, \u2022 le neutraliser.",
+        "key_concepts": [
+          "character presence",
+          "environment relationship",
+          "frame"
+        ],
+        "score": 0.2399,
+        "evidence_role": "domain_context",
+        "evidence_relevance": 0.1429,
+        "evidence_actionability": 0.15,
+        "evidence_specificity": 0.778
+      },
+      {
+        "rank": 5,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "summary": "Color should be viewed as a structural element that evolves throughout the film, ensuring continuity and emotional coherence across scenes.",
+        "excerpt": "La DA veille donc \u00e0 : \u2022 la progression ou la stabilit\u00e9 des dominantes, \u2022 les ruptures justifi\u00e9es (changement de lieu, de point de vue, de monde).",
+        "key_concepts": [
+          "color structure",
+          "continuity",
+          "emotional coherence"
+        ],
+        "score": 0.1992,
+        "evidence_role": "mixed_or_unknown",
+        "evidence_relevance": 0.0714,
+        "evidence_actionability": 0.15,
+        "evidence_specificity": 0.7925
+      }
+    ]
+  },
+  "evidence_report": {
+    "status": "ok",
+    "score_mode": "semantic_llm",
+    "kept_count": 5,
+    "raw_count": 5,
+    "thresholds": {
+      "overall_min": 0.0,
+      "relevance_min": 0.0,
+      "rescue_relevance_min": 0.0
+    },
+    "evidence_mix": {
+      "enabled": false,
+      "policy": "loose_topk_no_abstract_filter"
+    },
+    "details": [
+      {
+        "index": 0,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.6979,
+          "relevance": 0.7,
+          "actionability": 0.6,
+          "specificity": 0.853
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      },
+      {
+        "index": 1,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.2685,
+          "relevance": 0.1429,
+          "actionability": 0.25,
+          "specificity": 0.8016
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      },
+      {
+        "index": 2,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.241,
+          "relevance": 0.1429,
+          "actionability": 0.15,
+          "specificity": 0.785
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      },
+      {
+        "index": 3,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.2399,
+          "relevance": 0.1429,
+          "actionability": 0.15,
+          "specificity": 0.778
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      },
+      {
+        "index": 4,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.1992,
+          "relevance": 0.0714,
+          "actionability": 0.15,
+          "specificity": 0.7925
+        },
+        "evidence_role": "mixed_or_unknown",
+        "accepted": true
+      }
+    ],
+    "retrieval_variants": {
+      "enabled": true,
+      "variant_count": 1,
+      "time_budget_s": 1800,
+      "max_variants": 4,
+      "elapsed_total_ms": 27763,
+      "stopped_early": "",
+      "per_variant": [
+        {
+          "variant_index": 1,
+          "question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+          "elapsed_ms": 27763,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 5,
+          "added_unique_hits": 5
+        }
+      ],
+      "merged_unique_count": 5,
+      "returned_count": 5
+    }
+  },
+  "strategy_text": "1. Develop a coherent visual identity for the film by focusing on the use of materials and textures that align with the narrative's sociological context. Consider the dominant materials such as wood, metal, textile, concrete, and plastic, and their states (new, worn, repaired, degraded) to create a structured visual system that reflects the story's themes. 2. Create a foundational lookbook that outlines the visual intentions and functional color palettes for the film. This document should include a clear and concise general intention, major visual axes, and functional rather than decorative color palettes to guide the overall aesthetic. 3. Consider the emotional reading of each shot by carefully constructing sets and using lighting to influence the viewer's perception. The physical relationship between characters and their environments should be designed to enhance the emotional impact of the scenes. 4. Anticipate how the environments can affect the characters' presence within the frame. Design spaces that can either amplify, diminish, or neutralize a character's presence, depending on the narrative needs, to ensure that the art direction supports the storytelling. 5. Use color as a structural element that evolves throughout the film to maintain continuity and emotional coherence. Ensure that any changes in color dominance are justified by shifts in location, perspective, or world, to support the narrative progression and emotional journey.",
+  "library_item_ids": [
+    "da_chatgpt"
+  ],
+  "source_refs": [
+    "Concevoir la direction artistique - ChatGPT (notes): The art direction should focus on creating a coherent visual identity that translates the narrative into a structured visual system, emphasizing the importance of materials, textures, and their sociological coherence. | Concepts: visual identity, materials, textures, sociological coherence",
+    "Concevoir la direction artistique - ChatGPT (notes): A successful lookbook serves as a foundational document for art direction, outlining visual intentions and functional color palettes that guide the overall aesthetic without detailing every scene. | Concepts: lookbook, visual intentions, functional palettes",
+    "Concevoir la direction artistique - ChatGPT (notes): Art direction should consider the emotional reading of shots, influenced by the construction of sets, lighting, and the physical relationship between characters and their environments. | Concepts: emotional reading, set construction, lighting",
+    "Concevoir la direction artistique - ChatGPT (notes): The relationship between characters and their environments is crucial; art direction must anticipate how spaces can amplify or diminish a character's presence within the frame. | Concepts: character presence, environment relationship, frame",
+    "Concevoir la direction artistique - ChatGPT (notes): Color should be viewed as a structural element that evolves throughout the film, ensuring continuity and emotional coherence across scenes. | Concepts: color structure, continuity, emotional coherence"
+  ],
+  "notes": "Auto-selected based on writing typology and language. rag_mode=agentic_deep, rag_hits=5, evidence_mode=ok, evidence_kept=5.",
+  "logged_at": "2026-02-14T13:52:42.772401Z"
+}

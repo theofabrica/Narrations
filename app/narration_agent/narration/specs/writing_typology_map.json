@@ -9,7 +9,7 @@
   },
   "sections": {
     "n0": {
-      "production_summary": "summary",
+      "narrative_presentation": "summary",
       "deliverables": "structure",
       "art_direction": "style",
       "sound_direction": "style"

@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from app.narration_agent.llm_client import LLMClient, LLMRequest
@@ -19,6 +21,7 @@ from app.narration_agent.writer_agent.n_rules.n0_rules import (
     infer_n0_visual_style_tone,
 )
 from app.narration_agent.writer_agent.redactor.redactor import Redactor
+from app.utils.project_storage import get_project_root
 
 
 @dataclass
@@ -85,6 +88,13 @@ class WriterRunResult:
 
 
 class WriterOrchestrator:
+    @staticmethod
+    def _normalize_target_path(target_path: str) -> str:
+        value = str(target_path or "").strip()
+        if value.startswith("n0.production_summary"):
+            return value.replace("n0.production_summary", "n0.narrative_presentation", 1)
+        return value
+
     def _context_pack_for_redactor(self, context_pack: Dict[str, Any]) -> Dict[str, Any]:
         """Remove debug-only keys that must never be fed back to the redactor."""
         if not isinstance(context_pack, dict):
@@ -163,6 +173,7 @@ class WriterOrchestrator:
         target_path: str,
         source_state: Dict[str, Any],
     ) -> WriterRunResult:
+        target_path = self._normalize_target_path(target_path)
         context_pack = self.context_builder.build(project_id, source_state, target_path)
         target_current = context_pack.payload.get("target_current")
         if not isinstance(target_current, dict):
@@ -269,16 +280,11 @@ class WriterOrchestrator:
     ) -> WriterRunResult:
         strategy_card: Dict[str, Any] = {}
         if plan.use_strategy:
-            strategy_question = (
-                plan.strategy_finder_question.strip()
-                if isinstance(plan.strategy_finder_question, str)
-                and plan.strategy_finder_question.strip()
-                else self._build_strategy_question(
-                    target_path=target_path,
-                    context_pack=context_pack,
-                    rule=self._build_rules_payload(plan),
-                    has_existing=bool(existing_fields),
-                )
+            strategy_question = self._resolve_strategy_question(
+                target_path=target_path,
+                plan=plan,
+                context_pack=context_pack,
+                existing_fields=existing_fields,
             )
             if strategy_question:
                 context_pack["strategy_question"] = strategy_question
@@ -286,7 +292,12 @@ class WriterOrchestrator:
                 context_pack=context_pack,
                 plan=plan,
             )
-            strategy_card = self.strategy_finder.build_strategy(context_pack)
+            strategy_card = self._resolve_strategy_card(
+                project_id=project_id,
+                target_path=target_path,
+                context_pack=context_pack,
+                strategy_question=strategy_question,
+            )
         context_pack["strategy_card"] = strategy_card
 
         redaction_result = self._redact_with_validations(
@@ -328,7 +339,7 @@ class WriterOrchestrator:
             extra_patch = infer_n0_visual_style_tone(project_id, source_state)
             if extra_patch:
                 try:
-                    merge_target_patch(project_id, "n0.production_summary", extra_patch)
+                    merge_target_patch(project_id, "n0.narrative_presentation", extra_patch)
                 except Exception:
                     pass
 
@@ -354,6 +365,26 @@ class WriterOrchestrator:
         existing_fields: Dict[str, str],
     ) -> WriterRunResult:
         strategy_card: Dict[str, Any] = {}
+        strategy_question = ""
+        if plan.use_strategy:
+            strategy_question = self._resolve_strategy_question(
+                target_path=target_path,
+                plan=plan,
+                context_pack=context_pack,
+                existing_fields=existing_fields,
+            )
+            if strategy_question:
+                context_pack["strategy_question"] = strategy_question
+            context_pack["context_groups"] = self._build_context_groups(
+                context_pack=context_pack,
+                plan=plan,
+            )
+            strategy_card = self._resolve_strategy_card(
+                project_id=project_id,
+                target_path=target_path,
+                context_pack=context_pack,
+                strategy_question=strategy_question,
+            )
         context_pack["strategy_card"] = strategy_card
         agentic_trace: List[Dict[str, Any]] = []
         last_patch: Dict[str, Any] = {}
@@ -394,7 +425,12 @@ class WriterOrchestrator:
                 action = "redact"
             if action == "build_strategy" and not plan.use_strategy:
                 action = "redact"
-            if last_eval and last_eval.needs_strategy and plan.use_strategy:
+            if (
+                last_eval
+                and last_eval.needs_strategy
+                and plan.use_strategy
+                and not self._lock_strategy_refresh(target_path, strategy_card)
+            ):
                 action = "build_strategy"
             if last_eval and last_eval.rewrite and action == "stop":
                 action = "redact"
@@ -410,25 +446,24 @@ class WriterOrchestrator:
                     context_pack["target_current"] = target_current
 
             if action == "build_strategy" and plan.use_strategy:
-                strategy_question = (
-                    plan.strategy_finder_question.strip()
-                    if isinstance(plan.strategy_finder_question, str)
-                    and plan.strategy_finder_question.strip()
-                    else self._build_strategy_question(
-                        target_path=target_path,
+                if self._lock_strategy_refresh(target_path, strategy_card):
+                    action = "redact"
+                else:
+                    if not strategy_question:
+                        strategy_question = self._resolve_strategy_question(
+                            target_path=target_path,
+                            plan=plan,
+                            context_pack=context_pack,
+                            existing_fields=existing_fields,
+                        )
+                    if strategy_question:
+                        context_pack["strategy_question"] = strategy_question
+                    context_pack["context_groups"] = self._build_context_groups(
                         context_pack=context_pack,
-                        rule=self._build_rules_payload(plan),
-                        has_existing=bool(existing_fields),
+                        plan=plan,
                     )
-                )
-                if strategy_question:
-                    context_pack["strategy_question"] = strategy_question
-                context_pack["context_groups"] = self._build_context_groups(
-                    context_pack=context_pack,
-                    plan=plan,
-                )
-                strategy_card = self.strategy_finder.build_strategy(context_pack)
-                context_pack["strategy_card"] = strategy_card
+                    strategy_card = self.strategy_finder.build_strategy(context_pack)
+                    context_pack["strategy_card"] = strategy_card
 
             if action in {"redact", "build_strategy", "refresh_context"}:
                 redaction_result = self._redact_with_validations(
@@ -526,7 +561,7 @@ class WriterOrchestrator:
             extra_patch = infer_n0_visual_style_tone(project_id, source_state)
             if extra_patch:
                 try:
-                    merge_target_patch(project_id, "n0.production_summary", extra_patch)
+                    merge_target_patch(project_id, "n0.narrative_presentation", extra_patch)
                 except Exception:
                     pass
 
@@ -541,6 +576,145 @@ class WriterOrchestrator:
             warning=warning_message,
             agentic_trace=agentic_trace,
         )
+
+    def _resolve_strategy_question(
+        self,
+        *,
+        target_path: str,
+        plan: WritingPlan,
+        context_pack: Dict[str, Any],
+        existing_fields: Dict[str, str],
+    ) -> str:
+        if (
+            isinstance(plan.strategy_finder_question, str)
+            and plan.strategy_finder_question.strip()
+        ):
+            return self._render_strategy_finder_question(
+                plan.strategy_finder_question.strip(), context_pack
+            )
+        return self._build_strategy_question(
+            target_path=target_path,
+            context_pack=context_pack,
+            rule=self._build_rules_payload(plan),
+            has_existing=bool(existing_fields),
+        )
+
+    def _resolve_strategy_card(
+        self,
+        *,
+        project_id: str,
+        target_path: str,
+        context_pack: Dict[str, Any],
+        strategy_question: str,
+    ) -> Dict[str, Any]:
+        cached = self._load_recent_strategy_card(
+            project_id=project_id,
+            target_path=target_path,
+            context_pack=context_pack,
+            strategy_question=strategy_question,
+        )
+        if cached:
+            context_pack["strategy_card_reused"] = True
+            return cached
+        context_pack["strategy_card_reused"] = False
+        return self.strategy_finder.build_strategy(context_pack)
+
+    def _lock_strategy_refresh(self, target_path: str, strategy_card: Dict[str, Any]) -> bool:
+        if not isinstance(strategy_card, dict) or not strategy_card:
+            return False
+        return self._strategy_reuse_enabled_for_target(target_path)
+
+    def _strategy_reuse_enabled_for_target(self, target_path: str) -> bool:
+        value = str(target_path or "").strip()
+        return (
+            value.startswith("n0.narrative_presentation")
+            or value.startswith("n0.production_summary")
+            or value.startswith("n0.art_direction")
+            or value.startswith("n0.sound_direction")
+        )
+
+    def _load_recent_strategy_card(
+        self,
+        *,
+        project_id: str,
+        target_path: str,
+        context_pack: Dict[str, Any],
+        strategy_question: str,
+    ) -> Dict[str, Any]:
+        if not self._strategy_reuse_enabled_for_target(target_path):
+            return {}
+        try:
+            root = get_project_root(project_id)
+        except Exception:
+            return {}
+        strata = str(target_path or "").split(".", 1)[0].strip().lower()
+        if not re.fullmatch(r"n[0-9]+", strata or ""):
+            strata = "misc"
+        log_dir = root / "strategy_logs" / strata
+        if not log_dir.exists():
+            return {}
+        safe_target = "".join(
+            c for c in (target_path or "strategy") if c.isalnum() or c in ("-", "_", ".")
+        ).strip()
+        safe_target = safe_target.replace(".", "_") if safe_target else "strategy"
+        candidates: List[Path] = sorted(
+            [p for p in log_dir.glob(f"*_{safe_target}.json") if p.is_file()],
+            reverse=True,
+        )
+        if not candidates:
+            return {}
+        current_summary = str(context_pack.get("core_summary", "") or "").strip()
+        current_typology = str(context_pack.get("writing_typology", "") or "").strip()
+        current_constraints = context_pack.get("redaction_constraints", {})
+        for path in candidates:
+            try:
+                payload = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if not isinstance(payload, dict):
+                continue
+            if str(payload.get("target_path", "")).strip() != str(target_path).strip():
+                continue
+            if str(payload.get("writing_typology", "")).strip() != current_typology:
+                continue
+            logged_question = str(payload.get("strategy_question", "") or "").strip()
+            if strategy_question and logged_question and logged_question != strategy_question:
+                continue
+            logged_ctx = payload.get("strategy_context_payload", {})
+            if not isinstance(logged_ctx, dict):
+                logged_ctx = {}
+            logged_summary = str(logged_ctx.get("project_summary", "") or "").strip()
+            if current_summary and logged_summary and logged_summary != current_summary:
+                continue
+            logged_constraints = logged_ctx.get("redaction_constraints", {})
+            if (
+                isinstance(current_constraints, dict)
+                and isinstance(logged_constraints, dict)
+                and current_constraints
+                and logged_constraints
+                and logged_constraints != current_constraints
+            ):
+                continue
+            strategy_text = str(payload.get("strategy_text", "") or "").strip()
+            if not strategy_text:
+                continue
+            return {
+                "strategy_id": str(payload.get("strategy_id", "") or "cached_strategy"),
+                "target_path": str(payload.get("target_path", "") or target_path),
+                "writing_typology": str(payload.get("writing_typology", "") or current_typology),
+                "library_item_ids": payload.get("library_item_ids", [])
+                if isinstance(payload.get("library_item_ids"), list)
+                else [],
+                "strategy_text": strategy_text,
+                "source_refs": payload.get("source_refs", [])
+                if isinstance(payload.get("source_refs"), list)
+                else [],
+                "notes": (
+                    str(payload.get("notes", "") or "").strip()
+                    + " strategy_reused_from_log=true"
+                ).strip(),
+            }
+        return {}
 
     def _extract_existing_fields(
         self, allowed_fields: Optional[List[str]], target_current: Any
@@ -612,6 +786,21 @@ class WriterOrchestrator:
         redaction = self.redactor.redact(system_prompt=system_prompt, user_prompt=user_prompt)
         raw_content = redaction.raw_output
         parsed = redaction.parsed
+        base_attempt = {
+            "phase": "initial",
+            "prompt_debug": {
+                "system_prompt_chars": len(system_prompt),
+                "user_prompt_chars": len(user_prompt),
+                "system_prompt": system_prompt,
+                "user_prompt": user_prompt,
+            },
+            "context_groups_debug": self._summarize_context_groups_for_log(
+                context_pack, per_group_preview_chars=900
+            ),
+            "char_counts": {},
+            "length_violations": [],
+            "meta_violations": [],
+        }
         if not isinstance(parsed, dict):
             return RedactionCycleResult(
                 parsed=False,
@@ -619,6 +808,7 @@ class WriterOrchestrator:
                 open_questions=[],
                 raw_output=raw_content,
                 warning="invalid_json",
+                attempts=[base_attempt],
             )
 
         target_patch = self._coerce_target_patch(parsed, plan.allowed_fields)
@@ -638,24 +828,14 @@ class WriterOrchestrator:
         length_violations = self._collect_length_violations(
             filtered_patch, plan.redaction_constraints, plan.allowed_fields
         )
-        attempts: List[Dict[str, Any]] = [
-            {
-                "phase": "initial",
-                "prompt_debug": {
-                    "system_prompt_chars": len(system_prompt),
-                    "user_prompt_chars": len(user_prompt),
-                    "system_prompt": system_prompt,
-                    "user_prompt": user_prompt,
-                },
-                "context_groups_debug": self._summarize_context_groups_for_log(
-                    context_pack, per_group_preview_chars=900
-                ),
-                "char_counts": self._compute_char_counts(filtered_patch, plan.allowed_fields),
-                "length_violations": length_violations,
-                "meta_violations": meta_violations,
-            }
-        ]
-        if meta_violations or length_violations:
+        base_attempt["char_counts"] = self._compute_char_counts(
+            filtered_patch, plan.allowed_fields
+        )
+        base_attempt["length_violations"] = length_violations
+        base_attempt["meta_violations"] = meta_violations
+        attempts: List[Dict[str, Any]] = [base_attempt]
+        max_retries = self._redactor_max_retries()
+        if (meta_violations or length_violations) and max_retries > 0:
             retry_prompt = self._build_retry_prompt(
                 context_pack=context_pack,
                 target_path=target_path,
@@ -711,6 +891,13 @@ class WriterOrchestrator:
                     warning_message = "meta_violation"
                 else:
                     warning_message = "length_violation"
+        elif meta_violations or length_violations:
+            if meta_violations and length_violations:
+                warning_message = "length_and_meta_violation"
+            elif meta_violations:
+                warning_message = "meta_violation"
+            else:
+                warning_message = "length_violation"
         return RedactionCycleResult(
             parsed=True,
             filtered_patch=filtered_patch,
@@ -867,8 +1054,6 @@ class WriterOrchestrator:
     ) -> AgenticEvaluation:
         min_chars = int(constraints.get("min_chars") or 0)
         max_chars = int(constraints.get("max_chars") or 0)
-        max_chars_tolerance = int(max_chars * 1.15) if max_chars > 0 else 0
-        max_chars_tolerance = int(max_chars * 1.15) if max_chars > 0 else 0
         rules = context_pack.get("rules") if isinstance(context_pack, dict) else {}
         quality_criteria = rules.get("quality_criteria") if isinstance(rules, dict) else []
         redaction_rules = rules.get("redaction_rules") if isinstance(rules, dict) else []
@@ -1007,6 +1192,9 @@ class WriterOrchestrator:
     def _agentic_score_threshold(self) -> float:
         return self._env_float("WRITER_AGENTIC_SCORE_THRESHOLD", 0.75, min_value=0.0, max_value=1.0)
 
+    def _redactor_max_retries(self) -> int:
+        return self._env_int("WRITER_REDACTOR_MAX_RETRIES", 0, min_value=0, max_value=3)
+
     def _env_flag(self, name: str, default: bool) -> bool:
         raw = os.getenv(name)
         if raw is None:
@@ -1058,14 +1246,27 @@ class WriterOrchestrator:
             return plan
 
         if target_path.startswith("n0."):
-            if target_path == "n0.production_summary":
+            if target_path in {"n0.narrative_presentation", "n0.production_summary"}:
                 plan.base_patch = infer_n0_production_summary(source_state, target_current)
             elif target_path == "n0.deliverables":
                 plan.base_patch = infer_n0_deliverables(source_state, target_current)
             rule = self.n0_rules.get(target_path, {})
             self._apply_declarative_rules(plan, rule, target_current, source_state)
+            # Safety fallback: narrative presentation must always be redacted into "summary".
+            # This protects runtime behavior if rules are not loaded as expected.
+            if target_path in {"n0.narrative_presentation", "n0.production_summary"}:
+                if not plan.allowed_fields:
+                    plan.allowed_fields = ["summary"]
+                if not plan.redaction_constraints:
+                    plan.redaction_constraints = {"min_chars": 2000, "max_chars": 3000}
+                if not plan.strategy_finder_question:
+                    plan.strategy_finder_question = (
+                        "Find in the documents rules and guidance to write a clear, factual narrative presentation."
+                    )
+                if not plan.library_filename_prefixes:
+                    plan.library_filename_prefixes = ["SRC_NARRATOLOGY"]
         elif target_path == "n1" or target_path.startswith("n1."):
-            rule = self.n1_rules.get(target_path) or self.n1_rules.get("n1", {})
+            rule = self._resolve_n1_rule(target_path)
             self._apply_declarative_rules(plan, rule, target_current, source_state)
 
         return plan
@@ -1077,6 +1278,18 @@ class WriterOrchestrator:
     def _load_n1_rules(self) -> Dict[str, Any]:
         rules = load_json("writer_agent/n_rules/n1_rules.json") or {}
         return rules if isinstance(rules, dict) else {}
+
+    def _resolve_n1_rule(self, target_path: str) -> Dict[str, Any]:
+        if not isinstance(target_path, str) or not target_path.strip():
+            return self.n1_rules.get("n1", {})
+        direct = self.n1_rules.get(target_path)
+        if isinstance(direct, dict):
+            return direct
+        normalized = re.sub(r"\[\d+\]", "[]", target_path.strip())
+        wildcard_rule = self.n1_rules.get(normalized)
+        if isinstance(wildcard_rule, dict):
+            return wildcard_rule
+        return self.n1_rules.get("n1", {})
 
     def _apply_declarative_rules(
         self,
@@ -1191,7 +1404,9 @@ class WriterOrchestrator:
             dependencies = {}
 
         def get_n0_summary() -> str:
-            prod = target_data.get("production_summary", {})
+            prod = target_data.get("narrative_presentation")
+            if not isinstance(prod, dict):
+                prod = target_data.get("production_summary", {})
             if isinstance(prod, dict):
                 value = prod.get("summary", "")
                 return value.strip() if isinstance(value, str) else ""
@@ -1199,7 +1414,9 @@ class WriterOrchestrator:
             if isinstance(n0_state, dict):
                 n0_data = n0_state.get("data") if isinstance(n0_state, dict) else {}
                 if isinstance(n0_data, dict):
-                    n0_prod = n0_data.get("production_summary", {})
+                    n0_prod = n0_data.get("narrative_presentation")
+                    if not isinstance(n0_prod, dict):
+                        n0_prod = n0_data.get("production_summary", {})
                     if isinstance(n0_prod, dict):
                         value = n0_prod.get("summary", "")
                         return value.strip() if isinstance(value, str) else ""
@@ -1260,7 +1477,7 @@ class WriterOrchestrator:
             elif name == "chat_indications" or "chat_indications" in sources:
                 group_payload = chat_indications_payload
             elif name == "father":
-                group_payload = {"n0.production_summary.summary": get_n0_summary()}
+                group_payload = {"n0.narrative_presentation.summary": get_n0_summary()}
             elif name == "family":
                 group_payload = build_family_payload()
             elif name == "neighbours":
@@ -1320,7 +1537,7 @@ class WriterOrchestrator:
         if writing_typology:
             lines.append(f"Writing typology: {writing_typology}.")
         if isinstance(core_summary, str) and core_summary.strip():
-            lines.append(f"Project summary: {core_summary.strip()}.")
+            lines.append(f"Project narrative presentation: {core_summary.strip()}.")
         elif isinstance(brief_primary, str) and brief_primary.strip():
             lines.append(f"Primary objective: {brief_primary.strip()}.")
         if isinstance(constraints, list) and constraints:
@@ -1335,8 +1552,80 @@ class WriterOrchestrator:
         )
         return " ".join(lines)
 
+    def _render_strategy_finder_question(
+        self, template: str, context_pack: Dict[str, Any]
+    ) -> str:
+        if not isinstance(template, str) or not template.strip():
+            return ""
+        project_id = str(context_pack.get("project_id", "")).strip() or "current_project"
+        video_type = (
+            str(context_pack.get("brief_video_type", "")).strip() or "unspecified_video_type"
+        )
+        duration = self._strategy_duration_label(context_pack)
+        summary = self._strategy_summary_label(context_pack)
+        replacements = {
+            "project_id": project_id,
+            "video_type": video_type,
+            "duration": duration,
+            "summary": summary,
+        }
+        rendered = template
+        for key, value in replacements.items():
+            # Replace only explicit placeholders to avoid accidental substitutions
+            # in regular text (e.g. replacing "summary" inside "production summary").
+            rendered = rendered.replace(f'"{key}"', f'"{value}"')
+            rendered = rendered.replace(f"{{{key}}}", value)
+            rendered = rendered.replace(f"<{key}>", value)
+            rendered = rendered.replace(f"${{{key}}}", value)
+        return " ".join(rendered.split())
+
+    def _strategy_summary_label(self, context_pack: Dict[str, Any]) -> str:
+        summary = str(context_pack.get("core_summary", "")).strip()
+        if not summary:
+            return "narrative presentation unavailable"
+        cleaned = " ".join(summary.split())
+        if len(cleaned) <= 340:
+            return cleaned
+        clipped = cleaned[:340]
+        if " " in clipped:
+            clipped = clipped.rsplit(" ", 1)[0]
+        return clipped + "..."
+
+    def _strategy_duration_label(self, context_pack: Dict[str, Any]) -> str:
+        duration_text = str(context_pack.get("brief_target_duration_text", "")).strip()
+        if duration_text:
+            return duration_text
+        raw_seconds = context_pack.get("brief_target_duration_s", 0)
+        try:
+            seconds = int(raw_seconds)
+        except Exception:
+            seconds = 0
+        if seconds <= 0:
+            return "unspecified duration"
+        hours = seconds // 3600
+        minutes = (seconds % 3600) // 60
+        secs = seconds % 60
+        parts: List[str] = []
+        if hours:
+            parts.append(f"{hours} hour{'s' if hours > 1 else ''}")
+        if minutes:
+            parts.append(f"{minutes} minute{'s' if minutes > 1 else ''}")
+        if secs and not hours:
+            parts.append(f"{secs} second{'s' if secs > 1 else ''}")
+        return " ".join(parts) if parts else f"{seconds} seconds"
+
     def _build_writer_prompt(self, target_path: str) -> str:
-        base_prompt = load_text("writer_agent/redactor/redactor.md").strip()
+        analyst_targets = {
+            "n1.characters.main_characters",
+            "n1.characters.secondary_characters",
+            "n1.characters.background_characters",
+        }
+        prompt_path = (
+            "writer_agent/redactor/redactor_analyst.md"
+            if target_path in analyst_targets
+            else "writer_agent/redactor/redactor.md"
+        )
+        base_prompt = load_text(prompt_path).strip()
         if not base_prompt:
             base_prompt = "You are a redactor. Produce a patch for the target section only."
         # IMPORTANT: keep the system prompt stable and "role-level".
@@ -1369,6 +1658,11 @@ class WriterOrchestrator:
             return None
         target_patch = parsed.get("target_patch")
         if isinstance(target_patch, dict):
+            # Narrative safety: many model outputs return nested objects instead of target_patch.summary.
+            if allowed_fields == ["summary"] and "summary" not in target_patch:
+                nested_summary = self._extract_narrative_summary_text(target_patch)
+                if isinstance(nested_summary, str) and nested_summary.strip():
+                    return {"summary": nested_summary.strip()}
             return target_patch
         if not allowed_fields or len(allowed_fields) != 1:
             return None
@@ -1392,6 +1686,26 @@ class WriterOrchestrator:
             return {expected_key: value}
         return None
 
+    def _extract_narrative_summary_text(self, payload: Dict[str, Any]) -> str:
+        if not isinstance(payload, dict):
+            return ""
+        # Common malformed shapes returned by the model for narrative presentation.
+        candidates: List[Any] = [
+            payload.get("summary"),
+            (((payload.get("core") or {}).get("narrative_presentation") or {}).get("summary")),
+            (
+                ((payload.get("core") or {}).get("narrative_presentation") or {}).get(
+                    "narrative_foundation"
+                )
+            ),
+            (((payload.get("narrative_presentation") or {}).get("summary"))),
+            (((payload.get("narrative_presentation") or {}).get("narrative_foundation"))),
+        ]
+        for candidate in candidates:
+            if isinstance(candidate, str) and candidate.strip():
+                return candidate.strip()
+        return ""
+
     def _normalize_target_patch_keys(
         self, patch: Dict[str, Any], allowed_fields: Optional[List[str]]
     ) -> Dict[str, Any]:
@@ -1402,6 +1716,14 @@ class WriterOrchestrator:
         expected_key = allowed_fields[0]
         if expected_key in patch:
             return patch
+        # Common mistake for numeric tasks: the model returns the full target path
+        # as a key (e.g. {"n1.characters.main_characters.number": 2}).
+        if len(patch) == 1:
+            only_key, only_value = next(iter(patch.items()))
+            if isinstance(only_key, str):
+                last_segment = only_key.split(".")[-1].strip()
+                if last_segment == expected_key:
+                    return {expected_key: only_value}
         # If the redactor returned a single text field, map it deterministically.
         string_fields = {k: v for k, v in patch.items() if isinstance(v, str)}
         if len(string_fields) == 1:
@@ -1416,10 +1738,10 @@ class WriterOrchestrator:
             return []
         fields = allowed_fields or list(patch.keys())
         triggers = [
-            "the summary",
-            "this summary",
-            "summary should",
-            "the summary is",
+            "the narrative presentation",
+            "this narrative presentation",
+            "narrative presentation should",
+            "the narrative presentation is",
             "the redactor",
             "writing strategy",
             "style guidelines",
@@ -1469,7 +1791,7 @@ class WriterOrchestrator:
                 violations.append(
                     {"field": field, "length": length, "min": min_chars, "max": max_chars}
                 )
-            elif max_chars and length > max_chars_tolerance:
+            elif max_chars and length > max_chars:
                 violations.append(
                     {"field": field, "length": length, "min": min_chars, "max": max_chars}
                 )
@@ -1522,7 +1844,7 @@ class WriterOrchestrator:
         if meta_violations:
             correction_mode += (
                 "- Remove any meta-writing language or references to strategy, sources, or guidelines.\n"
-                "- Do NOT mention the summary as an object or the act of summarizing.\n"
+                "- Do NOT mention the narrative presentation as an object or the act of summarizing.\n"
             )
         redactor_context_pack = self._context_pack_for_redactor(context_pack)
         compiler = RedactorPromptCompiler()

@@ -1,0 +1,12 @@
+{
+  "total_requests": 3,
+  "modes": {
+    "agentic_deep": 3
+  },
+  "reasons": {
+    "agentic_success": 3
+  },
+  "fallback_rate": 0.0,
+  "updated_at": "2026-02-14T13:53:50.329789Z",
+  "signature": "b39cba8bf4e4b37d"
+}

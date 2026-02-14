@@ -1,0 +1,106 @@
+{
+  "project_id": "jesusparis",
+  "target_path": "n0.sound_direction",
+  "writing_typology": "style",
+  "strategy_id": "style_v1",
+  "strategy_question": "Find in the documents rules and guidance to write a general overview of this video's sound direction.",
+  "strategy_context_payload": {
+    "target_path": "n0.sound_direction",
+    "writing_typology": "style",
+    "mode": "write",
+    "strategy_question": "Find in the documents rules and guidance to write a general overview of this video's sound direction.",
+    "project_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with...",
+    "primary_objective": "",
+    "constraints": [],
+    "redaction_constraints": {
+      "min_chars": 180,
+      "max_chars": 1000
+    },
+    "existing_excerpt": "",
+    "expected_steps": 1,
+    "sources": [
+      {
+        "rank": 1,
+        "title": "Concevoir la direction sonore",
+        "author": "ChatGPT (notes)",
+        "summary": "{ \"items\": [ { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish a coherent sonic identity by defining the sound characteristics of locations and the emotional intent behind sound choices.\", \"key_concepts\": [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\": \"Identit\u00e9 sonore des lieux :",
+        "excerpt": "{ \"items\": [ { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish a coherent sonic identity by defining the sound characteristics of locations and the emotional intent behind sound choices.\", \"key_concepts\": [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\": \"Identit\u00e9 sonore des lieux : int\u00e9rieur/ext\u00e9rieur, mat\u00e9riaux, densit\u00e9 humaine, machines, m\u00e9t\u00e9o, insectes, ville/campagne.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Utilize silence as a narrative tool to enhance emotional impact and tension in scenes.\", \"key_concepts\": [\"silence\", \"narrative tool\", \"emotional impact\"], \"excerpt\": \"Le silence est un outil : le conserver quand il raconte quelque chose.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Define the rhythm of soundscapes to create a dynamic interaction between stable and moving ambiances.\", \"key_concepts\": [\"rhythm\", \"soundscapes\", \"dynamic interaction\"], \"excerpt\": \"Rythme : ambiances stables vs mouvantes, montage \u201crespir\u00e9\u201d vs nervosit\u00e9.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish clear sound contrasts and dynamics to enhance the storytelling experience.\", \"key_concepts\": [\"contrasts\", \"dynamics\", \"storytelling\"], \"excerpt\": \"Le film respire-t-il par contrastes (calme/violence, plein/vide, int\u00e9rieur/ext\u00e9rieur) ?\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Create a grammar of sound that inc",
+        "key_concepts": [
+          "\"Establish a coherent sonic identity by defining the sound characteristics of locations",
+          "[\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\"",
+          "\"Identit\u00e9 sonore des lieux",
+          "int\u00e9rieur/ext\u00e9rieur, mat\u00e9riaux, densit\u00e9 humaine, machines, m\u00e9t\u00e9o, insectes, ville/campagne.\" }, { \"source_file\"",
+          "\"Utilize silence as a narrative tool to enhance emotional impact and tension",
+          "[\"silence\", \"narrative tool\", \"emotional impact\"], \"excerpt\""
+        ],
+        "score": 0.6697,
+        "evidence_role": "domain_context",
+        "evidence_relevance": 0.7,
+        "evidence_actionability": 0.6,
+        "evidence_specificity": 0.6645
+      }
+    ]
+  },
+  "evidence_report": {
+    "status": "ok",
+    "score_mode": "semantic_llm",
+    "kept_count": 1,
+    "raw_count": 1,
+    "thresholds": {
+      "overall_min": 0.0,
+      "relevance_min": 0.0,
+      "rescue_relevance_min": 0.0
+    },
+    "evidence_mix": {
+      "enabled": false,
+      "policy": "loose_topk_no_abstract_filter"
+    },
+    "details": [
+      {
+        "index": 0,
+        "title": "Concevoir la direction sonore",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DS_chatGPT.txt",
+        "scores": {
+          "overall": 0.6697,
+          "relevance": 0.7,
+          "actionability": 0.6,
+          "specificity": 0.6645
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      }
+    ],
+    "retrieval_variants": {
+      "enabled": true,
+      "variant_count": 1,
+      "time_budget_s": 1800,
+      "max_variants": 4,
+      "elapsed_total_ms": 34569,
+      "stopped_early": "",
+      "per_variant": [
+        {
+          "variant_index": 1,
+          "question": "Find in the documents rules and guidance to write a general overview of this video's sound direction.",
+          "elapsed_ms": 34569,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 1,
+          "added_unique_hits": 1
+        }
+      ],
+      "merged_unique_count": 1,
+      "returned_count": 1
+    }
+  },
+  "strategy_text": "1. Establish a coherent sonic identity for the film by defining the sound characteristics of the various locations depicted, such as the interior and exterior settings, materials, human density, machinery, weather, insects, and urban versus rural environments. This will help create a distinct auditory atmosphere that aligns with the film's narrative of Jesus Christ observing modern-day Paris. Consider the emotional intent behind each sound choice to ensure it supports the film's themes and character experiences. Additionally, utilize silence strategically as a narrative tool to enhance emotional impact and tension in key scenes, allowing the audience to engage more deeply with the unfolding story. Define the rhythm of the soundscapes to create a dynamic interaction between stable and moving ambiances, which can reflect the contrast between the divine and the mundane. Establish clear sound contrasts and dynamics to enhance the storytelling experience, using elements like calm versus violence and full versus empty spaces to mirror the film's exploration of contemporary life through a divine lens.",
+  "library_item_ids": [
+    "ds_chatgpt"
+  ],
+  "source_refs": [
+    "Concevoir la direction sonore - ChatGPT (notes): { \"items\": [ { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish a coherent sonic identity by defining the sound characteristics of locations and the emotional intent behind sound choices.\", \"key_concepts\": [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\": \"Identit\u00e9 sonore des lieux : | Concepts: \"Establish a coherent sonic identity by defining the sound characteristics of locations, [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\", \"Identit\u00e9 sonore des lieux, int\u00e9rieur/ext\u00e9rieur, mat\u00e9riaux, densit\u00e9 humaine, machines, m\u00e9t\u00e9o, insectes, ville/campagne.\" }, { \"source_file\", \"Utilize silence as a narrative tool to enhance emotional impact and tension, [\"silence\", \"narrative tool\", \"emotional impact\"], \"excerpt\""
+  ],
+  "notes": "Auto-selected based on writing typology and language. rag_mode=agentic_deep, rag_hits=1, evidence_mode=ok, evidence_kept=1.",
+  "logged_at": "2026-02-14T13:53:53.788220Z"
+}

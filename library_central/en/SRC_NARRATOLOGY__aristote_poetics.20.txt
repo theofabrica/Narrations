@@ -1,0 +1,108 @@
+###tics00001###
+### POETICS
+
+###tics00002###
+ARISTOTLE
+
+###tics00003###
+CHAPTER I  
+Poetry consists of imitation, differing in elements, objects, and methods. Epic, tragic, comedy, dithyrambic, aulétique, and citharistic poetry are all forms of imitation. They use rhythm, language, and harmony, either separately or mixed. Aulétique and citharistic focus on harmony and rhythm, while dance uses rhythm alone. Epic poetry employs pure language or meters. Different poetry types are named based on meter, not imitation style. For instance, Homer is a poet, while Empedocles is a physicist, despite both using meter. Genres like dithyrambic poetry, tragedy, and comedy use rhythm, song, and meter, either together or separately.
+
+###tics00004###
+CHAPTER II
+Different kinds of poetry imitate people who are better, worse, or of the same moral value as in reality. Painters like Polygnotus, Pauson, and Dionysius exemplify this. In poetry, Homer presents better types, Cleophon similar, and Hegemon inferior. Tragedy imitates better beings
+
+###tics00005###
+CHAPTER III
+Different kinds of poetry differ in their manner of imitation. Imitation can occur through narrative, character portrayal, or direct action. Sophocles and Homer both imitate better beings, while Sophocles and Aristophanes put characters into action, leading to the term "dramas." Dorians and Megarians claim comedy and tragedy, with regional differences influencing terminology and origins.
+
+###tics00006###
+CHAPTER IV  
+Poetry originates from two natural causes: the human inclination to imitate and the enjoyment derived from imitation. Humans, unlike other animals, learn through imitation and find pleasure in representations, even of unpleasant subjects, due to the learning and reasoning they provoke. Poetry began with those naturally inclined to imitation, harmony, and rhythm, evolving from improvisations.
+
+Poetry divides into branches based on the moral nature of poets. Serious poets imitated noble actions, while others focused on inferior subjects. Before Homer, many poets existed, but Homer is notable for his serious works and for introducing comedic elements through ridicule, as seen in "Margites." With the rise of tragedy and comedy, poets chose their paths, with comic poets replacing iambic poets and tragedians replacing epic poets due to the grandeur of tragedy.
+
+Tragedy evolved from improvisation, influenced by dithyrambic and phallic poems. Aeschylus and Sophocles advanced tragedy by increasing actors and focusing on spoken discourse. Tragedy matured from light plots to serious themes, shifting from tetrameter to iambic meter, which suits spoken language.
+
+###tics00007###
+CHAPTER V  
+Comedy imitates what is worse than reality, focusing on the ridiculous, which involves faults and ugliness without suffering. Its origins are less documented than tragedy, with early developments in Sicily and Athens. Comedy's structure evolved with contributions from poets like Epicharmus and Crates. Tragedy and epic both imitate serious subjects, but differ in meter, narrative style, and temporal constraints, with tragedy being more time-bound.
+
+###tics00008###
+CHAPTER VI  
+Tragedy is defined as the imitation of a serious, complete action, using pleasant language with rhythm, harmony, and song. It involves characters who act, not through narrative, and aims to purge emotions like pity and terror. Tragedy consists of six parts: plot, manners, language, thought, scenic apparatus, and melody. The plot is the most crucial, as it represents actions, life, and the pursuit of happiness or unhappiness. Manners and thought follow, with thought involving the expression of opinions and eloquence. Diction, or the choice of words, ranks fourth, while melody is important for pleasure. The scenic apparatus captivates but is not essential to the art of tragedy, as it relies more on costume design than poetic skill. The essence of tragedy lies in its plot and the actions it depicts, with peripeties and recognitions being key elements. The plot is considered the soul of tragedy, as it drives the imitation of actions and character intentions.
+
+###tics00009###
+CHAPTER VII
+The constitution of a tragedy's plot is crucial, requiring a perfect and entire action with a beginning, middle, and end. The beginning leads naturally to something else, the end follows naturally from something else, and the middle connects the two. Plots must not start or end arbitrarily but follow this structure. Beauty in plots, like in living beings, depends on appropriate extent and order. The length should be easy to grasp and retain, with nature guiding its delimitation. A well-structured tragedy maintains clarity throughout, enhancing its beauty and effectiveness.
+
+###tics00010###
+CHAPTER VIII
+Unity of action in a fable is not achieved by focusing on a single character, as a character can have many unrelated adventures. Poets err when they assume a single hero ensures unity. Homer exemplifies true unity by selecting events in the Odyssey and Iliad that are interconnected, forming a cohesive whole where altering any part affects the entire narrative.
+
+###tics00011###
+CHAPTER IX Comparison of history and poetry. - On the historical element in drama. - Abuse of episodes in drama. On peripeteia, considered as a dramatic means.
+The poet's role is to explore what could happen, focusing on possibilities and generalities, unlike historians who recount specific events. Poetry is more philosophical, dealing with likely or necessary actions characters might take, while history details particular occurrences. In tragedy, poets often use known names to lend credibility, but they can also create entirely fictional narratives, as seen in Agathon's "Flower." The poet's task is to craft fables, not just verses, imitating actions that evoke terror and pity. The most compelling plots involve unexpected events that seem designed rather than random, enhancing the surprise and emotional impact. Episodic fables, lacking logical sequence, are considered inferior, often resulting from poor craftsmanship or catering to actors' preferences.
+
+###tics00012###
+CHAPTER X On simple action and complex action. Among fables, some are simple and others complex; and indeed, the actions, of which fables are imitations, precisely have (one or the other of) these characteristics. Now I call "simple action" one that, in its single and continuous course, as defined, unfolds without peripeteia or recognition; and "complex action" one that unfolds with recognition or with peripeteia, or even with both. These effects must necessarily be drawn from the very constitution of the fable, so that they come to be produced as a likely or necessary consequence of previous events; for there is a great difference between a fact produced because of such another fact, and a fact produced after such another.
+
+###tics00013###
+CHAPTER XI Elements of complex action: peripeteia, recognition, pathetic event. Peripeteia is a change in the opposite direction in the facts that are accomplished, as we have said previously, and we will add here "according to likelihood or necessity." Thus, in Oedipus, a character comes with the thought of pleasing Oedipus and dispelling his perplexity regarding his mother; then, when he reveals to him who he is, produces the opposite effect. Similarly, in Lynceus, where a character is brought as destined to death, while Danaus arrives as about to kill him, and where it happens, as a result of accomplished events, that the latter dies and the other is saved. Recognition is, as its name indicates, the passage from the state of ignorance to knowledge, or to a feeling of friendship or hatred between characters designated to have happiness or unhappiness. The most beautiful recognition is when peripeteias occur simultaneously, which happens in Oedipus. There are still other kinds of recognitions. Thus, such a circumstance may arise, as mentioned, concerning inanimate objects or accidental facts; and there may be recognition according to whether such a character has or has not acted; but the one that mainly relates to the fable, or the one that mainly concerns the action, is the recognition we have spoken of. Indeed, it is this kind of recognition and peripeteia that will excite pity or terror, feelings inherent in the actions whose imitation constitutes tragedy. Moreover, the fact of being unhappy or happy will occur based on such data. Now, as recognition is that of certain characters, there is one where only one of the two is recognized, when the other knows who he is; other times, recognition is necessarily reciprocal. For example, Iphigenia is recognized by Orestes, as a result of the letter being sent; but for him to be recognized by Iphigenia, another recognition will have been necessary. There are, therefore, in this regard, two parts in the fable: peripeteia and recognition. A third part is the pathetic event. As for peripeteia and recognition, we have spoken about them. The pathetic event is a destructive or painful action; for example, deaths that occur manifestly, sufferings, wounds, and all other things of this kind...
+
+###tics00014###
+CHAPTER XII Divisions of tragedy. As for the quality of the forms that the parts of tragedy must employ, we have spoken about them previously. Now, concerning their quantity and their special divisions, the following are distinguished: the prologue, the episode, the denouement, the choral part, and, in this part, the entrance (???????) and the station. These elements are common to all (tragedies). The particular elements are those that depend on the scene and the lamentations (??????). The prologue is a complete part in itself of the tragedy, placed before the entrance of the chorus. The episode is a complete part in itself of the tragedy, placed between the complete songs of the chorus. The denouement is a complete part in itself after which there is no more chorus song. In the choral part, the entrance is what is first said by the entire chorus; and the station, the chorus song, performed without anapest and without trochee. The commos is a lamentation common to the chorus and the actors on stage. We have previously spoken about the parts of tragedy that must be employed, and we have just considered them in terms of their quantity and their divisions.
+
+###tics00015###
+CHAPTER XIII On the qualities of the fable in relation to persons. What should be the goal of those who constitute fables; what should their attention focus on; under what conditions does tragedy fulfill its function, this is what we have to say after the explanations given so far. As the composition of a tragedy, for it to be most beautiful, must not be simple, but complex and capable of imitating things that excite terror and pity (this is the characteristic of this kind of imitation), it is evident, first, that good people should not pass from happiness to misfortune (which excites neither pity nor fear, but horrifies us); nor should the wicked pass from misfortune to happiness, which is entirely removed from the tragic effect, for there is nothing there of what it requires: neither feelings of humanity nor motive for pity or terror. Nor should the very wicked man fall from happiness into misfortune, for such a situation would give rise to feelings of humanity, but not to pity or terror. Indeed, one arises in the presence of an unfortunate person who is unjustly so, the other, in the presence of an unfortunate person of a condition similar to ours. This case, therefore, has nothing that gives rise to pity or terror. The intermediate situation remains; it is that of a man who has nothing superior by his merit or his feelings of justice, and who does not owe his misfortune to his perversity and bad inclinations, but rather to a certain error he commits while in full glory and prosperity; such, for example, are Oedipus, Thyestes, and other famous characters, from families of the same rank. Therefore, the fable, to be well composed, must be simple and not double, as some claim; and it must pass not from misfortune to happiness, but, on the contrary, from happiness to misfortune; and this not because of perversity, but due to the grave error of a character as we have described, or of a better rather than a worse.
+The best tragedies often focus on historical families like Oedipus or Orestes, known for their tragic experiences. Euripides is criticized for unhappy endings, but these are considered most tragic and effective on stage. Tragedies with dual outcomes, like the Odyssey, cater to audience preferences but align more with comedy, where conflicts resolve peacefully.
+
+###tics00016###
+CHAPTER XIV On the pathetic event in the fable. The effects of terror and pity can be inherent in the stage play; but they can also originate from the very constitution of the facts, which is better and is the work of a stronger poet. Indeed, one must, without striking the eye, constitute the fable in such a way that, at the narration of the facts that are accomplished, the listener is seized with terror or pity as a result of the events; this is what one will experience when listening to the fable of Oedipus. Seeking this effect through sight is less artistic and will entail greater staging costs. As for producing not terrible effects through sight, but only prodigious effects, this has nothing in common with tragedy, for one should not seek, in tragedy, to provoke any interest, but the one that belongs to it. As the (tragic) poet must excite, through imitation, an interest drawn from pity or terror, it is evident that it is the facts he must employ. Let us see, then, what kind of events will excite terror or pity. Such actions will necessarily be accomplished either by characters who are friends with each other, or by enemies, or by indifferent ones. An enemy who kills his enemy, neither by his action itself nor on the verge of committing it, shows anything that excites pity, apart from the effect produced by the act itself. It is the same with characters indifferent to each other. But let the events happen between friendly people; let, for example, a brother give or be about to give death to his brother, a mother to her son, a son to his mother, or let them accomplish some similar action, that is what must be sought. It is not permissible to distort accepted fables; I mean, for example, Clytemnestra dying under Orestes's blows, Eriphyle under those of Alcmaeon.
+Tragic subjects often derive from history, using tradition effectively. Actions can occur with characters aware or unaware of their implications. In Sophocles's "Oedipus," recognition happens post-action, while in "Medea," the horror is known. The most compelling tragedies involve characters recognizing their actions just in time, as in "Cresphontes" or "Iphigenia." Tragedies often focus on certain families due to their dramatic histories. Poets rely on these narratives, as they provide rich material for tragic storytelling.
+
+###tics00017###
+CHAPTER XV On morals in tragedy. Regarding morals, there are four points to aim for; one, the first, is that they are good. The character will have morals if, as has been said, speech or action reveals a purpose; good morals if the revealed purpose is good.
+Each class of people has its own kind of goodness, but bravery is not suitable for a woman's role. Characters should resemble their roles, maintaining equality even in inequality. Examples of inappropriate character portrayal include Menelaus in "Orestes" and Ulysses's lamentation in "Scylla." Tragedies should follow necessity or likelihood in actions and events. The denouement should arise from the fable itself, not external devices. Tragedy imitates things better than nature, so poets should embellish characters while maintaining resemblance, like Achilles in Agathon and Homer.
+
+###tics00018###
+CHAPTER XVI
+Recognition in tragedy has four forms. The first, least artistic, involves signs, either natural or acquired, like scars or objects. These are less artistic but can be used effectively, as with Ulysses's scar. The second form involves poet-invented recognitions, like Orestes recognizing his sister through a letter, which lacks authenticity. The third form is recognition by memory, triggered by objects or events, such as a character weeping upon seeing a painting. The fourth form is reasoning-based recognition, where logical deductions lead to realization, as in "Choephori." The best recognitions arise naturally from the plot, as in "Oedipus Rex," without relying on signs or contrived elements. Proper use of language, including metaphors and appropriate terms, enhances the narrative. Metaphors are particularly valued for their originality and ability to convey resemblance. Different types of names suit various poetic forms, with double names for dithyrambs, foreign words for heroic poetry, and metaphors for iambs. Proper use of these elements ensures a refined style, avoiding vulgarity and enhancing the tragic effect.
+
+###tics00019###
+CHAPTER XXIII
+Epic composition should focus on a single, complete action with a beginning, middle, and end, unlike histories that cover a chronological period with multiple events. Homer exemplifies this by not covering the entire Trojan War but focusing on parts with varied incidents. Other poets, like those of the Cypria and Little Iliad, base their works on a single hero within one era, dividing the action into many parts, leading to multiple tragedies.
+
+###tics00020###
+CHAPTER XXIV
+Epic and tragedy share similar elements, such as peripeties, recognitions, and pathos, but differ in composition and meter. Epics, like the "Iliad" and "Odyssey," can encompass multiple simultaneous events, adding breadth and variety, unlike tragedies which focus on a single action. The heroic meter is ideal for epics due to its breadth and suitability for foreign names and metaphors. Mixing meters, as Chérémon did, is considered inappropriate.
+
+Homer is praised for his ability to introduce characters with moral depth and for using surprise effectively. In epics, improbable events can be more acceptable because they aren't visually staged, unlike in tragedies. Homer also demonstrates how to incorporate falsehoods plausibly through paralogism, enhancing narrative surprise and pleasure. Plausible impossibilities are preferred over improbable possibilities, ensuring fables remain reasonable. Style should be carefully managed; too much brilliance can overshadow moral and intellectual elements. Homer's skill in concealing absurdities through his narrative style is highlighted, showing his mastery in crafting engaging and credible epics.
+
+###tics00021###
+CHAPTER XXV
+Poetic style faces objections based on its imitation of reality, beliefs, or ideals. Poets, like painters, depict things as they are, are believed to be, or should be, using expressions, glosses, and metaphors. Poetic faults can be inherent or accidental. If a poet imitates impossibilities, it's a fault unless it enhances the art's goal, like Hector's pursuit. Faults should be avoided, but if they occur, it's crucial to determine if they stem from the art itself or external factors. Misrepresentations can be defended by aiming to depict things as they should be, as Sophocles did, or as they are, like Euripides. Criticisms of style can be countered by explaining the use of glosses or metaphors, ensuring that words and actions are appropriate to context, character, and purpose. Misunderstandings of terms can be clarified by their metaphorical or contextual meanings.
+
+###tics00022###
+I. (One can also refute the criticism by alleging) accentuation, as Hippias of Thasos refuted it regarding the expression:
+??????? ?? ??... we give him and this other:
+what on one hand is not rotten by the rain.
+
+###tics00023###
+K. Other times one will allege punctuation, as in this verse by Empedocles:
+And from then on mortal beings were born who, before, had learned to be immortal; and pure, before, they had been mixed.
+
+###tics00024###
+L. Or ambiguity:
+The greatest half of the night is past... for ????? is ambiguous.
+
+###tics00025###
+M. Or again expressions consecrated by usage. Thus of any mixed drink one says "wine", and one will write:
+The text discusses the use of metaphor and interpretation in literature, emphasizing the importance of understanding contradictions and ambiguities. It highlights the need to prefer the "probable impossible" over the "improbable possible" in poetry, suggesting that characters should be depicted as idealized versions of themselves. Criticisms in literature arise from five areas: impossibility, inconsistency, harm, contradiction, and deviation from artistic rules. Solutions to these criticisms involve examining the context and intention behind the work, with twelve possible explanations to consider.
+
+###tics00026###
+CHAPTER XXVI
+The text debates whether epic or tragic composition is superior, suggesting that tragedy may be considered vulgar as it appeals to less discerning audiences, while epic addresses sensible people. However, the criticism targets the performers' exaggerations rather than the art itself. Tragedy, even without movement, fulfills its function like epic, offering music and spectacle for vivid pleasure. It excels by being concise, unlike the epic, which can seem diluted if extended. Tragedy achieves its goal more effectively, suggesting it might be superior to epic. The discussion covers their differences, qualities, criticisms, and responses, concluding that tragedy may surpass epic in achieving its artistic aims.
+
+###tics00027###
+END

@@ -27,7 +27,7 @@ avec des appels LLM, des plans de taches, et une gestion des states N0-N5.
 3) Le service lance 1a -> 1b -> 1c tant que `missing` non vides.
 4) L'orchestrateur narration produit un `task_plan`:
    - tache initiale d'identification du projet
-   - N0 par sections (production_summary, deliverables, art_direction, sound_direction)
+   - N0 par sections (narrative_presentation, deliverables, art_direction, sound_direction)
    - puis N1, N2, N3, N4, N5
 5) Le runner execute les taches:
    - Writer Orchestrator -> `context_pack` + `strategy_card`

@@ -13,6 +13,7 @@ from app.utils.storage import get_storage_path
 from app.utils.project_storage import (
     read_strata,
     read_ui_strata,
+    write_ui_strata,
     write_strata,
     list_projects,
     delete_project,
@@ -50,6 +51,7 @@ from app.narration_agent.writer_agent.strategy_finder.rag_bootstrap import (
 )
 from datetime import datetime, timezone
 import asyncio
+import httpx
 import json
 import uuid
 import os
@@ -387,11 +389,18 @@ def post_project_strata(
 def reset_project_n1(project_id: str) -> Dict[str, Any]:
     try:
         payload = reset_strata(project_id, "n1")
+        ui_payload = write_ui_strata(
+            project_id=project_id,
+            strata="n1",
+            data=payload.get("data", {}) if isinstance(payload, dict) else {},
+            source_updated_at=payload.get("updated_at", "") if isinstance(payload, dict) else "",
+        )
         deleted_logs = _delete_n1_logs(project_id)
         return {
             "status": "ok",
             "deleted_logs": deleted_logs,
             "n1": payload,
+            "n1_ui": ui_payload,
         }
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
@@ -439,11 +448,12 @@ def _delete_n1_logs(project_id: str) -> int:
     for log_dir in log_dirs:
         if not log_dir.exists() or not log_dir.is_dir():
             continue
-        for entry in log_dir.iterdir():
+        for entry in log_dir.rglob("*"):
             if not entry.is_file():
                 continue
-            name = entry.name
-            if "n1." in name or "n1_" in name:
+            name = entry.name.lower()
+            parent_name = entry.parent.name.lower()
+            if "n1." in name or "n1_" in name or parent_name == "n1":
                 try:
                     entry.unlink()
                     deleted += 1
@@ -776,6 +786,35 @@ def post_narration_message(
         raise HTTPException(status_code=404, detail="Projet introuvable")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+    except httpx.HTTPStatusError as e:
+        status_code = e.response.status_code if e.response is not None else 502
+        if status_code == 429:
+            error_code = ""
+            try:
+                payload = e.response.json() if e.response is not None else {}
+                if isinstance(payload, dict):
+                    err = payload.get("error")
+                    if isinstance(err, dict):
+                        error_code = str(err.get("code") or "").strip().lower()
+            except Exception:
+                error_code = ""
+            if error_code == "insufficient_quota":
+                raise HTTPException(
+                    status_code=429,
+                    detail="Quota OpenAI insuffisant (insufficient_quota). Verifie le projet API, la facturation et les limites.",
+                )
+            raise HTTPException(
+                status_code=429,
+                detail="Limite de requetes LLM atteinte. Reessaie dans quelques secondes.",
+            )
+        logger.error(
+            "Upstream HTTP error narration message project=%s status=%s: %s",
+            project_id,
+            status_code,
+            e,
+            exc_info=True,
+        )
+        raise HTTPException(status_code=status_code, detail="Erreur du fournisseur LLM")
     except Exception as e:
         logger.error(
             "Error handling narration message project=%s: %s",

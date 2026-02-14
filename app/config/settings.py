@@ -57,6 +57,11 @@ class Settings(BaseSettings):
     # OpenAI (for local agent scripts)
     OPENAI_API_KEY: Optional[str] = None  # Ignored by the server, but allowed in env
 
+    # RAG runtime guards (strategy finder)
+    R2R_CLIENT_TIMEOUT_S: float = 90.0
+    RAG_VARIANT_MAX: int = 4
+    RAG_VARIANT_TOTAL_BUDGET_S: int = 180
+
 
 # Global settings instance
 settings = Settings()

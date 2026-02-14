@@ -4,8 +4,8 @@ The `context_builder/context_pack_structure.json` file is a context container wi
 Each field comes from the state, N schemas, or knowledge sources (strategy).
 
 ## Fields
-- `target_path`: path of the target field to write (e.g. `data.production_summary`).
-- `target_section_name`: short name of the section (e.g. `production_summary`).
+- `target_path`: path of the target field to write (e.g. `data.narrative_presentation`).
+- `target_section_name`: short name of the section (e.g. `narrative_presentation`).
 - `writing_typology`: writing task type used to guide strategy selection.
 - `strategy_question`: explicit question to orient the strategy finder.
 - `target_current`: current content of the target section.

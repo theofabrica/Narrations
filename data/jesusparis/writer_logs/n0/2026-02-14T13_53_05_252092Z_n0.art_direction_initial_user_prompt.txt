@@ -1,0 +1,23 @@
+@Task@
+Write the text for "art direction description" for the project "jesusparis" a film with a duration of two hours.
+Use the @Task_input@ and the @Guidance@ that follow.
+
+Return ONLY valid JSON.
+
+@Rules@
+- Redaction rules: One paragraph with concrete descriptors.; No plot or story elements.; No meta-writing language or references to strategy..
+- Respect length constraints: min_chars=500, max_chars=1000.
+Writing rule: Describe the aesthetic style of the video precisely, highlighting what makes it distinctive and recognizable.
+
+@Guidance@
+1. Develop a coherent visual identity for the film by focusing on the use of materials and textures that align with the narrative's sociological context. Consider the dominant materials such as wood, metal, textile, concrete, and plastic, and their states (new, worn, repaired, degraded) to create a structured visual system that reflects the story's themes. 2. Create a foundational lookbook that outlines the visual intentions and functional color palettes for the film. This document should include a clear and concise general intention, major visual axes, and functional rather than decorative color palettes to guide the overall aesthetic. 3. Consider the emotional reading of each shot by carefully constructing sets and using lighting to influence the viewer's perception. The physical relationship between characters and their environments should be designed to enhance the emotional impact of the scenes. 4. Anticipate how the environments can affect the characters' presence within the frame. Design spaces that can either amplify, diminish, or neutralize a character's presence, depending on the narrative needs, to ensure that the art direction supports the storytelling. 5. Use color as a structural element that evolves throughout the film to maintain continuity and emotional coherence. Ensure that any changes in color dominance are justified by shifts in location, perspective, or world, to support the narrative progression and emotional journey.
+
+@Task_input@
+brief_video_type: film
+brief_target_duration_s: 7200
+core_summary: This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.
+
+EXISTING CONTENT TO REVISE (do not discard):
+{
+  "description": "The art direction for 'jesusparis' crafts a visually engaging narrative through a deliberate choice of materials and textures that align with the film's sociological themes. The aesthetic is characterized by a contrast between the old and the new, utilizing wood, metal, textile, concrete, and plastic as the core materials. These materials appear in various conditions\u2014new, worn, repaired, and degraded\u2014reflecting the layered history and modern reality of Paris. The visual identity is shaped by a functional color palette that evolves with the story, employing muted tones to evoke nostalgia and brighter colors to emphasize moments of revelation or transformation. Lighting is pivotal, creating shadows that enhance the melancholic humor and disillusionment Jesus experiences as he explores contemporary Paris. Sets are meticulously designed to affect the emotional interpretation of each scene, with environments crafted to either amplify or diminish the characters' presence as required by the narrative. This method ensures that the settings are not mere backgrounds but active elements in the storytelling. The film's visual language is cohesive and distinctive, with color transitions justified by shifts in location or perspective, ensuring continuity and emotional coherence throughout the two-hour experience."
+}

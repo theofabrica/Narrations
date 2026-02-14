@@ -23,24 +23,31 @@
       "propagate": {}
     }
   },
-  "n1.characters.main_characters.number": {
-    "allowed_fields": ["number"],
+  "n1.characters.main_characters": {
+    "allowed_fields": ["number", "names"],
     "modes": {
       "create": {
-        "writer_self_question": "How should I estimate the number of main characters from the project summary?",
+        "writer_self_question": "How should I estimate the number of main characters from the project summary, and what should their names be?",
         "context_aggregation": {
           "groups": [
             {
               "name": "father",
               "weight": 1.0,
-              "description": "N0 production summary only.",
-              "sources": ["n0.production_summary.summary"]
+              "description": "N0 narrative presentation only.",
+              "sources": ["n0.narrative_presentation.summary"]
             }
           ]
         },
+        "redaction_rules": [
+          "Return valid JSON with target_patch.number set to an integer between 1 and 4.",
+          "Return valid JSON with target_patch.names set to an array of distinct character names (strings).",
+          "The number of names must be exactly equal to target_patch.number.",
+          "Exclude secondary_characters and background_characters. Keep only the character or characters at the center of the story.",
+          "Do not include any other keys or prose."
+        ],
         "use_strategy": true,
         "strategy_finder": {
-          "question": "Je dois trouver dans la library narratology.  La méthode pour évaluer évaluer le nombre de personnages principaux dans le projet \"project_id\", un \"video_type\" de \"duration\" qui raconte \"summary\".",
+          "question": "I must find, in the narratology library, the method to evaluate the number of main characters and propose their names for project \"project_id\", a \"video_type\" of \"duration\". Explicitly exclude secondary and background characters. Keep only the character or characters at the center of the story.",
           "library_filename_prefixes": []
         }
       },
@@ -48,24 +55,32 @@
       "propagate": {}
     }
   },
-  "n1.characters.secondary_characters.number": {
-    "allowed_fields": ["number"],
+  "n1.characters.secondary_characters": {
+    "allowed_fields": ["number", "names"],
     "modes": {
       "create": {
-        "writer_self_question": "How should I estimate the number of secondary characters from the project summary?",
+        "writer_self_question": "How should I estimate the number of secondary characters from the project summary while accounting for the narrative economy imposed by video type and duration, and what should their names be?",
         "context_aggregation": {
           "groups": [
             {
               "name": "father",
               "weight": 1.0,
-              "description": "N0 production summary only.",
-              "sources": ["n0.production_summary.summary"]
+              "description": "N0 narrative presentation only.",
+              "sources": ["n0.narrative_presentation.summary"]
             }
           ]
         },
+        "redaction_rules": [
+          "Return valid JSON with target_patch.number set to an integer between 2 and 9.",
+          "Return valid JSON with target_patch.names set to an array of distinct character names (strings).",
+          "The number of names must be exactly equal to target_patch.number.",
+          "In the narrative economy of the project, calibrate the number of secondary characters to the available screen time implied by video type and duration.",
+          "Exclude main_characters and background_characters. Keep only characters in supporting roles around the main characters.",
+          "Do not include any other keys or prose."
+        ],
         "use_strategy": true,
         "strategy_finder": {
-          "question": "Je dois trouver dans la library narratology.  La méthode pour évaluer évaluer le nombre de personnages secondaires dans le projet \"project_id\", un \"video_type\" de \"duration\" qui raconte \"summary\".",
+          "question": "I must find, in the narratology library, the method to evaluate the number of secondary characters and propose their names for project \"project_id\", a \"video_type\" of \"duration\". The number must match the narrative economy allowed by \"video_type\" and \"duration\". Secondary characters must remain in supporting roles relative to the main characters already defined in n1.main_characters. Explicitly exclude main and background characters.",
           "library_filename_prefixes": []
         }
       },
@@ -73,24 +88,213 @@
       "propagate": {}
     }
   },
-  "n1.characters.background_characters.number": {
-    "allowed_fields": ["number"],
+  "n1.characters.background_characters": {
+    "allowed_fields": ["number", "names"],
     "modes": {
       "create": {
-        "writer_self_question": "How should I estimate the number of background characters from the project summary?",
+        "writer_self_question": "How should I estimate background characters that mainly serve setting or specific functional beats, and propose labels/names that may represent individuals or groups?",
         "context_aggregation": {
           "groups": [
             {
               "name": "father",
               "weight": 1.0,
-              "description": "N0 production summary only.",
-              "sources": ["n0.production_summary.summary"]
+              "description": "N0 narrative presentation only.",
+              "sources": ["n0.narrative_presentation.summary"]
             }
           ]
         },
+        "redaction_rules": [
+          "Return valid JSON with target_patch.number set to an integer between 1 and 5.",
+          "Return valid JSON with target_patch.names set to an array of distinct character names (strings).",
+          "The number of names must be exactly equal to target_patch.number.",
+          "Background characters are not narrative drivers: they primarily serve atmosphere, setting, or specific functional beats.",
+          "Background characters may be individuals or groups. Group labels are allowed (e.g., 'Commuters', 'Protest Crowd', 'Cafe Customers').",
+          "Exclude main_characters and secondary_characters. Keep only characters in minor background roles.",
+          "Do not include any other keys or prose."
+        ],
         "use_strategy": true,
         "strategy_finder": {
-          "question": "Je dois trouver dans la library narratology.  La méthode pour évaluer évaluer le nombre de personnages de fond dans le projet \"project_id\", un \"video_type\" de \"duration\" qui raconte \"summary\".",
+          "question": "I must find, in the narratology library, the method to evaluate the number of background characters and propose their labels/names for project \"project_id\", a \"video_type\" of \"duration\". Background characters should mostly serve setting and specific functional beats rather than drive the narrative. They can be individuals or groups. Keep them in minor roles relative to n1.main_characters and n1.secondary_characters, and explicitly exclude main and secondary characters.",
+          "library_filename_prefixes": []
+        }
+      },
+      "edit": {},
+      "propagate": {}
+    }
+  },
+  "n1.characters.main_characters.characters[].character_description": {
+    "allowed_fields": ["narrativ_role"],
+    "redaction_constraints": {
+      "min_chars": 500,
+      "max_chars": 800
+    },
+    "modes": {
+      "create": {
+        "writer_self_question": "How should I define the narrative role of this main character in the story?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 1.0,
+              "description": "N0 narrative presentation only.",
+              "sources": ["n0.narrative_presentation.summary"]
+            }
+          ]
+        },
+        "redaction_rules": [
+          "Return valid JSON where target_patch.narrativ_role is a concise narrative role statement in plain text.",
+          "Write exactly one paragraph with a length between 500 and 800 characters.",
+          "Anchor the role to the story conflict and the character's function in the narrative arc.",
+          "Do not rewrite or add other fields from character_description.",
+          "Do not include any other keys or prose."
+        ],
+        "use_strategy": true,
+        "strategy_finder": {
+          "question": "I must find, in the narratology library, methods to define a clear narrative role for one main character in project \"project_id\", a \"video_type\" of \"duration\" telling \"summary\". The role must describe this character's dramatic function in the central story arc.",
+          "library_filename_prefixes": []
+        }
+      },
+      "edit": {},
+      "propagate": {}
+    }
+  },
+  "n1.characters.main_characters.characters[].character_description.narrativ_role": {
+    "allowed_fields": ["narrativ_role"],
+    "redaction_constraints": {
+      "min_chars": 500,
+      "max_chars": 800
+    },
+    "modes": {
+      "create": {
+        "writer_self_question": "How should I define the narrative role of this main character in the story?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 1.0,
+              "description": "N0 narrative presentation only.",
+              "sources": ["n0.narrative_presentation.summary"]
+            }
+          ]
+        },
+        "redaction_rules": [
+          "Return valid JSON where target_patch.narrativ_role is a concise narrative role statement in plain text.",
+          "Write exactly one paragraph with a length between 500 and 800 characters.",
+          "Anchor the role to the story conflict and the character's function in the narrative arc.",
+          "Do not rewrite or add other fields from character_description.",
+          "Do not include any other keys or prose."
+        ],
+        "use_strategy": true,
+        "strategy_finder": {
+          "question": "I must find, in the narratology library, methods to define a clear narrative role for one main character in project \"project_id\", a \"video_type\" of \"duration\" telling \"summary\". The role must describe this character's dramatic function in the central story arc.",
+          "library_filename_prefixes": []
+        }
+      },
+      "edit": {},
+      "propagate": {}
+    }
+  },
+  "n1.characters.main_characters.characters[].character_description.appearance": {
+    "allowed_fields": ["appearance"],
+    "redaction_constraints": {
+      "min_chars": 500,
+      "max_chars": 800
+    },
+    "modes": {
+      "create": {
+        "writer_self_question": "How should I describe this main character's appearance for narrative readability and visual consistency?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 1.0,
+              "description": "N0 narrative presentation only.",
+              "sources": ["n0.narrative_presentation.summary"]
+            }
+          ]
+        },
+        "redaction_rules": [
+          "Return valid JSON where target_patch.appearance is a concrete visual description in plain text.",
+          "Write exactly one paragraph with a length between 500 and 800 characters.",
+          "Describe stable visual traits, silhouette, clothing cues, and visible attitude.",
+          "Do not rewrite or add other fields from character_description.",
+          "Do not include any other keys or prose."
+        ],
+        "use_strategy": true,
+        "strategy_finder": {
+          "question": "I must find, in the narratology library, methods to write a precise appearance description for one main character in project \"project_id\", a \"video_type\" of \"duration\" telling \"summary\". The output must support clear visualization and consistency across scenes.",
+          "library_filename_prefixes": []
+        }
+      },
+      "edit": {},
+      "propagate": {}
+    }
+  },
+  "n1.characters.main_characters.characters[].character_description.backstory": {
+    "allowed_fields": ["backstory"],
+    "redaction_constraints": {
+      "min_chars": 500,
+      "max_chars": 800
+    },
+    "modes": {
+      "create": {
+        "writer_self_question": "What concise backstory best explains this main character's current dramatic position?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 1.0,
+              "description": "N0 narrative presentation only.",
+              "sources": ["n0.narrative_presentation.summary"]
+            }
+          ]
+        },
+        "redaction_rules": [
+          "Return valid JSON where target_patch.backstory is a concise backstory paragraph in plain text.",
+          "Write exactly one paragraph with a length between 500 and 800 characters.",
+          "Focus on formative events that explain present behavior and conflict positioning.",
+          "Do not rewrite or add other fields from character_description.",
+          "Do not include any other keys or prose."
+        ],
+        "use_strategy": true,
+        "strategy_finder": {
+          "question": "I must find, in the narratology library, methods to write an effective backstory for one main character in project \"project_id\", a \"video_type\" of \"duration\" telling \"summary\". The backstory must clarify current stakes and behavior without drifting from the central narrative.",
+          "library_filename_prefixes": []
+        }
+      },
+      "edit": {},
+      "propagate": {}
+    }
+  },
+  "n1.characters.main_characters.characters[].character_description.motivation": {
+    "allowed_fields": ["motivation"],
+    "redaction_constraints": {
+      "min_chars": 500,
+      "max_chars": 800
+    },
+    "modes": {
+      "create": {
+        "writer_self_question": "How should I define this main character's motivation in relation to the core conflict and desired outcome?",
+        "context_aggregation": {
+          "groups": [
+            {
+              "name": "father",
+              "weight": 1.0,
+              "description": "N0 narrative presentation only.",
+              "sources": ["n0.narrative_presentation.summary"]
+            }
+          ]
+        },
+        "redaction_rules": [
+          "Return valid JSON where target_patch.motivation describes the character's driving need and objective in plain text.",
+          "Write exactly one paragraph with a length between 500 and 800 characters.",
+          "Connect inner need, concrete objective, and narrative stakes.",
+          "Do not rewrite or add other fields from character_description.",
+          "Do not include any other keys or prose."
+        ],
+        "use_strategy": true,
+        "strategy_finder": {
+          "question": "I must find, in the narratology library, methods to define a compelling character motivation for one main character in project \"project_id\", a \"video_type\" of \"duration\" telling \"summary\". Motivation must link inner need, goal, and stakes in the central arc.",
           "library_filename_prefixes": []
         }
       },

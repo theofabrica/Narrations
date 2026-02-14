@@ -34,20 +34,30 @@ def _has_text(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip())
 
 
+def _get_n0_narrative_presentation(data: Dict[str, Any]) -> Dict[str, Any]:
+    if not isinstance(data, dict):
+        return {}
+    section = data.get("narrative_presentation")
+    if isinstance(section, dict):
+        return section
+    legacy = data.get("production_summary")
+    return legacy if isinstance(legacy, dict) else {}
+
+
 def _is_state_empty(state: Dict[str, Any]) -> bool:
     if not isinstance(state, dict):
         return True
     data = state.get("data")
     if not isinstance(data, dict):
         return True
-    production_summary = data.get("production_summary", {})
+    narrative_presentation = _get_n0_narrative_presentation(data)
     art_direction = data.get("art_direction", {})
     sound_direction = data.get("sound_direction", {})
     if any(
         isinstance(section, dict)
-        for section in (production_summary, art_direction, sound_direction)
+        for section in (narrative_presentation, art_direction, sound_direction)
     ):
-        summary = production_summary.get("summary", "") if isinstance(production_summary, dict) else ""
+        summary = narrative_presentation.get("summary", "")
         art_description = (
             art_direction.get("description", "") if isinstance(art_direction, dict) else ""
         )

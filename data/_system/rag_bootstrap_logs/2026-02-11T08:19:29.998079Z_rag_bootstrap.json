@@ -1,0 +1,20 @@
+{
+  "status": "already_running",
+  "rag_base": "http://localhost:7272",
+  "auto_start": true,
+  "auto_ingest": true,
+  "docker_auto_start": true,
+  "server_started": false,
+  "server_ready": true,
+  "server_ready_ms": 0,
+  "ingest_items": 6,
+  "ingest_ms": 228,
+  "postgres_status": "already_running",
+  "postgres_ready": true,
+  "postgres_ready_ms": 0,
+  "docker_compose": "docker compose",
+  "logged_at": "2026-02-11T08:19:29.695429Z",
+  "compose_file": "/home/theoub02/code/MCP_Narrations/app/narration_agent/tools/r2r/docker/compose.yaml",
+  "ingest_status": "requested",
+  "duration_ms": 302
+}

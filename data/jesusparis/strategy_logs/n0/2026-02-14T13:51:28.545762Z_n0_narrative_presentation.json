@@ -1,0 +1,418 @@
+{
+  "project_id": "jesusparis",
+  "target_path": "n0.narrative_presentation",
+  "writing_typology": "summary",
+  "strategy_id": "summary_v1",
+  "strategy_question": "Find in the documents rules and guidance to write a clear, factual narrative presentation.",
+  "strategy_context_payload": {
+    "target_path": "n0.narrative_presentation",
+    "writing_typology": "summary",
+    "mode": "write",
+    "strategy_question": "Find in the documents rules and guidance to write a clear, factual narrative presentation.",
+    "project_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with...",
+    "primary_objective": "",
+    "constraints": [],
+    "redaction_constraints": {
+      "min_chars": 2000,
+      "max_chars": 3000
+    },
+    "existing_excerpt": "",
+    "expected_steps": 10,
+    "sources": [
+      {
+        "rank": 1,
+        "title": "Story",
+        "author": "Robert McKee",
+        "summary": "{ \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\",",
+        "excerpt": "/r963), PERSONA (Sweden/r966), WEEKEND (France/r967), DEATH BY HANGING (Japan/r968), CLOWNS (Italy/r970), MONTY PYTHON AND THE HOLY GRAIL (UK/r975), THAT OBSCURE OBJECT OF DESIRE (France/Spain/r977), BAD TIMING (UK/r980), STRANGER THAN PARADISE (USA/r984), AFTER HOURS (USA/r985), A ZED & TWO NOUGHTS (UK/ Netherlands/r985), WAYNE'S WORLD (USA/r993), CHUNGKING EXPRESS (Hong Kong/r994), LOST HIGHWAY (USA/r997). Anti\u00ad plot also includes the documentary-cum-collage such as Alain Resnais's NIGHT AND FOG (France/r955) and KOYAANISQATSI (USA/r983). ###tory00028### FORMAL DIFFERENCES WITHIN THE STORY TRIANGLE ###tory00029### Closed Versus Open Endings The Archplot delivers a closed ending-all questions raised by the story are answered; all emotions evoked are satisfied. The audience leaves with a rounded, closed experience- nothing in doubt, nothing unsated. Miniplot, on the other hand, often leaves the ending somewhat open. Most of the questions raised by the telling are answered, but an unanswered question or two may trail out of the film, leaving the audience to supply it subsequent to the viewing. Most of the emotion evoked by the film will be satisfied, but an emotional residue may be left for the audience to satisfy. Although Miniplot may end on a question mark of thought and feeling, \"open\" doesn't mean the film quits in the middle, leaving everything hanging. The question must b",
+        "key_concepts": [
+          "\"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading",
+          "[\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\"",
+          "\"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation",
+          "\"Classical Design emphasizes an active protagonist facing external conflict, which is essential",
+          "[\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\"",
+          "\"Classical Design involves an active protagonist facing external antagonism, pursuing desires through"
+        ],
+        "score": 0.5153,
+        "evidence_role": "abstract_function",
+        "evidence_relevance": 0.5714,
+        "evidence_actionability": 0.1667,
+        "evidence_specificity": 0.8717
+      },
+      {
+        "rank": 2,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "summary": "{ \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\",",
+        "excerpt": "anksgiving holiday three times. The structure is as follows: the story begins with a Thanksgiving dinner attended by all the characters, accompanied by bad partners. Then the narrative fractures into a series of alternating montages centered on the six individuals. In the middle of the story, all the characters gather again for Thanksgiving; this time, most of them are with new partners... but they are still not the right ones. The narrative fractures again into many simultaneous threads, with the different characters engaging in their respective activities. The story ends with all the characters reunited for the third time around a Thanksgiving dinner, but this time it is a true community, each now with the right partner. The narrative and the holiday become one. These characters do not talk about Thanksgiving; they live it. ###tory00310### The Single Day The single day is another temporal technique that has very specific consequences when used in a story. The first of these consequences is to create simultaneous movement while maintaining narrative dynamism. Instead of showing a single character throughout his development\u2014the linear approach adopted by most authors\u2014several characters are presented acting simultaneously, here and now, on this day. But the passage of hours forces the story to move forward and gives it a sense of compression. If the story is set over twelve hour",
+        "key_concepts": [
+          "\"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading",
+          "[\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\"",
+          "\"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation",
+          "\"Classical Design emphasizes an active protagonist facing external conflict, which is essential",
+          "[\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\"",
+          "\"Classical Design involves an active protagonist facing external antagonism, pursuing desires through"
+        ],
+        "score": 0.5084,
+        "evidence_role": "abstract_function",
+        "evidence_relevance": 0.5714,
+        "evidence_actionability": 0.1667,
+        "evidence_specificity": 0.8256
+      },
+      {
+        "rank": 3,
+        "title": "Story",
+        "author": "Robert McKee",
+        "summary": "Understanding narrative structure is essential for creating a coherent and engaging story. Writers should focus on events that integrate character, action, and dialogue to evoke specific emotions.",
+        "excerpt": "e bus this morning.\" Her coworkers lean back satisfied, muttering, \"God, yes, Helen, my kids are just like that.\" Now let's say the storytelling passes to the guy next to her who tells the others the heartrending tale of how his mother died over the weekend ... and bores the hell out of everyone. His story is all on the surface, repetitious rambling from trivial detail to cliche: \"She looked so good in her coffin.\" Halfway through his rendition, the rest head back to the coffee pot for another cup, turning a deaf ear to his tale of grief. Given the choice between trivial material brilliantly told versus profound material badly told, an audience will always choose the trivial told brilliantly. Master storytellers know how to squeeze life out of the least of things, while poor storytellers reduce the pro\u00ad found to the banal. You may have the insight of a Buddha, but if you cannot tell story, your ideas turn dry as chalk. Story talent is primary, literary talent secondary but essential. This principle is absolute in film and television, and truer for stage and page than most playwrights and novelists wish to admit. Rare as story talent is, you must have some or you wouldn't be itching to write. Your task is to wring from it all possible creativity. Only by using everything and anything you know about the craft of story\u00ad telling can you make your talent forge story. For talent with",
+        "key_concepts": [
+          "narrative structure",
+          "coherence",
+          "emotional engagement"
+        ],
+        "score": 0.4327,
+        "evidence_role": "story_context",
+        "evidence_relevance": 0.4286,
+        "evidence_actionability": 0.1667,
+        "evidence_specificity": 0.8923
+      },
+      {
+        "rank": 4,
+        "title": "Construire un recit",
+        "author": "Yves Lavandier",
+        "summary": "Effective structuring of a narrative enhances its plausibility and unity, linking scenes to create a persistent emotional question that engages the audience.",
+        "excerpt": "###urgy00122### 8. SCENE-BY-SCENE \"First operation: the plan with the division of the three main parts.\" (Carlo Goldoni) \"The pearls do not make the necklace, it's the thread.\" (Gustave Flaubert) \"I had a big event per episode. (...) It's like a backbone. The image that comes to me is that of a Christmas tree. People don't care about the trunk. They only see the balls, the lights, and the garlands. But you need a trunk. We kept referring to it.\" (David Chase) \"By plan, I mean the developed succession scene by scene of the entire play from its beginning to its end. (...) Once my plan is finished, I go over it and ask each scene what it serves, if it prepares or develops a character, a situation, finally if it advances the action.\" (Eug\u00e8ne Labiche) You have well planned your story, you have coherently filled the foundation entries, you are beginning to possess your characters. It is time to move on to the next step, the scene-by-scene (also called \"sequence of scenes\" or \"sequencer\"). This consists of feeding the second act by designing the broad lines of each scene but also and especially the way these scenes follow one another. I speak of the second act because, generally, at this stage of the process, the scenes that make up the first act are known. These are the scenes that come most easily. They are also the scenes that illustrate the pitch. The most important but the most n",
+        "key_concepts": [
+          "narrative structure",
+          "emotional engagement",
+          "scene linking"
+        ],
+        "score": 0.4228,
+        "evidence_role": "abstract_function",
+        "evidence_relevance": 0.4286,
+        "evidence_actionability": 0.15,
+        "evidence_specificity": 0.8546
+      },
+      {
+        "rank": 5,
+        "title": "Construire un recit",
+        "author": "Yves Lavandier",
+        "summary": "Creating an organic plot requires aligning thematic elements with a structured narrative, ensuring that character actions reflect the guiding principle.",
+        "excerpt": "###urgy00094### N. MAJOR DRAMATIC IRONIES At the foundation stage, you must think about the major dramatic ironies that will run throughout the second act, or at least a good part of it. Present them in the order of appearance in the story. It is possible that one or more dramatic ironies are already inherent in your subject. If, for example, you want to tell the story of aliens who take human form to discover Earth (3rd planet after the Sun), you automatically have two major dramatic ironies: 1 - we know that the protagonists are aliens, the other characters do not; 2 - we know earthly customs, the protagonists do not. In these cases, be aware of them. But sometimes, no dramatic irony is imposed by the subject. Victim and protagonist I distinguish two major categories of dramatic irony: the one where the victim of the dramatic irony is also the victim of the conflict (i.e., the protagonist) and the one where the victim of the dramatic irony is a character other than the protagonist. As examples of the first category, which I call \"bomb under the table,\" we find: - The Apartment: we know that Fran (Shirley MacLaine) is Sheldrake's (Fred MacMurray) mistress; Baxter (Jack Lemmon), the protagonist, does not; - Jean de Florette: we know that Papet (Yves Montand) and Ugolin (Daniel Auteuil) have blocked the spring; Jean (G\u00e9rard Depardieu), the protagonist, does not; - The Night of t",
+        "key_concepts": [
+          "organic plot",
+          "thematic alignment",
+          "character actions"
+        ],
+        "score": 0.4219,
+        "evidence_role": "abstract_function",
+        "evidence_relevance": 0.4286,
+        "evidence_actionability": 0.1667,
+        "evidence_specificity": 0.8204
+      },
+      {
+        "rank": 6,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "summary": "The Inciting Incident is pivotal in driving the protagonist's quest and revealing deeper desires, making it essential for narrative progression.",
+        "excerpt": "457### TOOTSIE Initially, Michael wants to get a role. But this desire is very quickly fulfilled. The goal that truly serves as the backbone of the film is Michael's desire for Julie, one of the actresses in the series. ###tory00458### TECHNIQUE: THE DIFFERENT DEGREES OF DESIRE ###tory00459### Part of the success of your story depends on the degree of desire you give your hero. A desire that remains weak throughout the story diminishes the hero, and, as for the plot, makes any complexity literally impossible. The weakest degree of desire, for example, is survival. The hero is attacked and seeks to escape. This lowers him to the animal stage. The plot of escape stories tends to simply repeat the same highlights of the escape. Below are the different degrees of some of the classic lines of desire, from weakest to strongest: ###tory00460### 1. Survive (escape) ###tory00461### 2. Take revenge ###tory00462### 3. Win the fight ###tory00463### 4. Accomplish something ###tory00464### 5. Explore a world ###tory00465### 6. Catch a criminal ###tory00466### 7. Discover the truth ###tory00467### 8. Win love ###tory00468### 9. Restore justice and freedom ###tory00469### 10. Save the republic ###tory00470### 11. Save the world ###tory00471### 6. Ally(ies) Once the hero is equipped with a line of desire, he usually needs to make one or more allies who will help him defeat the adversary and ach",
+        "key_concepts": [
+          "Inciting Incident",
+          "protagonist's quest",
+          "narrative progression"
+        ],
+        "score": 0.4189,
+        "evidence_role": "story_context",
+        "evidence_relevance": 0.4286,
+        "evidence_actionability": 0.15,
+        "evidence_specificity": 0.8285
+      },
+      {
+        "rank": 7,
+        "title": "Story",
+        "author": "Robert McKee",
+        "summary": "To maintain audience engagement, narratives must continuously escalate conflict and avoid repetitive actions that stall progression.",
+        "excerpt": "astating end. The point, however, is that the Inciting Incident of ORDINARY PEOPLE is triggered by a woman scraping French toast down a garbage disposal. Henry James wrote brilliantly about story art in the prefaces to his novels, and once asked: \"What, after all, is an event?\" An event, he said, could be as little as a woman putting her hand on the table and looking at you \"that certain way.\" In the right context, just a gesture and a look could mean, ''I'll never see you again,\" or ''I'll love you forever\"-a life broken or made. The quality of the Inciting Incident (for that matter, any event) must be germane to the world, characters, and genre surrounding it. Once it is conceived, the writer must concentrate on its function. Does the Inciting Incident radically upset the balance of forces in the protagonist's life? Does it arouse in the protagonist the desire to restore balance? Does it inspire in him the conscious desire for that object, material or immaterial, he feels would restore the balance? In a complex protagonist, does it also bring to life an unconscious desire that contradicts his conscious need? Does it launch the protagonist on a quest for his desire? Does it raise the Major Dramatic Question in the mind of the audience? Does it project an image of the Obliga\u00ad tory Scene? If it does all this, then it can be as little as a woman putting her hand on the table, loo",
+        "key_concepts": [
+          "audience engagement",
+          "escalating conflict",
+          "narrative progression"
+        ],
+        "score": 0.3795,
+        "evidence_role": "abstract_function",
+        "evidence_relevance": 0.3571,
+        "evidence_actionability": 0.1667,
+        "evidence_specificity": 0.8235
+      },
+      {
+        "rank": 8,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "summary": "The protagonist's desire forms the 'Spine' of the story, connecting all elements and driving the narrative forward.",
+        "excerpt": "ually) in a world of servitude that highlights, amplifies, or exacerbates his major weakness. He then faces the adversary most capable of exploiting this weakness. In Chapter 8, you'll see that another element of the beginning, the \"specter,\" can also express the hero's weakness. The connection between the hero and his universe begins with the hero's servitude and continues throughout the character's arc. In most stories, as the hero is an expression of the world and the world an expression of the hero, they both develop together. And if the hero doesn't change, as in most of Chekhov's works, the world doesn't change either. Let's now study some classic examples of transformations, contrasts, or non-transformations of the hero and his world throughout the story. Hero: From servitude to freedom through even worse servitude World: From servitude to freedom through even worse servitude The hero begins the story in a world of servitude. He fights to achieve his goal and falls throughout the story's progression. Then, through awareness, he fulfills his need and becomes free in a world that also liberates thanks to his actions. This pattern is found in episodes 4 to 6 of \"Star Wars,\" in \"The Lord of the Rings,\" \"The Verdict,\" \"The Lion King,\" \"The Shawshank Redemption,\" \"Life is Beautiful,\" and \"David Copperfield.\" Hero: From servitude to death or even worse servitude World: From ser",
+        "key_concepts": [
+          "Spine",
+          "protagonist's desire",
+          "narrative connection"
+        ],
+        "score": 0.3662,
+        "evidence_role": "abstract_function",
+        "evidence_relevance": 0.3571,
+        "evidence_actionability": 0.15,
+        "evidence_specificity": 0.7628
+      },
+      {
+        "rank": 9,
+        "title": "Story",
+        "author": "Robert McKee",
+        "summary": "Narrative dynamism relies on conflict and pacing, with the hero's actions and adversarial challenges driving the story forward.",
+        "excerpt": "###tory00212### THE QUEST From the point of view of the writer looking from the Inciting Inci\u00ad dent \"down the Spine\" to the last act's Climax, in spite of all we've said about genres and the various shapes from Archplot to Antiplot, in truth there's only one story. In essence we have told one another the same tale, one way or another, since the dawn of humanity, and that story could be usefully called the Quest. All stories take the form of a Quest. For better or worse. an event throws a character's life out of balance. arousing in him the conscious and/or unconscious desire for that which he feels will restore THE QUEST INCITING INCIDENT consci .inner : conflict SPINE perso_nal : conflict ',,,, . extra- , unc 'nscious desire pers na,l , confJtcV e balance. launching him on a Quest for his Object of Desire against forces of antagonism (inner. personal, extra-personal). He may or may not achieve it. This is story in a nutshell. The essential form of story is simple. But that's like saying that the essential form of music is simple. It is. It's twelve notes. But these twelve notes conspire into everything and anything we have ever called music. The essential elements of the Quest are the twelve notes of our music, the melody we've listened to all our lives. However, like the composer sitting down at the piano, when a writer takes up this seemingly simple form, he discovers how in",
+        "key_concepts": [
+          "narrative dynamism",
+          "conflict",
+          "pacing"
+        ],
+        "score": 0.3562,
+        "evidence_role": "abstract_function",
+        "evidence_relevance": 0.2857,
+        "evidence_actionability": 0.25,
+        "evidence_specificity": 0.8155
+      },
+      {
+        "rank": 10,
+        "title": "Construire un recit",
+        "author": "Yves Lavandier",
+        "summary": "{ \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\",",
+        "excerpt": "###urgy00139### B. AVOID DEUS EX MACHINA AND CONVENIENCES A deus ex machina is a narrative element that comes to help the protagonist and gives the unpleasant impression of appearing out of nowhere. In reality, the viewer senses that this element doesn't come out of nowhere but from the author's hat, making it even more unpleasant. In a broad sense, a deus ex machina is any convenience that suits the author. Managing the aids and solutions for the protagonist is a significant part of our activity. There are several ways to avoid a deus ex machina. The most radical solution is to ensure that the help comes from the protagonist themselves and not from outside. Any protagonist worthy of the name finds within themselves the resources to get out of trouble. That said, unless you're called MacGyver (MacGyver), a protagonist can't do everything, provoke a solar eclipse, resurrect their neighbor, or master nuclear fission overnight. Here are some techniques to avoid conveniences. Note: Some can be combined. 1. Preparation. Prepare the help. Preparation is the great antidote to deus ex machina. In the middle of \"The Great Dictator,\" the little Jewish barber (Charles Chaplin) is in a bad spot; Tomanian soldiers are about to hang him. He owes his salvation to the last-minute intervention of a Tomanian officer, Schultz (Reginald Gardiner). Deus ex machina? Not quite. Because the barber had",
+        "key_concepts": [
+          "\"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading",
+          "[\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\"",
+          "\"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation",
+          "\"Classical Design emphasizes an active protagonist facing external conflict, which is essential",
+          "[\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\"",
+          "\"Classical Design involves an active protagonist facing external antagonism, pursuing desires through"
+        ],
+        "score": 0.2802,
+        "evidence_role": "abstract_function",
+        "evidence_relevance": 0.2,
+        "evidence_actionability": 0.15,
+        "evidence_specificity": 0.8177
+      }
+    ]
+  },
+  "evidence_report": {
+    "status": "ok",
+    "score_mode": "semantic_llm",
+    "kept_count": 10,
+    "raw_count": 10,
+    "thresholds": {
+      "overall_min": 0.25,
+      "relevance_min": 0.14,
+      "rescue_relevance_min": 0.14
+    },
+    "evidence_mix": {
+      "enabled": true,
+      "policy": "n0_narrative_min_abstract_mix",
+      "target_min_abstract": 2,
+      "final_limit": 10,
+      "pool_counts": {
+        "abstract_function": 8,
+        "story_context": 2,
+        "mixed_or_unknown": 0
+      },
+      "selected_counts": {
+        "abstract_function": 8,
+        "story_context": 2,
+        "mixed_or_unknown": 0
+      },
+      "near_threshold_abstract_injections": 0,
+      "pool_mode": "strict"
+    },
+    "details": [
+      {
+        "index": 2,
+        "title": "Story",
+        "author": "Robert McKee",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+        "scores": {
+          "overall": 0.5153,
+          "relevance": 0.5714,
+          "actionability": 0.1667,
+          "specificity": 0.8717
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 1,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+        "scores": {
+          "overall": 0.5084,
+          "relevance": 0.5714,
+          "actionability": 0.1667,
+          "specificity": 0.8256
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 3,
+        "title": "Story",
+        "author": "Robert McKee",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+        "scores": {
+          "overall": 0.4327,
+          "relevance": 0.4286,
+          "actionability": 0.1667,
+          "specificity": 0.8923
+        },
+        "evidence_role": "story_context",
+        "accepted": true
+      },
+      {
+        "index": 4,
+        "title": "Construire un recit",
+        "author": "Yves Lavandier",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__lavandier_dramaturgy.src.txt",
+        "scores": {
+          "overall": 0.4228,
+          "relevance": 0.4286,
+          "actionability": 0.15,
+          "specificity": 0.8546
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 7,
+        "title": "Construire un recit",
+        "author": "Yves Lavandier",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__lavandier_dramaturgy.src.txt",
+        "scores": {
+          "overall": 0.4219,
+          "relevance": 0.4286,
+          "actionability": 0.1667,
+          "specificity": 0.8204
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 5,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+        "scores": {
+          "overall": 0.4189,
+          "relevance": 0.4286,
+          "actionability": 0.15,
+          "specificity": 0.8285
+        },
+        "evidence_role": "story_context",
+        "accepted": true
+      },
+      {
+        "index": 9,
+        "title": "Story",
+        "author": "Robert McKee",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+        "scores": {
+          "overall": 0.3795,
+          "relevance": 0.3571,
+          "actionability": 0.1667,
+          "specificity": 0.8235
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 8,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+        "scores": {
+          "overall": 0.3662,
+          "relevance": 0.3571,
+          "actionability": 0.15,
+          "specificity": 0.7628
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      }
+    ],
+    "retrieval_variants": {
+      "enabled": true,
+      "variant_count": 4,
+      "time_budget_s": 1800,
+      "max_variants": 4,
+      "elapsed_total_ms": 593465,
+      "stopped_early": "",
+      "per_variant": [
+        {
+          "variant_index": 1,
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation.",
+          "elapsed_ms": 192550,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 13,
+          "added_unique_hits": 13
+        },
+        {
+          "variant_index": 2,
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Focus on method-level narrative guidance and concrete writing moves.",
+          "elapsed_ms": 133439,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 15,
+          "added_unique_hits": 15
+        },
+        {
+          "variant_index": 3,
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Prioritize causal structure, stakes, conflict progression, and turning points.",
+          "elapsed_ms": 150117,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 15,
+          "added_unique_hits": 15
+        },
+        {
+          "variant_index": 4,
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Retrieve complementary guidance with non-overlapping evidence across sources.",
+          "elapsed_ms": 117357,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 15,
+          "added_unique_hits": 15
+        }
+      ],
+      "merged_unique_count": 58,
+      "returned_count": 10
+    }
+  },
+  "strategy_text": "1. Begin by establishing the protagonist's actions that provoke escalating antagonism, ensuring that each action leads to more significant challenges and avoids lesser efforts. This will maintain narrative progression and keep the story dynamic. 2. Use a temporal technique, such as setting the story over a single day, to create simultaneous movement and maintain narrative dynamism. This approach compresses the story's timeline, forcing it to move forward and keeping the audience engaged. 3. Focus on integrating character, action, and dialogue in each event to evoke specific emotions. This will ensure the narrative is coherent and engaging, drawing the audience into the story. 4. Structure the narrative to enhance its plausibility and unity by linking scenes that create a persistent emotional question. This will engage the audience and provide a cohesive story experience. 5. Align thematic elements with a structured narrative to create an organic plot. Ensure that character actions reflect the guiding principle, reinforcing the story's themes and messages. 6. Introduce an Inciting Incident that drives the protagonist's quest and reveals deeper desires. This incident should be pivotal for narrative progression, setting the stage for the protagonist's journey. 7. Continuously escalate conflict and avoid repetitive actions that stall progression. This will maintain audience engagement and keep the narrative dynamic. 8. Use the protagonist's desire as the 'Spine' of the story, connecting all elements and driving the narrative forward. This central desire should guide the protagonist's actions and decisions throughout the story. 9. Ensure narrative dynamism by focusing on conflict and pacing, with the hero's actions and adversarial challenges driving the story forward. This will keep the audience invested in the protagonist's journey. 10. Avoid deus ex machina and narrative conveniences by ensuring that the protagonist finds solutions from within themselves. Prepare any external help in advance to maintain narrative integrity and avoid undermining the story's believability.",
+  "library_item_ids": [
+    "mckee_story",
+    "truby_anatomy_of_story",
+    "lavandier_construire_un_recit"
+  ],
+  "source_refs": [
+    "Story - Robert McKee: { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\", | Concepts: \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading, [\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\", \"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation, \"Classical Design emphasizes an active protagonist facing external conflict, which is essential, [\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\", \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through",
+    "Anatomy of Story - John Truby: { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\", | Concepts: \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading, [\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\", \"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation, \"Classical Design emphasizes an active protagonist facing external conflict, which is essential, [\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\", \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through",
+    "Story - Robert McKee: Understanding narrative structure is essential for creating a coherent and engaging story. Writers should focus on events that integrate character, action, and dialogue to evoke specific emotions. | Concepts: narrative structure, coherence, emotional engagement",
+    "Construire un recit - Yves Lavandier: Effective structuring of a narrative enhances its plausibility and unity, linking scenes to create a persistent emotional question that engages the audience. | Concepts: narrative structure, emotional engagement, scene linking",
+    "Construire un recit - Yves Lavandier: Creating an organic plot requires aligning thematic elements with a structured narrative, ensuring that character actions reflect the guiding principle. | Concepts: organic plot, thematic alignment, character actions",
+    "Anatomy of Story - John Truby: The Inciting Incident is pivotal in driving the protagonist's quest and revealing deeper desires, making it essential for narrative progression. | Concepts: Inciting Incident, protagonist's quest, narrative progression",
+    "Story - Robert McKee: To maintain audience engagement, narratives must continuously escalate conflict and avoid repetitive actions that stall progression. | Concepts: audience engagement, escalating conflict, narrative progression",
+    "Anatomy of Story - John Truby: The protagonist's desire forms the 'Spine' of the story, connecting all elements and driving the narrative forward. | Concepts: Spine, protagonist's desire, narrative connection",
+    "Story - Robert McKee: Narrative dynamism relies on conflict and pacing, with the hero's actions and adversarial challenges driving the story forward. | Concepts: narrative dynamism, conflict, pacing",
+    "Construire un recit - Yves Lavandier: { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\", | Concepts: \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading, [\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\", \"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation, \"Classical Design emphasizes an active protagonist facing external conflict, which is essential, [\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\", \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through"
+  ],
+  "notes": "Auto-selected based on writing typology and language. rag_mode=agentic_deep, rag_hits=15, evidence_mode=ok, evidence_kept=10.",
+  "logged_at": "2026-02-14T13:51:28.545797Z"
+}

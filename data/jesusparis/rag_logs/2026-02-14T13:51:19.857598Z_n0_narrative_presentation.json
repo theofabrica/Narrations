@@ -1,0 +1,649 @@
+{
+  "project_id": "jesusparis",
+  "target_path": "n0.narrative_presentation",
+  "writing_typology": "summary",
+  "rag_mode": "agentic_deep",
+  "rag_hits": 15,
+  "error_detail": "",
+  "rag_reason": "agentic_success",
+  "rag_policy_path": [
+    "agentic"
+  ],
+  "rag_retry": "",
+  "rag_conversation_id": "",
+  "client_available": true,
+  "r2r_base": "http://127.0.0.1:7272",
+  "rag_input_context_pack_compact": {
+    "target_path": "n0.narrative_presentation",
+    "writing_typology": "summary",
+    "strategy_question": "Find in the documents rules and guidance to write a clear, factual narrative presentation.",
+    "core_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+    "brief_video_type": "film",
+    "brief_target_duration_s": 7200,
+    "brief_target_duration_text": "",
+    "redaction_constraints": {
+      "min_chars": 2000,
+      "max_chars": 3000
+    },
+    "allowed_fields": [
+      "summary"
+    ],
+    "writing_mode": "create",
+    "library_filename_prefixes": [
+      "SRC_NARRATOLOGY"
+    ],
+    "rag_conversation_id": ""
+  },
+  "rag_request_payload": {
+    "limit": 10,
+    "path": "agentic_deep",
+    "query_text": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Retrieve complementary guidance with non-overlapping evidence across sources. | target_path=n0.narrative_presentation | writing_typology=summary | Focus on abstract narrative architecture: stakes, causality, progression, conflict, arc.",
+    "query_text_architecture": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Retrieve complementary guidance with non-overlapping evidence across sources. | target_path=n0.narrative_presentation | writing_typology=summary | Focus on abstract narrative architecture: stakes, causality, progression, conflict, arc.",
+    "query_context_object": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+    "writing_typology": "summary",
+    "language": "en",
+    "allowed_filenames": [
+      "SRC_NARRATOLOGY__aristote_poetics.20.txt",
+      "SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt",
+      "SRC_NARRATOLOGY__mckee_story.20.txt",
+      "SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt"
+    ],
+    "base_search_settings": {
+      "use_semantic_search": true,
+      "use_fulltext_search": true,
+      "use_hybrid_search": true,
+      "include_scores": true,
+      "include_metadatas": true,
+      "search_strategy": "rag_fusion",
+      "num_sub_queries": 3,
+      "hybrid_settings": {
+        "full_text_weight": 1.0,
+        "semantic_weight": 4.0,
+        "full_text_limit": 200,
+        "rrf_k": 50
+      },
+      "filters": {
+        "$and": [
+          {
+            "metadata.doc_type": {
+              "$eq": "SRC"
+            }
+          },
+          {
+            "metadata.source_file": {
+              "$in": [
+                "SRC_NARRATOLOGY__aristote_poetics.20.txt",
+                "SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt",
+                "SRC_NARRATOLOGY__mckee_story.20.txt",
+                "SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt"
+              ]
+            }
+          }
+        ]
+      },
+      "limit": 12
+    },
+    "deep_agentic": {
+      "enabled": true,
+      "pass_count": 2,
+      "use_system_context": false,
+      "passes": [
+        {
+          "name": "focused",
+          "query_text": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Retrieve complementary guidance with non-overlapping evidence across sources. | target_path=n0.narrative_presentation | writing_typology=summary | Focus on abstract narrative architecture: stakes, causality, progression, conflict, arc.",
+          "task_prompt": "You are an expert narratology research agent working on retrieval, not final writing.\nPass: focused.\nTarget path (internal id): n0.narrative_presentation\nTarget objective (human): n0 narrative presentation\nWriting typology: summary.\nGoal: retrieve diverse, high-signal evidence from allowed files only.\nProcess: (1) identify relevant principles, (2) capture concrete method statements, (3) avoid generic plot summaries.\nALLOWED source_file values (EXACT STRING MATCH, case-sensitive):\n  - SRC_NARRATOLOGY__aristote_poetics.20.txt\n  - SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\n  - SRC_NARRATOLOGY__mckee_story.20.txt\n  - SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt\nSTRICT VALIDATION:\n- source_file MUST be one of the allowed values above.\n- NEVER use internal ids (e.g. n0.narrative_presentation) as source_file.\n- Any item with invalid source_file will be discarded.\n- excerpt MUST be an exact contiguous quote copied from the source text (verbatim only).\n- NEVER paraphrase, compress, translate, or rewrite excerpts.\n- If you cannot provide an exact quote, skip the item.\nReturn ONLY valid JSON with this schema:\n{ \"items\": [ { \"source_file\": \"\", \"summary\": \"\", \"key_concepts\": [], \"excerpt\": \"\" } ] }\n- Provide at most 30 items.\n- Excerpts must be verbatim, each under 1400 characters.\n- Summaries must be 1-2 sentences and actionable for writing strategy.\n- Prefer diversity across distinct sections of source content.\nCONTEXT_POLICY:\n- Treat CONTEXT_OBJECT as project context, not as mandatory output wording.\n- Prioritize abstract narrative functions first (stakes, causality, progression, arc).\n- Avoid overfitting to contextual motifs when selecting principles.\nCONTEXT_OBJECT:\nThis film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.\n- If unsure, return an empty items list.",
+          "search_settings": {
+            "use_semantic_search": true,
+            "use_fulltext_search": true,
+            "use_hybrid_search": true,
+            "include_scores": true,
+            "include_metadatas": true,
+            "search_strategy": "rag_fusion",
+            "num_sub_queries": 4,
+            "hybrid_settings": {
+              "full_text_weight": 1.0,
+              "semantic_weight": 5.0,
+              "full_text_limit": 220,
+              "rrf_k": 45
+            },
+            "filters": {
+              "$and": [
+                {
+                  "metadata.doc_type": {
+                    "$eq": "SRC"
+                  }
+                },
+                {
+                  "metadata.source_file": {
+                    "$in": [
+                      "SRC_NARRATOLOGY__aristote_poetics.20.txt",
+                      "SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt",
+                      "SRC_NARRATOLOGY__mckee_story.20.txt",
+                      "SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt"
+                    ]
+                  }
+                }
+              ]
+            },
+            "limit": 30
+          }
+        },
+        {
+          "name": "exploratory",
+          "query_text": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Retrieve complementary guidance with non-overlapping evidence across sources. | target_path=n0.narrative_presentation | writing_typology=summary | Focus on abstract narrative architecture: stakes, causality, progression, conflict, arc.\nEXPLORATORY_RETRIEVAL_GOAL:\n- Find complementary principles for target 'n0.narrative_presentation'.\n- Include alternatives and edge-case guidance, not only obvious matches.\n- Prefer evidence that can become concrete writing instructions.\n- Focus on abstract narrative architecture: stakes, causality, progression, conflict, arc.\nCONTEXT_USAGE:\n- Use context only to adapt examples and constraints; avoid copying user phrasing.\n- Story context (object-level): This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+          "task_prompt": "You are an expert narratology research agent working on retrieval, not final writing.\nPass: exploratory.\nTarget path (internal id): n0.narrative_presentation\nTarget objective (human): n0 narrative presentation\nWriting typology: summary.\nGoal: retrieve diverse, high-signal evidence from allowed files only.\nProcess: (1) identify relevant principles, (2) capture concrete method statements, (3) avoid generic plot summaries.\nALLOWED source_file values (EXACT STRING MATCH, case-sensitive):\n  - SRC_NARRATOLOGY__aristote_poetics.20.txt\n  - SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\n  - SRC_NARRATOLOGY__mckee_story.20.txt\n  - SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt\nSTRICT VALIDATION:\n- source_file MUST be one of the allowed values above.\n- NEVER use internal ids (e.g. n0.narrative_presentation) as source_file.\n- Any item with invalid source_file will be discarded.\n- excerpt MUST be an exact contiguous quote copied from the source text (verbatim only).\n- NEVER paraphrase, compress, translate, or rewrite excerpts.\n- If you cannot provide an exact quote, skip the item.\nReturn ONLY valid JSON with this schema:\n{ \"items\": [ { \"source_file\": \"\", \"summary\": \"\", \"key_concepts\": [], \"excerpt\": \"\" } ] }\n- Provide at most 40 items.\n- Excerpts must be verbatim, each under 1400 characters.\n- Summaries must be 1-2 sentences and actionable for writing strategy.\n- Prefer diversity across distinct sections of source content.\nCONTEXT_POLICY:\n- Treat CONTEXT_OBJECT as project context, not as mandatory output wording.\n- Prioritize abstract narrative functions first (stakes, causality, progression, arc).\n- Avoid overfitting to contextual motifs when selecting principles.\nCONTEXT_OBJECT:\nThis film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.\n- If unsure, return an empty items list.",
+          "search_settings": {
+            "use_semantic_search": true,
+            "use_fulltext_search": true,
+            "use_hybrid_search": true,
+            "include_scores": true,
+            "include_metadatas": true,
+            "search_strategy": "rag_fusion",
+            "num_sub_queries": 6,
+            "hybrid_settings": {
+              "full_text_weight": 2.0,
+              "semantic_weight": 3.0,
+              "full_text_limit": 260,
+              "rrf_k": 65
+            },
+            "filters": {
+              "$and": [
+                {
+                  "metadata.doc_type": {
+                    "$eq": "SRC"
+                  }
+                },
+                {
+                  "metadata.source_file": {
+                    "$in": [
+                      "SRC_NARRATOLOGY__aristote_poetics.20.txt",
+                      "SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt",
+                      "SRC_NARRATOLOGY__mckee_story.20.txt",
+                      "SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt"
+                    ]
+                  }
+                }
+              ]
+            },
+            "limit": 40
+          }
+        }
+      ]
+    },
+    "conversation_id": "",
+    "mode": "rag",
+    "rag_tools": [
+      "search_file_knowledge",
+      "search_file_descriptions"
+    ],
+    "disable_web_agentic": true
+  },
+  "rag_response_debug": {
+    "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Understanding classical design principles is crucial for crafting narratives that resonate universally, emphasizing causality and character-driven conflict.\", \"key_concepts\": [\"Classical Design\", \"Causality\", \"Active Protagonist\"], \"excerpt\": \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through continuous time within a consistent reality, leading to a closed ending with irreversible change.\" }, { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Effective narrative structuring is essential for coherence and engagement, linking scenes to create emotional questions that captivate the audience.\", \"key_concepts\": [\"Scene-by-Scene Structure\", \"Emotional Engagement\", \"Narrative Coherence\"], \"excerpt\": \"Structuring a narrative is crucial for creating a coherent and engaging story, as it provides plausibility, meaning, and unity.\" }, { \"source_file\": \"SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt\", \"summary\": \"A strong narrative arc is built on the protagonist's clear desire and the obstacles they face, ensuring that each action escalates the stakes and maintains audience interest.\", \"key_concepts\": [\"Protagonist's Desire\", \"Obstacles\", \"Narrative Arc\"], \"excerpt\": \"The protagonist's desire forms the story's Spine, unifying all elements.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Narrative dynamism is achieved through conflict and pacing, requiring the protagonist to face escalating challenges that d\n\n---\n\n```json { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Understanding stakes is crucial for engaging the audience, as they define what the protagonist stands to gain or lose.\", \"key_concepts\": [\"stakes\", \"audience engagement\", \"character motivation\"], \"excerpt\": \"Stakes are what the protagonist stands to lose or gain, distinct from objectives, and crucial for audience engagement.\" }, { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Dramatization enhances narrative impact by emphasizing significant actions and decisions through conflict and stakes.\", \"key_concepts\": [\"dramatization\", \"conflict\", \"tension\"], \"excerpt\": \"\\\"Dramatization\\\" in writing involves emphasizing significant narrative elements through conflict, stakes, and suspense.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"The Inciting Incident is pivotal for setting the protagonist on a transformative journey, marking a shift in their reality.\", \"key_concepts\": [\"Inciting Incident\", \"transformation\", \"character motivation\"], \"excerpt\": \"The Inciting Incident sets the protagonist on a quest, facing escalating antagonism that demands increasingly significant actions.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Narrative progression requires escalating challenges that lead to irreversible changes in the protagonist's journey.\", \"key_concepts\": [\"narrative progression\", \"escalation\", \"character development\"], \"excerpt\": \"As the story progresses, the protagonist must take more challenging a",
+    "raw_citations_count": 0,
+    "parsed_agent_items_count": 20,
+    "merged_hits_count": 20,
+    "invalid_source_file_items_count": 0,
+    "coerced_freeform_items_count": 0,
+    "fused_hits_count": 15,
+    "exploratory_error": "",
+    "passes": [
+      {
+        "pass_name": "focused",
+        "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Understanding classical design principles is crucial for crafting narratives that resonate universally, emphasizing causality and character-driven conflict.\", \"key_concepts\": [\"Classical Design\", \"Causality\", \"Active Protagonist\"], \"excerpt\": \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through continuous time within a consistent reality, leading to a closed ending with irreversible change.\" }, { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Effective narrative structuring is essential for coherence and engagement, linking scenes to create emotional questions that captivate the audience.\", \"key_concepts\": [\"Scene-by-Scene Structure\", \"Emotional Engagement\", \"Narrative Coherence\"], \"excerpt\": \"Structuring a narrative is crucial for creating a coherent and engaging story, as it provides plausibility, meaning, and unity.\" }, { \"source_file\": \"SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt\", \"summary\": \"A strong narrative arc is built on the protagonist's clear desire and the obstacles they face, ensuring that each action escalates the stakes and maintains audience interest.\", \"key_concepts\": [\"Protagonist's Desire\", \"Obstacles\", \"Narrative Arc\"], \"excerpt\": \"The protagonist's desire forms the story's Spine, unifying all elements.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Narrative dynamism is achieved through conflict and pacing, requiring the protagonist to face escalating challenges that d",
+        "raw_citations_count": 0,
+        "parsed_agent_items_count": 10,
+        "merged_hits_count": 10,
+        "invalid_source_file_items_count": 0,
+        "non_verbatim_excerpt_items_count": 3,
+        "coerced_freeform_items_count": 0
+      },
+      {
+        "pass_name": "exploratory",
+        "raw_agent_message": "```json { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Understanding stakes is crucial for engaging the audience, as they define what the protagonist stands to gain or lose.\", \"key_concepts\": [\"stakes\", \"audience engagement\", \"character motivation\"], \"excerpt\": \"Stakes are what the protagonist stands to lose or gain, distinct from objectives, and crucial for audience engagement.\" }, { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Dramatization enhances narrative impact by emphasizing significant actions and decisions through conflict and stakes.\", \"key_concepts\": [\"dramatization\", \"conflict\", \"tension\"], \"excerpt\": \"\\\"Dramatization\\\" in writing involves emphasizing significant narrative elements through conflict, stakes, and suspense.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"The Inciting Incident is pivotal for setting the protagonist on a transformative journey, marking a shift in their reality.\", \"key_concepts\": [\"Inciting Incident\", \"transformation\", \"character motivation\"], \"excerpt\": \"The Inciting Incident sets the protagonist on a quest, facing escalating antagonism that demands increasingly significant actions.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Narrative progression requires escalating challenges that lead to irreversible changes in the protagonist's journey.\", \"key_concepts\": [\"narrative progression\", \"escalation\", \"character development\"], \"excerpt\": \"As the story progresses, the protagonist must take more challenging actions,",
+        "raw_citations_count": 0,
+        "parsed_agent_items_count": 10,
+        "merged_hits_count": 10,
+        "invalid_source_file_items_count": 0,
+        "non_verbatim_excerpt_items_count": 5,
+        "coerced_freeform_items_count": 0
+      }
+    ],
+    "src_expand": {
+      "input_count": 15,
+      "switched_to_src_count": 15,
+      "expanded_segment_count": 15,
+      "missing_src_count": 0,
+      "missing_tag_or_segment_count": 0,
+      "tag_from_embedded_count": 0,
+      "tag_from_20_excerpt_count": 10,
+      "tag_from_similarity_count": 5,
+      "tag_total_resolved_count": 15
+    }
+  },
+  "evidence_report": {
+    "status": "ok",
+    "score_mode": "semantic_llm",
+    "kept_count": 10,
+    "raw_count": 10,
+    "thresholds": {
+      "overall_min": 0.25,
+      "relevance_min": 0.14,
+      "rescue_relevance_min": 0.14
+    },
+    "evidence_mix": {
+      "enabled": true,
+      "policy": "n0_narrative_min_abstract_mix",
+      "target_min_abstract": 2,
+      "final_limit": 10,
+      "pool_counts": {
+        "abstract_function": 8,
+        "story_context": 2,
+        "mixed_or_unknown": 0
+      },
+      "selected_counts": {
+        "abstract_function": 8,
+        "story_context": 2,
+        "mixed_or_unknown": 0
+      },
+      "near_threshold_abstract_injections": 0,
+      "pool_mode": "strict"
+    },
+    "details": [
+      {
+        "index": 2,
+        "title": "Story",
+        "author": "Robert McKee",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+        "scores": {
+          "overall": 0.5153,
+          "relevance": 0.5714,
+          "actionability": 0.1667,
+          "specificity": 0.8717
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 1,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+        "scores": {
+          "overall": 0.5084,
+          "relevance": 0.5714,
+          "actionability": 0.1667,
+          "specificity": 0.8256
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 3,
+        "title": "Story",
+        "author": "Robert McKee",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+        "scores": {
+          "overall": 0.4327,
+          "relevance": 0.4286,
+          "actionability": 0.1667,
+          "specificity": 0.8923
+        },
+        "evidence_role": "story_context",
+        "accepted": true
+      },
+      {
+        "index": 4,
+        "title": "Construire un recit",
+        "author": "Yves Lavandier",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__lavandier_dramaturgy.src.txt",
+        "scores": {
+          "overall": 0.4228,
+          "relevance": 0.4286,
+          "actionability": 0.15,
+          "specificity": 0.8546
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 7,
+        "title": "Construire un recit",
+        "author": "Yves Lavandier",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__lavandier_dramaturgy.src.txt",
+        "scores": {
+          "overall": 0.4219,
+          "relevance": 0.4286,
+          "actionability": 0.1667,
+          "specificity": 0.8204
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 5,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+        "scores": {
+          "overall": 0.4189,
+          "relevance": 0.4286,
+          "actionability": 0.15,
+          "specificity": 0.8285
+        },
+        "evidence_role": "story_context",
+        "accepted": true
+      },
+      {
+        "index": 9,
+        "title": "Story",
+        "author": "Robert McKee",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+        "scores": {
+          "overall": 0.3795,
+          "relevance": 0.3571,
+          "actionability": 0.1667,
+          "specificity": 0.8235
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      },
+      {
+        "index": 8,
+        "title": "Anatomy of Story",
+        "author": "John Truby",
+        "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+        "scores": {
+          "overall": 0.3662,
+          "relevance": 0.3571,
+          "actionability": 0.15,
+          "specificity": 0.7628
+        },
+        "evidence_role": "abstract_function",
+        "accepted": true
+      }
+    ],
+    "retrieval_variants": {
+      "enabled": true,
+      "variant_count": 4,
+      "time_budget_s": 1800,
+      "max_variants": 4,
+      "elapsed_total_ms": 593465,
+      "stopped_early": "",
+      "per_variant": [
+        {
+          "variant_index": 1,
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation.",
+          "elapsed_ms": 192550,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 13,
+          "added_unique_hits": 13
+        },
+        {
+          "variant_index": 2,
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Focus on method-level narrative guidance and concrete writing moves.",
+          "elapsed_ms": 133439,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 15,
+          "added_unique_hits": 15
+        },
+        {
+          "variant_index": 3,
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Prioritize causal structure, stakes, conflict progression, and turning points.",
+          "elapsed_ms": 150117,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 15,
+          "added_unique_hits": 15
+        },
+        {
+          "variant_index": 4,
+          "question": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Retrieve complementary guidance with non-overlapping evidence across sources.",
+          "elapsed_ms": 117357,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 15,
+          "added_unique_hits": 15
+        }
+      ],
+      "merged_unique_count": 58,
+      "returned_count": 10
+    }
+  },
+  "library_item_ids": [
+    "mckee_story",
+    "truby_anatomy_of_story",
+    "lavandier_construire_un_recit"
+  ],
+  "source_refs": [
+    "Story - Robert McKee: { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\", | Concepts: \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading, [\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\", \"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation, \"Classical Design emphasizes an active protagonist facing external conflict, which is essential, [\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\", \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through",
+    "Anatomy of Story - John Truby: { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\", | Concepts: \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading, [\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\", \"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation, \"Classical Design emphasizes an active protagonist facing external conflict, which is essential, [\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\", \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through",
+    "Story - Robert McKee: Understanding narrative structure is essential for creating a coherent and engaging story. Writers should focus on events that integrate character, action, and dialogue to evoke specific emotions. | Concepts: narrative structure, coherence, emotional engagement",
+    "Construire un recit - Yves Lavandier: Effective structuring of a narrative enhances its plausibility and unity, linking scenes to create a persistent emotional question that engages the audience. | Concepts: narrative structure, emotional engagement, scene linking",
+    "Construire un recit - Yves Lavandier: Creating an organic plot requires aligning thematic elements with a structured narrative, ensuring that character actions reflect the guiding principle. | Concepts: organic plot, thematic alignment, character actions",
+    "Anatomy of Story - John Truby: The Inciting Incident is pivotal in driving the protagonist's quest and revealing deeper desires, making it essential for narrative progression. | Concepts: Inciting Incident, protagonist's quest, narrative progression",
+    "Story - Robert McKee: To maintain audience engagement, narratives must continuously escalate conflict and avoid repetitive actions that stall progression. | Concepts: audience engagement, escalating conflict, narrative progression",
+    "Anatomy of Story - John Truby: The protagonist's desire forms the 'Spine' of the story, connecting all elements and driving the narrative forward. | Concepts: Spine, protagonist's desire, narrative connection",
+    "Story - Robert McKee: Narrative dynamism relies on conflict and pacing, with the hero's actions and adversarial challenges driving the story forward. | Concepts: narrative dynamism, conflict, pacing",
+    "Construire un recit - Yves Lavandier: { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\", | Concepts: \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading, [\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\", \"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation, \"Classical Design emphasizes an active protagonist facing external conflict, which is essential, [\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\", \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through"
+  ],
+  "warning": "rag_mode=agentic_deep",
+  "readable_report": {
+    "summary": {
+      "status": "ok",
+      "rag_mode": "agentic_deep",
+      "rag_reason": "agentic_success",
+      "kept_sources": 10,
+      "raw_sources": 10
+    },
+    "inputs": {
+      "target_path": "n0.narrative_presentation",
+      "writing_typology": "summary",
+      "strategy_question": "Find in the documents rules and guidance to write a clear, factual narrative presentation.",
+      "core_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor."
+    },
+    "task": {
+      "query_text": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Retrieve complementary guidance with non-overlapping evidence across sources. | target_path=n0.narrative_presentation | writing_typology=summary | Focus on abstract narrative architecture: stakes, causality, progression, conflict, arc.",
+      "query_architecture": "Find in the documents rules and guidance to write a clear, factual narrative presentation. Retrieve complementary guidance with non-overlapping evidence across sources. | target_path=n0.narrative_presentation | writing_typology=summary | Focus on abstract narrative architecture: stakes, causality, progression, conflict, arc.",
+      "query_context_object": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+      "context_input": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+      "writing_mode": "create",
+      "allowed_fields": [
+        "summary"
+      ],
+      "redaction_constraints": {
+        "min_chars": 2000,
+        "max_chars": 3000
+      }
+    },
+    "retrieval": {
+      "path": "agentic_deep",
+      "engine_mode": "rag",
+      "fallback_origin": "",
+      "fallback_exception_class": "",
+      "fallback_exception": "",
+      "fallback_from_request_payload": {},
+      "search_settings": {},
+      "library_filename_prefixes": [
+        "SRC_NARRATOLOGY"
+      ],
+      "candidate_files": [
+        "SRC_NARRATOLOGY__aristote_poetics.20.txt",
+        "SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt",
+        "SRC_NARRATOLOGY__mckee_story.20.txt",
+        "SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt"
+      ],
+      "candidate_files_count": 4,
+      "agent_response_debug": {
+        "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Understanding classical design principles is crucial for crafting narratives that resonate universally, emphasizing causality and character-driven conflict.\", \"key_concepts\": [\"Classical Design\", \"Causality\", \"Active Protagonist\"], \"excerpt\": \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through continuous time within a consistent reality, leading to a closed ending with irreversible change.\" }, { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Effective narrative structuring is essential for coherence and engagement, linking scenes to create emotional questions that captivate the audience.\", \"key_concepts\": [\"Scene-by-Scene Structure\", \"Emotional Engagement\", \"Narrative Coherence\"], \"excerpt\": \"Structuring a narrative is crucial for creating a coherent and engaging story, as it provides plausibility, meaning, and unity.\" }, { \"source_file\": \"SRC_NARRATOLOGY__truby_anatomy_of_story.20.txt\", \"summary\": \"A strong narrative arc is built on the protagonist's clear desire and the obstacles they face, ensuring that each action escalates the stakes and maintains audience interest.\", \"key_concepts\": [\"Protagonist's Desire\", \"Obstacles\", \"Narrative Arc\"], \"excerpt\": \"The protagonist's desire forms the story's Spine, unifying all elements.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Narrative dynamism is achieved through conflict and pacing, requiring the protagonist to face escalating challenges that d\n\n---\n\n```json { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Understanding stakes is crucial for engaging the audience, as they define what the protagonist stands to gain or lose.\", \"key_concepts\": [\"stakes\", \"audience engagement\", \"character motivation\"], \"excerpt\": \"Stakes are what the protagonist stands to lose or gain, distinct from objectives, and crucial for audience engagement.\" }, { \"source_file\": \"SRC_NARRATOLOGY__lavandier_dramaturgy.20.txt\", \"summary\": \"Dramatization enhances narrative impact by emphasizing significant actions and decisions through conflict and stakes.\", \"key_concepts\": [\"dramatization\", \"conflict\", \"tension\"], \"excerpt\": \"\\\"Dramatization\\\" in writing involves emphasizing significant narrative elements through conflict, stakes, and suspense.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"The Inciting Incident is pivotal for setting the protagonist on a transformative journey, marking a shift in their reality.\", \"key_concepts\": [\"Inciting Incident\", \"transformation\", \"character motivation\"], \"excerpt\": \"The Inciting Incident sets the protagonist on a quest, facing escalating antagonism that demands increasingly significant actions.\" }, { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"Narrative progression requires escalating challenges that lead to irreversible changes in the protagonist's journey.\", \"key_concepts\": [\"narrative progression\", \"escalation\", \"character development\"], \"excerpt\": \"As the story progresses, the protagonist must take more challenging a",
+        "raw_citations_count": 0,
+        "parsed_agent_items_count": 20,
+        "merged_hits_count": 20,
+        "fallback_origin": "",
+        "fallback_exception_class": "",
+        "fallback_exception": "",
+        "exploratory_error": ""
+      }
+    },
+    "evidence": {
+      "score_mode": "semantic_llm",
+      "thresholds": {
+        "overall_min": 0.25,
+        "relevance_min": 0.14,
+        "rescue_relevance_min": 0.14
+      },
+      "mix": {
+        "enabled": true,
+        "policy": "n0_narrative_min_abstract_mix",
+        "target_min_abstract": 2,
+        "final_limit": 10,
+        "pool_counts": {
+          "abstract_function": 8,
+          "story_context": 2,
+          "mixed_or_unknown": 0
+        },
+        "selected_counts": {
+          "abstract_function": 8,
+          "story_context": 2,
+          "mixed_or_unknown": 0
+        },
+        "near_threshold_abstract_injections": 0,
+        "pool_mode": "strict"
+      },
+      "details": [
+        {
+          "index": 2,
+          "title": "Story",
+          "author": "Robert McKee",
+          "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+          "scores": {
+            "overall": 0.5153,
+            "relevance": 0.5714,
+            "actionability": 0.1667,
+            "specificity": 0.8717
+          },
+          "evidence_role": "abstract_function",
+          "accepted": true
+        },
+        {
+          "index": 1,
+          "title": "Anatomy of Story",
+          "author": "John Truby",
+          "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+          "scores": {
+            "overall": 0.5084,
+            "relevance": 0.5714,
+            "actionability": 0.1667,
+            "specificity": 0.8256
+          },
+          "evidence_role": "abstract_function",
+          "accepted": true
+        },
+        {
+          "index": 3,
+          "title": "Story",
+          "author": "Robert McKee",
+          "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+          "scores": {
+            "overall": 0.4327,
+            "relevance": 0.4286,
+            "actionability": 0.1667,
+            "specificity": 0.8923
+          },
+          "evidence_role": "story_context",
+          "accepted": true
+        },
+        {
+          "index": 4,
+          "title": "Construire un recit",
+          "author": "Yves Lavandier",
+          "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__lavandier_dramaturgy.src.txt",
+          "scores": {
+            "overall": 0.4228,
+            "relevance": 0.4286,
+            "actionability": 0.15,
+            "specificity": 0.8546
+          },
+          "evidence_role": "abstract_function",
+          "accepted": true
+        },
+        {
+          "index": 7,
+          "title": "Construire un recit",
+          "author": "Yves Lavandier",
+          "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__lavandier_dramaturgy.src.txt",
+          "scores": {
+            "overall": 0.4219,
+            "relevance": 0.4286,
+            "actionability": 0.1667,
+            "specificity": 0.8204
+          },
+          "evidence_role": "abstract_function",
+          "accepted": true
+        },
+        {
+          "index": 5,
+          "title": "Anatomy of Story",
+          "author": "John Truby",
+          "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+          "scores": {
+            "overall": 0.4189,
+            "relevance": 0.4286,
+            "actionability": 0.15,
+            "specificity": 0.8285
+          },
+          "evidence_role": "story_context",
+          "accepted": true
+        },
+        {
+          "index": 9,
+          "title": "Story",
+          "author": "Robert McKee",
+          "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__mckee_story.src.txt",
+          "scores": {
+            "overall": 0.3795,
+            "relevance": 0.3571,
+            "actionability": 0.1667,
+            "specificity": 0.8235
+          },
+          "evidence_role": "abstract_function",
+          "accepted": true
+        },
+        {
+          "index": 8,
+          "title": "Anatomy of Story",
+          "author": "John Truby",
+          "source_path": "writer_agent/strategy_finder/library/SRC_NARRATOLOGY__truby_anatomy_of_story.src.txt",
+          "scores": {
+            "overall": 0.3662,
+            "relevance": 0.3571,
+            "actionability": 0.15,
+            "specificity": 0.7628
+          },
+          "evidence_role": "abstract_function",
+          "accepted": true
+        }
+      ]
+    },
+    "output": {
+      "library_item_ids": [
+        "mckee_story",
+        "truby_anatomy_of_story",
+        "lavandier_construire_un_recit"
+      ],
+      "source_refs_count": 10,
+      "source_refs_preview": [
+        "Story - Robert McKee: { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\", | Concepts: \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading, [\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\", \"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation, \"Classical Design emphasizes an active protagonist facing external conflict, which is essential, [\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\", \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through",
+        "Anatomy of Story - John Truby: { \"items\": [ { \"source_file\": \"SRC_NARRATOLOGY__mckee_story.20.txt\", \"summary\": \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading to increasingly significant actions that avoid lesser efforts.\", \"key_concepts\": [\"narrative progression\", \"escalation\", | Concepts: \"To maintain narrative progression, the protagonist's actions should provoke escalating antagonism, leading, [\"narrative progression\", \"escalation\", \"antagonism\"], \"excerpt\", \"The protagonist's initial actions provoke antagonistic forces, creating a gap between expectation, \"Classical Design emphasizes an active protagonist facing external conflict, which is essential, [\"Classical Design\", \"active protagonist\", \"external conflict\"], \"excerpt\", \"Classical Design involves an active protagonist facing external antagonism, pursuing desires through",
+        "Story - Robert McKee: Understanding narrative structure is essential for creating a coherent and engaging story. Writers should focus on events that integrate character, action, and dialogue to evoke specific emotions. | Concepts: narrative structure, coherence, emotional engagement"
+      ]
+    }
+  },
+  "logged_at": "2026-02-14T13:51:19.857691Z"
+}

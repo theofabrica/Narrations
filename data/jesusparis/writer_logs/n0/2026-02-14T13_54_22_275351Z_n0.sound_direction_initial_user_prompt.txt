@@ -1,0 +1,37 @@
+@Task@
+Write the text for "sound direction description" for the project "jesusparis" a film with a duration of two hours.
+Use the @Task_input@ and the @Guidance@ that follow.
+
+Return ONLY valid JSON.
+
+@Rules@
+- Redaction rules: One paragraph with concrete sonic descriptors.; No plot or story elements.; No meta-writing language or references to strategy..
+- Respect length constraints: min_chars=180, max_chars=1000.
+Writing rule (English): Describe the sonic and musical style of the video precisely, highlighting what makes it distinctive and recognizable.
+
+@Guidance@
+1. Establish a coherent sonic identity for the film by defining the sound characteristics of the various locations depicted, such as the interior and exterior settings, materials, human density, machinery, weather, insects, and urban versus rural environments. This will help create a distinct auditory atmosphere that aligns with the film's narrative of Jesus Christ observing modern-day Paris. Consider the emotional intent behind each sound choice to ensure it supports the film's themes and character experiences. Additionally, utilize silence strategically as a narrative tool to enhance emotional impact and tension in key scenes, allowing the audience to engage more deeply with the unfolding story. Define the rhythm of the soundscapes to create a dynamic interaction between stable and moving ambiances, which can reflect the contrast between the divine and the mundane. Establish clear sound contrasts and dynamics to enhance the storytelling experience, using elements like calm versus violence and full versus empty spaces to mirror the film's exploration of contemporary life through a divine lens.
+
+@Task_input@
+Summary:
+In the film 'jesusparis,' Jesus Christ arrives in present-day Paris, stepping into a world vastly different from the one he once knew. The story unfolds over a single day, capturing the essence of a city bustling with life yet burdened by its complexities. Jesus, portrayed with a blend of nostalgia and melancholy, walks through the streets, observing the modern world with a mix of curiosity and disillusionment.
+
+The narrative begins with Jesus emerging from the Seine River at dawn, his presence unnoticed by the early morning joggers and commuters. As he wanders through the city, he encounters a series of vignettes that reveal the contradictions of contemporary life. In a bustling café, he listens to conversations filled with trivial concerns, contrasting sharply with the deeper spiritual questions he embodies.
+
+His journey takes him to a homeless shelter, where he witnesses the struggles of those marginalized by society. Here, Jesus's compassion is evident as he quietly aids the volunteers, offering solace to those in need. This act of kindness sets off a chain of events, drawing the attention of a young journalist named Claire, who becomes intrigued by this mysterious figure.
+
+As the day progresses, Jesus finds himself in the heart of a protest, where tensions between the police and demonstrators escalate. His presence amidst the chaos brings a momentary calm, as both sides pause, struck by an inexplicable sense of peace. This encounter highlights the pervasive unrest in the city, reflecting broader societal issues.
+
+Throughout the day, Jesus's interactions with Parisians reveal their struggles with faith, identity, and purpose. In a poignant scene, he visits a cathedral, now more a tourist attraction than a place of worship. Here, he meets an elderly priest who recognizes him, sparking a conversation about the loss of spiritual connection in the modern world.
+
+As night falls, Jesus's journey culminates on the steps of the Sacré-Cœur Basilica, overlooking the city. Claire, having followed him throughout the day, confronts him, seeking answers to her own existential questions. Their dialogue is a blend of humor and introspection, as Jesus gently challenges her perceptions of faith and meaning.
+
+The film concludes with Jesus disappearing into the night, leaving behind a city subtly transformed by his presence. The final scene depicts Claire, inspired by her encounter, writing an article that questions the values of contemporary society and the enduring relevance of faith. The narrative ends with a sense of hope, suggesting that even in a world fraught with challenges, the possibility of change remains.
+
+Art direction:
+The art direction for 'jesusparis' crafts a visually engaging narrative through a deliberate choice of materials and textures that align with the film's sociological themes. The aesthetic is characterized by a contrast between the old and the new, utilizing wood, metal, textile, concrete, and plastic as the core materials. These materials appear in various conditions—new, worn, repaired, and degraded—reflecting the layered history and modern reality of Paris. The visual identity is shaped by a functional color palette that evolves with the story, employing muted tones to evoke nostalgia and brighter colors to emphasize moments of revelation or transformation. Lighting is pivotal, creating shadows that enhance the melancholic humor and disillusionment Jesus experiences as he explores contemporary Paris. Sets are meticulously designed to affect the emotional interpretation of each scene, with environments crafted to either amplify or diminish the characters' presence as required by the narrative. This method ensures that the settings are not mere backgrounds but active elements in the storytelling. The film's visual language is cohesive and distinctive, with color transitions justified by shifts in location or perspective, ensuring continuity and emotional coherence throughout the two-hour experience.
+
+EXISTING CONTENT TO REVISE (do not discard):
+{
+  "description": "The sound direction for 'jesusparis' crafts a nuanced auditory landscape that aligns with the film's narrative of Jesus Christ observing modern-day Paris. The film begins with the gentle lapping of the Seine River, establishing a serene tone that contrasts with the city's bustling sounds. As Jesus traverses Paris, the soundscape adapts to various environments: the lively chatter and clinking of cups in a crowded caf\u00e9, the distant hum of traffic, and the resonant footsteps in a cathedral. In the homeless shelter, ambient noise is subdued, highlighting the quiet struggles of its inhabitants. During the protest, sound intensifies with chants and sirens, only to be momentarily silenced by Jesus's calming presence. This strategic use of silence punctuates the film, emphasizing moments of reflection and divine intervention. The sound design incorporates the rhythmic pulse of the city, dynamically balancing calm and chaos, reflecting themes of spiritual searching amidst urban life. The auditory experience is enriched by the contrast between Paris's natural sounds and ethereal, otherworldly tones accompanying Jesus, creating a distinctive sonic identity."
+}

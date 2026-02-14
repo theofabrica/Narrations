@@ -1,0 +1,43 @@
+{
+  "project_id": "jesusparis",
+  "strata": "n1",
+  "updated_at": "2026-02-14T13:40:35.376133Z",
+  "data": {
+    "characters": {
+      "main_characters": {
+        "number": 0,
+        "names": [],
+        "characters": []
+      },
+      "secondary_characters": {
+        "number": 0,
+        "names": [],
+        "characters": []
+      },
+      "background_characters": {
+        "number": 0,
+        "names": [],
+        "characters": []
+      }
+    },
+    "world_era": "",
+    "aesthetics": "",
+    "sound": {
+      "ambiences": "",
+      "music": "",
+      "sfx": "",
+      "dialogue": ""
+    },
+    "motifs": [
+      {
+        "description": "",
+        "images": [],
+        "audio": []
+      }
+    ],
+    "canon_continuity_anchors": [],
+    "sources": "",
+    "hypotheses": "",
+    "questions": ""
+  }
+}

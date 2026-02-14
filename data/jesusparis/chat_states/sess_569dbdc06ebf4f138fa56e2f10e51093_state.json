@@ -1,0 +1,54 @@
+{
+  "project_id": "jesusparis",
+  "session_id": "sess_569dbdc06ebf4f138fa56e2f10e51093",
+  "updated_at": "2026-02-14T13:41:24.888524Z",
+  "state_snapshot": {
+    "state_id": "",
+    "state_version": "1abc_v1",
+    "completed_steps": [
+      "1a",
+      "1b",
+      "1c"
+    ],
+    "missing": [],
+    "core": {
+      "summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+      "open_questions": []
+    },
+    "thinker": {
+      "objectives": [
+        "Create a film depicting Jesus Christ arriving in present-day Paris"
+      ],
+      "constraints": [
+        "Film duration is two hours",
+        "Tone includes nostalgia, bitter and melancholic humor"
+      ],
+      "hypotheses": [
+        "The film will explore themes of disillusionment with the modern world"
+      ],
+      "missing": [],
+      "clarifications": [],
+      "target_level": "n2"
+    },
+    "brief": {
+      "primary_objective": "Create a film depicting Jesus Christ arriving in present-day Paris",
+      "project_title": "",
+      "video_type": "film",
+      "target_duration_s": 7200,
+      "secondary_objectives": [],
+      "constraints": [
+        "Tone includes nostalgia, bitter and melancholic humor"
+      ],
+      "hypotheses": [
+        "The film will explore themes of disillusionment with the modern world"
+      ],
+      "target_level": "n2",
+      "priorities": [],
+      "target_strata": [
+        "n2"
+      ],
+      "target_paths": []
+    },
+    "pending_questions": []
+  }
+}

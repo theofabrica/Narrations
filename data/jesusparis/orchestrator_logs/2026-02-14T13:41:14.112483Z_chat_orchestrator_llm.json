@@ -1,0 +1,9 @@
+{
+  "project_id": "jesusparis",
+  "session_id": "sess_569dbdc06ebf4f138fa56e2f10e51093",
+  "label": "chat_orchestrator_llm",
+  "logged_at": "2026-02-14T13:41:14.112492Z",
+  "used_llm": true,
+  "reason": "ok",
+  "raw_output": "```json\n{\n  \"tasks\": [\n    {\"agent\": \"chat_1a\"},\n    {\"agent\": \"chat_1b\"}\n  ],\n  \"next_action\": \"chat_clarification\"\n}\n```"
+}

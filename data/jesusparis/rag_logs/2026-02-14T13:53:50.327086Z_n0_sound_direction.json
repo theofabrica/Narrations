@@ -1,0 +1,355 @@
+{
+  "project_id": "jesusparis",
+  "target_path": "n0.sound_direction",
+  "writing_typology": "style",
+  "rag_mode": "agentic_deep",
+  "rag_hits": 1,
+  "error_detail": "",
+  "rag_reason": "agentic_success",
+  "rag_policy_path": [
+    "agentic"
+  ],
+  "rag_retry": "",
+  "rag_conversation_id": "",
+  "client_available": true,
+  "r2r_base": "http://127.0.0.1:7275",
+  "rag_input_context_pack_compact": {
+    "target_path": "n0.sound_direction",
+    "writing_typology": "style",
+    "strategy_question": "Find in the documents rules and guidance to write a general overview of this video's sound direction.",
+    "core_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+    "brief_video_type": "film",
+    "brief_target_duration_s": 7200,
+    "brief_target_duration_text": "",
+    "redaction_constraints": {
+      "min_chars": 180,
+      "max_chars": 1000
+    },
+    "allowed_fields": [
+      "description"
+    ],
+    "writing_mode": "create",
+    "library_filename_prefixes": [
+      "SRC_DS"
+    ],
+    "rag_conversation_id": ""
+  },
+  "rag_request_payload": {
+    "limit": 10,
+    "path": "agentic_deep",
+    "query_text": "Find in the documents rules and guidance to write a general overview of this video's sound direction. | target_path=n0.sound_direction | writing_typology=style | Focus on sound direction: timbre, rhythm, ambience, spatialization, motifs, silence, and coherent sonic identity.",
+    "query_text_architecture": "Find in the documents rules and guidance to write a general overview of this video's sound direction. | target_path=n0.sound_direction | writing_typology=style | Focus on sound direction: timbre, rhythm, ambience, spatialization, motifs, silence, and coherent sonic identity.",
+    "query_context_object": "",
+    "writing_typology": "style",
+    "language": "en",
+    "allowed_filenames": [
+      "SRC_DS_chatGPT.txt"
+    ],
+    "base_search_settings": {
+      "use_semantic_search": true,
+      "use_fulltext_search": true,
+      "use_hybrid_search": true,
+      "include_scores": true,
+      "include_metadatas": true,
+      "search_strategy": "rag_fusion",
+      "num_sub_queries": 3,
+      "hybrid_settings": {
+        "full_text_weight": 1.0,
+        "semantic_weight": 4.0,
+        "full_text_limit": 200,
+        "rrf_k": 50
+      },
+      "filters": {
+        "$and": [
+          {
+            "metadata.doc_type": {
+              "$eq": "SRC"
+            }
+          },
+          {
+            "metadata.source_file": {
+              "$in": [
+                "SRC_DS_chatGPT.txt"
+              ]
+            }
+          }
+        ]
+      },
+      "limit": 12
+    },
+    "deep_agentic": {
+      "enabled": true,
+      "pass_count": 1,
+      "use_system_context": false,
+      "passes": [
+        {
+          "name": "focused",
+          "query_text": "Find in the documents rules and guidance to write a general overview of this video's sound direction. | target_path=n0.sound_direction | writing_typology=style | Focus on sound direction: timbre, rhythm, ambience, spatialization, motifs, silence, and coherent sonic identity.",
+          "task_prompt": "You are an expert narratology research agent working on retrieval, not final writing.\nPass: focused.\nTarget path (internal id): n0.sound_direction\nTarget objective (human): n0 sound direction\nWriting typology: style.\nGoal: retrieve diverse, high-signal evidence from allowed files only.\nProcess: (1) identify relevant principles, (2) capture concrete method statements, (3) avoid generic plot summaries.\nALLOWED source_file values (EXACT STRING MATCH, case-sensitive):\n  - SRC_DS_chatGPT.txt\nSTRICT VALIDATION:\n- source_file MUST be one of the allowed values above.\n- NEVER use internal ids (e.g. n0.narrative_presentation) as source_file.\n- Any item with invalid source_file will be discarded.\n- excerpt MUST be an exact contiguous quote copied from the source text (verbatim only).\n- NEVER paraphrase, compress, translate, or rewrite excerpts.\n- If you cannot provide an exact quote, skip the item.\nReturn ONLY valid JSON with this schema:\n{ \"items\": [ { \"source_file\": \"\", \"summary\": \"\", \"key_concepts\": [], \"excerpt\": \"\" } ] }\n- Provide at most 30 items.\n- Excerpts must be verbatim, each under 1400 characters.\n- Summaries must be 1-2 sentences and actionable for writing strategy.\n- Prefer diversity across distinct sections of source content.\nCONTEXT_POLICY:\n- Treat CONTEXT_OBJECT as project context, not as mandatory output wording.\n- Prioritize sonic design principles (timbre, rhythm, ambience, spatialization, silence).\n- Avoid plot retelling; retrieve sound and musical direction guidance.\nCONTEXT_OBJECT:\n\n- If unsure, return an empty items list.",
+          "search_settings": {
+            "use_semantic_search": true,
+            "use_fulltext_search": true,
+            "use_hybrid_search": true,
+            "include_scores": true,
+            "include_metadatas": true,
+            "search_strategy": "rag_fusion",
+            "num_sub_queries": 4,
+            "hybrid_settings": {
+              "full_text_weight": 1.0,
+              "semantic_weight": 5.0,
+              "full_text_limit": 220,
+              "rrf_k": 45
+            },
+            "filters": {
+              "$and": [
+                {
+                  "metadata.doc_type": {
+                    "$eq": "SRC"
+                  }
+                },
+                {
+                  "metadata.source_file": {
+                    "$in": [
+                      "SRC_DS_chatGPT.txt"
+                    ]
+                  }
+                }
+              ]
+            },
+            "limit": 30
+          }
+        },
+        {
+          "name": "exploratory",
+          "query_text": "Find in the documents rules and guidance to write a general overview of this video's sound direction. | target_path=n0.sound_direction | writing_typology=style | Focus on sound direction: timbre, rhythm, ambience, spatialization, motifs, silence, and coherent sonic identity.\nEXPLORATORY_RETRIEVAL_GOAL:\n- Find complementary principles for target 'n0.sound_direction'.\n- Include alternatives and edge-case guidance, not only obvious matches.\n- Prefer evidence that can become concrete writing instructions.\n- Focus on sound direction: timbre, rhythm, ambience, spatialization, motifs, silence, and coherent sonic identity.\nCONTEXT_USAGE:\n- Use context only to adapt examples and constraints; avoid copying user phrasing.\n- Story context (object-level): ",
+          "task_prompt": "You are an expert narratology research agent working on retrieval, not final writing.\nPass: exploratory.\nTarget path (internal id): n0.sound_direction\nTarget objective (human): n0 sound direction\nWriting typology: style.\nGoal: retrieve diverse, high-signal evidence from allowed files only.\nProcess: (1) identify relevant principles, (2) capture concrete method statements, (3) avoid generic plot summaries.\nALLOWED source_file values (EXACT STRING MATCH, case-sensitive):\n  - SRC_DS_chatGPT.txt\nSTRICT VALIDATION:\n- source_file MUST be one of the allowed values above.\n- NEVER use internal ids (e.g. n0.narrative_presentation) as source_file.\n- Any item with invalid source_file will be discarded.\n- excerpt MUST be an exact contiguous quote copied from the source text (verbatim only).\n- NEVER paraphrase, compress, translate, or rewrite excerpts.\n- If you cannot provide an exact quote, skip the item.\nReturn ONLY valid JSON with this schema:\n{ \"items\": [ { \"source_file\": \"\", \"summary\": \"\", \"key_concepts\": [], \"excerpt\": \"\" } ] }\n- Provide at most 40 items.\n- Excerpts must be verbatim, each under 1400 characters.\n- Summaries must be 1-2 sentences and actionable for writing strategy.\n- Prefer diversity across distinct sections of source content.\nCONTEXT_POLICY:\n- Treat CONTEXT_OBJECT as project context, not as mandatory output wording.\n- Prioritize sonic design principles (timbre, rhythm, ambience, spatialization, silence).\n- Avoid plot retelling; retrieve sound and musical direction guidance.\nCONTEXT_OBJECT:\n\n- If unsure, return an empty items list.",
+          "search_settings": {
+            "use_semantic_search": true,
+            "use_fulltext_search": true,
+            "use_hybrid_search": true,
+            "include_scores": true,
+            "include_metadatas": true,
+            "search_strategy": "rag_fusion",
+            "num_sub_queries": 6,
+            "hybrid_settings": {
+              "full_text_weight": 2.0,
+              "semantic_weight": 3.0,
+              "full_text_limit": 260,
+              "rrf_k": 65
+            },
+            "filters": {
+              "$and": [
+                {
+                  "metadata.doc_type": {
+                    "$eq": "SRC"
+                  }
+                },
+                {
+                  "metadata.source_file": {
+                    "$in": [
+                      "SRC_DS_chatGPT.txt"
+                    ]
+                  }
+                }
+              ]
+            },
+            "limit": 40
+          }
+        }
+      ]
+    },
+    "conversation_id": "",
+    "mode": "rag",
+    "rag_tools": [
+      "search_file_knowledge",
+      "search_file_descriptions"
+    ],
+    "disable_web_agentic": true
+  },
+  "rag_response_debug": {
+    "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish a coherent sonic identity by defining the sound characteristics of locations and the emotional intent behind sound choices.\", \"key_concepts\": [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\": \"Identit\u00e9 sonore des lieux : int\u00e9rieur/ext\u00e9rieur, mat\u00e9riaux, densit\u00e9 humaine, machines, m\u00e9t\u00e9o, insectes, ville/campagne.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Utilize silence as a narrative tool to enhance emotional impact and tension in scenes.\", \"key_concepts\": [\"silence\", \"narrative tool\", \"emotional impact\"], \"excerpt\": \"Le silence est un outil : le conserver quand il raconte quelque chose.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Define the rhythm of soundscapes to create a dynamic interaction between stable and moving ambiances.\", \"key_concepts\": [\"rhythm\", \"soundscapes\", \"dynamic interaction\"], \"excerpt\": \"Rythme : ambiances stables vs mouvantes, montage \u201crespir\u00e9\u201d vs nervosit\u00e9.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish clear sound contrasts and dynamics to enhance the storytelling experience.\", \"key_concepts\": [\"contrasts\", \"dynamics\", \"storytelling\"], \"excerpt\": \"Le film respire-t-il par contrastes (calme/violence, plein/vide, int\u00e9rieur/ext\u00e9rieur) ?\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Create a grammar of sound that includes motifs and signatures to guide the audience's emotional journey.\", \"key_concepts\": [\"grammar of sound\", \"motifs\", \"emotional journey\"], \"excerpt\": \"D\u00e9finis 2 \u00e0 6 motifs maximum (un son, une text",
+    "raw_citations_count": 0,
+    "parsed_agent_items_count": 1,
+    "merged_hits_count": 1,
+    "invalid_source_file_items_count": 0,
+    "coerced_freeform_items_count": 1,
+    "fused_hits_count": 1,
+    "exploratory_error": "",
+    "passes": [
+      {
+        "pass_name": "focused",
+        "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish a coherent sonic identity by defining the sound characteristics of locations and the emotional intent behind sound choices.\", \"key_concepts\": [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\": \"Identit\u00e9 sonore des lieux : int\u00e9rieur/ext\u00e9rieur, mat\u00e9riaux, densit\u00e9 humaine, machines, m\u00e9t\u00e9o, insectes, ville/campagne.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Utilize silence as a narrative tool to enhance emotional impact and tension in scenes.\", \"key_concepts\": [\"silence\", \"narrative tool\", \"emotional impact\"], \"excerpt\": \"Le silence est un outil : le conserver quand il raconte quelque chose.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Define the rhythm of soundscapes to create a dynamic interaction between stable and moving ambiances.\", \"key_concepts\": [\"rhythm\", \"soundscapes\", \"dynamic interaction\"], \"excerpt\": \"Rythme : ambiances stables vs mouvantes, montage \u201crespir\u00e9\u201d vs nervosit\u00e9.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish clear sound contrasts and dynamics to enhance the storytelling experience.\", \"key_concepts\": [\"contrasts\", \"dynamics\", \"storytelling\"], \"excerpt\": \"Le film respire-t-il par contrastes (calme/violence, plein/vide, int\u00e9rieur/ext\u00e9rieur) ?\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Create a grammar of sound that includes motifs and signatures to guide the audience's emotional journey.\", \"key_concepts\": [\"grammar of sound\", \"motifs\", \"emotional journey\"], \"excerpt\": \"D\u00e9finis 2 \u00e0 6 motifs maximum (un son, une text",
+        "raw_citations_count": 0,
+        "parsed_agent_items_count": 1,
+        "merged_hits_count": 1,
+        "invalid_source_file_items_count": 0,
+        "non_verbatim_excerpt_items_count": 0,
+        "coerced_freeform_items_count": 1
+      }
+    ],
+    "src_expand": {
+      "input_count": 1,
+      "switched_to_src_count": 0,
+      "expanded_segment_count": 0,
+      "missing_src_count": 0,
+      "missing_tag_or_segment_count": 0,
+      "tag_from_embedded_count": 0,
+      "tag_from_20_excerpt_count": 0,
+      "tag_from_similarity_count": 0,
+      "tag_total_resolved_count": 0
+    }
+  },
+  "evidence_report": {
+    "status": "ok",
+    "score_mode": "semantic_llm",
+    "kept_count": 1,
+    "raw_count": 1,
+    "thresholds": {
+      "overall_min": 0.0,
+      "relevance_min": 0.0,
+      "rescue_relevance_min": 0.0
+    },
+    "evidence_mix": {
+      "enabled": false,
+      "policy": "loose_topk_no_abstract_filter"
+    },
+    "details": [
+      {
+        "index": 0,
+        "title": "Concevoir la direction sonore",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DS_chatGPT.txt",
+        "scores": {
+          "overall": 0.6697,
+          "relevance": 0.7,
+          "actionability": 0.6,
+          "specificity": 0.6645
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      }
+    ],
+    "retrieval_variants": {
+      "enabled": true,
+      "variant_count": 1,
+      "time_budget_s": 1800,
+      "max_variants": 4,
+      "elapsed_total_ms": 34569,
+      "stopped_early": "",
+      "per_variant": [
+        {
+          "variant_index": 1,
+          "question": "Find in the documents rules and guidance to write a general overview of this video's sound direction.",
+          "elapsed_ms": 34569,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 1,
+          "added_unique_hits": 1
+        }
+      ],
+      "merged_unique_count": 1,
+      "returned_count": 1
+    }
+  },
+  "library_item_ids": [
+    "ds_chatgpt"
+  ],
+  "source_refs": [
+    "Concevoir la direction sonore - ChatGPT (notes): { \"items\": [ { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish a coherent sonic identity by defining the sound characteristics of locations and the emotional intent behind sound choices.\", \"key_concepts\": [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\": \"Identit\u00e9 sonore des lieux : | Concepts: \"Establish a coherent sonic identity by defining the sound characteristics of locations, [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\", \"Identit\u00e9 sonore des lieux, int\u00e9rieur/ext\u00e9rieur, mat\u00e9riaux, densit\u00e9 humaine, machines, m\u00e9t\u00e9o, insectes, ville/campagne.\" }, { \"source_file\", \"Utilize silence as a narrative tool to enhance emotional impact and tension, [\"silence\", \"narrative tool\", \"emotional impact\"], \"excerpt\""
+  ],
+  "warning": "rag_mode=agentic_deep",
+  "readable_report": {
+    "summary": {
+      "status": "ok",
+      "rag_mode": "agentic_deep",
+      "rag_reason": "agentic_success",
+      "kept_sources": 1,
+      "raw_sources": 1
+    },
+    "inputs": {
+      "target_path": "n0.sound_direction",
+      "writing_typology": "style",
+      "strategy_question": "Find in the documents rules and guidance to write a general overview of this video's sound direction.",
+      "core_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor."
+    },
+    "task": {
+      "query_text": "Find in the documents rules and guidance to write a general overview of this video's sound direction. | target_path=n0.sound_direction | writing_typology=style | Focus on sound direction: timbre, rhythm, ambience, spatialization, motifs, silence, and coherent sonic identity.",
+      "query_architecture": "Find in the documents rules and guidance to write a general overview of this video's sound direction. | target_path=n0.sound_direction | writing_typology=style | Focus on sound direction: timbre, rhythm, ambience, spatialization, motifs, silence, and coherent sonic identity.",
+      "query_context_object": "",
+      "context_input": "",
+      "writing_mode": "create",
+      "allowed_fields": [
+        "description"
+      ],
+      "redaction_constraints": {
+        "min_chars": 180,
+        "max_chars": 1000
+      }
+    },
+    "retrieval": {
+      "path": "agentic_deep",
+      "engine_mode": "rag",
+      "fallback_origin": "",
+      "fallback_exception_class": "",
+      "fallback_exception": "",
+      "fallback_from_request_payload": {},
+      "search_settings": {},
+      "library_filename_prefixes": [
+        "SRC_DS"
+      ],
+      "candidate_files": [
+        "SRC_DS_chatGPT.txt"
+      ],
+      "candidate_files_count": 1,
+      "agent_response_debug": {
+        "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish a coherent sonic identity by defining the sound characteristics of locations and the emotional intent behind sound choices.\", \"key_concepts\": [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\": \"Identit\u00e9 sonore des lieux : int\u00e9rieur/ext\u00e9rieur, mat\u00e9riaux, densit\u00e9 humaine, machines, m\u00e9t\u00e9o, insectes, ville/campagne.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Utilize silence as a narrative tool to enhance emotional impact and tension in scenes.\", \"key_concepts\": [\"silence\", \"narrative tool\", \"emotional impact\"], \"excerpt\": \"Le silence est un outil : le conserver quand il raconte quelque chose.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Define the rhythm of soundscapes to create a dynamic interaction between stable and moving ambiances.\", \"key_concepts\": [\"rhythm\", \"soundscapes\", \"dynamic interaction\"], \"excerpt\": \"Rythme : ambiances stables vs mouvantes, montage \u201crespir\u00e9\u201d vs nervosit\u00e9.\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish clear sound contrasts and dynamics to enhance the storytelling experience.\", \"key_concepts\": [\"contrasts\", \"dynamics\", \"storytelling\"], \"excerpt\": \"Le film respire-t-il par contrastes (calme/violence, plein/vide, int\u00e9rieur/ext\u00e9rieur) ?\" }, { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Create a grammar of sound that includes motifs and signatures to guide the audience's emotional journey.\", \"key_concepts\": [\"grammar of sound\", \"motifs\", \"emotional journey\"], \"excerpt\": \"D\u00e9finis 2 \u00e0 6 motifs maximum (un son, une text",
+        "raw_citations_count": 0,
+        "parsed_agent_items_count": 1,
+        "merged_hits_count": 1,
+        "fallback_origin": "",
+        "fallback_exception_class": "",
+        "fallback_exception": "",
+        "exploratory_error": ""
+      }
+    },
+    "evidence": {
+      "score_mode": "semantic_llm",
+      "thresholds": {
+        "overall_min": 0.0,
+        "relevance_min": 0.0,
+        "rescue_relevance_min": 0.0
+      },
+      "mix": {
+        "enabled": false,
+        "policy": "loose_topk_no_abstract_filter"
+      },
+      "details": [
+        {
+          "index": 0,
+          "title": "Concevoir la direction sonore",
+          "author": "ChatGPT (notes)",
+          "source_path": "writer_agent/strategy_finder/library/SRC_DS_chatGPT.txt",
+          "scores": {
+            "overall": 0.6697,
+            "relevance": 0.7,
+            "actionability": 0.6,
+            "specificity": 0.6645
+          },
+          "evidence_role": "domain_context",
+          "accepted": true
+        }
+      ]
+    },
+    "output": {
+      "library_item_ids": [
+        "ds_chatgpt"
+      ],
+      "source_refs_count": 1,
+      "source_refs_preview": [
+        "Concevoir la direction sonore - ChatGPT (notes): { \"items\": [ { \"source_file\": \"SRC_DS_chatGPT.txt\", \"summary\": \"Establish a coherent sonic identity by defining the sound characteristics of locations and the emotional intent behind sound choices.\", \"key_concepts\": [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\": \"Identit\u00e9 sonore des lieux : | Concepts: \"Establish a coherent sonic identity by defining the sound characteristics of locations, [\"sonic identity\", \"location sound\", \"emotional intent\"], \"excerpt\", \"Identit\u00e9 sonore des lieux, int\u00e9rieur/ext\u00e9rieur, mat\u00e9riaux, densit\u00e9 humaine, machines, m\u00e9t\u00e9o, insectes, ville/campagne.\" }, { \"source_file\", \"Utilize silence as a narrative tool to enhance emotional impact and tension, [\"silence\", \"narrative tool\", \"emotional impact\"], \"excerpt\""
+      ]
+    }
+  },
+  "logged_at": "2026-02-14T13:53:50.327186Z"
+}

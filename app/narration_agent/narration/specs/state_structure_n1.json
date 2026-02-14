@@ -5,13 +5,19 @@
   "data": {
     "characters": {
       "main_characters": {
-        "number": 0
+        "number": 0,
+        "names": [],
+        "characters": []
       },
       "secondary_characters": {
-        "number": 0
+        "number": 0,
+        "names": [],
+        "characters": []
       },
       "background_characters": {
-        "number": 0
+        "number": 0,
+        "names": [],
+        "characters": []
       }
     },
     "world_era": "",

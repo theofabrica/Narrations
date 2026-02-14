@@ -35,6 +35,13 @@ def infer_n0_production_summary(
     patch: Dict[str, Any] = {}
     patch.update(apply_if_empty(target_current, "production_type", production_type))
     patch.update(apply_if_empty(target_current, "target_duration", target_duration))
+    patch.update(
+        apply_if_empty(
+            target_current,
+            "target_duration_text",
+            duration_to_text(target_duration),
+        )
+    )
     patch.update(apply_if_empty(target_current, "aspect_ratio", aspect_ratio))
     return patch
 
@@ -47,13 +54,17 @@ def infer_n0_visual_style_tone(project_id: str, source_state: Dict[str, Any]) ->
     n0_data = n0_state.get("data") if isinstance(n0_state, dict) else {}
     if not isinstance(n0_data, dict):
         n0_data = {}
-    production_summary = n0_data.get("production_summary", {})
+    narrative_presentation = n0_data.get("narrative_presentation")
+    if not isinstance(narrative_presentation, dict):
+        narrative_presentation = n0_data.get("production_summary", {})
     art_desc = (n0_data.get("art_direction", {}) or {}).get("description", "")
     sound_desc = (n0_data.get("sound_direction", {}) or {}).get("description", "")
     combined_text = " | ".join(
         [
             collect_brief_text(source_state),
-            production_summary.get("summary", "") if isinstance(production_summary, dict) else "",
+            narrative_presentation.get("summary", "")
+            if isinstance(narrative_presentation, dict)
+            else "",
             art_desc if isinstance(art_desc, str) else "",
             sound_desc if isinstance(sound_desc, str) else "",
         ]
@@ -85,9 +96,9 @@ def infer_n0_visual_style_tone(project_id: str, source_state: Dict[str, Any]) ->
         ],
     )
     patch: Dict[str, Any] = {}
-    if isinstance(production_summary, dict):
-        patch.update(apply_if_empty(production_summary, "visual_style", visual_style))
-        patch.update(apply_if_empty(production_summary, "tone", tone))
+    if isinstance(narrative_presentation, dict):
+        patch.update(apply_if_empty(narrative_presentation, "visual_style", visual_style))
+        patch.update(apply_if_empty(narrative_presentation, "tone", tone))
     return patch
 
 
@@ -266,6 +277,87 @@ def format_duration_seconds(total_seconds: int) -> str:
     minutes = (total_seconds % 3600) // 60
     seconds = total_seconds % 60
     return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+
+def duration_to_text(value: str) -> str:
+    seconds = _duration_to_seconds(value)
+    if seconds <= 0:
+        return ""
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    secs = seconds % 60
+    parts: List[str] = []
+    if hours:
+        parts.append(f"{_to_english(hours)} hour{'s' if hours > 1 else ''}")
+    if minutes:
+        parts.append(f"{_to_english(minutes)} minute{'s' if minutes > 1 else ''}")
+    if secs and not hours:
+        parts.append(f"{_to_english(secs)} second{'s' if secs > 1 else ''}")
+    return " ".join(parts).strip()
+
+
+def _duration_to_seconds(value: Any) -> int:
+    if isinstance(value, bool):
+        return 0
+    if isinstance(value, (int, float)):
+        return max(0, int(value))
+    if not isinstance(value, str):
+        return 0
+    text = value.strip().lower()
+    if not text:
+        return 0
+    if text.isdigit():
+        return max(0, int(text))
+    match = re.fullmatch(r"(\d{1,2}):(\d{2})(?::(\d{2}))?", text)
+    if match:
+        hours = 0
+        minutes = int(match.group(1))
+        seconds = int(match.group(2))
+        if match.group(3) is not None:
+            hours = minutes
+            minutes = seconds
+            seconds = int(match.group(3))
+        return max(0, hours * 3600 + minutes * 60 + seconds)
+    return 0
+
+
+def _to_english(value: int) -> str:
+    if value < 0:
+        return str(value)
+    if value == 0:
+        return "zero"
+    ones = [
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+        "ten",
+        "eleven",
+        "twelve",
+        "thirteen",
+        "fourteen",
+        "fifteen",
+        "sixteen",
+        "seventeen",
+        "eighteen",
+        "nineteen",
+    ]
+    tens = ["", "", "twenty", "thirty", "forty", "fifty"]
+    if value < 20:
+        return ones[value]
+    if value < 60:
+        ten = value // 10
+        rest = value % 10
+        if rest == 0:
+            return tens[ten]
+        return f"{tens[ten]} {ones[rest]}"
+    return str(value)
 
 
 def extract_aspect_ratio(text: str) -> str:

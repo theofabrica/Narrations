@@ -65,9 +65,9 @@ Rules:
     - Infer from the chat context when it is explicit (do not invent).
   - `brief.target_duration_s`: duration in seconds (integer). Convert from text if needed.
   - Keep `brief.constraints` for free-form constraints that do not fit structured fields.
-  - For `edit` or `propagate`, set `brief.target_paths` with the exact JSON path to update (e.g. `n0.production_summary.summary`).
+  - For `edit` or `propagate`, set `brief.target_paths` with the exact JSON path to update (e.g. `n0.narrative_presentation.summary`).
 - Fill `brief.target_strata` with the strata impacted by the request (e.g. `["n1"]`).
-- Fill `brief.target_paths` with specific sections/paths (e.g. `n1.characters`, `n0.production_summary`).
+- Fill `brief.target_paths` with specific sections/paths (e.g. `n1.characters`, `n0.narrative_presentation`).
 - If no clear scope is provided, leave `target_strata`/`target_paths` empty.
 
 ## Example
@@ -90,7 +90,7 @@ Rules:
     "target_level": "n1",
     "priorities": ["Clarify topic and duration"],
     "target_strata": ["n0", "n1"],
-    "target_paths": ["n0.production_summary", "n1.pitch"]
+    "target_paths": ["n0.narrative_presentation", "n1.pitch"]
   },
   "pending_questions": ["Exact topic", "Target duration"]
 }

@@ -1,0 +1,1449 @@
+###urgy00001###
+Yves Lavandier
+
+###urgy00002###
+CONSTRUCTING A STORY
+
+###urgy00003###
+TABLE OF CONTENTS
+The text outlines a comprehensive guide for storytelling, covering essential elements from motif to resolution.
+- Emphasizes the importance of understanding the basic motif and meaning, including intentions and potential pitfalls.
+- Discusses major choices and the dramatic pitch, focusing on protagonist objectives, obstacles, and logline creation.
+- Details the internal trajectory and foundational elements like title, characterization, and plot structure.
+- Provides guidance on characterization, scene-by-scene development, and treatment, avoiding clichés and ensuring dialogue continuity.
+
+###urgy00004###
+Q. Cherish comedy
+
+###urgy00005###
+R. Be patient and tenacious
+
+###urgy00006###
+S. Have it read
+
+###urgy00007###
+T. Let it rest
+
+###urgy00008###
+13. HAVE IT READ
+
+###urgy00009###
+14. SCALES CONCLUSION
+GLOSSARY
+
+###urgy00010###
+INDEX OF WORKS INDEX OF PEOPLE BIBLIOGRAPHY
+
+###urgy00011###
+PREFACE
+Art is a disciplined expression that requires mastering both inspiration and craftsmanship.
+- Writing involves channeling creativity with structure, as emphasized by various artists and thinkers.
+- Rules and guidelines in storytelling are essential for coherence and effective communication, despite some artists' aversion to them.
+- The book aims to provide a practical method for organizing creative ideas, drawing from personal experience and established storytelling principles.
+- Understanding storytelling rules is straightforward, but applying them effectively requires talent, time, and practice.
+
+###urgy00012###
+Yves Lavandier (May 2019)
+
+###urgy00013###
+1. THE BASIC MOTIF
+"I will do everything to discover the author of this murder."
+
+"You will learn nothing from me."
+
+###urgy00014###
+(Oedipus, Oedipus Rex)
+
+###urgy00015###
+(Tiresias, Oedipus Rex)
+A good story is defined as a difficult human action, involving objectives and obstacles that create conflict and drive the narrative.
+- A story's core is the conflict between objectives and obstacles, which generates tension and interest.
+- Conflict arises from the opposition of objectives and obstacles, leading to feelings of frustration or anxiety.
+- Key storytelling elements like character, stakes, and structure stem from the objective-obstacles dynamic.
+- Unconscious objectives can be reflexive or transformative, influencing character development and narrative trajectory.
+
+###urgy00016###
+Life is Aristotelian
+In "A Childhood Under Occupation," Roger Emmenecker's story illustrates how real-life events can embody dramatic principles found in narratives.
+- The story highlights internal obstacles, conflict, suspense, and dramatic irony, showing that dramaturgy exists in life as well as in fiction.
+- Narratives differ due to varying objectives, protagonists, and combinations of elements, despite following a basic pattern.
+- The narrative structure can be applied at different scales, from entire works to individual scenes, allowing for diverse storytelling.
+- Authors can manipulate narrative elements, such as hiding or revealing information, to create unique and engaging stories.
+
+###urgy00017###
+6. Finally, the last criterion and not the least, this fractal combination that is the narrative is never as perfectly constructed as a Romanesco broccoli. One must account for failures, approximations, exceptions, rebellions (conscious or not), in short, what some call "poetic licenses."
+History and narrative
+
+Capra was also discovering the difference between history and narrative. Because the narrative, precisely, is the arrangement of the events of a story in a chosen and specific order.
+
+###urgy00018###
+2. MEANING
+Narrative and storytelling are powerful tools for education and addressing social issues.
+- Poets and storytellers play a crucial role in educating older audiences.
+- Telenovelas are effective in solving social problems.
+- Writing should stem from a genuine need to express something meaningful.
+- Authors should focus on their message without feeling obligated
+
+###urgy00019###
+(Krzysztof Piesiewicz)
+
+###urgy00020###
+A. THE FIRST POINT OF THE LINE
+Authors often struggle with writing due to the overwhelming elements involved, leading them to rely on spontaneity, which can result in disorganized narratives.
+- To create a coherent narrative, authors should focus on organizing their ideas logically, starting with a clear general intention or message.
+- The initial spark for a story can come from various inspirations, but it should resonate deeply with the author to sustain their interest.
+- A starting idea is not enough; authors must explore why they want to tell a particular story to ensure it aligns with their personal vision and message.
+- Understanding the difference between a starting idea and a fully developed narrative is crucial to avoid being unconsciously guided.
+
+###urgy00021###
+Unconscious: Advantages and Disadvantages
+Every human unconsciously knows narrative principles, but authors must consciously shape these ideas to avoid pitfalls.
+- Authors have the ingredients for a good narrative within them, but must translate unconscious ideas into coherent stories.
+- The unconscious can reveal biases, leading to works that unintentionally express misogyny, racism, or other prejudices.
+- Raw ideas from the unconscious may not fit the narrative, requiring conscious refinement to align with the story's needs.
+- The unconscious is influenced by clichés, and authors must be aware of these to create original work.
+
+###urgy00022###
+B. THE INTEREST OF DETERMINING MEANING
+Authors must prioritize meaning over tools in storytelling to create impactful narratives.
+- Understand the intended meaning and intention before choosing narrative tools like characterization and conflict.
+- A clear point of view helps in selecting and discarding ideas, especially when collaborating with others.
+- Drama and narratives can influence audiences emotionally, leading to changes in perception and behavior, as seen in various films and literary works.
+- Socially impactful storytelling, like Miguel Sabido's soap operas, demonstrates the power of narratives to address and influence social issues.
+
+###urgy00023###
+1. Create a personal, strictly personal work;
+Authors must prioritize meaning over tools in storytelling to create impactful narratives.
+- Authors should establish a clear point of view and intention before selecting narrative tools, ensuring the story's coherence and depth.
+- Collaborations succeed when authors share a unified message; otherwise, differing intentions can lead to failure.
+- A personal point of view respects the viewer's freedom, allowing them to form their own opinions and engage in meaningful dialogue.
+- Avoiding clichés and fully exploring narrative potential prevents viewer disappointment and enhances storytelling impact.
+
+###urgy00024###
+E. BEYOND THE GENERAL INTENTION
+Authors should master storytelling rules before bending them to create meaningful narratives.
+- Understand and master the rules of storytelling, questioning motivations for breaking them to ensure sincerity and depth.
+- Originality should be balanced; focus on unique angles while maintaining classic elements to avoid alienating the audience.
+- Continuously question the meaning and coherence of ideas throughout the creative process to align with the story's intention.
+- Evaluate the potential and personal commitment to a story idea, ensuring it has the depth and energy to sustain a complete narrative.
+
+###urgy00025###
+3. MAJOR CHOICES
+Before writing, learn to think.
+(Nicolas Boileau [10])
+(Suso Cecchi d'Amico [15])
+"I then made a mistake often made by young authors: starting to write without having finished building."
+
+###urgy00026###
+(Francis Veber on The Kidnapping [86])
+To effectively create a compelling narrative, authors should establish a solid foundation before diving into writing.
+- Begin with foundational elements like major story choices, milestones, and outlines to guide the narrative and facilitate rewriting.
+- Start with short stories or scenes to practice storytelling on a smaller scale, applying the same principles as longer works.
+- Conduct thorough research to ensure authenticity and originality, drawing inspiration from real life and existing works.
+- Understand and utilize genre conventions to enhance storytelling, while remaining open to mixing genres for added depth and originality.
+
+###urgy00027###
+4. THE DRAMATIC PITCH
+"Twenty-five words, max."
+(Griffin Mill (Tim Robbins), The Player)
+(Alfred Hitchcock in 1939 [42])
+"I fight against him, I fight against you, I fight for Mom's rights to the house."
+
+###urgy00028###
+(Eben, Desire Under the Elms)
+
+###urgy00029###
+A. PROTAGONIST-OBJECTIVE-OBSTACLES
+Choosing the right protagonist, objective, and obstacles is crucial to effectively convey your narrative's message.
+- The protagonist's nature shapes the story's perspective and audience connection.
+- Selecting a protagonist aligned with the theme enhances the narrative's impact.
+- Understanding the reasons behind actions, even of "villains," enriches the story's humanism.
+- A protagonist with moral flaws can deepen the exploration of complex issues.
+
+###urgy00030###
+Angelicism
+Choosing the right protagonist is essential for conveying a narrative's message effectively, whether through positive heroes or complex anti-heroes.
+- Western cinema often favors "angelicism," focusing on positive heroes, possibly due to societal needs or political correctness.
+- Anti-heroes of the 1970s, like those in "Taxi Driver" and "One Flew Over the Cuckoo's Nest," offered complex, flawed characters.
+- A protagonist may not be the main character but should convey the author's intention, as seen in works like "Tartuffe" and "Terminator."
+- Choral narratives with multiple protagonists can illustrate diverse perspectives but risk losing audience identification unless managed carefully, as in "Spartacus: Blood and Sand."
+
+###urgy00031###
+B. THE LOGLINE
+The protagonist-objective pair can be encapsulated in a "pitch," a crucial tool for both selling and crafting narratives.
+- A pitch, akin to a baseball pitch, launches an idea to decision-makers.
+- Beyond sales, it serves as a powerful writing and logical tool.
+- Taglines and loglines are key pitch
+
+###urgy00032###
+A. In space, no one can hear you scream.
+
+###urgy00033###
+B. Troubles?... Confusions?... Anxieties?... Meet real professionals.
+
+###urgy00034###
+C. Just when you thought it was safe to go back in the water.
+
+###urgy00035###
+D. Life is in their hands. Death is in their minds.
+A tagline is a sales tool for viewers, while a logline summarizes the story in one line for broader applications.
+- Taglines aim to interest decision-makers without revealing the story.
+- Screenwriters may create taglines for fun, but they are often added post-production.
+- Loglines serve as concise story summaries applicable to
+
+###urgy00036###
+E. A young prince battles his own doubts to avenge his father.
+
+###urgy00037###
+F. A military man full of panache and poetry but self-conscious about a physical flaw tries to woo a precious woman through a handsome intermediary.
+
+###urgy00038###
+G. A tramp does everything to help a young blind florist who mistakes him for a millionaire.
+
+###urgy00039###
+H. A scientist confronts the intolerance and obscurantism of his time to assert his revolutionary theories.
+
+###urgy00040###
+I. An ordinary composer seeks to destroy the musical genius who fascinates him.
+
+###urgy00041###
+J. To catch a cruelly inventive serial killer, an FBI trainee takes the risk of consulting a manipulative and even more dangerous psychopath.
+A one-line pitch is a crucial tool for summarizing and selling a story, guiding both the narrative and the author.
+- A well-crafted pitch defines the story's core idea, serving as a foundation for further discussion and development.
+- It acts as a sales tool, sparking interest and prompting questions from decision-makers.
+- Beyond sales, it helps authors maintain narrative focus and clarity, revealing their competence.
+- Knowing the audience is key; tailor pitches to the interests of the decision-maker.
+
+###urgy00042###
+C. DESIGNING YOUR DRAMATIC PITCH
+A one-line pitch is essential for summarizing and selling a story, including key elements like the protagonist, goal, and inciting incident.
+- A dramatic pitch should include the protagonist, their goal, inciting incident, obstacles, and setting, creating a logical link between these elements.
+- Avoid overloading the pitch with names, vague elements, or unnecessary details; focus on clarity and suspense without revealing the ending.
+- The central conflict should be dynamic and balanced, guiding the pitch and revealing the protagonist's motivations.
+- For choral works or serialized series, each plot or subplot should have its own pitch, ensuring thematic or dramatic connections.
+
+###urgy00043###
+N. A professional robber determined to go straight is taken hostage by an amateur robber. He fights to prove his innocence.
+
+###urgy00044###
+O. A policeman does everything to neutralize the bomb on a bus that will explode if the bus goes below 50 mph.
+
+###urgy00045###
+P. During Prohibition, two musicians disguise themselves as women to escape mobsters. They strive to manage the situation.
+
+###urgy00046###
+Q. Mistaken for a non-existent spy, a carefree advertiser tries to save his skin.
+
+###urgy00047###
+R. A 49-year-old man transported into the body of the teenager he was at 14 does everything to prevent his father from leaving his family.
+Developing a strong premise is challenging because it creates high audience expectations and requires integrating powerful scenes into a coherent whole.
+- A pitch should summarize the action, not the story's meaning, intention, or result.
+- Avoid "trajectory pitches" that focus on internal character journeys rather than concrete dynamics.
+- Examples of ineffective pitches often lack clarity or fail to entice due to vague or overly broad descriptions.
+- Ensure pitches highlight the protagonist's journey and the central conflict without unnecessary details.
+
+###urgy00048###
+D. PITCH AND FIRST ACT
+A pitch is essential for launching a story, as it encapsulates the first act's elements, setting the stage for the action.
+- The first act introduces the protagonist, setting, inciting incident, and goal, aligning with the pitch's components.
+- A pitch provides an overview of the action, particularly the second act, while the first act prepares the audience for this journey.
+- An effective pitch is not a summary but a narrative necessity, presenting the story's launch and direction.
+- Evaluating pitches can reveal if they adequately set up the first act, ensuring clarity and engagement.
+
+###urgy00049###
+E. PLOT-DRIVEN AND CHARACTER-DRIVEN NARRATIVES
+Narratives range from plot-driven to character-driven, often blending both elements.
+- Plot-driven stories focus on action and objectives, while character-driven narratives emphasize psychological depth.
+- Many successful narratives integrate plot and characterization, offering a balanced approach.
+- Authors should be aware of their narrative preferences, as these influence their storytelling style and
+
+###urgy00050###
+Characterization in Plot-Driven Narratives
+Plot-driven narratives focus on twists, but character depth enriches the story.
+- Good characterizations make narratives more accurate and engaging, adding realism and enjoyment.
+- A balanced narrative integrates both plot and character development, as seen in "Groundhog Day."
+- The best pitches combine plot and character elements, enhancing the story's appeal.
+- Plot and character are interconnected; altering either changes the narrative, highlighting their mutual importance.
+
+###urgy00051###
+The Basic Structure in Character-Driven Narratives
+Character-driven narratives require a plot framework to maintain engagement and structure.
+- Even in character-focused stories, a plot or dramatic question is essential to guide the narrative.
+- Successful narratives have classic structures with inciting incidents and climaxes, as seen in works like "Amadeus" and "A Streetcar Named Desire."
+- The protagonist's actions often highlight another character's development, providing depth and complexity.
+- A solid plot framework is crucial to prevent losing the audience and to enhance character portrayal.
+
+###urgy00052###
+F. TEST YOUR PITCH CONSTANTLY
+A well-formulated pitch is essential but must be fully exploited to fulfill its promises.
+- Ensure the pitch excites you and aligns with your message.
+- Regularly check that the narrative respects the pitch.
+- If straying, reformulate the pitch for coherence and interest.
+
+###urgy00053###
+5. THE INTERNAL TRAJECTORY
+"You make me want to be a better man."
+
+###urgy00054###
+(Melvin [Jack Nicholson], As Good as It Gets)
+"Having listened to you for these thousand and one nights, I leave with a profoundly changed soul."
+
+###urgy00055###
+(Shahryar, One Thousand and One Nights)
+"With Qiu Ju, a Chinese woman, I wanted to say that every Chinese person must do the same thing: fight to get their way and discover themselves in the process they have engaged in to achieve their goal."
+
+###urgy00056###
+(Zhang Yimou [961])
+"It's all well and good to have fun all the time, but I would like you to grow up a bit."
+
+###urgy00057###
+(Kazué, A Distant Neighborhood)
+
+###urgy00058###
+(Creon, Oedipus Rex)
+Narratives typically depict character evolution through causal relationships, leading to internal and personal journeys.
+- Characters move from one point to another, often improving.
+- These journeys involve psychological or moral changes.
+- Occasionally, transformations can be negative.
+
+###urgy00059###
+A. THREE EMOTIONAL QUESTIONS
+Characters in narratives have both dramatic and trajectory objectives, which drive their development and create suspense.
+- Protagonists have general objectives and unconscious needs, termed "trajectory objectives," which often involve personal growth.
+- Examples include Nora in "A Doll's House" and Charlie in "Rain Man," who have both external goals and internal needs.
+- Audience engagement is heightened by questions about whether characters will achieve their objectives and grow.
+- A coherent narrative links the protagonist's desires with character needs, often leading to personality changes through conflicts and obstacles.
+
+###urgy00060###
+B. BEWARE OF DOGMAS
+
+###urgy00061###
+Personality Change, Not Status Change
+A character's trajectory is more impactful when it involves moral or psychological changes rather than social or biological ones.
+- True character change requires overcoming internal flaws, not just coping with them or experiencing external changes like success or revelation.
+- Forced changes due to circumstances, like McMurphy's lobotomy in "One Flew Over the Cuckoo's Nest," do not constitute genuine character development.
+- The most compelling transformations occur when characters consciously choose between two paths, reflecting free will.
+- Revealing hidden traits enriches a character but does not equate to a change; genuine transformation demands careful justification of internal growth.
+
+###urgy00062###
+Dramatic Protagonist and Trajectory Protagonist
+Character evolution in narratives can involve protagonists or other characters, with changes occurring at various points in the story.
+- Characters who evolve may not always be the protagonist; sometimes, secondary characters undergo significant transformations.
+- Changes can occur at different stages, such as the beginning or middle, rather than the end, influencing the protagonist's actions.
+- Some stories feature no character change, focusing instead on the audience's understanding or emotional response.
+- The decision to include character growth should align with the story's intention, whether to entertain, provoke thought, or convey a message.
+
+###urgy00063###
+C. FOUR ESSENTIAL ELEMENTS
+Character transformation during a narrative requires careful design of several key elements to ensure a compelling internal trajectory.
+- Begin with a scene highlighting the character trait that will evolve, often involving a secondary character to emphasize the protagonist's initial state.
+- Identify the "trajectory conflict," the cause of change, which can be a conflict, failure, awakening, or other impactful event.
+- Clearly depict the "trajectory climax," where the character consciously chooses to change, ideally facing a dilemma and taking responsibility for their transformation.
+- Conclude with a scene showcasing the new character trait, providing a satisfying resolution for the audience.
+
+###urgy00064###
+OEDIPUS REX (c. 430 BC) and OEDIPUS AT COLONUS (406 BC)
+Oedipus undergoes significant transformation in "Oedipus Rex," marked by shifts in his blindness and irritability.
+- Oedipus initially exhibits three forms of blindness: ignorance of Laius's murder, denial after Tiresias reveals the truth, and self-inflicted physical blindness.
+- His irritability is evident in conflicts with Creon and others, culminating in his self-blinding, which signifies a shift from psychological to physiological blindness.
+- By "Oedipus at Colonus," he becomes more humble and less irascible, reflecting a deeper change influenced by his suffering.
+- The dramatic irony of his identity and actions leads to profound personal change, highlighted by interactions with Tiresias and Creon, who challenge his traits.
+
+###urgy00065###
+THE THOUSAND AND ONE NIGHTS (13th century)
+Shahryar undergoes a profound transformation in "The Thousand and One Nights," influenced by Scheherazade's storytelling.
+- Initially, Shahryar becomes a tyrant after betrayal, killing a new bride each morning.
+- Scheherazade offers herself as his wife, intending to end his barbarity by telling stories for a thousand and one nights.
+- Her tales, filled with moral lessons, gradually soften Shahryar, leading to his repentance and the cessation of his cruel actions.
+- Ultimately, Shahryar is moved by their children and changes, inspiring his brother to do the same.
+
+###urgy00066###
+THE TAMING OF THE SHREW (1592)
+Katharina undergoes a significant transformation in "The Taming of the Shrew," marked by her submission to Petruchio.
+- In Scene V/1, Katharina kisses Petruchio in public and calls him "Love," indicating a change.
+- She defends Petruchio against Hortensio's wife's criticism and wins a bet by being the most obedient wife.
+- Her controversial speech on
+
+###urgy00067###
+BEAUTY AND THE BEAST (1757)
+In Jeanne-Marie Leprince de Beaumont's version of "Beauty and the Beast," the Beast undergoes a significant transformation, while Beauty matures symbolically.
+- Beauty remains generous and honest, but matures from a childlike love for her father to a mature love for a man.
+- The Beast, initially ugly and kind, endures humiliation and suffering before transforming into a prince.
+- Beauty's realization of true kindness over superficial traits prompts her to accept the Beast, leading to his transformation.
+
+###urgy00068###
+THE APARTMENT (1960)
+C.C.
+- Initially, Baxter is exploited and unable to say no, aiming to climb the corporate ladder.
+- Despite his kindness, he is humiliated, especially in romantic matters, as seen when Fran is involved with Sheldrake.
+- At the climax, Baxter rejects further exploitation, choosing dignity over career advancement.
+- Dr. Dreyfuss, though mistaken about Baxter, embodies the moral conscience, urging Baxter to assert himself.
+
+###urgy00069###
+ASTERIX AND THE NORMANS (1966)
+In "Asterix and the Normans," secondary characters Goudurix and the Normans undergo significant transformations.
+- Goudurix arrives arrogant but becomes more humble and seemingly courageous, though his bravery may be superficial.
+- The Normans, initially fearless, learn the meaning of fear through Assurancetourix's singing, realizing fear does not grant flight.
+- The story cleverly uses humor and character development, with Goudurix's evolution driven by terror and the influence of the Gauls.
+- The series maintains its comedic essence while allowing secondary characters to experience change.
+
+###urgy00070###
+ONE FLEW OVER THE CUCKOO'S NEST (1975)
+Chief undergoes a transformation from submissive to autonomous, influenced by McMurphy's rebellious spirit.
+- Initially restrained, Chief is inspired by McMurphy's actions and begins to engage with the world around him.
+- McMurphy's friendship and the chaos he introduces provoke Chief's latent rebelliousness.
+- The climax occurs when Chief discovers McMurphy's lobotomy, prompting him to take decisive action.
+- Chief ultimately escapes, symbolizing his newfound autonomy and liberation.
+
+###urgy00071###
+TOOTSIE (1982)
+Michael Dorsey in "Tootsie" is portrayed as a sensitive man rather than a macho character.
+- Michael is described as a great guy by his friend Sandy and behaves respectfully towards women, showing embarrassment rather than opportunism in awkward situations.
+- He criticizes the director's machismo, indicating he is not aligned with such behavior.
+- The film's dramatic irony influences Michael's actions, and his supposed transformation is more nuanced than a clear macho-to-sensitive arc.
+- The true machismo in the film is embodied by other characters, such as the director and the old actor, rather than Michael.
+
+###urgy00072###
+BACK TO THE FUTURE (1985)
+George McFly undergoes a transformation from a cowardly character to a more assertive one, influenced by various factors.
+- Initially bullied by Biff, George is portrayed as weak and makes excuses for his behavior.
+- Marty's intervention in 1955 helps George find courage, culminating in George standing up to Biff and winning Lorraine's affection.
+- By 1985, George is confident and successful, with Biff now subservient to him.
+- His transformation is attributed to a mix of Marty's coaching, his love for
+
+###urgy00073###
+RAIN MAN (1988)
+Charlie, the protagonist, undergoes a dual transformation from being venal and emotionally detached to compassionate and disinterested in money.
+- Initially, Charlie is estranged from his father and indifferent to his autistic brother Raymond, whom he kidnaps for inheritance.
+- A turning point occurs when Charlie discovers a childhood connection with Raymond, leading to a gradual softening of his attitude.
+- Despite exploiting Raymond's abilities for financial gain, Charlie eventually refuses a $250,000 offer, choosing to care for his brother instead.
+- The film highlights Charlie's dual change: his newfound compassion leads to a disinterest in money, though the progression lacks a clear climax for the compassion trajectory.
+
+###urgy00074###
+GROUNDHOG DAY (1993)
+Phil Connors transforms from arrogant and jaded to compassionate and selfless through a series of failures and realizations.
+- Initially, Phil exploits his situation, indulging in reckless behavior and manipulating others.
+- After a series of romantic and existential failures, he experiences despair and attempts suicide repeatedly.
+- Realizing his immortality, Phil begins to change, influenced by Rita's perspective, and starts acting selflessly.
+- The climax of his transformation is marked by his genuine acts of kindness, though questions remain about the permanence of his change.
+
+###urgy00075###
+THE LIVES OF OTHERS (2006)
+Captain Wiesler undergoes a profound transformation from a ruthless Stasi officer to a compassionate and humane individual.
+- Initially, Wiesler is depicted as cold and inhumane, marking students for dissent and suggesting surveillance for personal motives.
+- His transformation begins as he experiences loneliness, reads romantic poetry, and is moved to tears by music, leading him to falsify reports to protect Dreyman.
+- Wiesler's change is highlighted by his decision not to arrest a child's father and his encouragement of actress Christa-Maria Sieland to be authentic.
+- The film questions whether music and art alone can drive such a significant change, while Dreyman's character shows a less dramatic shift from adaptation to subtle resistance.
+
+###urgy00076###
+DEPARTURES (2008)
+Daigo undergoes a significant evolution, changing his perspective on his job and reconciling with his father's memory.
+- Initially ashamed of his work as a mortician, Daigo comes to admire the delicate preparation of the deceased.
+- His resentment towards his father shifts after discovering a stone from his childhood, leading to a peaceful acceptance.
+- The film highlights Daigo's growth through his handling of his father's body, though it lacks clarity on what triggers his final decision to reconcile.
+- The secretary's story serves as a mirror, helping Daigo process his own abandonment issues.
+
+###urgy00077###
+Teachings
+Character trajectories involve either personal growth or life cleanup, often requiring a serious ordeal to provoke change.
+- Protagonists may improve morally or psychologically, like Shahryar or Nora.
+- Alternatively, they clear life obstacles, leading to character changes, as seen with Oedipus or Rick.
+- A powerful trajectory
+
+###urgy00078###
+CREATION OF THE INTERNAL TRAJECTORY
+Character transformation involves a significant yet plausible change, often triggered by a profound experience or realization.
+- Characters evolve by altering one specific trait or aspect of their life, not their entire personality.
+- Transformations can range from extreme shifts to more subtle changes along a spectrum, maintaining plausibility.
+- A character's initial flaw or lack is essential for the audience to perceive the need for change.
+- Triggers for change include therapy, learning, extreme experiences, catharsis, or epiphanies, each providing a catalyst for transformation.
+
+###urgy00079###
+5. The character faces a symbolic mirror. Either a mirror character or a mirror situation. One Thousand and One Nights and Distant Neighborhood use this process abundantly. It is also found in One Flew Over the Cuckoo's Nest, in the sense that McMurphy serves as a model, an inspiration, to Chief. As mentioned above, Jean Valjean's transformation occurs at the beginning of Les Misérables. In the chapter titled "Petit-Gervais," Victor Hugo explains that the bishop served as a mirror character for the protagonist: "The priest's forgiveness was the greatest assault and the most formidable attack."
+Character transformation in narratives involves significant, plausible changes often triggered by profound experiences or realizations.
+- Positive labeling can push characters to evolve by reflecting an ideal image back to them, even if it doesn't initially match their true nature.
+- Characters often face accumulating conflicts, leading to a breaking point that triggers change, emphasizing that evolution occurs through struggle, not ease.
+- Sudden changes are more impactful in fiction than progressive ones, as they provide clarity and are often preceded by necessary preparation.
+- Physical transformations can symbolize psychological changes but are not always indicative of internal growth; they can also serve as metaphors, curses, or rewards.
+
+###urgy00080###
+6. FOUNDATIONS
+Before writing, fully understand your character and story foundation by addressing key narrative questions.
+- Define your dramatic pitch and character trajectory to establish story foundations.
+- Clarify the protagonist's characterization, goals, and stakes, and identify essential supporting characters.
+- Determine the inciting incident, act transitions, and the nature of obstacles and urgency.
+- Consider the structure, including climaxes, twists, and dramatic ironies, to enrich the narrative.
+
+###urgy00081###
+A. THE TITLE
+A title's significance often transcends its literal meaning, becoming a concept that influences perception.
+- Titles quickly evolve into concepts, much like a child's name, affecting audience expectations.
+- The myth of a "good title" is often perpetuated by decision-makers seeking control.
+- Choose a title that inspires you and aligns with the work's content to avoid misleading the audience.
+
+###urgy00082###
+3 - that it doesn't sell the dramatic response.
+Titles prepare audiences for the emotional experience of a work.
+- Consider how a title sets expectations, as seen in Shakespeare's descriptive play titles.
+- Titles like "The Tragedy of Hamlet" or "Much Ado About Nothing" guide audience emotions.
+- A well-chosen title psychologically prepares the audience for the intended
+
+###urgy00083###
+B. THE CHARACTERIZATION OF THE PROTAGONIST
+The protagonist's characterization involves three phases: conception, setup, and exploitation, with a focus on creating a compelling character through specific traits and backstory.
+- Begin by naming your protagonist, considering age, appearance, and costume to establish their identity and context.
+- Define key characteristics, including flaws, skills, and dreams, ensuring they are relatable and interesting, even if not likable.
+- Use elements like ghosts, wounds, and elastics to enrich backstory and create depth, linking past events to present actions.
+- Avoid overloading characters with traits; focus on a few specific ones to maintain coherence and interest, while ensuring diversity and avoiding stereotypes.
+
+###urgy00084###
+C. THE INCITING INCIDENT  
+An inciting incident is a pivotal event that disrupts routine and prompts the protagonist to act, categorized by its dependence on the protagonist.
+- Inciting incidents can be independent of the protagonist, like accidents or inheritances, or dependent, such as personal trials or accumulated pressures.
+- Consider whether the inciting incident should be included in the story or occur before it begins, ensuring it is powerful enough to drive the protagonist into action.
+- Avoid multiple independent inciting incidents to prevent coincidences and maintain a clear narrative focus.
+- Ensure the inciting incident is a significant shock that motivates the protagonist's journey through the second act.
+
+###urgy00085###
+D. THE GENERAL OBJECTIVE
+The protagonist's objective must align with the dramatic pitch and be clearly defined to maintain coherence and audience engagement.
+- Ensure the protagonist's objective is consistent with the dramatic pitch, focusing on action verbs to convey both action and result.
+- Clarify the objective to avoid ambiguity, using examples like becoming a rock star to illustrate different criteria for success.
+- Link the inciting incident, characterization, and objective to create a cohesive narrative, as seen in examples like Ikiru and Breaking Bad.
+- Consider originality in objectives to create unique stories, and manage multiple objectives by making one an obstacle or unconscious to maintain narrative focus.
+
+###urgy00086###
+E. THE STAKES
+Stakes are what the protagonist stands to lose or gain, distinct from objectives, and crucial for audience engagement.
+- Clearly differentiate between stakes and objectives to avoid confusion; stakes are what is at risk, while objectives are the goals to achieve.
+- Ensure stakes are significant and well-exploited in the narrative to maintain interest, as seen in examples like "Lagaan" and "A Time for Drunken Horses."
+- Consider both conscious and unconscious stakes, as they motivate the protagonist's dramatic goal and can add depth to the story.
+- Develop secondary characters with clear goals and motivations to enrich the narrative and support the protagonist's journey.
+
+###urgy00087###
+3 - it allows explaining the protagonist's motivations.
+Sub-objectives make the protagonist active, avoiding passivity and enhancing identification through determination.
+- Ensure the protagonist actively pursues their objective, using sub-objectives to drive action and engagement.
+- Tailor sub-objectives to the protagonist's characterization, allowing for tactical changes in response to conflict.
+- Incorporate collateral sub-objectives that arise from the protagonist's actions, adding complexity and additional challenges.
+
+###urgy00088###
+H. THE FIRST ACT-SECOND ACT TRANSITION
+The transition from the first to the second act is when the protagonist's objective becomes clear, marking the start of the action.
+- The protagonist often declares their objective, as seen in "Hamlet," "Pygmalion," and "The Great Escape," prompting immediate action.
+- Sub-objectives are introduced to add complexity and drive the narrative forward.
+- Even without explicit declaration, the protagonist's goals are understood by the audience, as
+
+###urgy00089###
+I. THE ARENA
+The arena in storytelling is a meaningful setting where the protagonist evolves, crucial for the second act, and must be specific and exploited to enhance the narrative.
+- The arena should be more than a backdrop, adding unity, personality, and meaning to the story, and can create contrast, add symbolism, and make the subject original.
+- Exploit the arena by using local elements dramatically, even in mundane settings, to highlight contrasts and character interactions.
+- Sub-arenas provide specific, original settings within the main arena, offering new challenges and dynamics, as seen in stories like "The Walking Dead."
+- Research or creative work may be necessary to develop arenas, especially if they are set in the past, in foreign locations, or are fictional.
+
+###urgy00090###
+J. OBSTACLES
+The section discusses the importance of obstacles and villains in storytelling, emphasizing internal challenges and well-crafted antagonists.
+- Internal or internally originated obstacles enrich the narrative, often stemming from the protagonist's flaws or co-protagonists.
+- External obstacles can feel internally originated if they seem deserved, as seen in "Groundhog Day" and "Casablanca."
+- Introducing urgency through a countdown can enhance tension, whether in a scene or throughout the story.
+- Effective villains are not just evil but have understandable motivations, charm, and cleverness, making them formidable and memorable adversaries.
+
+###urgy00091###
+K. THE CLIMAX
+The climax is the dramatic knot that resolves the protagonist's goal, marking the transition to the third act.
+- The climax should be conflictual and spectacular, providing the biggest payoff of the story.
+- It concludes the action, resolving the protagonist's objective, as seen in examples like "Little Miss Sunshine" and "Flashforward."
+- The climax often involves an all-or-nothing moment or a critical choice, sometimes presenting a dilemma.
+- In "Cyrano de Bergerac," the climax is a culmination of Cyrano's actions, leading to a poignant resolution where he abandons his goal.
+
+###urgy00092###
+L. THE DRAMATIC ANSWER
+The dramatic answer is essential for giving meaning to a story, influencing its message based on whether the protagonist achieves their goal.
+- The dramatic question engages both the protagonist and the audience, though sometimes only the audience receives the answer.
+- Most stories provide a dramatic answer, but exceptions like "Life Is a Long Quiet River" leave the resolution open, highlighting the importance of meaning.
+- A story without a clear ending can feel incomplete, as humans have a strong need for closure and meaning.
+- Deciding on a "positive" or "negative" dramatic answer adds depth and direction to the narrative.
+
+###urgy00093###
+M. THE THIRD ACT
+The third act transitions from the end of the action to the conclusion of the work, often resolving subplots and indicating future character developments.
+- A short third act is recommended if the structure isn't enriched, as seen in Shakespeare's works where the action concludes swiftly after the climax.
+- The three-act structure consists of before, during, and after the action, differing from some theorists who split the second act into two parts.
+- An enriched structure may include a plot twist and a second climax, often reversing the initial dramatic answer to maintain audience engagement.
+- It's crucial to clearly mark the end of the second act and the beginning of the third, ensuring the protagonist's goal appears resolved before introducing new developments.
+
+###urgy00094###
+N. MAJOR DRAMATIC IRONIES
+Dramatic irony is a crucial element in storytelling, creating tension and engagement by revealing information to the audience that characters are unaware of.
+- Dramatic irony can be categorized into two types: when the protagonist is the victim of the irony, and when another character is the victim, affecting the protagonist's actions.
+- The "bomb under the table" type involves the protagonist being unaware of critical information, creating urgency for the audience to see the resolution.
+- The "secrecy" type involves the protagonist's strategies being hidden from other characters, often leading to a desire for the irony to remain unresolved as long as possible.
+- Effective use of dramatic irony requires careful management of timing and audience expectations, ensuring it enhances the dramatic question and adds depth to the narrative.
+
+###urgy00095###
+MAJOR DIFFUSE DRAMATIC IRONIES
+Diffuse dramatic irony is a pervasive element in storytelling, enhancing audience engagement by allowing them to sense outcomes before characters do.
+- Audiences often anticipate plot developments, maintaining interest even when characters believe they've succeeded, as seen in "Jaws."
+- In "Meet the Fockers," sequences of good fortune signal impending conflict, using irony to prepare the audience.
+- This technique often relates to character growth, where audiences perceive necessary changes before characters do.
+- If diffuse dramatic irony isn't immediately apparent during planning, focus on other aspects of the story.
+
+###urgy00096###
+THE GREAT DRAMATIC KNOTS
+The mid-climax and twists are crucial dramatic elements that enhance storytelling by reigniting action and surprising the audience.
+- The mid-climax divides the second act, introducing new phases or objectives, as seen in "Jaws" and "Rambo," and should not conclude the action but launch new sub-objectives.
+- Twists break narrative monotony and engage the audience by introducing unexpected developments, often adding realism and a sense of partnership with the author.
+- Two types of twists include unexpected dramatic knots and those that mislead the audience with false trails, requiring careful management to maintain surprise.
+- Twists can also reveal new character facets or motivations, adding depth and complexity to the narrative.
+
+###urgy00097###
+Unequivocal
+A clear and impactful twist should avoid ambiguity and mystery, focusing instead on delivering a surprising revelation.
+- Twists should be clear and massive, avoiding the mix of mystery and surprise, which can confuse the audience.
+- The prevalence of spoilers has reduced the effectiveness of end twists, making mid-action twists more favorable.
+- The point of no return signifies a moment when returning to normalcy is impossible, enhancing stakes and audience engagement.
+- Examples include Faust, The Matrix, and subtle moments like in The Dinner Game, where decisions lead to irreversible consequences.
+
+###urgy00098###
+Emotional Times
+Emotional times, often overlooked, are crucial dramatic knots that significantly alter a character's emotions, adding depth to storytelling.
+- Emotional times can be subtle or immense, impacting character emotions and serving as dramatic knots.
+- In "The Apartment," Baxter's discovery of Fran's overdose shifts his emotions from bitterness to concern, illustrating a powerful emotional time.
+- In "Oedipus Rex," the Corinthian messenger's news serves as an emotional time for Oedipus but not for the audience due to dramatic irony.
+- Writers should consider emotional times during development to ensure they justify character emotions and enhance narrative depth.
+
+###urgy00099###
+Q. COMEDY
+Consider the type of humor and character roles that can introduce comedy into your story.
+- Focus on general discrepancies in character traits or situations to add humor.
+- Decide on the type of comedy: demeaning, demanding, or compassionate.
+- Identify characters who can serve as comedic figures or clowns.
+- Use surprises, dramatic ironies,
+
+###urgy00100###
+R. TRAJECTORIAL ELEMENTS
+If you have worked on the trajectorial question using chapter 5, you have already started filling in this entry.
+
+###urgy00101###
+Trajectorial Protagonist
+Understanding a character's historical reasons for their personality can enrich their development and story.
+- Consider the origins of traits like guilt or selfishness.
+- Use backstory elements, like flashbacks, to reveal motivations.
+- Connect character history to their current trajectory and conflicts.
+
+###urgy00102###
+Trajectorial Objective
+A trajectorial protagonist's path defines their growth objective.
+- Identify the protagonist's initial traits to set objectives.
+- Objectives often involve transforming negative traits into positives.
+- Tailor the protagonist's journey to achieve personal growth.
+
+###urgy00103###
+The Reasonable Contradictor of the Trajectorial Protagonist
+The reasonable contradictor is a vital tool for highlighting a trajectorial protagonist's need for growth.
+- The contradictor disapproves of the protagonist's attitude, helping to define their growth path.
+- This character can be a protagonist, secondary character, or antagonist, providing a practical means to launch a trajectorial question.
+- Examples include Woody in "Toy Story" and Juror No. 8 in "12 Angry Men," showing how contradictors can be integral to the narrative.
+- The presence of a contradictor ensures the audience recognizes the protagonist's flaws and potential for growth, enhancing the story's depth.
+
+###urgy00104###
+The Trajectorial Conflict
+A trajectorial protagonist must face significant challenges to abandon ingrained traits, even when no change occurs.
+- Push the protagonist to their limits to encourage growth or change.
+- Create situations that highlight the potential for change, even if none occurs.
+- Use conflicts to emphasize the protagonist's resistance to change.
+
+###urgy00105###
+The Trajectorial Climax
+The trajectorial climax is a pivotal moment that triggers a character's transformation through conscious choice.
+- Determine the timing of the trajectorial climax within the story to effectively showcase character change.
+- Ensure the character's transformation is demonstrated through actions, not just dialogue.
+- Highlight the role of free will in the character's decision-making during
+
+###urgy00106###
+The Trajectorial Response
+A character's internal trajectory often aims for awakening, though change may not always occur.
+- Set up trials to challenge the character, even if they remain unchanged.
+- Use examples like "Waiting for Godot" to illustrate characters who remain lost despite trials.
+
+###urgy00107###
+S. THREE EXAMPLES OF FOUNDATIONS
+Foundations provide a concise overview of a project, offering insight into the upcoming story and tone.
+- Use foundations of unrealized projects as an alternative to synopses for decision-makers.
+- Keep foundations concise, ideally two to three pages, to maintain a clear overview.
+- Understand that the provided examples are polished, not first drafts.
+
+###urgy00108###
+The Foundations of 'Model Couple'
+
+###urgy00109###
+Title: Model Couple
+The owner of a matchmaking agency, Xavier, discovers his wife is cheating and struggles to maintain his reputation.
+- Xavier, a controlling and appearance-focused man, runs the Felicitas matchmaking agency and faces personal turmoil when his wife Gaëlle has an affair.
+- Key characters include Gaëlle, her lover Jean-François, Jean-François's wife Claire, and Mrs. Varnier-Duval-Le Guen, a mole from a rival agency.
+- Xavier's objectives are to hide the affair and win back his wife, leading to manipulative schemes involving Claire.
+- The climax occurs at the agency's anniversary party, where Xavier admits his marriage is a sham and declares love for Claire.
+
+###urgy00110###
+The Foundations of 'The 11th Man'
+Claude Retz, a talented young footballer, battles to be recognized as a professional player in the men's league, driven by her father's admiration and her own determination.
+- Claude's journey spans from childhood to adulthood, facing challenges in both amateur and professional football arenas.
+- Her main objective is to gain recognition in the men's league, motivated by her father's passion for football and the desire to prove herself.
+- Key characters include her father Charles, brother Georges, coach Franck, agent Andreas, player Tigran, and antagonist Horst Santander.
+- Despite internal and external obstacles, Claude's ambition leads to a tragic climax where she achieves her goal but dies in her father's arms, becoming a symbol of beautiful play.
+
+###urgy00111###
+Foundations of Culbuto
+A chronically clumsy man named Maxime falls in love with an insecure theater actress, Natacha, and navigates personal and external challenges to win her heart.
+- Maxime, a dyspraxic and hypersensitive man, tests drugs for income and falls for Natacha, who is actually an actress, not a nurse.
+- He faces obstacles from Hans, a manipulative director, and his own clumsiness, while trying to create a play to win Natacha's affection.
+- Natacha, seeking validation, initially falls for Hans but eventually realizes her love for Maxime during a performance.
+- Maxime finds his calling as a clown-magician for children, learning to embrace his clumsiness and laugh at himself.
+
+###urgy00112###
+T. A STEP TO MATURE
+Taking a break to let foundations mature is crucial before progressing to milestones and scenes.
+- Jot down necessary scenes during the break to maintain momentum.
+- Allow several months for foundational work to avoid rushing and risking quality.
+- Avoid the misconception that quick typing equates to easy conception, as it undervalues the creative process
+
+###urgy00113###
+7. CHARACTERIZATION
+"The way of acting is the way of being."
+(Lao-Tseu [49])
+"There will be character if words or actions reveal a determined choice."
+
+###urgy00114###
+(Aristotle [02])
+Characterization progresses through foundational design and scene development.
+- Design protagonists and main characters in the foundation stage.
+- Prepare for scene-by-scene development in the next phase.
+
+###urgy00115###
+Second Phase: Staging Characterization
+Characterization involves imagining scenes to understand characters.
+- Initial scenes help grasp character depth, even if unused.
+- Mixing phases can enhance character development understanding.
+
+###urgy00116###
+Major Tool 1: Conflict
+Characterization is best conveyed through a character's behavior in specific situations, especially during conflicts.
+- Situational behavior reveals character depth, as seen in examples from "The Remains of the Day," "Gone with the Wind," and "Titanic."
+- Characters' actions during conflicts, like Stevens serving his master or Cal
+
+###urgy00117###
+Major Tool 2: Abnormality
+Characterization requires characters to act uniquely under pressure, distinguishing them from the norm.
+- Characters should react differently from the majority to avoid blending in with common behaviors.
+- Unique reactions can reveal depth and are not always comedic, as seen in various examples.
+- Abnormal responses, like Dave's aggression or Blanche's neuroticism, provide strong character insights.
+- Even in serious contexts, such as in "Hannibal," atypical reactions can be profoundly characterizing.
+
+###urgy00118###
+Major Tool 3: Contrast
+Contrast is a key tool in characterization, highlighting differences between characters' actions and typical behavior.
+- Contrast between characters' actions and normal behavior reveals depth.
+- Comparing actions of different characters in similar situations enhances characterization.
+- Examples include Blueberry's rebellious nature versus Graig's straight-laced demeanor.
+- Gustavo Fring's
+
+###urgy00119###
+Setting Up the Routine of Life
+Characterization often involves presenting characters in their daily routines to reveal their traits and roles.
+- In "Othello," the protagonist's dual responsibilities introduce his character.
+- "Casablanca" uses Rick's inaction during Ugarte's arrest to show his neutrality.
+- "Read My Lips" highlights Carla's lip-reading ability as both a skill and a source of suffering.
+- "Stagecoach" and "The Pigeon" efficiently introduce multiple characters through situational interactions.
+
+###urgy00120###
+Don't Tell, Show
+Characterization in storytelling requires effectively conveying traits and roles through action rather than mere description.
+- Overloading audiences with character details, as seen in "The Court of Songs" and "A Ghost," can be ineffective; showing traits through actions is more impactful.
+- Introducing characters through others' dialogue, as in "Tartuffe," can build anticipation, but their first appearance must be significant and creative.
+- Important characters should generally be introduced early unless the story justifies a later entry, as seen in exceptions like "Apocalypse Now."
+- Character traits should influence the plot, as demonstrated in "The Secret in Their Eyes," where alcoholism affects the story's outcome.
+
+###urgy00121###
+7. Whether for the protagonist or secondary characters, imagine their prism. That is, their way of perceiving things in life, their value system, their professional bias. The prism should be felt in what the character does or says. In 'Panic,' the butcher (Max Dalban) makes butcher's comments. He judges people by their meat consumption. The prostitute (Lira Recio) has prostitute's concerns. She rejects the tax collector's (Guy Favières) remarks because, in other circumstances, he dares to demand taxes from her. In 'The Imaginary Invalid,' Thomas Diafoirus, a doctor, proposes to Angélique, his betrothed, to attend a woman's dissection. In the same ultra-romantic vein, in 'Taxi Driver,' Travis (Robert De Niro) takes the young woman he is courting (Cybill Shepherd) to see a porn film! In 'Day for Night,' Joëlle (Nathalie Baye) and Bernard (Bernard Menez) take advantage of a car breakdown to make love. As a result, they arrive late at their workplace (the film set). Liliane the script girl (Dani) smiles when she sees Joëlle arrive and says: "That polo doesn't match." In 'Angel,' two English valets (Ernest Cossart, Edward Everett Horton) discuss the political situation in Europe in 1936. They mention with disgust the French delegation whose representative at the League of Nations doesn't even have a valet. There is still hope that war will be avoided because the Soviets, surprisingly, were properly dressed in Geneva. Finally, let's not rush things, the Russians still dip their bread. In 'Security Arms,' Felix (Tony Randall) has been robbed. He describes the two suspects to a policeman (Al Molinaro): "One of them had mud on his shoes and a tomato stain on his shirt. The other needed a good haircut."
+Effective villains have motivations beyond mere evil, and character development can be enhanced by drawing from existing archetypes and avoiding reliance on specific actors.
+- Villains should have complex motivations, sometimes believing they are doing good, as seen in "Splendor in the Grass" and "Family Life."
+- Drawing inspiration from established characters can help bring new characters to life without confining them to specific actors.
+- If a character feels stuck, consider exploring personal reflections, altering character traits, or imagining pitching the role to a renowned actor.
+- Understanding acting and directing can enhance writing, as many successful playwrights and directors have acting experience.
+
+###urgy00122###
+8. SCENE-BY-SCENE
+Structuring a narrative is crucial for creating a coherent and engaging story, as it provides plausibility, meaning, and unity.
+- Structure enhances the narrative by linking scenes, creating a persistent emotional question that keeps the audience engaged.
+- Despite its importance, structuring is often neglected because it is invisible, difficult, and less enjoyable than creating dialogue or scenes.
+- Effective structuring involves placing major dramatic elements on an axis to form "milestones," ensuring each scene serves a purpose within the overall narrative.
+- The beauty of a scene is superficial without a functional role in the structure, emphasizing the need for thoughtful planning.
+
+###urgy00123###
+A. MILESTONES AND SEQUENCES
+Filling the second act involves adding depth to the narrative, not merely padding it.
+- Divide the second act into sequences or groups of scenes, focusing on protagonist sub-objectives or major dramatic milestones.
+- Consider using milestones to structure the act, as they define dramatic knots and guide scene progression.
+- Some theorists suggest dividing the second act into descending and ascending parts, separated by a mid-climax, but this may not suit all narratives.
+- "North by Northwest" serves as a model with its clear sequences and milestones, illustrating how each scene contributes to the protagonist's objectives.
+
+###urgy00124###
+2. Drunken driving. Sub-objective: prove his innocence.
+3. Roger's humiliation by the fake Mrs. Townsend (Josephine Hutchinson). Objective: clarify this mystery.
+
+###urgy00125###
+4. Townsend's murder at the UN. Sub-objective: escape the police.
+5. The CIA meeting that explains Kaplan doesn't exist. Roger's sub-objective: discover what he doesn't know.
+6. The scene where we discover Eve works for Vandamm (James Mason). Sub-objective: avoid traps and discover what he doesn't know.
+
+###urgy00126###
+7. The airplane trap. Sub-objective: understand Eve's role.
+The section discusses the structure and milestones in "North by Northwest," emphasizing the importance of sub-objectives and synopses in narrative construction.
+- Each milestone in a narrative should induce a sub-objective for the protagonist, acting as a local inciting incident.
+- A synopsis should be a condensed version of the narrative, not just the story, and is more useful for decision-makers than authors.
+- Writing a synopsis before completing a screenplay can be limiting; it's better to create it after the screenplay is finished.
+- Authors should focus on narrative foundations and milestones before adapting them into a synopsis for decision-makers.
+
+###urgy00127###
+B. THREE EXAMPLES OF MILESTONES
+The section illustrates how narratives can be divided into sequences with sub-objectives, using examples from "Couple témoin" and "Le 11e homme."
+- Milestones in a narrative help structure the story and define sub-objectives for characters, even if they aren't initially clear.
+- In "Couple témoin," Xavier's journey involves discovering infidelity, managing relationships, and ultimately declaring his true feelings.
+- "Le 11e homme" follows Claude's struggle to play men's football, facing challenges like identity concealment and societal acceptance.
+- Both examples highlight the importance of character objectives and the evolving nature of sub-objectives throughout the narrative.
+
+###urgy00128###
+The Milestones of Culbuto
+The section outlines the narrative structure of a film, focusing on the protagonist Maxime's evolving sub-objectives.
+- Maxime's journey begins with meeting Natacha, leading to a series of sub-goals aimed at winning her heart.
+- Key events include a disastrous dinner, a theater role, and discovering Natacha's relationship with Hans.
+- The climax reveals Natacha's complex feelings, prompting Maxime to shift his focus to helping her.
+- The narrative emphasizes starting with a few milestones and allowing more to develop during writing.
+
+###urgy00129###
+C. FROM MILESTONES TO SCENE-BY-SCENE
+Developing a scene-by-scene structure involves focusing on the essential meaning of each scene to create a cohesive narrative.
+- Break the second act into smaller sequences of ten to fifteen minutes, focusing on the essential "what" each scene conveys.
+- Reduce scenes to their bare minimum, summarizing them in two or three lines to ensure they are necessary and not just interesting.
+- Use thematic subplots and causal relationships to create an organic story structure, avoiding false knitting and quest narratives.
+- Build a crescendo by reserving the strongest conflicts for the end, creating a logical and rewarding escalation for the viewer.
+
+###urgy00130###
+3. Do not maintain a sustained pace throughout the second act, vary the effects, avoid monotony. For this, you have several tools: surprise, dramatic irony, false ally, mid-climax, subplot, etc. Frantisek Daniel had a beautiful image about this. A story, he said, should not make you think of "... and then... and then... and then..." but rather "... suddenly... moreover... and then... consequently... two years before... except that... all of a sudden... and then... meanwhile... nevertheless..."
+Contrast in storytelling maintains audience attention by providing relief and variation, preventing fatigue from constant conflict.
+- Start with simple characters and situations, gradually adding complexity to avoid overwhelming the audience.
+- Integrate narrative information into existing scenes to maintain unity and avoid unnecessary complexity.
+- Embrace excess in storytelling to create impactful moments, drawing inspiration from great authors who successfully used this technique.
+- Balance excess with contrast to avoid creating overly agitated works, using it strategically to enhance the narrative.
+
+###urgy00131###
+Comedy Technique
+For effective comedy writing, focus on situational and character comedy rather than just slapstick and jokes.
+- Develop comedy from the scene-by-scene stage to enhance situational and character elements.
+- Situational comedy arises from context, creating a natural payoff, as seen in "Life is Beautiful."
+- Character comedy ties gags to character traits, exemplified by Pignon in "
+
+###urgy00132###
+Mockery, Displacement, and Detachment
+Comedy thrives on mockery, failure, belief, distance, and displacement.
+- Mock characters with compassion to entertain and correct, creating solidarity.
+- Stage failures to highlight characters' ridiculousness, providing comedic material.
+- Characters should earnestly believe in their trivial obsessions, with actors playing seriously to enhance humor.
+- Create distance for both author and spectator to avoid suffering and maintain detachment, using dramatic irony.
+
+###urgy00133###
+If You Want to Deconstruct
+Deconstructed narratives have gained popularity, but they can sometimes signal narrative weakness or lack of confidence.
+- Before deconstructing, ensure a solid scene-by-scene construction to avoid narrative confusion.
+- Situational comedy struggles with deconstruction, as payoffs need proper setup.
+- Films like "Three Burials" show that while fragmented storytelling can work, more intimate stories benefit from a linear approach.
+
+###urgy00134###
+Although for Your Eyes
+A scene-by-scene should be shared only with those familiar with the project's development.
+- Avoid sharing with outsiders unfamiliar with the project to prevent confusion.
+- Share with co-authors, workshop members, or producers who understand the context.
+
+###urgy00135###
+THREE SCENE-BY-SCENE EXCERPTS
+The first acts of three different scene-by-scenes explore themes of deception, ambition, and personal struggle.
+- In "Witness Couple," Xavier and Gaëlle run a matchmaking agency while hiding personal secrets, leading to a crisis of trust.
+- "The 12th Man" follows young Claude's passion for football and her struggle against gender barriers, seeking her father's approval.
+- "Culbuto" introduces Maxime, who battles clumsiness and loneliness while falling for an actress, Natacha, and devises a plan to win her over.
+
+###urgy00136###
+THE TREATMENT
+Develop a scene-by-scene by first outlining and then detailing episodes.
+- Begin with a general outline before moving to specifics.
+- Use a two-stage process: treatment and dialogue continuity.
+- Determine the best way to convey each scene's content without dialogue initially.
+
+###urgy00137###
+LOCAL FOUNDATIONS
+Transitioning from scene-by-scene to treatment involves creatively enhancing scenes by focusing on setting, character, conflict, and climax before writing dialogue.
+- Identify the setting, protagonist, central conflict, and climax for each scene to build a strong foundation.
+- Use creative scenarios to enrich scenes, such as using a classroom setting to add conflict and character depth.
+- Characterize important figures through actions rather than dialogue, as seen with Rambal-Cochet's introduction.
+- Innovate traditional scenes by exploiting character traits and settings, like Susan's unique breakup announcement in "Parenthood."
+
+###urgy00138###
+Double "How"
+Characters must creatively achieve their goals, enhancing narrative depth and engagement.
+- Focus on how characters achieve local goals, using creativity to enrich scenes.
+- Respect character traits and situations, as seen in "Some Like It Hot" where Joe's deception is handled with humor and character consistency.
+- Establish conflicts early, even before the inciting incident, to avoid confusing the viewer with unresolved dramatic questions.
+- Choose settings that enhance the scene's impact, using them to add conflict or humor, as demonstrated in "When Harry Met Sally."
+
+###urgy00139###
+B. AVOID DEUS EX MACHINA AND CONVENIENCES
+Avoiding deus ex machina involves ensuring that solutions for protagonists are well-prepared and integrated into the narrative.
+- Ensure help comes from the protagonist or is prepared in advance, like Schultz's intervention in "The Great Dictator" or the magic potion in "Asterix."
+- Use techniques like inversion, where help appears before the problem is fully realized, as seen in "Three Days of the Condor."
+- Justify help through past events or flashbacks, ensuring it feels earned, as in "Battlestar Galactica."
+- Introduce new conflicts or dangers immediately after a resolution to maintain tension, such as in "Some Like It Hot."
+
+###urgy00140###
+C. THREE TREATMENT EXCERPTS
+The first act of "Couple Witness" explores the dynamics of a matchmaking agency run by Xavier and Gaëlle, revealing underlying tensions and secrets.
+- Xavier and Gaëlle run a matchmaking agency, Félicitas, emphasizing genuine romantic motivations and criticizing online dating.
+- Gaëlle secretly meets her lover, Jean-François, while maintaining the facade of a perfect marriage with Xavier.
+- Xavier discovers inconsistencies in Gaëlle's pottery, leading to suspicions about her fidelity.
+- Xavier follows Gaëlle and witnesses her with Jean-François, confirming his fears but struggles with how to address the situation.
+
+###urgy00141###
+First Act of the Young Man's Treatment
+Claude Retz, a young girl passionate about football, faces challenges and discrimination as she strives to play professionally in a male-dominated sport.
+- At six, Claude discovers her love for football during a match where her brother scores the winning goal.
+- Despite her skills, Claude faces resistance from her team and her father, who suggests she transition to women's football.
+- Determined to play with boys, Claude proves her abilities but is scapegoated after a crucial match loss.
+- After being kicked off the team, Claude resolves to become the first professional female football player in the men's championship, inspired by trailblazing women in other fields.
+
+###urgy00142###
+First Act of the Culbut Treatment
+Maxime navigates personal and professional challenges while developing an interest in Natacha, an actress he meets at a hospital.
+- Maxime, a volunteer for clinical trials, meets Natacha, who is preparing for a theater role, and becomes fascinated by her.
+- He attends her performances repeatedly, even after discovering she is not a nurse but an actress.
+- Maxime plans to invite Natacha to dinner, seeking additional trials to fund the outing, despite health risks.
+- He travels to Geneva for another trial, ensuring it won't affect his hearing, as he wants to listen attentively to Natacha.
+
+###urgy00143###
+10. THE CONTINUITY OF DIALOGUE
+Dialoguing a scene is a spontaneous part of a playwright's work, allowing for a first draft that is later refined.
+- Authors often eagerly anticipate writing dialogues, viewing it as the "real" writing stage.
+- Some struggle with dialogue, fearing their first draft must be perfect, leading to creative blocks.
+- The process
+
+###urgy00144###
+A. THE DIALOGUE
+Dialogue primarily makes a story believable by creating an illusion of reality through speech, essential for character interaction.
+- Dialogue is crucial for making fiction plausible, as it mirrors human communication, even in silent films where characters still "speak" through actions or implied speech.
+- Exceptions to dialogue use are rare and often involve unique narratives that justify the absence of spoken words.
+- Dialogue also characterizes speakers, illustrates relationships, reveals desires or thoughts, advances the plot, and creates unity within scenes.
+- Understanding these functions can alleviate pressure on crafting perfect dialogue and enhance storytelling.
+
+###urgy00145###
+1 - be clear and understandable for the viewer;
+Effective dialogue should be comfortable for actors, specific, and realistic, while avoiding over-reliance, dilution, and unnecessary explicitness.
+- Act out dialogues to ensure they are comfortable and natural for actors.
+- Use specific language to convey precise meaning and context.
+- Strive for realistic dialogue that mirrors natural speech but remains crafted and concise.
+- Avoid making dialogue carry the entire narrative, diluting information, or stating the obvious; let actions and context convey meaning.
+
+###urgy00146###
+B. EXPOSITION
+Exposition in dialogue should be used sparingly and effectively, often wrapped in conflict to maintain audience engagement.
+- Exposition can become indigestible if overused, especially at the beginning of a story, and should ideally be brief or conflictual.
+- Conflictual exposition, where the act of narrating creates tension, can enhance engagement, as seen in works like "Hamlet" and "A Doll's House."
+- Techniques like humor or conflict can help make exposition more digestible, but unusual images may distract rather than inform.
+- Only include essential exposition and consider delaying it for maximum impact, ensuring it aligns with dramatic moments without creating unnecessary mystery.
+
+###urgy00147###
+C. GENERAL SUGGESTIONS
+Scenes without conflict can be effective, serving to set up future obstacles or goals without necessarily involving the protagonist or conflict.
+- Keep scenes without conflict short to maintain audience interest and avoid slowing the narrative.
+- Use non-conflict scenes to introduce future challenges or goals, as seen in "Hamlet" and "Tartuffe."
+- Construct scenes with a clear evolution and consider varying the structure to maintain interest.
+- Speed up the pace by shortening scenes and focusing on fewer characters towards the end of a narrative.
+
+###urgy00148###
+EXT. CHAMPS-ELYSEES - NIGHT
+A dramatic work must first captivate decision-makers with a compelling narrative and readable text before being used by a production team.
+- Ensure your story is engaging and the text is enjoyable to read without compromising integrity.
+- A statement of intent should focus on imagery, staging, sound, and actor embodiment, offering references to clarify the story type.
+- Avoid relying on the statement of intent to convey meaning not evident in the story itself, as it can highlight weaknesses.
+- Use references wisely, as they can backfire if the screenplay doesn't match the quality of the cited works.
+
+###urgy00149###
+D. EXCERPT OF DIALOGUE CONTINUITY
+Examples of dialogue continuity are common online, but foundational elements like milestones and treatments are rare.
+- Provide a sample dialogue scene with the layout preferred by decision-makers.
+- Introduce characters and context clearly, such as Maxime's clumsiness and sensitivity.
+- Establish the setting and relationships early, like Maxime's involvement
+
+###urgy00150###
+INT. ANTOINE'S OFFICE AT CIC - DAY
+Maxime and Antoine are in front of a chessboard. Maxime has the black pieces.
+
+###urgy00151###
+MAXIME
+CfS.
+
+Antoine takes one of Maxime's two black knights and moves it. Then he plays one of his white pieces.
+
+###urgy00152###
+MAXIME
+For the next test, I'd rather it wasn't Marie-Claude taking care of me. Ta4.
+
+Antoine moves Maxime's rook.
+
+###urgy00153###
+ANTOINE
+Did something happen?
+
+###urgy00154###
+MAXIME
+Antoine moves one of his pieces.
+
+###urgy00155###
+ANTOINE
+You prefer to try someone else.
+
+###urgy00156###
+MAXIME
+That's right.
+
+###urgy00157###
+ANTOINE
+(smiling)
+Natacha, for example. She's quite a looker, huh?
+
+###urgy00158###
+MAXIME
+Antoine moves one of Maxime's pawns.
+
+###urgy00159###
+ANTOINE
+Is it already over with Juliette?
+
+###urgy00160###
+MAXIME
+_ She annoyed me.
+
+Antoine doesn't seem to approve.
+
+###urgy00161###
+MAXIME
+Would you like to be constantly reminded that you sweat a lot?
+
+Antoine doesn't insist. He moves one of his pieces.
+
+###urgy00162###
+ANTOINE
+That's how I ended up here.
+
+Maxime doesn't understand.
+
+###urgy00163###
+ANTOINE
+During my medical studies, I was looking for an effective deodorant. I applied for tests. I liked the principle.
+
+Maxime smiles.
+
+###urgy00164###
+MAXIME
+So, if you had protruding ears and suffered from chronic aerophagia, you'd work in aeronautics.
+
+Maxime makes a fart noise with his mouth. Antoine nods, smiling with a falsely complicit air.
+
+###urgy00165###
+ANTOINE
+Do you want to see Natacha again or do you prefer to make fun of me?
+
+###urgy00166###
+MAXIME
+Yes, sorry.
+
+###urgy00167###
+ANTOINE
+Well, she's gone. That'll teach you, Zigoto.
+
+###urgy00168###
+MAXIME
+To another department?
+
+###urgy00169###
+ANTOINE
+She was a placebo nurse. You didn't see it coming.
+
+###urgy00170###
+MAXIME
+She was what?
+
+###urgy00171###
+ANTOINE
+An actress.
+(Maxime's astonished look) She came to do an internship to prepare for a theater role.
+
+###urgy00172###
+MAXIME
+Antoine looks at the game and realizes he has lost.
+
+###urgy00173###
+ANTOINE
+Maxime aims to see Natacha again despite obstacles, revealing themes of personal handicaps.
+- Maxime struggles with revealing his intentions and alienating Antoine.
+- Natacha, an actress, is not easily accessible.
+- The film explores how everyone has handicaps and how they handle them.
+
+###urgy00174###
+11. SPECIFIC WRITINGS
+"I would be unable to tell you the story of Daphne Du Maurier's The Birds. I only read it once, quickly."
+(Alfred Hitchcock [41])
+"If Peau d'âne were told to me, I would take extreme pleasure in it."
+
+###urgy00175###
+Jean de La Fontaine [48])
+The book outlines a progressive writing method suitable for various formats and adaptations.
+- Effective for adapting literary works, news, historical episodes, and film remakes.
+- Applicable to writing for children and creating short stories.
+- Offers suggestions tailored to specific media and formats.
+
+###urgy00176###
+A. ADAPTING LITERARY WORKS
+Stories written to be read differ fundamentally from those meant to be seen and heard, and not all novels are suitable for adaptation into theater, cinema, or comics.
+- Question your motivations for adaptation; if it's to share enthusiasm, encourage reading instead.
+- Accept that novels are often too long for a two-hour format, necessitating significant cuts.
+- Ensure the adaptation includes plot and conflict, not just images.
+- Choose a protagonist with dynamic conflict and a single objective, focusing on dramatic actions.
+
+###urgy00177###
+B. THE STORY FOR CHILDREN
+Writing for children requires understanding their unique audience, emphasizing clarity, simplicity, and active involvement.
+- Do not underestimate children; they demand engaging conflict and should not be overshadowed by adult perspectives.
+- Involve children in performances to enhance empathy and identification, avoiding reliance on recorded soundtracks.
+- Avoid using dreams as plot devices; maintain realism and causality to strengthen the story's impact.
+- Characters should be simple and Manichean, especially for younger audiences, and stories should be tested and refined based on children's reactions.
+
+###urgy00178###
+C. THE SHORT STORY
+The tools in this book apply to both short stories and long series, emphasizing concise storytelling.
+- Create a simple first act with three phases: routine life, inciting incident, and transition.
+- Each phase can be a separate scene or combined if space is limited.
+
+###urgy00179###
+2. Give your protagonist a clear and universal stake.
+
+###urgy00180###
+3. Use activity to characterize the future protagonist.
+4. Design a twist. Sometimes, this dramatic knot is almost the first element you will have, even before the climax - if the two are not confused. Sometimes, you will find it last.
+
+###urgy00181###
+D. THE DOCUMENTARY
+Again, I refer you to my comments on the mechanisms of storytelling applied to documentaries in La dramaturgie [51]. Basically, you need to find the human factor of your project. This mainly involves applying some fundamental principles of drama.
+
+###urgy00182###
+1. Designate a protagonist.
+2. Give the protagonist an objective that allows the subject to be addressed.
+
+###urgy00183###
+3. Think about placing some obstacles in their path.
+Creating a compelling documentary involves more than just assembling impressive visuals; it requires a structured narrative and personal engagement.
+- Avoid simply aligning impressive scenes; create connections and a cohesive narrative.
+- Develop a personal viewpoint and engage emotionally with the audience.
+- Structure your documentary with a clear beginning, development, and end to maintain interest.
+- Solicit feedback and ensure the film is not perceived as promotional content.
+
+###urgy00184###
+E. THE SERIES (TV, COMICS, WEB)
+The three-act structure is essential and adaptable to all storytelling formats, including series with multiple plots.
+- Respect the series bible when writing for an existing series.
+- Establish a general objective for the entire series to guide its direction.
+- Assign a general objective for each parallel plot.
+- Define a local objective for each episode, focusing on one predominant plot.
+
+###urgy00185###
+4. Put a hook at the end of each episode.
+Intersecting multiple plots enhances series unity by creating obstacles between them.
+- Designate each plot with a letter and outline its milestones to create intersecting scenes.
+- Align scenes from different plots, using protagonists as antagonists in neighboring plots.
+- Choose a clear main protagonist to maintain unity of action in ensemble casts.
+- This method is effective for series and ensemble works like "The Chase" or "Children of Paradise."
+
+###urgy00186###
+12. FUNDAMENTAL REQUIREMENTS
+Clarity and simplicity are crucial in storytelling to engage and inform the audience.
+- Ensure the audience is well-informed about the story elements.
+- Prioritize simplicity and clarity in narrative construction.
+- Balance personal enjoyment with audience entertainment.
+- Dedicate significant effort to rewriting for improved clarity.
+
+###urgy00187###
+(I.A.L Diamond [24])
+Making clear choices is more important than conflict in storytelling.
+- Proceed in order and construct parts methodically, like a seamstress.
+- Maintain autonomy and develop reflexive storytelling habits.
+- Emphasize clarity and decision-making over conflict.
+- Consider these principles as guiding lighthouses for authors.
+
+###urgy00188###
+A. MAKE CHOICES
+Making choices in storytelling is crucial, as it involves commitment and responsibility.
+- Avoid adopting every idea; true choice means letting go of alternatives.
+- Authors must limit themselves and take responsibility for their narrative decisions.
+- Convey a clear point of view to connect with the audience, rather than leaving endings open.
+- An artist's duty is to express their perspective, not to leave interpretation entirely to the audience.
+
+###urgy00189###
+B. BE CLEAR
+Clarity and conflict are essential in storytelling, with clarity being the primary virtue.
+- Avoid vagueness and ensure your narrative is easily understood, as clarity enhances depth and meaning.
+- Provide a single, clear objective and motivation to engage the audience effectively.
+- Ensure the audience receives all necessary information, especially in adaptations, to prevent confusion.
+- Use distinct character names to avoid reader confusion and maintain clarity throughout the story.
+
+###urgy00190###
+C. BE FEROCIOUS WITH YOUR PROTAGONIST
+Protagonists must face significant conflict to engage the audience and reveal their determination.
+- Avoid sparing protagonists from conflict; it makes them more endearing and relatable.
+- Conflict should be dynamic and measured, avoiding scenes of overwhelming torture.
+- Use subtle and original forms of conflict, as demonstrated by Nadia El Fani's scene.
+- Stories should challenge protagonists with new experiences, pushing them beyond their limits.
+
+###urgy00191###
+D. BE RUTHLESS WITH YOURSELF
+Authors must avoid complacency and ensure their work resonates with the audience by focusing on necessity and economy in storytelling.
+- Don't assume personal interest will translate to public interest; effectively translate ideas to engage the audience.
+- Sincerity alone isn't enough for quality work; necessity in storytelling is crucial, requiring authors to make deliberate choices.
+- Economy in storytelling involves condensing information and using tools like ellipses to enhance audience engagement.
+- Understand the full narrative, including off-screen elements, to maintain coherence and avoid inconsistencies.
+
+###urgy00192###
+E. BE SIMPLE AND EXPLOIT
+A good script should start simply and evolve with unpredictable twists, avoiding unnecessary complexity.
+- Simplicity in storytelling is challenging but essential, as it requires depth and creativity without superficial complications.
+- Avoid adding unnecessary subplots or characters, which can dilute the narrative's impact and clarity.
+- True ambiguity should be developed gradually, ensuring clarity before introducing complexity.
+- Overloading a narrative with excessive elements can lead to a loss of accuracy and humanity.
+
+###urgy00193###
+F. INVOLVE THE AUDIENCE
+A compelling narrative involves the audience by ensuring clarity, preparation, dramatic irony, and self-confidence in storytelling.
+- Clarity is essential; storytellers should provide clear context and purpose, as seen in works like 'The Seven Samurai' and 'Lagaan,' which use visual aids and explanations to engage the audience.
+- Preparation involves setting up narrative elements that are plausible and informative, ensuring that all introduced elements serve a purpose and fulfill audience expectations.
+- Dramatic irony engages the audience by providing them with information unknown to characters, enhancing suspense and emotional impact.
+- Self-confidence in storytelling allows authors to share information without fear of losing suspense, encouraging audience participation and anticipation.
+
+###urgy00194###
+G. BE DISSOCIATED
+Understanding characters' inner worlds is crucial for effective dramaturgy.
+- Authors must deeply know their characters' thoughts, desires, and emotions.
+- It's essential to empathize with both characters and audience simultaneously.
+- Balancing character insight with audience perspective is a challenging but necessary task.
+
+###urgy00195###
+H. UNDERSTAND ALL YOUR CHARACTERS
+Understanding all characters and their motivations is essential, ensuring they have personal goals rather than merely serving the protagonist's narrative.
+- Characters should have their own needs and motivations, which may inadvertently create obstacles for the protagonist.
+- Imagine characters defending their actions to understand their motivations deeply.
+- Avoid making secondary characters' sole purpose to provide information or create obstacles.
+- Ensure the protagonist remains central, avoiding excessive focus on secondary characters' conflicts.
+
+###urgy00196###
+I. DRAMATIZE
+"Dramatization" in writing involves emphasizing significant narrative elements through conflict, stakes, and suspense.
+- Highlight important actions or decisions by creating a context filled with conflict and stakes.
+- Use dramatization to reveal character motivations and create tension, as seen in examples like Brecht's 'Mother Courage.'
+- Ensure that significant story elements, especially the climax, are dramatized to enhance the narrative impact.
+- Avoid dramatizing trivial details; focus on elements that advance the plot or character development.
+
+###urgy00197###
+J. DON'T SAY, SHOW
+Show, don't tell, is a fundamental rule in dramaturgy, emphasizing action and dialogue over mere visual representation.
+- In literature, showing involves engaging the reader's imagination through action, dialogue, and conflict.
+- Effective dialogue can reveal character traits and motivations without explicitly stating them.
+- Simply showing emotions isn't enough; justifying them through context enhances credibility and audience engagement.
+- Understanding the reasons behind a character's actions can lead to more nuanced and restrained expressions of emotion.
+
+###urgy00198###
+K. USE THE MOST POWERFUL LANGUAGES
+A language is a system of signs to create meaning or emotion, with dramaturgy comprising various languages of differing effectiveness.
+- Prioritize structure and preparation over dialogue for conveying information or emotions.
+- Use images and actions effectively, as they can be more powerful than static visuals.
+- Rely on dialogue as a last resort, focusing instead on gestures and characterization.
+
+###urgy00199###
+L. CREATE CONNECTION
+In dramaturgy, connections are essential for engaging the audience and ensuring narrative coherence.
+- Establish connections between the artist and receiver, character and viewer, and among spectators for a unified experience.
+- Ensure the story's organic dimension by making narrative elements fit seamlessly, creating a sense of unity.
+- Prioritize causal and thematic connections
+
+###urgy00200###
+Units
+Creating connections between different parts of a work enhances its unity and coherence.
+- Focus action on a short time frame and limited locations to strengthen unity.
+- Avoid subplots or connect them with the main theme.
+- Maintain protagonist presence through dialogue even when absent from scenes.
+
+###urgy00201###
+M. BE PLAUSIBLE
+The story should evoke life, not copy it, using artifice to engage imagination while maintaining plausibility.
+- Balance imagination with logic to maintain viewer belief, as suspension of disbelief has limits.
+- Ensure plausibility in both structure and character psychology for coherence.
+- Believe in your creations to make them convincing, using preparation to enhance plausibility.
+- Draw from life and the humanities to develop psychologically credible characters.
+
+###urgy00202###
+N. BE SPECIFIC
+Specificity is crucial in storytelling to enhance clarity and engagement.
+- Be precise in characterization, objectives, settings, and dialogue.
+- Avoid vague objectives; make them concrete and specific.
+- Use detailed descriptions for actions to convey clear meaning.
+- Consider the significance of details, like the sound of a car horn, to add
+
+###urgy00203###
+O. RESOLVE YOUR STORY
+A well-crafted ending resolves narrative elements while allowing life to continue, engaging the viewer without leaving them in confusion.
+- Ensure all narrative setups are resolved, maintaining viewer engagement without prematurely ending or leaving subplots unresolved.
+- Avoid lingering unnecessarily in the third act; a concise conclusion is often more effective.
+- Balance closure with open-ended elements to reflect life's ongoing nature, without resorting to excessive mystery or ambiguity.
+- A powerful resolution should leave a lasting impact, teaching the viewer something meaningful while allowing the story to naturally conclude.
+
+###urgy00204###
+P. HAVE FUN AND... ENTERTAIN US
+Inventing a story involves balancing creativity with responsibility, ensuring both the author and audience find enjoyment.
+- Engage the "Free Child" state for creativity, but recognize when responsibility is necessary to avoid self-indulgence.
+- Writing involves constraints, and while it can be challenging, finding pleasure in rewriting can satisfy both the author and audience.
+- Avoid gratuitous additions; focus on making the most of existing elements to delight the audience with originality.
+- Cultivate creativity by consciously understanding narrative mechanisms and avoiding repetition to enhance inventiveness.
+
+###urgy00205###
+CHERISH COMEDY
+Comedy is a noble and challenging art form that should be respected and integrated thoughtfully into writing, even if the primary genre isn't comedic.
+- Respect comedy and consider incorporating humorous moments to add depth and complexity to narratives.
+- Understand that comedy requires detachment and highlights human limitations, but it can be learned and cultivated through practice.
+- Be willing to explore your sense of humor, even if it doesn't match the genius of renowned comedians, as humor is subjective and personal.
+- Differentiate between lightness and comedy; true comedy often involves exaggeration and depth rather than mere cheerfulness or quirkiness.
+
+###urgy00206###
+BE PATIENT AND TENACIOUS
+Creating a compelling story requires rigorous rewriting and attention to detail, ensuring each element serves a purpose and contributes to the narrative's coherence.
+- Embrace the process of rewriting by polishing and refining all aspects of the story, not just dialogue, to enhance depth and meaning.
+- Overcome writer's block by breaking tasks into manageable steps, using altered states of consciousness, or switching projects to maintain creativity.
+- Use feedback from others and self-questioning techniques to identify and resolve inconsistencies or "old remains" in the narrative.
+- Treat each scene and character action as essential, justifying their presence to ensure they contribute meaningfully to the story's progression.
+
+###urgy00207###
+S. MAKE IT READ
+Sharing your stories and gathering feedback is essential for improvement.
+- Share stories at various stages like pitch, synopsis, and dialogue continuity.
+- Avoid overly synthetic formats like scene-by-scene for feedback.
+- Prioritize this activity to enhance storytelling skills.
+
+###urgy00208###
+T. LET IT REST
+Time is a crucial co-author for storytellers, aiding both short-term creativity and long-term perspective.
+- Allow time to work subconsciously by stepping away from the blank page.
+- Gain perspective by letting stories mature over time.
+- Juggle multiple projects to benefit from diverse creative insights.
+
+###urgy00209###
+13. MAKE IT READ
+Authors often lose perspective on their work, making external feedback essential for improvement.
+- Seek outside perspectives to maintain freshness and clarity in your writing.
+- Find competent readers or script doctors who can provide constructive feedback.
+- Avoid relying on decision-makers for rewriting help, as their focus is not on script development.
+- Build a network of skilled beta-readers over time, ensuring they are authentic and unbiased.
+
+###urgy00210###
+MAKE IT READ
+Compensating beta-readers or script doctors is essential for obtaining quality feedback.
+- Consider exchanges or non-monetary compensation for beta-readers, but ensure they feel valued.
+- Professional script doctors should be paid adequately; avoid asking for free services.
+- Rewriting workshops can provide diverse feedback and help identify trends in your work.
+- When receiving feedback, distinguish between subjective and objective insights, focusing on what enhances your project's coherence.
+
+###urgy00211###
+14. SCALES
+Screenwriters in 1934 were under intense pressure with multiple projects.
+- Submit eleven pages of script weekly, every Thursday.
+- Juggle working on two to four films simultaneously.
+- Frequently shift between projects and rewrite others' scripts.
+
+###urgy00212###
+(Billy Wilder [94])
+Practicing on scenes or short stories in workshops is a stimulating way for beginners to master storytelling tools.
+- Workshops involve regular submissions and feedback from peers, helping authors gain perspective and test ideas with a diverse audience.
+- Exercises with specific constraints, such as conflict or dramatic irony, help authors understand dramatic mechanisms and improve storytelling skills.
+- Transformation exercises, like rewriting existing scenes, encourage creativity and can lead to personal projects or new narratives.
+- Respect and collaboration in workshops foster a productive environment, allowing authors to explore and refine their craft.
+
+###urgy00213###
+CONCLUSION
+Storytelling is a powerful cultural tool that transcends borders and enriches both creators and audiences.
+- Storytelling is not deeply embedded in French culture, unlike in Anglo-Saxon traditions.
+- Exposure to diverse narratives, like those from Chinese cinema, offers cultural insights and enjoyment.
+- Embracing storytelling rules and acknowledging the need for hard work over innate talent is crucial.
+- Completing a story is challenging but rewarding, contributing to personal growth and self-understanding.
+
+###urgy00214###
+GLOSSARY
+The language of dramaturgy is not fully codified, and many terms have unique definitions in this work, highlighting the historical roots of storytelling techniques.
+- Dramatic concepts such as remakes, happy endings, and cliffhangers have existed for centuries, originating in theater long before Hollywood.
+- Key terms like "hook," "act," "action," and "adaptation" are defined with specific meanings, emphasizing their roles in narrative structure.
+- The glossary includes terms like "antagonist," "arena," "catharsis," and "climax," each contributing to the understanding of storytelling dynamics.
+- Concepts such as "conflict," "dialogue," "dramatic irony," and "structure" are explored to illustrate their importance in crafting compelling narratives.
+
+###urgy00215###
+The Bureau, TV series created by Eric Rochant (2015-...) 69  
+The current section lists various films, plays, TV series, and literary works, highlighting their creators, directors, and screenwriters.
+- Each entry includes the title, director, screenplay writer, and sometimes the original source material, such as novels or plays.
+- The list spans a wide range of genres and time periods, showcasing the diversity of storytelling across different media.
+- Notable works include "Butch Cassidy and the Sundance Kid," "Casablanca," "Citizen Kane," and "Cyrano de Bergerac."
+- The entries often reference specific pages or sections, suggesting a detailed analysis or discussion of these works in the broader context.
+
+###urgy00216###
+The Dinner Game, play by Francis Veber (1993) 111  
+A diverse collection of films, plays, TV series, and literary works is listed, highlighting their creators and origins.
+- Each entry provides the title, director, screenplay writer, and sometimes the original source material.
+- The list spans various genres and time periods, showcasing storytelling diversity across media.
+- Notable works include "The King's Speech," "Dr. Strangelove," "Downton Abbey," and "Waiting for Godot."
+- Specific pages or sections are referenced, indicating detailed analysis or discussion within a broader context.
+
+###urgy00217###
+I Married a Dead Man, novel by William Irish (1942) 25, 27  
+A diverse collection of films and literary works is highlighted, detailing their directors, screenplay writers, and origins.
+- "Rear Window" by Alfred Hitchcock and "Festen" by Thomas Vinterberg are notable entries.
+- The list includes works like "Babette's Feast" and "Splendor in the Grass."
+
+###urgy00218###
+3 Godfathers, film directed by John Ford (1948), screenplay by Frank Nugent, Laurence Stallings, and Peter Kyne 160  
+A diverse collection of films, TV series, plays, and literary works is presented, detailing their creators and origins.
+- Notable entries include "The Final Cut" by Omar Naim, "Flashforward" developed by Brannon Braga and David S. Goyer, and "Forrest Gump" directed by Robert Zemeckis.
+- The list features classic works like "The Impostures of Scapin" by Molière and "The Frogs" by Aristophanes.
+- Iconic films such as "Star Wars" by George Lucas and "The Great Escape" by John Sturges are highlighted.
+- The collection spans various genres and time periods, showcasing a wide range of storytelling techniques and adaptations.
+
+###urgy00219###
+Happy Valley, TV series created by Sally Wainwright (2014-...) 143, 281  
+A diverse collection of films, TV series, plays, and literary works is presented, detailing their creators and origins.
+- Notable entries include "Harold and Maude" by Hal Ashby, "Harry Potter" by J.K. Rowling, and "Henry V" by William Shakespeare.
+- The list features classic works like "The Man Who Knew Too Much" by Alfred Hitchcock and "No Exit" by Jean-Paul Sartre.
+- Iconic films such as "Inception" by Christopher Nolan and "The Matrix" by the Wachowskis are highlighted.
+- The collection spans various genres and time periods, showcasing a wide range of storytelling techniques and adaptations.
+
+###urgy00220###
+Othello, play by William Shakespeare (1604) 75, 82, 171, 179, 180, 181, 207, 325  
+A diverse collection of films, TV series, plays, and literary works is presented, detailing their creators and origins.
+- Notable entries include "Where Is the Friend's Home?" by Abbas Kiarostami, "The Godfather" by Francis Ford Coppola, and "Persona" by Ingmar Bergman.
+- The list features classic works like "Peer Gynt" by Henrik Ibsen and "The Shepherd and the Lion" by Jean de La Fontaine.
+- Iconic films such as "The Bridge on the River Kwai" by David Lean and "One Flew Over the Cuckoo's Nest" by Milos Forman are highlighted.
+- The collection spans various genres and time periods, showcasing a wide range of storytelling techniques and adaptations.
+
+###urgy00221###
+The President, play by Eugène Labiche and Edouard Martin (1860) 41, 61, 83, 156  
+A diverse collection of films, TV series, and comics is highlighted, showcasing various creators and storytelling techniques.
+- "The Walking Dead" is a TV series developed by Frank Darabont, based on a comic.
+- Films like "WarGames" by John Badham and "Good Will Hunting" by Gus Van Sant

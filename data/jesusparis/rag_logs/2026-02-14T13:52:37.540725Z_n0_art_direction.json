@@ -1,0 +1,473 @@
+{
+  "project_id": "jesusparis",
+  "target_path": "n0.art_direction",
+  "writing_typology": "style",
+  "rag_mode": "agentic_deep",
+  "rag_hits": 5,
+  "error_detail": "",
+  "rag_reason": "agentic_success",
+  "rag_policy_path": [
+    "agentic"
+  ],
+  "rag_retry": "",
+  "rag_conversation_id": "",
+  "client_available": true,
+  "r2r_base": "http://127.0.0.1:7274",
+  "rag_input_context_pack_compact": {
+    "target_path": "n0.art_direction",
+    "writing_typology": "style",
+    "strategy_question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+    "core_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+    "brief_video_type": "film",
+    "brief_target_duration_s": 7200,
+    "brief_target_duration_text": "",
+    "redaction_constraints": {
+      "min_chars": 500,
+      "max_chars": 1000
+    },
+    "allowed_fields": [
+      "description"
+    ],
+    "writing_mode": "create",
+    "library_filename_prefixes": [
+      "SRC_DA"
+    ],
+    "rag_conversation_id": ""
+  },
+  "rag_request_payload": {
+    "limit": 10,
+    "path": "agentic_deep",
+    "query_text": "Find in the documents rules and guidance to write a general overview of this video's art direction. | target_path=n0.art_direction | writing_typology=style | Focus on visual direction: palette, lighting, contrast, texture, framing, camera movement, and coherent aesthetic identity.",
+    "query_text_architecture": "Find in the documents rules and guidance to write a general overview of this video's art direction. | target_path=n0.art_direction | writing_typology=style | Focus on visual direction: palette, lighting, contrast, texture, framing, camera movement, and coherent aesthetic identity.",
+    "query_context_object": "brief_video_type: film\nbrief_target_duration_s: 7200\ncore_summary: This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+    "writing_typology": "style",
+    "language": "en",
+    "allowed_filenames": [
+      "SRC_DA__chatGPT.txt"
+    ],
+    "base_search_settings": {
+      "use_semantic_search": true,
+      "use_fulltext_search": true,
+      "use_hybrid_search": true,
+      "include_scores": true,
+      "include_metadatas": true,
+      "search_strategy": "rag_fusion",
+      "num_sub_queries": 3,
+      "hybrid_settings": {
+        "full_text_weight": 1.0,
+        "semantic_weight": 4.0,
+        "full_text_limit": 200,
+        "rrf_k": 50
+      },
+      "filters": {
+        "$and": [
+          {
+            "metadata.doc_type": {
+              "$eq": "SRC"
+            }
+          },
+          {
+            "metadata.source_file": {
+              "$in": [
+                "SRC_DA__chatGPT.txt"
+              ]
+            }
+          }
+        ]
+      },
+      "limit": 12
+    },
+    "deep_agentic": {
+      "enabled": true,
+      "pass_count": 1,
+      "use_system_context": false,
+      "passes": [
+        {
+          "name": "focused",
+          "query_text": "Find in the documents rules and guidance to write a general overview of this video's art direction. | target_path=n0.art_direction | writing_typology=style | Focus on visual direction: palette, lighting, contrast, texture, framing, camera movement, and coherent aesthetic identity.",
+          "task_prompt": "You are an expert narratology research agent working on retrieval, not final writing.\nPass: focused.\nTarget path (internal id): n0.art_direction\nTarget objective (human): n0 art direction\nWriting typology: style.\nGoal: retrieve diverse, high-signal evidence from allowed files only.\nProcess: (1) identify relevant principles, (2) capture concrete method statements, (3) avoid generic plot summaries.\nALLOWED source_file values (EXACT STRING MATCH, case-sensitive):\n  - SRC_DA__chatGPT.txt\nSTRICT VALIDATION:\n- source_file MUST be one of the allowed values above.\n- NEVER use internal ids (e.g. n0.narrative_presentation) as source_file.\n- Any item with invalid source_file will be discarded.\n- excerpt MUST be an exact contiguous quote copied from the source text (verbatim only).\n- NEVER paraphrase, compress, translate, or rewrite excerpts.\n- If you cannot provide an exact quote, skip the item.\nReturn ONLY valid JSON with this schema:\n{ \"items\": [ { \"source_file\": \"\", \"summary\": \"\", \"key_concepts\": [], \"excerpt\": \"\" } ] }\n- Provide at most 30 items.\n- Excerpts must be verbatim, each under 1400 characters.\n- Summaries must be 1-2 sentences and actionable for writing strategy.\n- Prefer diversity across distinct sections of source content.\nCONTEXT_POLICY:\n- Treat CONTEXT_OBJECT as project context, not as mandatory output wording.\n- Prioritize visual design principles (palette, lighting, textures, framing, movement).\n- Avoid plot retelling; retrieve aesthetic and stylistic guidance.\nCONTEXT_OBJECT:\nbrief_video_type: film\nbrief_target_duration_s: 7200\ncore_summary: This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.\n- If unsure, return an empty items list.",
+          "search_settings": {
+            "use_semantic_search": true,
+            "use_fulltext_search": true,
+            "use_hybrid_search": true,
+            "include_scores": true,
+            "include_metadatas": true,
+            "search_strategy": "rag_fusion",
+            "num_sub_queries": 4,
+            "hybrid_settings": {
+              "full_text_weight": 1.0,
+              "semantic_weight": 5.0,
+              "full_text_limit": 220,
+              "rrf_k": 45
+            },
+            "filters": {
+              "$and": [
+                {
+                  "metadata.doc_type": {
+                    "$eq": "SRC"
+                  }
+                },
+                {
+                  "metadata.source_file": {
+                    "$in": [
+                      "SRC_DA__chatGPT.txt"
+                    ]
+                  }
+                }
+              ]
+            },
+            "limit": 30
+          }
+        },
+        {
+          "name": "exploratory",
+          "query_text": "Find in the documents rules and guidance to write a general overview of this video's art direction. | target_path=n0.art_direction | writing_typology=style | Focus on visual direction: palette, lighting, contrast, texture, framing, camera movement, and coherent aesthetic identity.\nEXPLORATORY_RETRIEVAL_GOAL:\n- Find complementary principles for target 'n0.art_direction'.\n- Include alternatives and edge-case guidance, not only obvious matches.\n- Prefer evidence that can become concrete writing instructions.\n- Focus on visual direction: palette, lighting, contrast, texture, framing, camera movement, and coherent aesthetic identity.\nCONTEXT_USAGE:\n- Use context only to adapt examples and constraints; avoid copying user phrasing.\n- Story context (object-level): brief_video_type: film\nbrief_target_duration_s: 7200\ncore_summary: This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+          "task_prompt": "You are an expert narratology research agent working on retrieval, not final writing.\nPass: exploratory.\nTarget path (internal id): n0.art_direction\nTarget objective (human): n0 art direction\nWriting typology: style.\nGoal: retrieve diverse, high-signal evidence from allowed files only.\nProcess: (1) identify relevant principles, (2) capture concrete method statements, (3) avoid generic plot summaries.\nALLOWED source_file values (EXACT STRING MATCH, case-sensitive):\n  - SRC_DA__chatGPT.txt\nSTRICT VALIDATION:\n- source_file MUST be one of the allowed values above.\n- NEVER use internal ids (e.g. n0.narrative_presentation) as source_file.\n- Any item with invalid source_file will be discarded.\n- excerpt MUST be an exact contiguous quote copied from the source text (verbatim only).\n- NEVER paraphrase, compress, translate, or rewrite excerpts.\n- If you cannot provide an exact quote, skip the item.\nReturn ONLY valid JSON with this schema:\n{ \"items\": [ { \"source_file\": \"\", \"summary\": \"\", \"key_concepts\": [], \"excerpt\": \"\" } ] }\n- Provide at most 40 items.\n- Excerpts must be verbatim, each under 1400 characters.\n- Summaries must be 1-2 sentences and actionable for writing strategy.\n- Prefer diversity across distinct sections of source content.\nCONTEXT_POLICY:\n- Treat CONTEXT_OBJECT as project context, not as mandatory output wording.\n- Prioritize visual design principles (palette, lighting, textures, framing, movement).\n- Avoid plot retelling; retrieve aesthetic and stylistic guidance.\nCONTEXT_OBJECT:\nbrief_video_type: film\nbrief_target_duration_s: 7200\ncore_summary: This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.\n- If unsure, return an empty items list.",
+          "search_settings": {
+            "use_semantic_search": true,
+            "use_fulltext_search": true,
+            "use_hybrid_search": true,
+            "include_scores": true,
+            "include_metadatas": true,
+            "search_strategy": "rag_fusion",
+            "num_sub_queries": 6,
+            "hybrid_settings": {
+              "full_text_weight": 2.0,
+              "semantic_weight": 3.0,
+              "full_text_limit": 260,
+              "rrf_k": 65
+            },
+            "filters": {
+              "$and": [
+                {
+                  "metadata.doc_type": {
+                    "$eq": "SRC"
+                  }
+                },
+                {
+                  "metadata.source_file": {
+                    "$in": [
+                      "SRC_DA__chatGPT.txt"
+                    ]
+                  }
+                }
+              ]
+            },
+            "limit": 40
+          }
+        }
+      ]
+    },
+    "conversation_id": "",
+    "mode": "rag",
+    "rag_tools": [
+      "search_file_knowledge",
+      "search_file_descriptions"
+    ],
+    "disable_web_agentic": true
+  },
+  "rag_response_debug": {
+    "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"The art direction should focus on creating a coherent visual identity that translates the narrative into a structured visual system, emphasizing the importance of materials, textures, and their sociological coherence.\", \"key_concepts\": [\"visual identity\", \"materials\", \"textures\", \"sociological coherence\"], \"excerpt\": \"Un monde visuel n\u2019existe pas par ses formes seules, mais par ses surfaces. Le look development int\u00e8gre donc : \u2022 des mati\u00e8res dominantes (bois, m\u00e9tal, textile, b\u00e9ton, plastique), \u2022 leur \u00e9tat (neuf, us\u00e9, r\u00e9par\u00e9, d\u00e9grad\u00e9), \u2022 leur coh\u00e9rence sociologique.\" }, { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"A successful lookbook serves as a foundational document for art direction, outlining visual intentions and functional color palettes that guide the overall aesthetic without detailing every scene.\", \"key_concepts\": [\"lookbook\", \"visual intentions\", \"functional palettes\"], \"excerpt\": \"Le lookbook est le premier document structurant de la direction artistique. Contenu typique (mais jamais fig\u00e9) \u2022 intention g\u00e9n\u00e9rale (texte court, clair, non lyrique), \u2022 axes visuels majeurs, \u2022 palettes chromatiques (pas d\u00e9coratives, mais fonctionnelles).\" }, { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"Art direction should consider the emotional reading of shots, influenced by the construction of sets, lighting, and the physical relationship between characters and their environments.\", \"key_concepts\": [\"emotional reading\", \"set construction\", \"lighting\"], \"excerpt\": \"Ces d\u00e9cisions influencent directement : \u2022",
+    "raw_citations_count": 0,
+    "parsed_agent_items_count": 10,
+    "merged_hits_count": 10,
+    "invalid_source_file_items_count": 0,
+    "coerced_freeform_items_count": 0,
+    "fused_hits_count": 5,
+    "exploratory_error": "",
+    "passes": [
+      {
+        "pass_name": "focused",
+        "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"The art direction should focus on creating a coherent visual identity that translates the narrative into a structured visual system, emphasizing the importance of materials, textures, and their sociological coherence.\", \"key_concepts\": [\"visual identity\", \"materials\", \"textures\", \"sociological coherence\"], \"excerpt\": \"Un monde visuel n\u2019existe pas par ses formes seules, mais par ses surfaces. Le look development int\u00e8gre donc : \u2022 des mati\u00e8res dominantes (bois, m\u00e9tal, textile, b\u00e9ton, plastique), \u2022 leur \u00e9tat (neuf, us\u00e9, r\u00e9par\u00e9, d\u00e9grad\u00e9), \u2022 leur coh\u00e9rence sociologique.\" }, { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"A successful lookbook serves as a foundational document for art direction, outlining visual intentions and functional color palettes that guide the overall aesthetic without detailing every scene.\", \"key_concepts\": [\"lookbook\", \"visual intentions\", \"functional palettes\"], \"excerpt\": \"Le lookbook est le premier document structurant de la direction artistique. Contenu typique (mais jamais fig\u00e9) \u2022 intention g\u00e9n\u00e9rale (texte court, clair, non lyrique), \u2022 axes visuels majeurs, \u2022 palettes chromatiques (pas d\u00e9coratives, mais fonctionnelles).\" }, { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"Art direction should consider the emotional reading of shots, influenced by the construction of sets, lighting, and the physical relationship between characters and their environments.\", \"key_concepts\": [\"emotional reading\", \"set construction\", \"lighting\"], \"excerpt\": \"Ces d\u00e9cisions influencent directement : \u2022 ",
+        "raw_citations_count": 0,
+        "parsed_agent_items_count": 10,
+        "merged_hits_count": 10,
+        "invalid_source_file_items_count": 0,
+        "non_verbatim_excerpt_items_count": 0,
+        "coerced_freeform_items_count": 0
+      }
+    ],
+    "src_expand": {
+      "input_count": 5,
+      "switched_to_src_count": 0,
+      "expanded_segment_count": 0,
+      "missing_src_count": 0,
+      "missing_tag_or_segment_count": 0,
+      "tag_from_embedded_count": 0,
+      "tag_from_20_excerpt_count": 0,
+      "tag_from_similarity_count": 0,
+      "tag_total_resolved_count": 0
+    }
+  },
+  "evidence_report": {
+    "status": "ok",
+    "score_mode": "semantic_llm",
+    "kept_count": 5,
+    "raw_count": 5,
+    "thresholds": {
+      "overall_min": 0.0,
+      "relevance_min": 0.0,
+      "rescue_relevance_min": 0.0
+    },
+    "evidence_mix": {
+      "enabled": false,
+      "policy": "loose_topk_no_abstract_filter"
+    },
+    "details": [
+      {
+        "index": 0,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.6979,
+          "relevance": 0.7,
+          "actionability": 0.6,
+          "specificity": 0.853
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      },
+      {
+        "index": 1,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.2685,
+          "relevance": 0.1429,
+          "actionability": 0.25,
+          "specificity": 0.8016
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      },
+      {
+        "index": 2,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.241,
+          "relevance": 0.1429,
+          "actionability": 0.15,
+          "specificity": 0.785
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      },
+      {
+        "index": 3,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.2399,
+          "relevance": 0.1429,
+          "actionability": 0.15,
+          "specificity": 0.778
+        },
+        "evidence_role": "domain_context",
+        "accepted": true
+      },
+      {
+        "index": 4,
+        "title": "Concevoir la direction artistique",
+        "author": "ChatGPT (notes)",
+        "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+        "scores": {
+          "overall": 0.1992,
+          "relevance": 0.0714,
+          "actionability": 0.15,
+          "specificity": 0.7925
+        },
+        "evidence_role": "mixed_or_unknown",
+        "accepted": true
+      }
+    ],
+    "retrieval_variants": {
+      "enabled": true,
+      "variant_count": 1,
+      "time_budget_s": 1800,
+      "max_variants": 4,
+      "elapsed_total_ms": 27763,
+      "stopped_early": "",
+      "per_variant": [
+        {
+          "variant_index": 1,
+          "question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+          "elapsed_ms": 27763,
+          "rag_mode": "agentic_deep",
+          "rag_reason": "agentic_success",
+          "rag_error": "",
+          "raw_hits": 5,
+          "added_unique_hits": 5
+        }
+      ],
+      "merged_unique_count": 5,
+      "returned_count": 5
+    }
+  },
+  "library_item_ids": [
+    "da_chatgpt"
+  ],
+  "source_refs": [
+    "Concevoir la direction artistique - ChatGPT (notes): The art direction should focus on creating a coherent visual identity that translates the narrative into a structured visual system, emphasizing the importance of materials, textures, and their sociological coherence. | Concepts: visual identity, materials, textures, sociological coherence",
+    "Concevoir la direction artistique - ChatGPT (notes): A successful lookbook serves as a foundational document for art direction, outlining visual intentions and functional color palettes that guide the overall aesthetic without detailing every scene. | Concepts: lookbook, visual intentions, functional palettes",
+    "Concevoir la direction artistique - ChatGPT (notes): Art direction should consider the emotional reading of shots, influenced by the construction of sets, lighting, and the physical relationship between characters and their environments. | Concepts: emotional reading, set construction, lighting",
+    "Concevoir la direction artistique - ChatGPT (notes): The relationship between characters and their environments is crucial; art direction must anticipate how spaces can amplify or diminish a character's presence within the frame. | Concepts: character presence, environment relationship, frame",
+    "Concevoir la direction artistique - ChatGPT (notes): Color should be viewed as a structural element that evolves throughout the film, ensuring continuity and emotional coherence across scenes. | Concepts: color structure, continuity, emotional coherence"
+  ],
+  "warning": "rag_mode=agentic_deep",
+  "readable_report": {
+    "summary": {
+      "status": "ok",
+      "rag_mode": "agentic_deep",
+      "rag_reason": "agentic_success",
+      "kept_sources": 5,
+      "raw_sources": 5
+    },
+    "inputs": {
+      "target_path": "n0.art_direction",
+      "writing_typology": "style",
+      "strategy_question": "Find in the documents rules and guidance to write a general overview of this video's art direction.",
+      "core_summary": "This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor."
+    },
+    "task": {
+      "query_text": "Find in the documents rules and guidance to write a general overview of this video's art direction. | target_path=n0.art_direction | writing_typology=style | Focus on visual direction: palette, lighting, contrast, texture, framing, camera movement, and coherent aesthetic identity.",
+      "query_architecture": "Find in the documents rules and guidance to write a general overview of this video's art direction. | target_path=n0.art_direction | writing_typology=style | Focus on visual direction: palette, lighting, contrast, texture, framing, camera movement, and coherent aesthetic identity.",
+      "query_context_object": "brief_video_type: film\nbrief_target_duration_s: 7200\ncore_summary: This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+      "context_input": "brief_video_type: film\nbrief_target_duration_s: 7200\ncore_summary: This film depicts Jesus Christ arriving in present-day Paris, witnessing the city as it is now. He observes the contemporary world with a disillusioned gaze, yet the story unfolds with his powers. It's a two-hour film filled with nostalgia, featuring a bitter and somewhat melancholic humor.",
+      "writing_mode": "create",
+      "allowed_fields": [
+        "description"
+      ],
+      "redaction_constraints": {
+        "min_chars": 500,
+        "max_chars": 1000
+      }
+    },
+    "retrieval": {
+      "path": "agentic_deep",
+      "engine_mode": "rag",
+      "fallback_origin": "",
+      "fallback_exception_class": "",
+      "fallback_exception": "",
+      "fallback_from_request_payload": {},
+      "search_settings": {},
+      "library_filename_prefixes": [
+        "SRC_DA"
+      ],
+      "candidate_files": [
+        "SRC_DA__chatGPT.txt"
+      ],
+      "candidate_files_count": 1,
+      "agent_response_debug": {
+        "raw_agent_message": "{ \"items\": [ { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"The art direction should focus on creating a coherent visual identity that translates the narrative into a structured visual system, emphasizing the importance of materials, textures, and their sociological coherence.\", \"key_concepts\": [\"visual identity\", \"materials\", \"textures\", \"sociological coherence\"], \"excerpt\": \"Un monde visuel n\u2019existe pas par ses formes seules, mais par ses surfaces. Le look development int\u00e8gre donc : \u2022 des mati\u00e8res dominantes (bois, m\u00e9tal, textile, b\u00e9ton, plastique), \u2022 leur \u00e9tat (neuf, us\u00e9, r\u00e9par\u00e9, d\u00e9grad\u00e9), \u2022 leur coh\u00e9rence sociologique.\" }, { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"A successful lookbook serves as a foundational document for art direction, outlining visual intentions and functional color palettes that guide the overall aesthetic without detailing every scene.\", \"key_concepts\": [\"lookbook\", \"visual intentions\", \"functional palettes\"], \"excerpt\": \"Le lookbook est le premier document structurant de la direction artistique. Contenu typique (mais jamais fig\u00e9) \u2022 intention g\u00e9n\u00e9rale (texte court, clair, non lyrique), \u2022 axes visuels majeurs, \u2022 palettes chromatiques (pas d\u00e9coratives, mais fonctionnelles).\" }, { \"source_file\": \"SRC_DA__chatGPT.txt\", \"summary\": \"Art direction should consider the emotional reading of shots, influenced by the construction of sets, lighting, and the physical relationship between characters and their environments.\", \"key_concepts\": [\"emotional reading\", \"set construction\", \"lighting\"], \"excerpt\": \"Ces d\u00e9cisions influencent directement : \u2022",
+        "raw_citations_count": 0,
+        "parsed_agent_items_count": 10,
+        "merged_hits_count": 10,
+        "fallback_origin": "",
+        "fallback_exception_class": "",
+        "fallback_exception": "",
+        "exploratory_error": ""
+      }
+    },
+    "evidence": {
+      "score_mode": "semantic_llm",
+      "thresholds": {
+        "overall_min": 0.0,
+        "relevance_min": 0.0,
+        "rescue_relevance_min": 0.0
+      },
+      "mix": {
+        "enabled": false,
+        "policy": "loose_topk_no_abstract_filter"
+      },
+      "details": [
+        {
+          "index": 0,
+          "title": "Concevoir la direction artistique",
+          "author": "ChatGPT (notes)",
+          "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+          "scores": {
+            "overall": 0.6979,
+            "relevance": 0.7,
+            "actionability": 0.6,
+            "specificity": 0.853
+          },
+          "evidence_role": "domain_context",
+          "accepted": true
+        },
+        {
+          "index": 1,
+          "title": "Concevoir la direction artistique",
+          "author": "ChatGPT (notes)",
+          "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+          "scores": {
+            "overall": 0.2685,
+            "relevance": 0.1429,
+            "actionability": 0.25,
+            "specificity": 0.8016
+          },
+          "evidence_role": "domain_context",
+          "accepted": true
+        },
+        {
+          "index": 2,
+          "title": "Concevoir la direction artistique",
+          "author": "ChatGPT (notes)",
+          "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+          "scores": {
+            "overall": 0.241,
+            "relevance": 0.1429,
+            "actionability": 0.15,
+            "specificity": 0.785
+          },
+          "evidence_role": "domain_context",
+          "accepted": true
+        },
+        {
+          "index": 3,
+          "title": "Concevoir la direction artistique",
+          "author": "ChatGPT (notes)",
+          "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+          "scores": {
+            "overall": 0.2399,
+            "relevance": 0.1429,
+            "actionability": 0.15,
+            "specificity": 0.778
+          },
+          "evidence_role": "domain_context",
+          "accepted": true
+        },
+        {
+          "index": 4,
+          "title": "Concevoir la direction artistique",
+          "author": "ChatGPT (notes)",
+          "source_path": "writer_agent/strategy_finder/library/SRC_DA__chatGPT.txt",
+          "scores": {
+            "overall": 0.1992,
+            "relevance": 0.0714,
+            "actionability": 0.15,
+            "specificity": 0.7925
+          },
+          "evidence_role": "mixed_or_unknown",
+          "accepted": true
+        }
+      ]
+    },
+    "output": {
+      "library_item_ids": [
+        "da_chatgpt"
+      ],
+      "source_refs_count": 5,
+      "source_refs_preview": [
+        "Concevoir la direction artistique - ChatGPT (notes): The art direction should focus on creating a coherent visual identity that translates the narrative into a structured visual system, emphasizing the importance of materials, textures, and their sociological coherence. | Concepts: visual identity, materials, textures, sociological coherence",
+        "Concevoir la direction artistique - ChatGPT (notes): A successful lookbook serves as a foundational document for art direction, outlining visual intentions and functional color palettes that guide the overall aesthetic without detailing every scene. | Concepts: lookbook, visual intentions, functional palettes",
+        "Concevoir la direction artistique - ChatGPT (notes): Art direction should consider the emotional reading of shots, influenced by the construction of sets, lighting, and the physical relationship between characters and their environments. | Concepts: emotional reading, set construction, lighting"
+      ]
+    }
+  },
+  "logged_at": "2026-02-14T13:52:37.540847Z"
+}
